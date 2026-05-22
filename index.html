@@ -1,0 +1,1924 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Kopman Build | Premium Construction &amp; Project Management · Est. 1999</title>
+<meta name="description" content="Founded in 1999, Kopman Build is a privately-held construction and development firm delivering premium custom homes, renovations, and commercial projects across four continents — with the discipline of an institutional builder and the discretion of a private practice." />
+<meta name="keywords" content="construction, custom homes, renovations, project management, design build, commercial construction, Kopman Build" />
+<meta name="theme-color" content="#1a1a18" />
+<meta name="author" content="Kopman Build" />
+<link rel="canonical" href="https://kopmanbuild.com/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Kopman Build" />
+<meta property="og:title" content="Kopman Build | Premium Construction &amp; Project Management" />
+<meta property="og:description" content="Premium construction, renovation, and project management — delivered with precision, transparency, and lasting value." />
+<meta property="og:url" content="https://kopmanbuild.com/" />
+<meta property="og:image" content="https://kopmanbuild.com/og.jpg" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Kopman Build | Premium Construction &amp; Project Management" />
+<meta name="twitter:description" content="Premium construction, renovation, and project management — delivered with precision, transparency, and lasting value." />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GeneralContractor",
+  "name": "Kopman Build",
+  "alternateName": "Kopman Build International",
+  "url": "https://kopmanbuild.com",
+  "description": "Premium construction, renovation, and project management — founded 1999, delivered globally.",
+  "foundingDate": "1999",
+  "areaServed": ["North America", "Europe", "Middle East", "Asia-Pacific"],
+  "telephone": "+1-000-000-0000",
+  "email": "hello@kopmanbuild.com",
+  "address": [
+    { "@type": "PostalAddress", "addressLocality": "New York",  "addressCountry": "US" },
+    { "@type": "PostalAddress", "addressLocality": "London",    "addressCountry": "GB" },
+    { "@type": "PostalAddress", "addressLocality": "Dubai",     "addressCountry": "AE" },
+    { "@type": "PostalAddress", "addressLocality": "Singapore", "addressCountry": "SG" }
+  ]
+}
+</script>
+
+<style>
+:root {
+  /* warm neutral palette */
+  --bg:        #f3efe8;   /* linen */
+  --bg-2:      #ebe6dc;   /* concrete light */
+  --bg-3:      #1a1a18;   /* near-black, warm */
+  --ink:       #1a1a18;
+  --ink-2:     #3a3a36;
+  --ink-3:     #6b675f;
+  --line:      #d8d3c8;
+  --line-2:    #c4bfb3;
+  --inv:       #f3efe8;
+  --accent:    oklch(58% 0.09 45);   /* muted terracotta */
+  --accent-ink:oklch(40% 0.08 45);
+
+  --f-display: "Instrument Serif", "Times New Roman", Georgia, serif;
+  --f-sans:    "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --f-mono:    "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --max: 1320px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --r-sm: 2px;
+  --r-md: 4px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+::selection { background: var(--ink); color: var(--bg); }
+
+/* ─── Layout primitives ─────────────────────────────────────── */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.rule { height: 1px; background: var(--line); width: 100%; }
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 18px; height: 1px; background: var(--ink-3);
+}
+.eyebrow.no-bar::before { display: none; }
+
+h1, h2, h3, h4 { margin: 0; font-weight: 400; letter-spacing: -0.01em; }
+p { margin: 0; }
+
+.display {
+  font-family: var(--f-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+}
+
+/* ─── Buttons ────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 22px;
+  border-radius: 999px;
+  font-family: var(--f-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+  transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn .arrow { transition: transform .2s ease; }
+.btn:hover .arrow { transform: translate(3px, -3px); }
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary:hover { background: var(--accent-ink); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
+.btn-ghost:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+/* ─── Nav ───────────────────────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: color-mix(in oklch, var(--bg) 78%, transparent);
+  border-bottom: 1px solid color-mix(in oklch, var(--line) 60%, transparent);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--f-display);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--ink);
+}
+.brand .mark {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 26px; height: 26px;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+.brand .mark svg { display: block; width: 100%; height: 100%; }
+.brand .name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  line-height: 1;
+}
+.brand .sub {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid var(--line-2);
+  line-height: 1;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.brand .sub span:last-child { color: var(--ink-2); letter-spacing: 0.22em; }
+.nav-links {
+  display: flex; gap: 28px; align-items: center;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.nav-links a { position: relative; padding: 4px 0; }
+.nav-links a:hover { color: var(--ink); }
+.nav-links a::after {
+  content: ""; position: absolute; bottom: 0; left: 0;
+  height: 1px; width: 0; background: var(--ink);
+  transition: width .25s ease;
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-cta { display: flex; align-items: center; gap: 14px; }
+.menu-btn {
+  display: none;
+  width: 40px; height: 40px;
+  border: 1px solid var(--line-2);
+  background: transparent;
+  border-radius: 999px;
+  align-items: center; justify-content: center;
+}
+.menu-btn span {
+  display: block; width: 14px; height: 1px; background: var(--ink);
+  position: relative;
+}
+.menu-btn span::before, .menu-btn span::after {
+  content: ""; position: absolute; left: 0; width: 14px; height: 1px; background: var(--ink);
+}
+.menu-btn span::before { top: -4px; }
+.menu-btn span::after  { top:  4px; }
+
+@media (max-width: 1180px) {
+  .brand .sub { display: none; }
+}
+@media (max-width: 880px) {
+  .nav-links { display: none; }
+  .menu-btn { display: inline-flex; }
+  .nav-cta .btn { display: none; }
+}
+
+/* mobile drawer */
+.drawer {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  z-index: 60;
+  transform: translateY(-100%);
+  transition: transform .4s cubic-bezier(.6,.05,.2,1);
+  padding: 24px var(--gutter);
+  display: flex; flex-direction: column;
+}
+.drawer.open { transform: translateY(0); }
+.drawer-top { display: flex; justify-content: space-between; align-items: center; height: 48px; }
+.drawer-links {
+  margin-top: 40px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.drawer-links a {
+  font-family: var(--f-display);
+  font-size: 44px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.drawer-links a .num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.14em;
+  margin-right: 14px;
+  vertical-align: super;
+}
+.drawer-foot {
+  margin-top: auto;
+  padding-top: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+/* ─── Hero ───────────────────────────────────────────────── */
+.hero { padding: clamp(40px, 8vw, 96px) 0 0; position: relative; }
+.hero-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--f-mono); font-size: 11px; color: var(--ink-3);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding-bottom: 24px;
+}
+.hero-h1 {
+  font-size: clamp(56px, 11vw, 168px);
+  line-height: 0.92;
+}
+.hero-h1 em {
+  font-style: italic;
+  color: var(--ink-2);
+}
+.hero-h1 .amp {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-sub {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(24px, 5vw, 80px);
+  padding: clamp(28px, 5vw, 56px) 0 clamp(40px, 6vw, 72px);
+  align-items: end;
+}
+.hero-sub p {
+  font-size: clamp(17px, 1.6vw, 21px);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 56ch;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+@media (max-width: 720px) {
+  .hero-sub { grid-template-columns: 1fr; }
+}
+
+.hero-image {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  background: var(--bg-2);
+  overflow: hidden;
+  border-radius: var(--r-md);
+}
+.hero-image .ph-label {
+  position: absolute;
+  bottom: 18px; left: 18px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: color-mix(in oklch, var(--bg) 78%, transparent);
+  padding: 6px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+.hero-image .corner {
+  position: absolute; top: 18px; right: 18px;
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em;
+  color: var(--ink-3); text-transform: uppercase;
+}
+
+/* Placeholder pattern (striped concrete) */
+.ph {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--bg-2) 92%, var(--ink) 8%) 0 2px,
+      var(--bg-2) 2px 14px
+    );
+}
+.ph-dark {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--bg-3) 88%, var(--bg) 12%) 0 2px,
+      var(--bg-3) 2px 14px
+    );
+  color: var(--inv);
+}
+
+/* ─── Numbers strip (hero) ────────────────────────────────── */
+.numbers {
+  margin-top: clamp(40px, 5vw, 64px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.number {
+  padding: clamp(24px, 3vw, 36px) clamp(16px, 2.4vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-right: 1px solid var(--line);
+  min-height: 180px;
+  justify-content: space-between;
+}
+.number:last-of-type { border-right: none; }
+.n-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.n-value {
+  font-size: clamp(48px, 5.6vw, 84px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.n-value i {
+  font-style: normal;
+  color: var(--ink-3);
+  font-size: 0.5em;
+  vertical-align: super;
+  margin-left: 2px;
+}
+.n-foot {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.numbers-note {
+  grid-column: 1 / -1;
+  padding: 12px clamp(16px, 2.4vw, 28px);
+  border-top: 1px solid var(--line);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: center;
+}
+@media (max-width: 880px) {
+  .numbers { grid-template-columns: repeat(2, 1fr); }
+  .number:nth-of-type(2) { border-right: none; }
+  .number:nth-of-type(1), .number:nth-of-type(2) { border-bottom: 1px solid var(--line); }
+  .number { min-height: 140px; }
+}
+@media (max-width: 520px) {
+  .numbers { grid-template-columns: 1fr; }
+  .number { border-right: none !important; border-bottom: 1px solid var(--line); min-height: 0; }
+}
+
+/* ─── Trust strip ─────────────────────────────────────────── */
+.trust {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-top: clamp(40px, 6vw, 80px);
+  padding: 22px 0;
+}
+.trust-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+.trust-label {
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.trust-items {
+  display: flex; gap: clamp(20px, 5vw, 56px);
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: var(--f-display);
+  font-size: clamp(18px, 1.6vw, 22px);
+  color: var(--ink-2);
+}
+.trust-items span { white-space: nowrap; }
+.trust-items i {
+  font-style: normal;
+  color: var(--ink-3);
+  margin-left: 8px;
+  font-size: 0.75em;
+  vertical-align: super;
+}
+.trust-note {
+  font-family: var(--f-mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+@media (max-width: 880px) {
+  .trust-inner { grid-template-columns: 1fr; text-align: center; }
+}
+
+/* ─── Section header ─────────────────────────────────────── */
+section { padding: clamp(72px, 11vw, 140px) 0; scroll-margin-top: 80px; }
+.s-head {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(24px, 5vw, 80px);
+  align-items: end;
+  padding-bottom: clamp(40px, 6vw, 72px);
+}
+.s-head h2 {
+  font-family: var(--f-display);
+  font-size: clamp(40px, 5.6vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  max-width: 14ch;
+}
+.s-head h2 em { font-style: italic; color: var(--ink-2); }
+.s-head .right p {
+  font-size: clamp(16px, 1.3vw, 18px);
+  color: var(--ink-2);
+  max-width: 52ch;
+}
+.s-head .right .meta {
+  display: flex; justify-content: space-between; align-items: end;
+  gap: 24px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.s-head .right .meta .num {
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+@media (max-width: 880px) {
+  .s-head { grid-template-columns: 1fr; }
+}
+
+/* ─── About ──────────────────────────────────────────────── */
+#about { background: var(--bg); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+.about-statement {
+  font-family: var(--f-display);
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.about-statement em { font-style: italic; color: var(--ink-2); }
+.about-statement .eyebrow {
+  display: flex;
+  margin-bottom: 28px;
+  font-family: var(--f-mono);
+}
+
+/* ─── Recognition strip ───────────────────────────────────── */
+.recognition {
+  margin-top: clamp(48px, 6vw, 80px);
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+.recognition-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.recognition-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(20px, 4vw, 48px);
+  font-family: var(--f-display);
+  font-size: clamp(17px, 1.5vw, 22px);
+  color: var(--ink-2);
+  font-style: italic;
+}
+.recognition-items span { white-space: nowrap; }
+.recognition-note {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+@media (max-width: 980px) {
+  .recognition {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+.values {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.value {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+.value .num {
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.14em; color: var(--ink-3);
+}
+.value h4 {
+  font-family: var(--f-display);
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.value p { color: var(--ink-2); font-size: 15px; }
+
+.team-card {
+  margin-top: clamp(48px, 6vw, 80px);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: clamp(20px, 3vw, 40px);
+  align-items: start;
+  padding: clamp(20px, 3vw, 32px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: color-mix(in oklch, var(--bg) 50%, var(--bg-2) 50%);
+}
+.team-card .portrait {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-sm);
+  position: relative;
+  overflow: hidden;
+}
+.team-card .portrait .tag {
+  position: absolute; bottom: 10px; left: 10px;
+  font-family: var(--f-mono); font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  background: var(--bg);
+  padding: 4px 8px; border-radius: 999px;
+}
+.team-card h4 { font-family: var(--f-display); font-size: 28px; }
+.team-card .role {
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: 4px;
+}
+.team-card p { color: var(--ink-2); margin-top: 16px; font-size: 15px; }
+@media (max-width: 880px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .team-card { grid-template-columns: 1fr; }
+  .team-card .portrait { aspect-ratio: 3 / 2; }
+}
+
+/* ─── Services ──────────────────────────────────────────── */
+#services { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.service {
+  padding: clamp(24px, 3vw, 40px);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+  transition: background .25s ease, color .25s ease;
+  position: relative;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+.service:hover { background: var(--ink); color: var(--inv); }
+.service:hover .service-meta,
+.service:hover .service-list li { color: color-mix(in oklch, var(--inv) 70%, transparent); }
+.service:hover .service-list li::before { background: var(--inv); }
+.service:hover .service-arrow { transform: translate(4px, -4px); color: var(--accent); }
+.service-meta {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.service h3 {
+  font-family: var(--f-display);
+  font-size: clamp(28px, 2.4vw, 36px);
+  letter-spacing: -0.01em;
+  margin-top: 40px;
+  max-width: 12ch;
+}
+.service-list {
+  list-style: none; padding: 0; margin: 18px 0 0;
+  font-size: 14px;
+  color: var(--ink-3);
+}
+.service-list li {
+  padding: 4px 0 4px 18px;
+  position: relative;
+}
+.service-list li::before {
+  content: ""; position: absolute; left: 0; top: 13px;
+  width: 8px; height: 1px; background: var(--ink-3);
+}
+.service-arrow {
+  margin-top: auto;
+  align-self: flex-start;
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding-top: 24px;
+  transition: transform .25s ease, color .25s ease;
+}
+@media (max-width: 980px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .services-grid { grid-template-columns: 1fr; } .service { min-height: 0; } }
+
+/* ─── Projects ──────────────────────────────────────────── */
+#projects { background: var(--bg); }
+.filters {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+.filter {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line-2);
+  background: transparent;
+  color: var(--ink-2);
+  transition: all .2s ease;
+}
+.filter:hover { color: var(--ink); border-color: var(--ink); }
+.filter.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(20px, 2.4vw, 36px);
+}
+.project { display: block; transition: opacity .3s ease; }
+.project.size-lg { grid-column: span 4; }
+.project.size-md { grid-column: span 3; }
+.project.size-sm { grid-column: span 2; }
+.project .img {
+  aspect-ratio: 4 / 3;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  margin-bottom: 16px;
+}
+.project.size-lg .img { aspect-ratio: 16 / 10; }
+.project .img .badge {
+  position: absolute; top: 14px; left: 14px;
+  font-family: var(--f-mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-2);
+  background: var(--bg);
+  padding: 6px 10px; border-radius: 999px;
+}
+.project .img .coming {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.project .meta {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 6px;
+}
+.project h4 {
+  font-family: var(--f-display);
+  font-size: clamp(20px, 1.7vw, 26px);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.project .desc { font-size: 14px; color: var(--ink-3); margin-top: 4px; }
+.project.dim { opacity: 0.25; pointer-events: none; }
+
+@media (max-width: 980px) {
+  .projects-grid { grid-template-columns: repeat(4, 1fr); }
+  .project.size-lg { grid-column: span 4; }
+  .project.size-md { grid-column: span 2; }
+  .project.size-sm { grid-column: span 2; }
+}
+@media (max-width: 600px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .project.size-lg, .project.size-md, .project.size-sm { grid-column: span 1; }
+}
+
+/* ─── Process ────────────────────────────────────────────── */
+#process { background: var(--bg-3); color: var(--inv); }
+#process .eyebrow { color: color-mix(in oklch, var(--inv) 60%, transparent); }
+#process .eyebrow::before { background: color-mix(in oklch, var(--inv) 60%, transparent); }
+#process .s-head h2 em { color: color-mix(in oklch, var(--inv) 55%, transparent); }
+#process .s-head .right p { color: color-mix(in oklch, var(--inv) 70%, transparent); }
+#process .s-head .right .meta { border-color: color-mix(in oklch, var(--inv) 15%, transparent); }
+#process .s-head .right .meta .num { color: color-mix(in oklch, var(--inv) 50%, transparent); }
+
+.steps {
+  border-top: 1px solid color-mix(in oklch, var(--inv) 15%, transparent);
+}
+.step {
+  display: grid;
+  grid-template-columns: 80px 1.2fr 1.6fr auto;
+  gap: clamp(20px, 4vw, 48px);
+  padding: clamp(24px, 3.5vw, 40px) 0;
+  border-bottom: 1px solid color-mix(in oklch, var(--inv) 15%, transparent);
+  align-items: baseline;
+  transition: padding .3s ease;
+}
+.step:hover { padding-left: 12px; padding-right: 12px; }
+.step .n {
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.14em; color: color-mix(in oklch, var(--inv) 50%, transparent);
+}
+.step .ttl {
+  font-family: var(--f-display);
+  font-size: clamp(28px, 3vw, 44px);
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+.step .desc {
+  color: color-mix(in oklch, var(--inv) 70%, transparent);
+  font-size: 15px;
+  max-width: 50ch;
+}
+.step .dur {
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: color-mix(in oklch, var(--inv) 50%, transparent);
+  white-space: nowrap;
+}
+@media (max-width: 880px) {
+  .step {
+    grid-template-columns: 60px 1fr;
+    gap: 12px;
+  }
+  .step .desc, .step .dur { grid-column: 2; }
+  .step .dur { margin-top: 4px; }
+}
+
+/* ─── Contact ─────────────────────────────────────────────── */
+#contact { background: var(--bg); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+.contact-info h3 {
+  font-family: var(--f-display);
+  font-size: clamp(36px, 4vw, 56px);
+  letter-spacing: -0.02em;
+  line-height: 1.0;
+  max-width: 12ch;
+}
+.contact-info h3 em { font-style: italic; color: var(--ink-2); }
+.contact-info p { color: var(--ink-2); margin-top: 20px; font-size: 17px; max-width: 36ch; }
+
+/* Offices grid */
+.offices {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.office {
+  background: var(--bg);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.office .o-label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.office .o-city {
+  font-family: var(--f-display);
+  font-size: 28px;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  margin: 2px 0 4px;
+}
+.office .o-addr {
+  font-size: 13px;
+  color: var(--ink-3);
+  font-family: var(--f-mono);
+  letter-spacing: 0.04em;
+}
+.office .o-tel {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--ink-2);
+  letter-spacing: 0.05em;
+}
+@media (max-width: 520px) {
+  .offices { grid-template-columns: 1fr; }
+}
+.contact-details {
+  margin-top: 36px;
+  border-top: 1px solid var(--line);
+}
+.contact-detail {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+.contact-detail .lbl {
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.contact-detail .val { font-size: 16px; color: var(--ink); }
+.contact-detail .val .ph-text {
+  color: var(--ink-3); font-family: var(--f-mono); font-size: 13px;
+}
+
+/* form */
+.form {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: clamp(24px, 3vw, 40px);
+}
+.form .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.field {
+  display: flex; flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.field label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.field label .req { color: var(--accent); margin-left: 4px; }
+.field input,
+.field select,
+.field textarea {
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line-2);
+  padding: 10px 0;
+  border-radius: 0;
+  transition: border-color .2s ease;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--ink-3); }
+.field textarea { resize: vertical; min-height: 100px; font-family: var(--f-sans); }
+.field select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink-3) 50%), linear-gradient(135deg, var(--ink-3) 50%, transparent 50%);
+  background-position: calc(100% - 14px) 18px, calc(100% - 9px) 18px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 28px;
+}
+.field.error input, .field.error select, .field.error textarea {
+  border-color: var(--accent);
+}
+.field .err-msg {
+  font-family: var(--f-mono); font-size: 10px;
+  letter-spacing: 0.1em; color: var(--accent);
+  display: none;
+}
+.field.error .err-msg { display: block; }
+
+.form-submit {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.form-submit .small {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  max-width: 32ch;
+}
+.form-status {
+  display: none;
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-radius: var(--r-md);
+  font-size: 14px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+.form-status.show { display: block; }
+.form-status.ok { border-color: var(--ink); }
+.form-status.err { border-color: var(--accent); color: var(--accent-ink); }
+
+@media (max-width: 880px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .form .row { grid-template-columns: 1fr; }
+}
+
+/* ─── Footer ──────────────────────────────────────────────── */
+.footer {
+  background: var(--bg-3);
+  color: var(--inv);
+  padding: clamp(48px, 7vw, 88px) 0 28px;
+}
+.footer-hero {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: clamp(40px, 5vw, 64px);
+  border-bottom: 1px solid color-mix(in oklch, var(--inv) 15%, transparent);
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+.footer-mark {
+  display: inline-flex;
+  width: 48px; height: 48px;
+  color: var(--inv);
+  flex-shrink: 0;
+}
+.footer-mark svg { width: 100%; height: 100%; }
+.footer-hero-meta {
+  display: flex; flex-direction: column;
+  gap: 6px;
+}
+.footer-hero .f-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: color-mix(in oklch, var(--inv) 55%, transparent);
+}
+.footer-hero .f-tagline {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: clamp(22px, 2.4vw, 32px);
+  color: var(--inv);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.f-tag {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bg-3);
+  background: var(--inv);
+  padding: 2px 6px;
+  border-radius: 999px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: clamp(24px, 4vw, 56px);
+  padding-bottom: 56px;
+  border-bottom: 1px solid color-mix(in oklch, var(--inv) 15%, transparent);
+}
+.footer h5 {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in oklch, var(--inv) 50%, transparent);
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+.footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.footer a { color: color-mix(in oklch, var(--inv) 80%, transparent); font-size: 15px; transition: color .15s ease; }
+.footer a:hover { color: var(--inv); }
+.footer-wordmark {
+  font-family: var(--f-display);
+  font-size: clamp(64px, 12vw, 160px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin: 56px 0 24px;
+  color: var(--inv);
+}
+.footer-wordmark em { font-style: italic; color: color-mix(in oklch, var(--inv) 35%, transparent); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  font-family: var(--f-mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: color-mix(in oklch, var(--inv) 50%, transparent);
+  flex-wrap: wrap;
+}
+.footer-tagline em { font-style: italic; }
+@media (max-width: 880px) {
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .footer-top { grid-template-columns: 1fr; }
+}
+
+/* small reveal */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+</style>
+</head>
+<body>
+
+<!-- ========= NAV ========= -->
+<header class="nav" role="banner">
+  <div class="wrap nav-inner">
+    <a href="#home" class="brand" aria-label="Kopman Build, established 1999">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="currentColor">
+          <rect x="5" y="4" width="4" height="24"/>
+          <polygon points="9,16 24,4 29,4 14,16"/>
+          <polygon points="9,16 24,28 29,28 14,16"/>
+        </svg>
+      </span>
+      <span class="name">Kopman Build</span>
+      <span class="sub"><span>Est. 1999</span><span>Build · No.&nbsp;001</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-primary">
+        Request a Consultation
+        <svg class="arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+        </svg>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- mobile drawer -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-top">
+    <a href="#home" class="brand" data-close>
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="currentColor">
+          <rect x="5" y="4" width="4" height="24"/>
+          <polygon points="9,16 24,4 29,4 14,16"/>
+          <polygon points="9,16 24,28 29,28 14,16"/>
+        </svg>
+      </span>
+      <span class="name">Kopman Build</span>
+    </a>
+    <button class="menu-btn" id="closeBtn" aria-label="Close menu">
+      <span style="transform:rotate(45deg);"></span>
+    </button>
+  </div>
+  <nav class="drawer-links" aria-label="Mobile">
+    <a href="#about"    data-close><span class="num">01</span>About</a>
+    <a href="#services" data-close><span class="num">02</span>Services</a>
+    <a href="#projects" data-close><span class="num">03</span>Projects</a>
+    <a href="#process"  data-close><span class="num">04</span>Process</a>
+    <a href="#contact"  data-close><span class="num">05</span>Contact</a>
+  </nav>
+  <div class="drawer-foot">
+    <a href="#contact" class="btn btn-primary" data-close>Request a Consultation
+      <svg class="arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<!-- ========= HERO ========= -->
+<main id="home">
+  <section class="hero" style="padding-bottom: 0;">
+    <div class="wrap">
+      <div class="hero-meta">
+        <span>Kopman Build / Est. 1999 / Vol. XXVI</span>
+        <span>Premium Construction &amp; Development · Global Delivery</span>
+      </div>
+      <h1 class="display hero-h1">
+        Building with<br>
+        precision. <em>Delivering</em><br>
+        with <span class="amp">integrity</span>.
+      </h1>
+      <div class="hero-sub">
+        <p>
+          Founded in 1999, Kopman Build is a construction and development firm working
+          with owners, investors, and design teams on custom residences, renovations,
+          and commercial projects — delivered end-to-end with the discipline of an
+          institutional builder and the discretion of a private practice.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">
+            Request a Consultation
+            <svg class="arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+            </svg>
+          </a>
+          <a href="#projects" class="btn btn-ghost">
+            View Projects
+            <svg class="arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-image ph">
+        <span class="corner">Fig. 01 — Hero</span>
+        <span class="ph-label">hero_image.jpg — drop a wide site/build photograph here</span>
+      </div>
+
+      <!-- ===== By the numbers ===== -->
+      <div class="numbers">
+        <div class="number">
+          <span class="n-label">Founded</span>
+          <span class="n-value display">1999</span>
+          <span class="n-foot">New York</span>
+        </div>
+        <div class="number">
+          <span class="n-label">Projects delivered</span>
+          <span class="n-value display">320<i>+</i></span>
+          <span class="n-foot">Across 14 countries</span>
+        </div>
+        <div class="number">
+          <span class="n-label">Square footage built</span>
+          <span class="n-value display">9.4<i>M</i></span>
+          <span class="n-foot">Residential · Commercial</span>
+        </div>
+        <div class="number">
+          <span class="n-label">On-time · on-budget</span>
+          <span class="n-value display">98<i>%</i></span>
+          <span class="n-foot">Independently audited</span>
+        </div>
+        <div class="numbers-note">
+          <span>— Illustrative figures · verifiable references furnished on request</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- trust strip -->
+    <div class="trust">
+      <div class="wrap trust-inner">
+        <span class="trust-label">Entrusted by</span>
+        <div class="trust-items">
+          <span>Private Owners</span>
+          <span>Family Offices <i>·</i></span>
+          <span>Institutional Developers</span>
+          <span>Sovereign &amp; Diplomatic <i>·</i></span>
+          <span>Architects of Record</span>
+          <span>Hospitality Groups</span>
+        </div>
+        <span class="trust-note">Logos &amp; references on request</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= ABOUT ========= -->
+  <section id="about">
+    <div class="wrap">
+      <div class="s-head">
+        <h2 class="display"><em>About</em><br>Kopman Build</h2>
+        <div class="right">
+          <div class="meta">
+            <span class="num">§ 01 — About</span>
+            <span class="num">Overview · Values · Process</span>
+          </div>
+          <p>
+            We work where careful planning, skilled trades, and disciplined project
+            management meet. Every build is treated as a long-term object — designed
+            to perform, to age well, and to be worth the investment.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-statement">
+          <span class="eyebrow" style="margin-bottom:24px;">Since 1999 · Twenty-six years</span>
+          A construction firm built on three convictions:
+          <em>that craftsmanship still matters, that budgets are promises,</em>
+          and that owners deserve to know exactly where their project stands —
+          every week, on every line item.
+        </div>
+
+        <ul class="values">
+          <li class="value">
+            <span class="num">01</span>
+            <div>
+              <h4>Precision</h4>
+              <p>Detailed scopes, drawn-down budgets, and field execution that matches the plans on paper.</p>
+            </div>
+          </li>
+          <li class="value">
+            <span class="num">02</span>
+            <div>
+              <h4>Transparency</h4>
+              <p>Weekly reporting, open-book accounting available, and direct access to the people running your build.</p>
+            </div>
+          </li>
+          <li class="value">
+            <span class="num">03</span>
+            <div>
+              <h4>Longevity</h4>
+              <p>Materials and methods chosen for how they perform in year ten, not just at handover.</p>
+            </div>
+          </li>
+          <li class="value">
+            <span class="num">04</span>
+            <div>
+              <h4>Discretion</h4>
+              <p>Comfortable working with private clients and confidential projects on tight timelines.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Recognition / press strip -->
+      <div class="recognition">
+        <span class="recognition-label">As referenced in</span>
+        <div class="recognition-items">
+          <span>Architectural Record</span>
+          <span>The Wall Street Journal</span>
+          <span>Dezeen</span>
+          <span>Financial Times — How To Spend It</span>
+          <span>Wallpaper*</span>
+          <span>Robb Report</span>
+        </div>
+        <span class="recognition-note">— Example placements · swap for verified press</span>
+      </div>
+
+      <!-- Team placeholder -->
+      <div class="team-card">
+        <div class="portrait ph">
+          <span class="tag">portrait — placeholder</span>
+        </div>
+        <div>
+          <span class="eyebrow no-bar" style="margin-bottom:14px;">§ Founder</span>
+          <h4>— Founder Name —</h4>
+          <div class="role">Principal · Kopman Build</div>
+          <p>
+            Bio placeholder. A short, founder-led paragraph belongs here — background,
+            disciplines, and the kind of work the firm is best known for. Keep it to
+            two or three sentences; let projects do the rest.
+          </p>
+          <p style="margin-top:12px; font-family:var(--f-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);">
+            Replace with bio · headshot · credentials
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= SERVICES ========= -->
+  <section id="services">
+    <div class="wrap">
+      <div class="s-head">
+        <h2 class="display">What we <em>build</em></h2>
+        <div class="right">
+          <div class="meta">
+            <span class="num">§ 02 — Services</span>
+            <span class="num">Six disciplines</span>
+          </div>
+          <p>
+            Whole-project delivery, from a single renovation to a portfolio of
+            commercial assets. Each engagement is scoped to fit the build — never
+            forced into a template.
+          </p>
+        </div>
+      </div>
+
+      <div class="services-grid">
+        <article class="service">
+          <div class="service-meta"><span>01</span><span>Residential</span></div>
+          <h3>Custom<br>Homes</h3>
+          <ul class="service-list">
+            <li>Ground-up single-family</li>
+            <li>Architect-led delivery</li>
+            <li>Long-term material selection</li>
+          </ul>
+          <span class="service-arrow">Inquire →</span>
+        </article>
+
+        <article class="service">
+          <div class="service-meta"><span>02</span><span>Residential</span></div>
+          <h3>Renovations</h3>
+          <ul class="service-list">
+            <li>Full-house remodels</li>
+            <li>Kitchen, primary suite, additions</li>
+            <li>Heritage &amp; sensitive structures</li>
+          </ul>
+          <span class="service-arrow">Inquire →</span>
+        </article>
+
+        <article class="service">
+          <div class="service-meta"><span>03</span><span>Commercial</span></div>
+          <h3>Commercial<br>Builds</h3>
+          <ul class="service-list">
+            <li>Office, retail &amp; hospitality fit-outs</li>
+            <li>Mixed-use shells</li>
+            <li>Tenant improvement coordination</li>
+          </ul>
+          <span class="service-arrow">Inquire →</span>
+        </article>
+
+        <article class="service">
+          <div class="service-meta"><span>04</span><span>Owner-Side</span></div>
+          <h3>Project<br>Management</h3>
+          <ul class="service-list">
+            <li>Owner&rsquo;s representative</li>
+            <li>Schedule, cost &amp; risk controls</li>
+            <li>Trade &amp; consultant procurement</li>
+          </ul>
+          <span class="service-arrow">Inquire →</span>
+        </article>
+
+        <article class="service">
+          <div class="service-meta"><span>05</span><span>Advisory</span></div>
+          <h3>Development<br>Consulting</h3>
+          <ul class="service-list">
+            <li>Feasibility &amp; site review</li>
+            <li>Pre-construction budgeting</li>
+            <li>Capital planning support</li>
+          </ul>
+          <span class="service-arrow">Inquire →</span>
+        </article>
+
+        <article class="service">
+          <div class="service-meta"><span>06</span><span>Integrated</span></div>
+          <h3>Design–Build<br>Coordination</h3>
+          <ul class="service-list">
+            <li>Single point of accountability</li>
+            <li>Architect &amp; trade alignment</li>
+            <li>Cost certainty before breaking ground</li>
+          </ul>
+          <span class="service-arrow">Inquire →</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= PROJECTS ========= -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="s-head">
+        <h2 class="display"><em>Selected</em><br>projects</h2>
+        <div class="right">
+          <div class="meta">
+            <span class="num">§ 03 — Portfolio</span>
+            <span class="num">Case studies forthcoming</span>
+          </div>
+          <p>
+            A first look at the kind of work in our pipeline. Detailed case studies,
+            photography, and references are released project-by-project as each
+            engagement closes.
+          </p>
+        </div>
+      </div>
+
+      <div class="filters" role="tablist" aria-label="Filter projects">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="residential">Residential</button>
+        <button class="filter" data-filter="commercial">Commercial</button>
+        <button class="filter" data-filter="renovation">Renovation</button>
+        <button class="filter" data-filter="development">Development</button>
+      </div>
+
+      <div class="projects-grid">
+        <a class="project size-lg" data-cat="residential" href="#contact">
+          <div class="img ph">
+            <span class="badge">Residential · Custom Home</span>
+          </div>
+          <div class="meta"><span>2025 — In progress</span><span>P—001</span></div>
+          <h4>Hillside Residence</h4>
+          <p class="desc">5,200 sq ft single-family build · architect-led, design-build delivery.</p>
+        </a>
+
+        <a class="project size-md" data-cat="commercial" href="#contact">
+          <div class="img ph">
+            <span class="badge">Commercial · Fit-out</span>
+          </div>
+          <div class="meta"><span>2024 — Completed</span><span>P—002</span></div>
+          <h4>Office Headquarters Fit-out</h4>
+          <p class="desc">Tenant improvement &amp; FF&amp;E coordination for a 14,000 sq ft floor.</p>
+        </a>
+
+        <a class="project size-md" data-cat="renovation" href="#contact">
+          <div class="img ph">
+            <span class="badge">Renovation · Whole-house</span>
+          </div>
+          <div class="meta"><span>2024 — Completed</span><span>P—003</span></div>
+          <h4>Heritage Townhouse Restoration</h4>
+          <p class="desc">Structural rebuild within a sensitive façade · 11-month delivery.</p>
+        </a>
+
+        <a class="project size-sm" data-cat="development" href="#contact">
+          <div class="img ph">
+            <span class="coming">— Case study coming soon —</span>
+          </div>
+          <div class="meta"><span>2025</span><span>P—004</span></div>
+          <h4>Mixed-Use Shell</h4>
+        </a>
+
+        <a class="project size-sm" data-cat="residential" href="#contact">
+          <div class="img ph">
+            <span class="coming">— Case study coming soon —</span>
+          </div>
+          <div class="meta"><span>2025</span><span>P—005</span></div>
+          <h4>Lakeside Custom Home</h4>
+        </a>
+
+        <a class="project size-sm" data-cat="commercial" href="#contact">
+          <div class="img ph">
+            <span class="coming">— Case study coming soon —</span>
+          </div>
+          <div class="meta"><span>2026</span><span>P—006</span></div>
+          <h4>Hospitality Build-out</h4>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= PROCESS ========= -->
+  <section id="process">
+    <div class="wrap">
+      <div class="s-head">
+        <h2 class="display">From concept<br>to <em>completion</em>.</h2>
+        <div class="right">
+          <div class="meta">
+            <span class="num">§ 04 — Process</span>
+            <span class="num">Seven stages</span>
+          </div>
+          <p>
+            Every Kopman Build engagement moves through the same disciplined sequence.
+            The deliverables at each stage are made explicit upfront — so progress is
+            measured against the plan, not against impressions.
+          </p>
+        </div>
+      </div>
+
+      <ol class="steps" style="list-style:none; padding:0; margin:0;">
+        <li class="step">
+          <span class="n">01</span>
+          <span class="ttl">Consultation</span>
+          <span class="desc">Listening session and site walk. We define the project in writing — goals, constraints, timeline, budget envelope.</span>
+          <span class="dur">Week 1</span>
+        </li>
+        <li class="step">
+          <span class="n">02</span>
+          <span class="ttl">Planning</span>
+          <span class="desc">Scope of work, design brief, consultant team, permits and approvals strategy. Risks identified before they cost money.</span>
+          <span class="dur">Weeks 2–6</span>
+        </li>
+        <li class="step">
+          <span class="n">03</span>
+          <span class="ttl">Budgeting</span>
+          <span class="desc">Itemised pre-construction estimate with allowances, contingencies, and a clear path to cost certainty.</span>
+          <span class="dur">Weeks 4–8</span>
+        </li>
+        <li class="step">
+          <span class="n">04</span>
+          <span class="ttl">Design Coordination</span>
+          <span class="desc">Architect, engineers, interiors and specialist trades aligned. Drawings are buildable before they leave the table.</span>
+          <span class="dur">Ongoing</span>
+        </li>
+        <li class="step">
+          <span class="n">05</span>
+          <span class="ttl">Construction</span>
+          <span class="desc">Full-time site supervision, weekly client reporting, and live cost-to-complete visibility throughout.</span>
+          <span class="dur">Project term</span>
+        </li>
+        <li class="step">
+          <span class="n">06</span>
+          <span class="ttl">Delivery</span>
+          <span class="desc">Punch list, commissioning, owner training, and a structured handover package — drawings, warranties, manuals.</span>
+          <span class="dur">Final 4 weeks</span>
+        </li>
+        <li class="step">
+          <span class="n">07</span>
+          <span class="ttl">Aftercare</span>
+          <span class="desc">12-month attendance window. The relationship doesn&rsquo;t end at handover — it changes shape.</span>
+          <span class="dur">Year 1+</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ========= CONTACT ========= -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="s-head">
+        <h2 class="display">Start a<br><em>conversation</em>.</h2>
+        <div class="right">
+          <div class="meta">
+            <span class="num">§ 05 — Contact</span>
+            <span class="num">Response within 2 business days</span>
+          </div>
+          <p>
+            Tell us about your project. Initial consultations are no-obligation and
+            confidential. If we&rsquo;re not the right firm for the work, we&rsquo;ll say so —
+            and where we can, point you to someone who is.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3 class="display">Let&rsquo;s build something <em>worth keeping</em>.</h3>
+
+          <div class="offices">
+            <div class="office">
+              <span class="o-label">Headquarters</span>
+              <span class="o-city">New York</span>
+              <span class="o-addr">— Address forthcoming</span>
+              <span class="o-tel">+1 (000) 000-0000</span>
+            </div>
+            <div class="office">
+              <span class="o-label">Europe</span>
+              <span class="o-city">London</span>
+              <span class="o-addr">— Address forthcoming</span>
+              <span class="o-tel">+44 (0) 00 0000 0000</span>
+            </div>
+            <div class="office">
+              <span class="o-label">Middle East</span>
+              <span class="o-city">Dubai</span>
+              <span class="o-addr">— Address forthcoming</span>
+              <span class="o-tel">+971 0 000 0000</span>
+            </div>
+            <div class="office">
+              <span class="o-label">Asia-Pacific</span>
+              <span class="o-city">Singapore</span>
+              <span class="o-addr">— Address forthcoming</span>
+              <span class="o-tel">+65 0000 0000</span>
+            </div>
+          </div>
+
+          <div class="contact-details">
+            <div class="contact-detail">
+              <span class="lbl">Press</span>
+              <span class="val">press@kopmanbuild.com</span>
+            </div>
+            <div class="contact-detail">
+              <span class="lbl">New inquiries</span>
+              <span class="val">hello@kopmanbuild.com</span>
+            </div>
+            <div class="contact-detail">
+              <span class="lbl">Hours</span>
+              <span class="val">Mon — Fri · 8:00 — 18:00 · local time</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="form" id="contactForm" novalidate>
+          <div class="row">
+            <div class="field">
+              <label for="f-name">Name<span class="req">*</span></label>
+              <input type="text" id="f-name" name="name" required autocomplete="name" placeholder="Full name" />
+              <span class="err-msg">Please enter your name</span>
+            </div>
+            <div class="field">
+              <label for="f-email">Email<span class="req">*</span></label>
+              <input type="email" id="f-email" name="email" required autocomplete="email" placeholder="you@domain.com" />
+              <span class="err-msg">Please enter a valid email</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="f-phone">Phone</label>
+              <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="Optional" />
+              <span class="err-msg">Please enter a valid phone number</span>
+            </div>
+            <div class="field">
+              <label for="f-type">Project Type<span class="req">*</span></label>
+              <select id="f-type" name="projectType" required>
+                <option value="">Select one</option>
+                <option>Custom Home</option>
+                <option>Renovation</option>
+                <option>Commercial Build</option>
+                <option>Project Management</option>
+                <option>Development Consulting</option>
+                <option>Design-Build</option>
+                <option>Other</option>
+              </select>
+              <span class="err-msg">Please choose a project type</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="f-budget">Budget Range<span class="req">*</span></label>
+              <select id="f-budget" name="budget" required>
+                <option value="">Select one</option>
+                <option>Under $500k</option>
+                <option>$500k — $1M</option>
+                <option>$1M — $3M</option>
+                <option>$3M — $10M</option>
+                <option>$10M+</option>
+                <option>Undecided</option>
+              </select>
+              <span class="err-msg">Please choose a range</span>
+            </div>
+            <div class="field">
+              <label for="f-timeline">Timeline<span class="req">*</span></label>
+              <select id="f-timeline" name="timeline" required>
+                <option value="">Select one</option>
+                <option>Within 3 months</option>
+                <option>3 — 6 months</option>
+                <option>6 — 12 months</option>
+                <option>12+ months</option>
+                <option>Exploring</option>
+              </select>
+              <span class="err-msg">Please choose a timeline</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-message">Message<span class="req">*</span></label>
+            <textarea id="f-message" name="message" required placeholder="Tell us about the project — site, scale, intent, anything that matters."></textarea>
+            <span class="err-msg">Please add a brief message</span>
+          </div>
+
+          <div class="form-submit">
+            <span class="small">By submitting you agree to be contacted about your project. We will not share your information.</span>
+            <button type="submit" class="btn btn-primary">
+              Send Inquiry
+              <svg class="arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ========= FOOTER ========= -->
+<footer class="footer">
+  <div class="wrap">
+
+    <!-- Footer hero: large logo lockup -->
+    <div class="footer-hero">
+      <span class="footer-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="currentColor">
+          <rect x="5" y="4" width="4" height="24"/>
+          <polygon points="9,16 24,4 29,4 14,16"/>
+          <polygon points="9,16 24,28 29,28 14,16"/>
+        </svg>
+      </span>
+      <div class="footer-hero-meta">
+        <span class="f-eyebrow">Kopman Build · Est. MCMXCIX</span>
+        <span class="f-tagline">Building deliberately, since 1999.</span>
+      </div>
+    </div>
+
+    <div class="footer-top">
+      <div>
+        <h5>The firm</h5>
+        <p style="color: color-mix(in oklch, var(--inv) 75%, transparent); max-width: 34ch; font-size: 15px;">
+          A privately-held construction and development firm, founded in 1999 — entrusted by private clients, family offices, and institutional partners across four continents.
+        </p>
+      </div>
+      <div>
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Offices</h5>
+        <ul>
+          <li>New York <span class="f-tag">HQ</span></li>
+          <li>London</li>
+          <li>Dubai</li>
+          <li>Singapore</li>
+          <li><a href="#contact">All locations &nbsp;→</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Inquiries</h5>
+        <ul>
+          <li><a href="mailto:hello@kopmanbuild.com">hello@kopmanbuild.com</a></li>
+          <li><a href="mailto:press@kopmanbuild.com">press@kopmanbuild.com</a></li>
+          <li><a href="mailto:careers@kopmanbuild.com">careers@kopmanbuild.com</a></li>
+          <li><a href="#">Capabilities (PDF) &nbsp;↓</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-wordmark display">Kopman <em>Build</em>.</div>
+
+    <div class="footer-bottom">
+      <span>© 1999 — <span id="year">2025</span> &nbsp;Kopman Build. All rights reserved.</span>
+      <span class="footer-tagline"><em>Built deliberately.</em></span>
+      <span>kopmanbuild.com</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// ── mobile drawer
+const drawer  = document.getElementById('drawer');
+const menuBtn = document.getElementById('menuBtn');
+const closeBtn= document.getElementById('closeBtn');
+function openDrawer(){ drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); menuBtn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+function closeDrawer(){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); menuBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+menuBtn.addEventListener('click', openDrawer);
+closeBtn.addEventListener('click', closeDrawer);
+drawer.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeDrawer));
+
+// ── project filters
+const filters = document.querySelectorAll('.filter');
+const projects= document.querySelectorAll('.project');
+filters.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filters.forEach(f => f.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.filter;
+    projects.forEach(p => {
+      const match = cat === 'all' || p.dataset.cat === cat;
+      p.classList.toggle('dim', !match);
+    });
+  });
+});
+
+// ── contact form (client-side validate + safe placeholder submit)
+const form    = document.getElementById('contactForm');
+const status  = document.getElementById('formStatus');
+
+function setError(field, on) {
+  field.classList.toggle('error', on);
+}
+function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+function validPhone(v){ return v.trim() === '' || /^[+()\-\s0-9]{7,}$/.test(v); }
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  status.classList.remove('show','ok','err');
+
+  const fields = form.querySelectorAll('.field');
+  let firstInvalid = null;
+  fields.forEach(f => setError(f, false));
+
+  const name    = form['name'];
+  const email   = form['email'];
+  const phone   = form['phone'];
+  const type    = form['projectType'];
+  const budget  = form['budget'];
+  const time    = form['timeline'];
+  const msg     = form['message'];
+
+  const checks = [
+    [name,    name.value.trim().length > 1],
+    [email,   validEmail(email.value)],
+    [phone,   validPhone(phone.value)],
+    [type,    !!type.value],
+    [budget,  !!budget.value],
+    [time,    !!time.value],
+    [msg,     msg.value.trim().length > 4],
+  ];
+  for (const [el, ok] of checks) {
+    if (!ok) {
+      const f = el.closest('.field');
+      setError(f, true);
+      if (!firstInvalid) firstInvalid = el;
+    }
+  }
+  if (firstInvalid) { firstInvalid.focus(); return; }
+
+  // PLACEHOLDER SUBMIT — wire to a real endpoint (Formspree, Resend, your API, etc.)
+  status.textContent = 'Sending…';
+  status.classList.add('show');
+  try {
+    await new Promise(r => setTimeout(r, 700));   // simulate network
+    status.classList.add('ok');
+    status.textContent = 'Thank you — your inquiry has been received. We will respond within two business days. (Note: form is wired to a placeholder; connect your backend to start receiving submissions.)';
+    form.reset();
+  } catch (err) {
+    status.classList.add('err');
+    status.textContent = 'Something went wrong. Please email us directly at hello@kopmanbuild.com.';
+  }
+});
+
+// ── reveal on scroll
+const io = new IntersectionObserver(entries => {
+  for (const e of entries) {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }
+}, { threshold: 0.08 });
+document.querySelectorAll('.hero-h1, .s-head, .about-grid, .team-card, .services-grid, .projects-grid, .steps, .contact-grid, .footer-wordmark')
+  .forEach(el => { el.classList.add('reveal'); io.observe(el); });
+</script>
+
+</body>
+</html>
