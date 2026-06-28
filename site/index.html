@@ -435,42 +435,39 @@ p { margin: 0; }
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   margin-top: clamp(40px, 6vw, 80px);
-  padding: 22px 0;
-}
-.trust-inner {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 24px;
-  align-items: center;
+  padding: clamp(24px, 3.5vw, 40px) 0;
 }
 .trust-label {
   font-family: var(--f-mono); font-size: 11px;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--ink-3);
 }
-.trust-items {
-  display: flex; gap: clamp(20px, 5vw, 56px);
-  justify-content: center;
-  flex-wrap: wrap;
+.trust-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.trust-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
   font-family: var(--f-display);
-  font-size: clamp(18px, 1.6vw, 22px);
+  font-size: clamp(18px, 1.7vw, 24px);
   color: var(--ink-2);
 }
-.trust-items span { white-space: nowrap; }
-.trust-items i {
-  font-style: normal;
-  color: var(--ink-3);
-  margin-left: 8px;
-  font-size: 0.75em;
-  vertical-align: super;
+.trust-row-2 {
+  padding-left: clamp(0px, 2vw, 24px);
 }
-.trust-note {
-  font-family: var(--f-mono); font-size: 10px;
-  letter-spacing: 0.14em; text-transform: uppercase;
+.trust-row span { white-space: nowrap; }
+.trust-dot {
   color: var(--ink-3);
+  font-style: normal;
+  flex-shrink: 0;
 }
 @media (max-width: 880px) {
-  .trust-inner { grid-template-columns: 1fr; text-align: center; }
+  .trust-row { flex-wrap: wrap; gap: 12px 20px; }
+  .trust-row-2 { padding-left: 0; }
+  .trust-dot { display: none; }
 }
 
 /* ─── Section header ─────────────────────────────────────── */
@@ -1259,16 +1256,25 @@ section { padding: clamp(72px, 11vw, 140px) 0; scroll-margin-top: 80px; }
 
     <!-- trust strip -->
     <div class="trust">
-      <div class="wrap trust-inner">
-        <span class="trust-label">Entrusted by</span>
-        <div class="trust-items">
-          <span>Private Owners</span>
-          <span>Family Offices <i>·</i></span>
-          <span>Institutional Developers</span>
-          <span>Interior Designers <i>·</i></span>
-          <span>Architects of Record</span>
-          <span>Real Estate Agencies <i>·</i></span>
-          <span>Hospitality Groups</span>
+      <div class="wrap">
+        <div class="trust-label" style="margin-bottom:18px;">Entrusted by</div>
+        <div class="trust-rows">
+          <div class="trust-row">
+            <span>Private Owners</span>
+            <span class="trust-dot">·</span>
+            <span>Family Offices</span>
+            <span class="trust-dot">·</span>
+            <span>Institutional Developers</span>
+            <span class="trust-dot">·</span>
+            <span>Interior Designers</span>
+          </div>
+          <div class="trust-row trust-row-2">
+            <span>Architects of Record</span>
+            <span class="trust-dot">·</span>
+            <span>Real Estate Agencies</span>
+            <span class="trust-dot">·</span>
+            <span>Hospitality Groups</span>
+          </div>
         </div>
       </div>
     </div>
