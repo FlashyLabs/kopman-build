@@ -51,6 +51,14 @@ p { margin: 0; }
 .btn-primary { background: var(--ink); color: var(--bg); }
 .btn-primary:hover { background: oklch(40% 0.08 45); }
 .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px); background: color-mix(in oklch, var(--bg) 78%, transparent); border-bottom: 1px solid color-mix(in oklch, var(--line) 60%, transparent); }
+/* Nav dropdowns */
+.nav-drop { position: relative; }
+.nav-drop-trigger { display: flex; align-items: center; gap: 4px; cursor: default; }
+.nav-drop-menu { display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px; min-width: 220px; box-shadow: 0 8px 32px color-mix(in oklch, var(--ink) 12%, transparent); z-index: 100; }
+.nav-drop:hover .nav-drop-menu { display: flex; flex-direction: column; }
+.nav-drop-menu a { padding: 8px 12px; border-radius: 6px; font-size: 13.5px; color: var(--ink-2); white-space: nowrap; }
+.nav-drop-menu a:hover { background: var(--bg-2); color: var(--ink); }
+.nav-drop-rule { border: none; border-top: 1px solid var(--line); margin: 4px 0; }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
 .brand { display: flex; align-items: center; gap: 12px; font-family: var(--f-display); font-size: 22px; color: var(--ink); }
 .brand svg { width: 26px; height: 26px; }
@@ -90,9 +98,21 @@ p { margin: 0; }
 .article-cta p { color: color-mix(in oklch, var(--inv) 70%, transparent); margin-bottom: 32px; font-size: 17px; }
 .article-cta .btn-primary { background: var(--inv); color: var(--ink); }
 
-.footer { background: var(--bg-3); color: var(--inv); padding: 32px 0; border-top: 1px solid color-mix(in oklch, var(--inv) 10%, transparent); }
-.footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in oklch, var(--inv) 50%, transparent); }
-.footer-inner a { color: color-mix(in oklch, var(--inv) 70%, transparent); }
+.footer { background: var(--bg-3); color: var(--inv); padding: 64px 0 0; border-top: 1px solid color-mix(in oklch, var(--inv) 10%, transparent); }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px 32px; padding-bottom: 48px; border-bottom: 1px solid color-mix(in oklch, var(--inv) 12%, transparent); }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-col--brand { display: flex; flex-direction: column; gap: 16px; }
+.footer-brand { display: flex; align-items: center; gap: 10px; font-family: var(--f-sans); font-size: 15px; font-weight: 500; color: var(--inv); }
+.footer-desc { font-size: 13.5px; line-height: 1.6; color: color-mix(in oklch, var(--inv) 55%, transparent); max-width: 30ch; }
+.footer-region { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in oklch, var(--inv) 35%, transparent); }
+.footer-heading { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in oklch, var(--inv) 40%, transparent); margin-bottom: 14px; font-weight: 400; }
+.footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.footer-links a { font-size: 13.5px; color: color-mix(in oklch, var(--inv) 65%, transparent); transition: color .15s ease; }
+.footer-links a:hover { color: var(--inv); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: color-mix(in oklch, var(--inv) 35%, transparent); flex-wrap: wrap; gap: 8px; }
+.footer-bottom a { color: color-mix(in oklch, var(--inv) 50%, transparent); }
+.footer-bottom a:hover { color: var(--inv); }
 </style>
 </head>
 <body>
@@ -103,10 +123,36 @@ p { margin: 0; }
       <svg viewBox="0 0 32 32" fill="currentColor"><rect x="5" y="4" width="4" height="24"/><polygon points="9,16 24,4 29,4 14,16"/><polygon points="9,16 24,28 29,28 14,16"/></svg>
       Kopman Build
     </a>
-    <nav class="nav-links">
+    <nav class="nav-links" aria-label="Primary">
       <a href="/#about">About</a>
-      <a href="/#services">Services</a>
-      <a href="/#projects">Projects</a>
+      <div class="nav-drop">
+        <a href="/renovation-contractor-toronto/" class="nav-drop-trigger">Services <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-drop-menu">
+          <a href="/renovation-contractor-toronto/">Renovation Contractor</a>
+          <a href="/custom-home-builder-toronto/">Custom Home Builder</a>
+          <a href="/general-contractor-toronto/">General Contractor</a>
+          <a href="/design-build-toronto/">Design-Build</a>
+          <a href="/muskoka-home-builder/">Muskoka Home Builder</a>
+          <hr class="nav-drop-rule">
+          <a href="/basement-renovation-toronto/">Basement Renovation</a>
+          <a href="/kitchen-renovation-toronto/">Kitchen Renovation</a>
+          <a href="/bathroom-renovation-toronto/">Bathroom Renovation</a>
+          <a href="/home-addition-toronto/">Home Additions</a>
+        </div>
+      </div>
+      <div class="nav-drop">
+        <a href="/renovation-contractor-toronto/" class="nav-drop-trigger">Locations <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-drop-menu">
+          <a href="/renovation-contractor-north-york/">North York</a>
+          <a href="/renovation-contractor-etobicoke/">Etobicoke</a>
+          <a href="/renovation-contractor-scarborough/">Scarborough</a>
+          <a href="/renovation-contractor-mississauga/">Mississauga</a>
+          <a href="/renovation-contractor-oakville/">Oakville</a>
+          <a href="/renovation-contractor-richmond-hill/">Richmond Hill</a>
+          <a href="/renovation-contractor-markham/">Markham</a>
+        </div>
+      </div>
+      <a href="/blog/">Blog</a>
       <a href="/#contact">Contact</a>
     </nav>
     <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
@@ -210,9 +256,59 @@ p { margin: 0; }
 </div>
 
 <footer class="footer">
-  <div class="wrap footer-inner">
+  <div class="wrap footer-grid">
+    <div class="footer-col footer-col--brand">
+      <a href="/" class="footer-brand">
+        <svg viewBox="0 0 32 32" fill="currentColor" width="24" height="24" aria-hidden="true"><rect x="5" y="4" width="4" height="24"/><polygon points="9,16 24,4 29,4 14,16"/><polygon points="9,16 24,28 29,28 14,16"/></svg>
+        Kopman Build
+      </a>
+      <p class="footer-desc">A privately-held construction and development firm founded in 1999, serving private clients across Toronto, the GTA, and Muskoka.</p>
+      <span class="footer-region">Toronto · GTA · Muskoka</span>
+    </div>
+    <div class="footer-col">
+      <h5 class="footer-heading">Services</h5>
+      <ul class="footer-links">
+        <li><a href="/renovation-contractor-toronto/">Renovation Contractor</a></li>
+        <li><a href="/custom-home-builder-toronto/">Custom Home Builder</a></li>
+        <li><a href="/general-contractor-toronto/">General Contractor</a></li>
+        <li><a href="/design-build-toronto/">Design-Build</a></li>
+        <li><a href="/muskoka-home-builder/">Muskoka Home Builder</a></li>
+        <li><a href="/basement-renovation-toronto/">Basement Renovation</a></li>
+        <li><a href="/kitchen-renovation-toronto/">Kitchen Renovation</a></li>
+        <li><a href="/bathroom-renovation-toronto/">Bathroom Renovation</a></li>
+        <li><a href="/home-addition-toronto/">Home Additions</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5 class="footer-heading">Locations</h5>
+      <ul class="footer-links">
+        <li><a href="/renovation-contractor-north-york/">North York</a></li>
+        <li><a href="/renovation-contractor-etobicoke/">Etobicoke</a></li>
+        <li><a href="/renovation-contractor-scarborough/">Scarborough</a></li>
+        <li><a href="/renovation-contractor-mississauga/">Mississauga</a></li>
+        <li><a href="/renovation-contractor-oakville/">Oakville</a></li>
+        <li><a href="/renovation-contractor-richmond-hill/">Richmond Hill</a></li>
+        <li><a href="/renovation-contractor-markham/">Markham</a></li>
+        <li><a href="/custom-home-builder-oakville/">Custom Homes — Oakville</a></li>
+        <li><a href="/custom-home-builder-richmond-hill/">Custom Homes — Richmond Hill</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5 class="footer-heading">Resources</h5>
+      <ul class="footer-links">
+        <li><a href="/blog/">All Articles</a></li>
+        <li><a href="/blog/home-renovation-cost-toronto-2026/">Renovation Cost Guide 2026</a></li>
+        <li><a href="/blog/how-to-find-renovation-contractor-toronto/">How to Find a Contractor</a></li>
+        <li><a href="/blog/renovation-permit-toronto/">Toronto Permit Guide</a></li>
+        <li><a href="/blog/home-renovation-roi-toronto-neighbourhoods/">Renovation ROI</a></li>
+        <li><a href="/blog/design-build-vs-general-contractor-toronto/">Design-Build vs GC</a></li>
+        <li><a href="/blog/second-storey-addition-toronto/">Second Storey Additions</a></li>
+        <li><a href="/blog/muskoka-cottage-renovation-guide/">Muskoka Cottage Guide</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
     <span>© 1999 — <span id="yr"></span> Kopman Build. All rights reserved.</span>
-    <span>Toronto · GTA · Muskoka</span>
     <a href="/">kopmanbuild.com</a>
   </div>
 </footer>

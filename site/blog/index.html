@@ -3,16 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Custom Home Builder Richmond Hill | Kopman Build — Est. 1999</title>
-<meta name="description" content="Kopman Build builds custom homes in Richmond Hill. Ground-up custom builds in Oak Ridges, Mill Pond, and throughout Richmond Hill since 1999." />
-<meta name="keywords" content="custom home builder Richmond Hill, custom homes Richmond Hill, new home builder Richmond Hill, luxury home builder Richmond Hill, home builder York Region" />
+<title>Renovation &amp; Construction Blog | Kopman Build Toronto</title>
+<meta name="description" content="Renovation guides, cost breakdowns, permit advice, and construction insights from Kopman Build — Toronto's trusted custom builder and renovation contractor since 1999." />
 <meta name="robots" content="index, follow" />
-<meta name="geo.region" content="CA-ON" />
-<meta name="geo.placename" content="Richmond Hill, Ontario, Canada" />
-<link rel="canonical" href="https://kopmanbuild.com/custom-home-builder-richmond-hill/" />
-<meta property="og:title" content="Custom Home Builder Richmond Hill | Kopman Build" />
-<meta property="og:description" content="Kopman Build builds custom homes in Richmond Hill. Ground-up custom builds in Oak Ridges, Mill Pond, and throughout Richmond Hill since 1999." />
-<meta property="og:url" content="https://kopmanbuild.com/custom-home-builder-richmond-hill/" />
+<link rel="canonical" href="https://kopmanbuild.com/blog/" />
+<meta property="og:title" content="Renovation &amp; Construction Blog | Kopman Build" />
+<meta property="og:description" content="Renovation guides, cost breakdowns, permit advice, and construction insights from Toronto's trusted custom builder since 1999." />
+<meta property="og:url" content="https://kopmanbuild.com/blog/" />
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,18 +17,15 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Custom Home Builder Richmond Hill",
-  "provider": {
-    "@type": "GeneralContractor",
+  "@type": "Blog",
+  "name": "Kopman Build Blog",
+  "url": "https://kopmanbuild.com/blog/",
+  "description": "Renovation guides, cost breakdowns, permit advice, and construction insights from Toronto's trusted custom builder since 1999.",
+  "publisher": {
+    "@type": "Organization",
     "name": "Kopman Build",
-    "url": "https://kopmanbuild.com",
-    "telephone": "+1-416-555-0100",
-    "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" }
-  },
-  "areaServed": ["Richmond Hill","York Region","Greater Toronto Area"],
-  "description": "Kopman Build builds custom homes in Richmond Hill. Ground-up custom builds in Oak Ridges, Mill Pond, and throughout Richmond Hill since 1999.",
-  "serviceType": "Custom Home Building"
+    "url": "https://kopmanbuild.com"
+  }
 }
 </script>
 <style>
@@ -58,10 +52,14 @@ p { margin: 0; }
 .btn { display: inline-flex; align-items: center; gap: 12px; padding: 16px 22px; border-radius: 999px; font-size: 14px; font-weight: 500; border: 1px solid transparent; transition: all .2s ease; white-space: nowrap; }
 .btn-primary { background: var(--ink); color: var(--bg); }
 .btn-primary:hover { background: var(--accent-ink); }
-.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
-.btn-ghost:hover { background: var(--ink); color: var(--bg); }
+/* Nav */
 .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px); background: color-mix(in oklch, var(--bg) 78%, transparent); border-bottom: 1px solid color-mix(in oklch, var(--line) 60%, transparent); }
-/* Nav dropdowns */
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--f-display); font-size: 22px; color: var(--ink); }
+.brand svg { width: 26px; height: 26px; }
+.nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--ink-2); }
+.nav-links a:hover { color: var(--ink); }
+@media (max-width: 880px) { .nav-links { display: none; } }
 .nav-drop { position: relative; }
 .nav-drop-trigger { display: flex; align-items: center; gap: 4px; cursor: default; }
 .nav-drop-menu { display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px; min-width: 220px; box-shadow: 0 8px 32px color-mix(in oklch, var(--ink) 12%, transparent); z-index: 100; }
@@ -69,49 +67,35 @@ p { margin: 0; }
 .nav-drop-menu a { padding: 8px 12px; border-radius: 6px; font-size: 13.5px; color: var(--ink-2); white-space: nowrap; }
 .nav-drop-menu a:hover { background: var(--bg-2); color: var(--ink); }
 .nav-drop-rule { border: none; border-top: 1px solid var(--line); margin: 4px 0; }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-.brand { display: flex; align-items: center; gap: 12px; font-family: var(--f-display); font-size: 22px; color: var(--ink); }
-.brand svg { width: 26px; height: 26px; }
-.nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--ink-2); }
-.nav-links a:hover { color: var(--ink); }
-@media (max-width: 880px) { .nav-links { display: none; } }
-.page-hero { padding: clamp(72px, 10vw, 120px) 0 clamp(56px, 8vw, 96px); border-bottom: 1px solid var(--line); }
-.page-hero .eyebrow { margin-bottom: 24px; display: block; }
-.page-hero h1 { font-size: clamp(48px, 8vw, 120px); max-width: 14ch; margin-bottom: clamp(24px, 4vw, 48px); }
-.page-hero h1 em { font-style: italic; color: var(--ink-2); }
-.page-hero .lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-2); max-width: 56ch; line-height: 1.5; margin-bottom: 36px; }
-.page-hero .actions { display: flex; gap: 14px; flex-wrap: wrap; }
-.section { padding: clamp(56px, 8vw, 100px) 0; border-bottom: 1px solid var(--line); }
-.section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
-.section h2 { font-family: var(--f-display); font-size: clamp(36px, 4vw, 60px); margin-bottom: 24px; }
-.section h2 em { font-style: italic; color: var(--ink-2); }
-.section p { color: var(--ink-2); font-size: 17px; line-height: 1.6; margin-bottom: 16px; }
-.section p:last-child { margin-bottom: 0; }
-.process-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
-.process-item { display: grid; grid-template-columns: 48px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
-.process-item .n { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--ink-3); }
-.process-item h3 { font-family: var(--f-display); font-size: 22px; margin-bottom: 4px; }
-.process-item p { font-size: 15px; color: var(--ink-2); margin: 0; }
-.services-strip { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: clamp(40px, 6vw, 80px) 0; }
-.services-strip h2 { font-family: var(--f-display); font-size: clamp(32px, 3.5vw, 52px); margin-bottom: 40px; }
-.services-strip h2 em { font-style: italic; color: var(--ink-2); }
-.service-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-.service-item { padding: 28px 32px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.service-item h3 { font-family: var(--f-display); font-size: 24px; margin-bottom: 8px; }
-.service-item p { font-size: 14px; color: var(--ink-3); margin: 0; }
-.faq { padding: clamp(56px, 8vw, 100px) 0; }
-.faq h2 { font-family: var(--f-display); font-size: clamp(36px, 4vw, 56px); margin-bottom: 48px; }
-.faq h2 em { font-style: italic; color: var(--ink-2); }
-.faq-item { border-top: 1px solid var(--line); padding: 24px 0; }
-.faq-item:last-child { border-bottom: 1px solid var(--line); }
-.faq-item h3 { font-family: var(--f-display); font-size: 22px; margin-bottom: 12px; }
-.faq-item p { color: var(--ink-2); font-size: 16px; max-width: 72ch; }
+/* Breadcrumb */
+.breadcrumb { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); padding: 16px 0; border-bottom: 1px solid var(--line); }
+.breadcrumb a { color: var(--ink-3); }
+.breadcrumb span { margin: 0 8px; }
+/* Blog hero */
+.blog-hero { padding: clamp(64px, 9vw, 112px) 0 clamp(40px, 6vw, 64px); }
+.blog-hero h1 { font-family: var(--f-display); font-size: clamp(48px, 8vw, 110px); letter-spacing: -0.02em; line-height: 1; margin-bottom: 24px; max-width: 18ch; }
+.blog-hero h1 em { font-style: italic; color: var(--ink-2); }
+.blog-hero p { font-size: clamp(16px, 1.5vw, 19px); color: var(--ink-2); max-width: 60ch; line-height: 1.5; }
+/* Posts grid */
+.posts-section { padding: clamp(40px, 6vw, 72px) 0 clamp(56px, 8vw, 96px); }
+.posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+@media (max-width: 900px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 580px) { .posts-grid { grid-template-columns: 1fr; } }
+.post-card { background: var(--bg); border: 1px solid var(--line); padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px; transition: background .15s ease; }
+.post-card:hover { background: var(--bg-2); }
+.post-card .tag { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); }
+.post-card h2 { font-family: var(--f-display); font-size: clamp(20px, 2vw, 26px); line-height: 1.15; letter-spacing: -0.01em; }
+.post-card h2 em { font-style: italic; color: var(--ink-2); }
+.post-card p { font-size: 14px; color: var(--ink-3); line-height: 1.6; flex: 1; }
+.post-card .read-link { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); align-self: flex-start; }
+/* CTA */
 .cta-block { background: var(--bg-3); color: var(--inv); padding: clamp(56px, 8vw, 100px) 0; text-align: center; }
-.cta-block h2 { font-family: var(--f-display); font-size: clamp(40px, 6vw, 80px); margin-bottom: 20px; }
+.cta-block h2 { font-family: var(--f-display); font-size: clamp(36px, 5vw, 72px); margin-bottom: 20px; }
 .cta-block h2 em { font-style: italic; color: color-mix(in oklch, var(--inv) 50%, transparent); }
 .cta-block p { color: color-mix(in oklch, var(--inv) 70%, transparent); font-size: 18px; margin-bottom: 36px; max-width: 52ch; margin-left: auto; margin-right: auto; }
 .cta-block .btn-primary { background: var(--inv); color: var(--ink); }
-.cta-block .btn-primary:hover { background: var(--accent); color: var(--inv); }
+.cta-block .btn-primary:hover { background: var(--bg-2); }
+/* Footer */
 .footer { background: var(--bg-3); color: var(--inv); padding: 64px 0 0; border-top: 1px solid color-mix(in oklch, var(--inv) 10%, transparent); }
 .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px 32px; padding-bottom: 48px; border-bottom: 1px solid color-mix(in oklch, var(--inv) 12%, transparent); }
 @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
@@ -127,15 +111,10 @@ p { margin: 0; }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: color-mix(in oklch, var(--inv) 35%, transparent); flex-wrap: wrap; gap: 8px; }
 .footer-bottom a { color: color-mix(in oklch, var(--inv) 50%, transparent); }
 .footer-bottom a:hover { color: var(--inv); }
-.breadcrumb { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); padding: 16px 0; border-bottom: 1px solid var(--line); }
-.breadcrumb a { color: var(--ink-3); }
-.breadcrumb a:hover { color: var(--ink); }
-.breadcrumb span { margin: 0 8px; }
-@media (max-width: 880px) { .service-list { grid-template-columns: 1fr 1fr; } .section-grid { grid-template-columns: 1fr; } }
-@media (max-width: 520px) { .service-list { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
+
 <header class="nav">
   <div class="wrap nav-inner">
     <a href="/" class="brand">
@@ -171,85 +150,134 @@ p { margin: 0; }
           <a href="/renovation-contractor-markham/">Markham</a>
         </div>
       </div>
-      <a href="/blog/">Blog</a>
+      <a href="/blog/" aria-current="page">Blog</a>
       <a href="/#contact">Contact</a>
     </nav>
     <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
   </div>
 </header>
-<div class="wrap">
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Home</a><span>→</span><span>Custom Home Builder Richmond Hill</span>
-  </nav>
-</div>
-<section class="page-hero">
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
   <div class="wrap">
-    <span class="eyebrow">Custom Home Builder · Richmond Hill, York Region</span>
-    <h1 class="display">Custom homes in Richmond Hill, <em>from the ground up</em>.</h1>
-    <p class="lead">Kopman Build delivers ground-up custom homes in Richmond Hill with the same disciplined approach we've built over 25 years. From infill lots in Mill Pond to estate properties in Oak Ridges, we manage every phase from feasibility to handover.</p>
-    <div class="actions">
-      <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
-      <a href="/#projects" class="btn btn-ghost">View Projects</a>
-    </div>
+    <a href="/">Home</a><span aria-hidden="true">→</span> Blog
+  </div>
+</nav>
+
+<section class="blog-hero">
+  <div class="wrap">
+    <p class="eyebrow" style="margin-bottom:20px">Resources &amp; Guides</p>
+    <h1 class="display">Toronto renovation <em>guides</em> &amp; insights.</h1>
+    <p>Practical advice on renovation costs, permits, timelines, and project management — written by the team that has been building across Toronto and the GTA since 1999.</p>
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap section-grid">
-    <div>
-      <h2 class="display">Why Richmond Hill clients choose <em>Kopman Build</em></h2>
-    </div>
-    <div>
-      <p>Richmond Hill is a premium York Region market where land values have risen significantly and homeowners expect a commensurate standard of build quality. Custom homes here need to reflect the neighbourhood's investment level while delivering modern systems, superior insulation, and architectural character that holds value. Kopman Build brings 25 years of custom home management to every Richmond Hill project.</p>
-      <p>Dustin Kopman founded the company in 1999 after growing up working in construction through his family's firm, G&amp; G Enterprise. That hands-on background means every project is managed by someone who understands the craft — not just the sales pitch.</p>
-    </div>
-  </div>
-</section>
-
-<div class="services-strip">
+<section class="posts-section">
   <div class="wrap">
-    <h2 class="display">What's included in a <em>Richmond Hill custom home build</em></h2>
-    <div class="service-list">
-      <div class="service-item"><h3>Site Evaluation</h3><p>Feasibility assessment, lot analysis, zoning review, and architect coordination from day one.</p></div>
-      <div class="service-item"><h3>Pre-Construction Budget</h3><p>Detailed line-item estimates with allowances and contingencies before any commitment is made.</p></div>
-      <div class="service-item"><h3>Permit & Approvals</h3><p>Full permit management with the Town of Richmond Hill, including site plan, grading, and building permit.</p></div>
-      <div class="service-item"><h3>Construction Management</h3><p>Full-time site supervision, weekly client updates, and transparent cost tracking throughout.</p></div>
-      <div class="service-item"><h3>Trade Network</h3><p>Trusted tradespeople we've worked with for years — the same quality, every time.</p></div>
-      <div class="service-item"><h3>Handover</h3><p>Structured handover with full documentation, warranty package, and a 12-month post-completion window.</p></div>
+    <div class="posts-grid">
+
+      <a href="/blog/home-renovation-cost-toronto-2026/" class="post-card">
+        <span class="tag">Cost Guide</span>
+        <h2>Home Renovation <em>Costs</em> in Toronto — 2026</h2>
+        <p>A complete breakdown of renovation costs by project type — kitchens, bathrooms, basements, additions, and full-house remodels — with real Toronto pricing.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
+      <a href="/blog/how-to-find-renovation-contractor-toronto/" class="post-card">
+        <span class="tag">Hiring</span>
+        <h2>How to Find a <em>Renovation Contractor</em> in Toronto</h2>
+        <p>What to look for, what questions to ask, and how to avoid the most common mistakes homeowners make when hiring a contractor in the GTA.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
+      <a href="/blog/kitchen-renovation-toronto-what-to-expect/" class="post-card">
+        <span class="tag">Kitchen</span>
+        <h2>Kitchen Renovation in Toronto — <em>What to Expect</em></h2>
+        <p>Timeline, sequencing, material selections, and what drives costs up or down on a Toronto kitchen renovation — from demo to final punch list.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
+      <a href="/blog/basement-finishing-cost-toronto-2026/" class="post-card">
+        <span class="tag">Basement</span>
+        <h2>Basement Finishing <em>Costs</em> in Toronto — 2026</h2>
+        <p>Real cost ranges for basement finishing, underpinning, and legal suite conversions across Toronto and the GTA — with permit and design considerations.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
+      <a href="/blog/renovation-permit-toronto/" class="post-card">
+        <span class="tag">Permits</span>
+        <h2>Renovation <em>Permits</em> in Toronto — A Complete Guide</h2>
+        <p>Which renovations require permits, how to apply, what inspections to expect, and how long the process takes — explained clearly for homeowners.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
+      <a href="/blog/home-renovation-roi-toronto-neighbourhoods/" class="post-card">
+        <span class="tag">Investment</span>
+        <h2>Renovation <em>ROI</em> by Toronto Neighbourhood</h2>
+        <p>Which renovations deliver the best return in which Toronto neighbourhoods — an honest look at resale value across different housing markets and price points.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
+      <a href="/blog/bathroom-renovation-timeline-toronto/" class="post-card">
+        <span class="tag">Bathroom</span>
+        <h2>Bathroom Renovation <em>Timeline</em> in Toronto</h2>
+        <p>A week-by-week breakdown of a primary ensuite renovation — from demo to final clean — and what causes projects to run over schedule.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
+      <a href="/blog/muskoka-cottage-renovation-guide/" class="post-card">
+        <span class="tag">Muskoka</span>
+        <h2>Muskoka <em>Cottage Renovation</em> — The Complete Guide</h2>
+        <p>Everything you need to know about renovating a cottage in Muskoka — seasonal constraints, permit considerations, structural upgrades, and costs.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
+      <a href="/blog/design-build-vs-general-contractor-toronto/" class="post-card">
+        <span class="tag">Process</span>
+        <h2>Design-Build vs General <em>Contractor</em> in Toronto</h2>
+        <p>An honest comparison of the two delivery models — when design-build makes sense, when it doesn't, and how to decide which approach fits your project.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
+      <a href="/blog/home-addition-cost-toronto/" class="post-card">
+        <span class="tag">Additions</span>
+        <h2>Home Addition <em>Costs</em> in Toronto — 2026</h2>
+        <p>Rear additions, second-storey additions, and infill development — what each costs, what drives the price, and what the permit process looks like.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
+      <a href="/blog/heritage-home-renovation-toronto/" class="post-card">
+        <span class="tag">Heritage</span>
+        <h2>Renovating a <em>Heritage Home</em> in Toronto</h2>
+        <p>What heritage designation means for your renovation, which changes require approval, and how to modernize a heritage home without losing what makes it special.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
+      <a href="/blog/toronto-renovation-mistakes/" class="post-card">
+        <span class="tag">Planning</span>
+        <h2>Toronto Renovation <em>Mistakes</em> to Avoid</h2>
+        <p>The most common — and most expensive — mistakes Toronto homeowners make before and during renovations, and how experienced contractors prevent them.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
+      <a href="/blog/second-storey-addition-toronto/" class="post-card">
+        <span class="tag">Additions</span>
+        <h2>Second Storey <em>Addition</em> in Toronto — A Complete Guide</h2>
+        <p>Costs, structural considerations, permit requirements, and what to expect when adding a second storey to a Toronto bungalow or semi-detached home.</p>
+        <span class="read-link">Read guide →</span>
+      </a>
+
     </div>
-  </div>
-</div>
-
-<section class="section">
-  <div class="wrap">
-    <h2 class="display" style="margin-bottom: 40px;">How we work on every <em>project</em></h2>
-    <ol class="process-list">
-      <li class="process-item"><span class="n">01</span><div><h3>Consultation</h3><p>We visit your property, listen to your goals, and document the project in writing — scope, budget, and timeline.</p></div></li>
-      <li class="process-item"><span class="n">02</span><div><h3>Pre-Construction Estimate</h3><p>A detailed line-item estimate with allowances and contingencies, so you know the number before committing.</p></div></li>
-      <li class="process-item"><span class="n">03</span><div><h3>Permits &amp; Planning</h3><p>We manage all permit applications, engineering consultants, and approvals — nothing falls through the cracks.</p></div></li>
-      <li class="process-item"><span class="n">04</span><div><h3>Construction</h3><p>Full-time site supervision, weekly updates, and open-book cost tracking throughout the project.</p></div></li>
-      <li class="process-item"><span class="n">05</span><div><h3>Handover</h3><p>Structured handover with all documentation, warranties, and a 12-month attendance window post-completion.</p></div></li>
-    </ol>
-  </div>
-</section>
-
-<section class="faq">
-  <div class="wrap">
-    <h2 class="display">Questions about <em>custom home builder richmond hill</em></h2>
-    <div class="faq-item"><h3>How much does a custom home cost in Richmond Hill?</h3><p>Custom home construction in Richmond Hill typically runs $400–$800+ per square foot. A 3,500 sq ft custom home in Richmond Hill can range from $1.4M–$2.8M in construction costs. We provide complete pre-construction estimates with no obligation.</p></div>
-    <div class="faq-item"><h3>How long does building a custom home in Richmond Hill take?</h3><p>Typically 18–28 months from initial consultation to move-in. This includes 3–6 months of design and permitting with the Town of Richmond Hill, and 12–18 months of construction depending on the home's size and specification.</p></div>
-    <div class="faq-item"><h3>Do you build custom homes in Oak Ridges?</h3><p>Yes. Oak Ridges and the Lake Wilcox area are established parts of our Richmond Hill service territory. Properties here often include larger lots with unique site conditions that we are experienced managing.</p></div>
-    <div class="faq-item"><h3>Who manages my project at Kopman Build?</h3><p>Dustin Kopman is personally involved in every project. You'll have a dedicated site supervisor and a consistent point of contact from consultation through handover — not a rotating cast of project managers.</p></div>
   </div>
 </section>
 
 <div class="cta-block">
   <div class="wrap">
-    <h2 class="display">Build your custom home in <em>Richmond Hill</em>.</h2>
-    <p>No-obligation consultation for Richmond Hill and York Region. Tell us about your project.</p>
+    <h2 class="display">Ready to start your <em>project</em>?</h2>
+    <p>Initial consultations are no-obligation and focused entirely on your project. Toronto · GTA · Muskoka.</p>
     <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
   </div>
 </div>
+
 <footer class="footer">
   <div class="wrap footer-grid">
     <div class="footer-col footer-col--brand">

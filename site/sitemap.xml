@@ -124,6 +124,14 @@
     <priority>0.85</priority>
   </url>
 
+  <!-- Blog Index -->
+  <url>
+    <loc>https://kopmanbuild.com/blog/</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- Blog Posts -->
   <url>
     <loc>https://kopmanbuild.com/blog/home-renovation-cost-toronto-2026/</loc>
