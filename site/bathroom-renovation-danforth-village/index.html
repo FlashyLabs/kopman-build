@@ -206,6 +206,13 @@ p { margin: 0; }
   left: 50%;
   transform: translateX(-50%);
 }
+.nav-mega-2col-right {
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 32px;
+  width: 460px;
+  right: 0;
+  left: auto;
+}
 .nav-mega-3col {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px 24px;
@@ -309,8 +316,26 @@ p { margin: 0; }
           </div>
         </div>
       </div>
+      <div class="nav-drop">
+        <span class="nav-drop-trigger">Resources <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="nav-mega-menu nav-mega-2col-right">
+          <div class="mega-col">
+            <p class="mega-col-head">Tools &amp; Data</p>
+            <a href="/renovation-cost-index/" class="mega-featured">Cost Index Q3 2026</a>
+            <a href="/renovation-budget-calculator/">Budget Calculator</a>
+            <a href="/toronto-permit-timeline/">Permit Timeline</a>
+          </div>
+          <div class="mega-col">
+            <p class="mega-col-head">Reference Guides</p>
+            <a href="/toronto-renovation-guide/">Toronto Renovation Guide</a>
+            <a href="/custom-home-building-guide/">Custom Home Building</a>
+            <a href="/laneway-house-guide/">Laneway House Guide</a>
+            <a href="/second-storey-addition-guide/">Second Storey Addition</a>
+          </div>
+        </div>
+      </div>
       <a href="/blog/">Insights</a>
-      <a href="/#contact">Contact</a>
+      <a href="/for-professionals/">For Professionals</a>
     </nav>
     <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
   </div>
