@@ -234,6 +234,14 @@ p { margin: 0; }
 }
 .nav-links a { position: relative; padding: 4px 0; }
 .nav-links a:hover { color: var(--ink); }
+/* Nav dropdowns */
+.nav-drop { position: relative; }
+.nav-drop-trigger { display: flex; align-items: center; gap: 4px; cursor: default; font-size: 14px; color: var(--ink-2); }
+.nav-drop-menu { display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px; min-width: 220px; box-shadow: 0 8px 32px color-mix(in oklch, var(--ink) 12%, transparent); z-index: 100; }
+.nav-drop:hover .nav-drop-menu { display: flex; flex-direction: column; }
+.nav-drop-menu a { padding: 8px 12px; border-radius: 6px; font-size: 13.5px; color: var(--ink-2); white-space: nowrap; }
+.nav-drop-menu a:hover { background: var(--bg-2); color: var(--ink); }
+.nav-drop-rule { border: none; border-top: 1px solid var(--line); margin: 4px 0; }
 .nav-links a::after {
   content: ""; position: absolute; bottom: 0; left: 0;
   height: 1px; width: 0; background: var(--ink);
@@ -1161,9 +1169,23 @@ section { padding: clamp(72px, 11vw, 140px) 0; scroll-margin-top: 80px; }
     </a>
     <nav class="nav-links" aria-label="Primary">
       <a href="#about">About</a>
-      <a href="#services">Services</a>
+      <div class="nav-drop">
+        <span class="nav-drop-trigger">Services <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="nav-drop-menu">
+          <a href="/renovation-contractor-toronto/">Renovation Contractor</a>
+          <a href="/custom-home-builder-toronto/">Custom Home Builder</a>
+          <a href="/general-contractor-toronto/">General Contractor</a>
+          <a href="/design-build-toronto/">Design-Build</a>
+          <a href="/muskoka-home-builder/">Muskoka Home Builder</a>
+          <hr class="nav-drop-rule">
+          <a href="/basement-renovation-toronto/">Basement Renovation</a>
+          <a href="/kitchen-renovation-toronto/">Kitchen Renovation</a>
+          <a href="/bathroom-renovation-toronto/">Bathroom Renovation</a>
+          <a href="/home-addition-toronto/">Home Additions</a>
+        </div>
+      </div>
       <a href="#projects">Projects</a>
-      <a href="#process">Process</a>
+      <a href="/blog/">Blog</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-cta">

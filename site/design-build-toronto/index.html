@@ -134,6 +134,46 @@ p { margin: 0; }
 @media (max-width: 880px) { .service-list { grid-template-columns: 1fr 1fr; } .section-grid { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .service-list { grid-template-columns: 1fr; } }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is design-build, and how is it different from the traditional approach?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the traditional model, a client hires an architect, then uses those drawings to get bids from contractors, then manages the relationship between both. Design-build combines design and construction under one entity. The result: fewer handoff errors, faster decisions, better cost certainty from the design phase, and one point of accountability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is design-build more expensive than hiring an architect and GC separately?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not necessarily \u2014 and often less expensive. Because design decisions are made with real construction cost data from the start, there are fewer expensive changes in the field. The coordination overhead is also reduced. Total project cost is frequently lower, with significantly fewer surprises."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kind of projects does Kopman Build take on as design-build?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We work on custom homes, major whole-home renovations, additions, commercial fit-outs, and specialized suites (laneway, garden) as integrated design-build engagements. Both residential and commercial clients use our design-build model."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you have in-house architects or do you partner with external architects?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We coordinate with a trusted network of licensed architects and designers we have worked with extensively. The design-build model means we select and manage the right design professional for your project \u2014 one that understands construction cost, not just design intent."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <header class="nav">
@@ -145,7 +185,7 @@ p { margin: 0; }
     <nav class="nav-links" aria-label="Primary">
       <a href="/#about">About</a>
       <div class="nav-drop">
-        <a href="/renovation-contractor-toronto/" class="nav-drop-trigger">Services <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <span class="nav-drop-trigger">Services <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <div class="nav-drop-menu">
           <a href="/renovation-contractor-toronto/">Renovation Contractor</a>
           <a href="/custom-home-builder-toronto/">Custom Home Builder</a>
@@ -160,7 +200,7 @@ p { margin: 0; }
         </div>
       </div>
       <div class="nav-drop">
-        <a href="/renovation-contractor-toronto/" class="nav-drop-trigger">Locations <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <span class="nav-drop-trigger">Locations <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <div class="nav-drop-menu">
           <a href="/renovation-contractor-north-york/">North York</a>
           <a href="/renovation-contractor-etobicoke/">Etobicoke</a>
