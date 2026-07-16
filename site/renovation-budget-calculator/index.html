@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Renovation Budget Calculator Toronto | Kopman Build</title>
+<meta name="description" content="Get a realistic renovation cost estimate for your Toronto home in 60 seconds. Free interactive calculator from Kopman Build, Toronto's contractor since 1999." />
+<meta name="robots" content="index, follow" />
+<meta name="geo.region" content="CA-ON" />
+<meta name="geo.placename" content="Toronto, Ontario, Canada" />
+<link rel="canonical" href="https://kopmanbuild.com/renovation-budget-calculator/" />
+<meta property="og:title" content="Renovation Budget Calculator Toronto | Kopman Build" />
+<meta property="og:description" content="Get a realistic renovation cost estimate for your Toronto home in 60 seconds. Free interactive calculator from Kopman Build, Toronto's contractor since 1999." />
+<meta property="og:url" content="https://kopmanbuild.com/renovation-budget-calculator/" />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f3efe8; --bg-2: #ebe6dc; --bg-3: #1a1a18;
+  --ink: #1a1a18; --ink-2: #3a3a36; --ink-3: #6b675f;
+  --line: #d8d3c8; --line-2: #c4bfb3; --inv: #f3efe8;
+  --accent: oklch(58% 0.09 45); --accent-ink: oklch(40% 0.08 45);
+  --f-display: "Instrument Serif", Georgia, serif;
+  --f-sans: "Geist", system-ui, sans-serif;
+  --f-mono: "Geist Mono", monospace;
+  --max: 1320px; --gutter: clamp(20px, 4vw, 56px);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+h1,h2,h3,h4 { margin: 0; font-weight: 400; }
+p { margin: 0; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.display { font-family: var(--f-display); font-weight: 400; letter-spacing: -0.02em; line-height: 0.98; }
+.eyebrow { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.btn { display: inline-flex; align-items: center; gap: 12px; padding: 16px 22px; border-radius: 999px; font-size: 14px; font-weight: 500; border: 1px solid transparent; transition: all .2s ease; white-space: nowrap; }
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary:hover { background: var(--accent-ink); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
+.btn-ghost:hover { background: var(--ink); color: var(--bg); }
+.nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px); background: color-mix(in oklch, var(--bg) 78%, transparent); border-bottom: 1px solid color-mix(in oklch, var(--line) 60%, transparent); }
+.nav-drop { position: relative; }
+.nav-drop-trigger { display: flex; align-items: center; gap: 4px; cursor: default; }
+.nav-drop-menu { display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px; min-width: 220px; box-shadow: 0 8px 32px color-mix(in oklch, var(--ink) 12%, transparent); z-index: 100; }
+.nav-drop:hover .nav-drop-menu { display: flex; flex-direction: column; }
+.nav-drop-menu a { padding: 8px 12px; border-radius: 6px; font-size: 13.5px; color: var(--ink-2); white-space: nowrap; }
+.nav-drop-menu a:hover { background: var(--bg-2); color: var(--ink); }
+.nav-drop-rule { border: none; border-top: 1px solid var(--line); margin: 4px 0; }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--f-display); font-size: 22px; color: var(--ink); }
+.brand svg { width: 26px; height: 26px; }
+.nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--ink-2); }
+.nav-links a:hover { color: var(--ink); }
+@media (max-width: 880px) { .nav-links { display: none; } }
+.page-hero { padding: clamp(72px, 10vw, 120px) 0 clamp(56px, 8vw, 96px); border-bottom: 1px solid var(--line); }
+.page-hero .eyebrow { margin-bottom: 24px; display: block; }
+.page-hero h1 { font-size: clamp(48px, 8vw, 120px); max-width: 14ch; margin-bottom: clamp(24px, 4vw, 48px); }
+.page-hero h1 em { font-style: italic; color: var(--ink-2); }
+.page-hero .lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--ink-2); max-width: 56ch; line-height: 1.5; margin-bottom: 36px; }
+.page-hero .actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.section { padding: clamp(56px, 8vw, 100px) 0; border-bottom: 1px solid var(--line); }
+.section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
+.section h2 { font-family: var(--f-display); font-size: clamp(36px, 4vw, 60px); margin-bottom: 24px; }
+.section h2 em { font-style: italic; color: var(--ink-2); }
+.section p { color: var(--ink-2); font-size: 17px; line-height: 1.6; margin-bottom: 16px; }
+.section p:last-child { margin-bottom: 0; }
+.faq { padding: clamp(56px, 8vw, 100px) 0; }
+.faq h2 { font-family: var(--f-display); font-size: clamp(36px, 4vw, 56px); margin-bottom: 48px; }
+.faq h2 em { font-style: italic; color: var(--ink-2); }
+.faq-item { border-top: 1px solid var(--line); padding: 24px 0; }
+.faq-item:last-child { border-bottom: 1px solid var(--line); }
+.faq-item h3 { font-family: var(--f-display); font-size: 22px; margin-bottom: 12px; }
+.faq-item p { color: var(--ink-2); font-size: 16px; max-width: 72ch; }
+.cta-block { background: var(--bg-3); color: var(--inv); padding: clamp(56px, 8vw, 100px) 0; text-align: center; }
+.cta-block h2 { font-family: var(--f-display); font-size: clamp(40px, 6vw, 80px); margin-bottom: 20px; }
+.cta-block h2 em { font-style: italic; color: color-mix(in oklch, var(--inv) 50%, transparent); }
+.cta-block p { color: color-mix(in oklch, var(--inv) 70%, transparent); font-size: 18px; margin-bottom: 36px; max-width: 52ch; margin-left: auto; margin-right: auto; }
+.cta-block .btn-primary { background: var(--inv); color: var(--ink); }
+.cta-block .btn-primary:hover { background: var(--accent); color: var(--inv); }
+.footer { background: var(--bg-3); color: var(--inv); padding: 64px 0 0; border-top: 1px solid color-mix(in oklch, var(--inv) 10%, transparent); }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px 32px; padding-bottom: 48px; border-bottom: 1px solid color-mix(in oklch, var(--inv) 12%, transparent); }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-col--brand { display: flex; flex-direction: column; gap: 16px; }
+.footer-brand { display: flex; align-items: center; gap: 10px; font-family: var(--f-sans); font-size: 15px; font-weight: 500; color: var(--inv); }
+.footer-desc { font-size: 13.5px; line-height: 1.6; color: color-mix(in oklch, var(--inv) 55%, transparent); max-width: 30ch; }
+.footer-region { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in oklch, var(--inv) 35%, transparent); }
+.footer-heading { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in oklch, var(--inv) 40%, transparent); margin-bottom: 14px; font-weight: 400; }
+.footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.footer-links a { font-size: 13.5px; color: color-mix(in oklch, var(--inv) 65%, transparent); transition: color .15s ease; }
+.footer-links a:hover { color: var(--inv); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: color-mix(in oklch, var(--inv) 35%, transparent); flex-wrap: wrap; gap: 8px; }
+.footer-bottom a { color: color-mix(in oklch, var(--inv) 50%, transparent); }
+.footer-bottom a:hover { color: var(--inv); }
+.breadcrumb { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); padding: 16px 0; border-bottom: 1px solid var(--line); }
+.breadcrumb a { color: var(--ink-3); }
+.breadcrumb a:hover { color: var(--ink); }
+.breadcrumb span { margin: 0 8px; }
+/* Mega-menu */
+.nav-mega-menu{display:none;position:absolute;top:calc(100% + 14px);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:24px;box-shadow:0 12px 40px color-mix(in oklch,var(--ink) 10%,transparent);z-index:200}.nav-drop:hover .nav-mega-menu{display:grid}.nav-mega-2col{grid-template-columns:1fr 1fr;gap:8px 32px;width:460px;left:50%;transform:translateX(-50%)}.nav-mega-3col{grid-template-columns:1fr 1fr 1fr;gap:8px 24px;width:580px;right:0;left:auto}.mega-col{display:flex;flex-direction:column}.mega-col-head{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}.mega-col a{padding:5px 8px;border-radius:5px;font-size:13.5px;color:var(--ink-2);white-space:nowrap;line-height:1.4}.mega-col a:hover{background:var(--bg-2);color:var(--ink)}.mega-featured{font-weight:600!important;color:var(--ink)!important}.mega-region-desc{font-size:12px;color:var(--ink-3);line-height:1.55;margin-top:10px;padding:0 8px}.mega-col--accent .mega-col-head{color:var(--accent)}
+/* Calculator page styles */
+.calc-wrap { padding: clamp(56px, 8vw, 100px) 0; }
+.calc-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 16px; padding: 40px; max-width: 680px; margin: 0 auto; }
+.calc-step { margin-bottom: 36px; }
+.calc-step:last-of-type { margin-bottom: 0; }
+.calc-step-label { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; display: block; }
+.calc-step-title { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 16px; }
+/* Type button grid */
+.type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 520px) { .type-grid { grid-template-columns: 1fr; } }
+.type-btn { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; text-align: left; font-size: 14px; color: var(--ink-2); transition: all .15s ease; }
+.type-btn:hover { border-color: var(--line-2); color: var(--ink); background: color-mix(in oklch, var(--bg) 60%, var(--line) 40%); }
+.type-btn.selected { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+/* Neighbourhood select */
+.calc-select { width: 100%; padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); font-family: var(--f-sans); font-size: 15px; appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%236b675f' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+.calc-select:focus { outline: 2px solid var(--ink); outline-offset: 2px; }
+/* Finish radio cards */
+.finish-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+@media (max-width: 520px) { .finish-grid { grid-template-columns: 1fr; } }
+.finish-card { background: var(--bg); border: 2px solid var(--line); border-radius: 10px; padding: 16px; cursor: pointer; transition: all .15s ease; }
+.finish-card input[type="radio"] { display: none; }
+.finish-card.selected { border-color: var(--ink); }
+.finish-card:hover:not(.selected) { border-color: var(--line-2); }
+.finish-name { font-weight: 600; font-size: 14px; color: var(--ink); margin-bottom: 6px; }
+.finish-desc { font-size: 12px; color: var(--ink-3); line-height: 1.45; }
+/* Size input */
+.size-row { display: flex; flex-direction: column; gap: 8px; }
+.size-row label { font-size: 14px; color: var(--ink-2); }
+.calc-input { padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); font-family: var(--f-sans); font-size: 15px; width: 100%; max-width: 240px; }
+.calc-input:focus { outline: 2px solid var(--ink); outline-offset: 2px; }
+/* Calculate button */
+.calc-submit { width: 100%; padding: 18px; background: var(--ink); color: var(--bg); border: none; border-radius: 999px; font-size: 15px; font-weight: 500; margin-top: 32px; transition: background .2s ease; }
+.calc-submit:hover { background: var(--accent-ink); }
+.calc-submit:disabled { opacity: 0.45; cursor: not-allowed; }
+/* Result panel */
+.result-panel { max-width: 680px; margin: 32px auto 0; background: var(--bg-2); border: 1px solid var(--line); border-radius: 16px; padding: 40px; opacity: 0; transition: opacity .35s ease; pointer-events: none; }
+.result-panel.visible { opacity: 1; pointer-events: auto; }
+.result-range { font-family: var(--f-display); font-size: clamp(36px, 6vw, 52px); letter-spacing: -0.02em; line-height: 1; color: var(--ink); margin-bottom: 8px; }
+.result-sub { font-size: 13px; color: var(--ink-3); font-family: var(--f-mono); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 32px; }
+/* Cost bar */
+.cost-bar { display: flex; height: 10px; border-radius: 999px; overflow: hidden; margin-bottom: 16px; gap: 2px; }
+.cost-bar-seg { height: 100%; border-radius: 999px; }
+.cost-bar-seg--labour { background: var(--accent); width: 38%; }
+.cost-bar-seg--materials { background: var(--ink-2); width: 42%; }
+.cost-bar-seg--permits { background: var(--ink-3); width: 12%; }
+.cost-bar-seg--contingency { background: var(--line-2); width: 8%; }
+.cost-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 32px; }
+.legend-item { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--ink-2); }
+.legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.legend-dot--labour { background: var(--accent); }
+.legend-dot--materials { background: var(--ink-2); }
+.legend-dot--permits { background: var(--ink-3); }
+.legend-dot--contingency { background: var(--line-2); }
+/* Timeline */
+.result-timeline { font-size: 14px; color: var(--ink-2); padding: 14px 18px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; margin-bottom: 28px; }
+.result-timeline strong { color: var(--ink); }
+/* Result CTAs */
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+/* How we calculate section */
+.how-section { padding: clamp(56px, 8vw, 100px) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.how-section h2 { font-family: var(--f-display); font-size: clamp(32px, 4vw, 52px); margin-bottom: 16px; }
+.how-section h2 em { font-style: italic; color: var(--ink-2); }
+.how-section p { color: var(--ink-2); font-size: 16px; line-height: 1.65; margin-bottom: 14px; max-width: 68ch; }
+.how-section p:last-child { margin-bottom: 0; }
+.how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 80px); }
+@media (max-width: 720px) { .how-grid { grid-template-columns: 1fr; } }
+.divider { border: none; border-top: 1px solid var(--line); margin: 0; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Toronto Renovation Budget Calculator",
+  "description": "Free interactive calculator to estimate renovation costs for Toronto, GTA, and Muskoka homes. Covers kitchens, bathrooms, basements, additions, and custom homes.",
+  "url": "https://kopmanbuild.com/renovation-budget-calculator/",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
+  "provider": {
+    "@type": "Organization",
+    "name": "Kopman Build",
+    "url": "https://kopmanbuild.com"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How accurate is the renovation budget calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The calculator produces all-in cost ranges based on Kopman Build's Q3 2026 Cost Index — derived from real project data, permit filings, and supplier pricing across Toronto, the GTA, and Muskoka. Results are directionally reliable for budget planning. For a project-specific estimate, request a formal consultation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is included in the cost estimate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The estimate is all-in: design fees, permit costs, labour, and materials. It excludes furniture, appliances, and owner-supplied fixtures. The breakdown shows approximate proportions for labour (38%), materials (42%), permits and design (12%), and contingency (8%)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does neighbourhood affect the cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Neighbourhoods like Rosedale, Forest Hill, and Bridle Path command premiums of 18–28% due to higher labour rates, heritage permit complexity, longer site logistics, and elevated finish expectations. GTA markets like Scarborough and Mississauga often run at or slightly below the Toronto base."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the finish level selection mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standard means builder-grade materials with a functional, clean layout. Premium means mid-to-high-end materials, upgraded fixtures, and meaningful design detail — the most common choice for Toronto homeowners. Luxury means bespoke millwork, imported stone, custom hardware, and top-tier design coordination throughout."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav"><div class="wrap nav-inner"><a href="/" class="brand"><svg viewBox="0 0 32 32" fill="currentColor"><rect x="5" y="4" width="4" height="24"/><polygon points="9,16 24,4 29,4 14,16"/><polygon points="9,16 24,28 29,28 14,16"/></svg> Kopman Build</a><nav class="nav-links" aria-label="Primary"><a href="/#about">About</a><div class="nav-drop"><span class="nav-drop-trigger">Services <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="nav-mega-menu nav-mega-2col"><div class="mega-col"><p class="mega-col-head">Design &amp; Construction</p><a href="/custom-home-builder-toronto/">Custom Home Building</a><a href="/design-build-toronto/">Design-Build</a><a href="/general-contractor-toronto/">General Contracting</a><a href="/renovation-contractor-toronto/">Renovation Contractor</a><a href="/muskoka-home-builder/">Muskoka Home Builder</a></div><div class="mega-col"><p class="mega-col-head">Renovation Specialties</p><a href="/kitchen-renovation-toronto/">Kitchen Renovation</a><a href="/bathroom-renovation-toronto/">Bathroom Renovation</a><a href="/basement-renovation-toronto/">Basement Renovation</a><a href="/home-addition-toronto/">Home Additions</a><a href="/second-storey-addition-leaside/">Second Storey Addition</a><a href="/laneway-house-leslieville/">Laneway House</a></div></div></div><div class="nav-drop"><span class="nav-drop-trigger">Markets <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="nav-mega-menu nav-mega-3col"><div class="mega-col"><p class="mega-col-head">Toronto</p><a href="/renovation-contractor-rosedale/">Rosedale</a><a href="/renovation-contractor-forest-hill/">Forest Hill</a><a href="/renovation-contractor-leaside/">Leaside</a><a href="/renovation-contractor-annex/">The Annex</a><a href="/renovation-contractor-cabbagetown/">Cabbagetown</a><a href="/renovation-contractor-riverdale/">Riverdale</a><a href="/renovation-contractor-beaches/">The Beaches</a><a href="/renovation-contractor-yorkville/">Yorkville</a><a href="/renovation-contractor-leslieville/">Leslieville</a></div><div class="mega-col"><p class="mega-col-head">Greater Toronto</p><a href="/renovation-contractor-north-york/">North York</a><a href="/renovation-contractor-etobicoke/">Etobicoke</a><a href="/renovation-contractor-scarborough/">Scarborough</a><a href="/renovation-contractor-mississauga/">Mississauga</a><a href="/renovation-contractor-oakville/">Oakville</a><a href="/renovation-contractor-richmond-hill/">Richmond Hill</a><a href="/renovation-contractor-markham/">Markham</a><a href="/renovation-contractor-vaughan/">Vaughan</a><a href="/renovation-contractor-burlington/">Burlington</a></div><div class="mega-col mega-col--accent"><p class="mega-col-head">Muskoka</p><a href="/muskoka-home-builder/" class="mega-featured">Muskoka Home Builder</a><p class="mega-region-desc">Custom home construction and cottage renovation across the Muskoka Lakes.</p></div></div></div><a href="/blog/">Insights</a><a href="/#contact">Contact</a></nav><a href="/#contact" class="btn btn-primary">Request a Consultation</a></div></header>
+
+<div class="wrap">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>→</span><a href="/blog/">Insights</a><span>→</span><span>Renovation Budget Calculator</span>
+  </nav>
+</div>
+
+<section class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Free Tool &middot; Est. 1999</span>
+    <h1 class="display">Renovation Budget <em>Calculator</em></h1>
+    <p class="lead">Get a realistic all-in cost estimate for your Toronto renovation in under 60 seconds.</p>
+  </div>
+</section>
+
+<div class="calc-wrap">
+  <div class="wrap">
+
+    <!-- Calculator Card -->
+    <div class="calc-card" id="calcCard">
+
+      <!-- Step 1: Project Type -->
+      <div class="calc-step">
+        <span class="calc-step-label">Step 1 of 4</span>
+        <p class="calc-step-title">What type of project are you planning?</p>
+        <div class="type-grid" id="typeGrid">
+          <button class="type-btn" data-type="kitchen">Kitchen Renovation</button>
+          <button class="type-btn" data-type="bathroom">Bathroom</button>
+          <button class="type-btn" data-type="primary_bath">Primary Ensuite</button>
+          <button class="type-btn" data-type="basement">Basement</button>
+          <button class="type-btn" data-type="legal_suite">Legal Suite</button>
+          <button class="type-btn" data-type="rear_addition">Rear Addition</button>
+          <button class="type-btn" data-type="second_storey">Second Storey</button>
+          <button class="type-btn" data-type="laneway">Laneway House</button>
+          <button class="type-btn" data-type="full_reno">Full Renovation</button>
+          <button class="type-btn" data-type="custom_home">Custom Home</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Neighbourhood -->
+      <div class="calc-step">
+        <span class="calc-step-label">Step 2 of 4</span>
+        <p class="calc-step-title">Where is the property?</p>
+        <select class="calc-select" id="hoodSelect" aria-label="Select neighbourhood">
+          <optgroup label="Toronto Tier 1">
+            <option value="1.22">Bridle Path / Rosedale</option>
+            <option value="1.14">Forest Hill / Yorkville / Moore Park</option>
+            <option value="1.08">Leaside / Lawrence Park / Casa Loma</option>
+            <option value="1.05">Annex / Cabbagetown / Beaches</option>
+          </optgroup>
+          <optgroup label="Toronto Standard">
+            <option value="1.0" selected>Standard Toronto</option>
+          </optgroup>
+          <optgroup label="Greater Toronto Area">
+            <option value="1.02">North York / Etobicoke</option>
+            <option value="0.97">Scarborough / East York</option>
+            <option value="1.08">Oakville / Burlington</option>
+            <option value="0.97">Mississauga / Markham / Vaughan</option>
+          </optgroup>
+          <optgroup label="Muskoka">
+            <option value="1.16">Muskoka / Cottage Country</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <!-- Step 3: Finish Level -->
+      <div class="calc-step">
+        <span class="calc-step-label">Step 3 of 4</span>
+        <p class="calc-step-title">What finish level are you targeting?</p>
+        <div class="finish-grid">
+          <label class="finish-card selected" id="finishStandard">
+            <input type="radio" name="finish" value="standard" checked />
+            <div class="finish-name">Standard</div>
+            <div class="finish-desc">Builder-grade materials, functional layout</div>
+          </label>
+          <label class="finish-card" id="finishPremium">
+            <input type="radio" name="finish" value="premium" />
+            <div class="finish-name">Premium</div>
+            <div class="finish-desc">Mid-high materials, upgraded fixtures, design detail</div>
+          </label>
+          <label class="finish-card" id="finishLuxury">
+            <input type="radio" name="finish" value="luxury" />
+            <div class="finish-name">Luxury</div>
+            <div class="finish-desc">Bespoke everything — custom millwork, imported stone</div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Step 4: Size (conditional) -->
+      <div class="calc-step" id="sizeStep" style="display:none">
+        <span class="calc-step-label">Step 4 of 4</span>
+        <p class="calc-step-title">Approximate size</p>
+        <div class="size-row">
+          <label for="sizeInput">Square footage (sq ft)</label>
+          <input type="number" class="calc-input" id="sizeInput" min="100" max="20000" value="800" aria-label="Approximate size in square feet" />
+        </div>
+      </div>
+
+      <button class="calc-submit" id="calcBtn" type="button">Calculate My Budget</button>
+    </div>
+
+    <!-- Result Panel -->
+    <div class="result-panel" id="resultPanel" aria-live="polite">
+      <div class="result-range" id="resultRange"></div>
+      <p class="result-sub">All-in estimate &middot; design, permits, labour &amp; materials</p>
+
+      <div class="cost-bar" aria-hidden="true">
+        <div class="cost-bar-seg cost-bar-seg--labour"></div>
+        <div class="cost-bar-seg cost-bar-seg--materials"></div>
+        <div class="cost-bar-seg cost-bar-seg--permits"></div>
+        <div class="cost-bar-seg cost-bar-seg--contingency"></div>
+      </div>
+      <div class="cost-legend">
+        <div class="legend-item"><span class="legend-dot legend-dot--labour"></span>Labour 38%</div>
+        <div class="legend-item"><span class="legend-dot legend-dot--materials"></span>Materials 42%</div>
+        <div class="legend-item"><span class="legend-dot legend-dot--permits"></span>Permits &amp; Design 12%</div>
+        <div class="legend-item"><span class="legend-dot legend-dot--contingency"></span>Contingency 8%</div>
+      </div>
+
+      <div class="result-timeline" id="resultTimeline"></div>
+
+      <div class="result-actions">
+        <a href="/#contact" class="btn btn-primary">Get a Precise Quote</a>
+        <a href="/toronto-renovation-guide/" class="btn btn-ghost">Read the Cost Guide</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- How we calculate -->
+<section class="how-section">
+  <div class="wrap">
+    <div class="how-grid">
+      <div>
+        <h2 class="display">How we <em>calculate</em> this</h2>
+      </div>
+      <div>
+        <p>The calculator pulls from the Kopman Build Q3 2026 Cost Index — built from actual project quotes, City of Toronto permit applications, and supplier material pricing across Toronto, the GTA, and Muskoka.</p>
+        <p>Base ranges reflect Standard Toronto pricing. Neighbourhood multipliers account for labour premiums, permit complexity, and finish-level expectations specific to each market. The finish multiplier (1.0&times; Standard, 1.6&times; Premium, 2.6&times; Luxury) reflects the compound effect of materials, fixtures, and the additional coordination that higher-end projects require.</p>
+        <p>All results are all-in estimates: design, permits, labour, and materials. They exclude furniture, appliances, and owner-supplied fixtures. For per-square-foot project types (rear additions and custom homes), the estimate reflects the midpoint of the current cost-per-sqft range applied to your stated area.</p>
+        <p>These figures are reliable for budget planning. For a precise, itemised estimate specific to your project, request a consultation — we provide detailed budgets before any commitments are made.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQs -->
+<section class="faq">
+  <div class="wrap">
+    <h2 class="display">Common <em>questions</em></h2>
+    <div class="faq-item">
+      <h3>How accurate is the renovation budget calculator?</h3>
+      <p>The calculator produces all-in cost ranges based on Kopman Build's Q3 2026 Cost Index — derived from real project data, permit filings, and supplier pricing across Toronto, the GTA, and Muskoka. Results are directionally reliable for budget planning. For a project-specific estimate, request a formal consultation.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What is included in the cost estimate?</h3>
+      <p>The estimate is all-in: design fees, permit costs, labour, and materials. It excludes furniture, appliances, and owner-supplied fixtures. The breakdown shows approximate proportions for labour (38%), materials (42%), permits and design (12%), and contingency (8%).</p>
+    </div>
+    <div class="faq-item">
+      <h3>Why does neighbourhood affect the cost?</h3>
+      <p>Neighbourhoods like Rosedale, Forest Hill, and Bridle Path command premiums of 18&ndash;28% due to higher labour rates, heritage permit complexity, longer site logistics, and elevated finish expectations. GTA markets like Scarborough and Mississauga often run at or slightly below the Toronto base.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What does the finish level selection mean?</h3>
+      <p>Standard means builder-grade materials with a functional, clean layout. Premium means mid-to-high-end materials, upgraded fixtures, and meaningful design detail — the most common choice for Toronto homeowners. Luxury means bespoke millwork, imported stone, custom hardware, and top-tier design coordination throughout.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-block">
+  <div class="wrap">
+    <h2 class="display">Ready to get a <em>real number</em>?</h2>
+    <p>Initial consultations are confidential, no-obligation, and focused on your project. We'll give you a detailed itemised budget before any work begins.</p>
+    <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
+  </div>
+</div>
+
+<footer class="footer"><div class="wrap footer-grid"><div class="footer-col footer-col--brand"><a href="/" class="footer-brand"><svg viewBox="0 0 32 32" fill="currentColor" width="24" height="24" aria-hidden="true"><rect x="5" y="4" width="4" height="24"/><polygon points="9,16 24,4 29,4 14,16"/><polygon points="9,16 24,28 29,28 14,16"/></svg> Kopman Build</a><p class="footer-desc">A privately-held construction and development firm founded in 1999, serving private clients across Toronto, the GTA, and Muskoka.</p><span class="footer-region">Toronto · GTA · Muskoka</span></div><div class="footer-col"><h5 class="footer-heading">Services</h5><ul class="footer-links"><li><a href="/renovation-contractor-toronto/">Renovation Contractor</a></li><li><a href="/custom-home-builder-toronto/">Custom Home Builder</a></li><li><a href="/general-contractor-toronto/">General Contractor</a></li><li><a href="/design-build-toronto/">Design-Build</a></li><li><a href="/muskoka-home-builder/">Muskoka Home Builder</a></li><li><a href="/basement-renovation-toronto/">Basement Renovation</a></li><li><a href="/kitchen-renovation-toronto/">Kitchen Renovation</a></li><li><a href="/bathroom-renovation-toronto/">Bathroom Renovation</a></li><li><a href="/home-addition-toronto/">Home Additions</a></li></ul></div><div class="footer-col"><h5 class="footer-heading">Locations</h5><ul class="footer-links"><li><a href="/renovation-contractor-north-york/">North York</a></li><li><a href="/renovation-contractor-etobicoke/">Etobicoke</a></li><li><a href="/renovation-contractor-scarborough/">Scarborough</a></li><li><a href="/renovation-contractor-mississauga/">Mississauga</a></li><li><a href="/renovation-contractor-oakville/">Oakville</a></li><li><a href="/renovation-contractor-richmond-hill/">Richmond Hill</a></li><li><a href="/renovation-contractor-markham/">Markham</a></li></ul></div><div class="footer-col"><h5 class="footer-heading">Resources</h5><ul class="footer-links"><li><a href="/renovation-cost-index/">Cost Index Q3 2026</a></li><li><a href="/renovation-budget-calculator/">Budget Calculator</a></li><li><a href="/toronto-permit-timeline/">Permit Timeline</a></li><li><a href="/for-professionals/">For Professionals</a></li><li><a href="/toronto-renovation-guide/">Renovation Guide</a></li><li><a href="/blog/">All Insights</a></li></ul></div></div><div class="wrap footer-bottom"><span>&#169; 1999 &#8212; <span id="yr"></span> Kopman Build. All rights reserved.</span><a href="/">kopmanbuild.com</a></div></footer><script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+
+<script>
+(function() {
+  // Base cost data [low, high] — per-project total or per-sqft for PER_SQFT types
+  var BASE = {
+    kitchen:       [45000,  72000],
+    bathroom:      [22000,  38000],
+    primary_bath:  [38000,  65000],
+    basement:      [42000,  68000],
+    legal_suite:   [85000, 130000],
+    rear_addition: [380,    480],
+    second_storey: [225000, 390000],
+    laneway:       [360000, 480000],
+    full_reno:     [380000, 650000],
+    custom_home:   [360,    520]
+  };
+
+  var PER_SQFT = ['rear_addition', 'custom_home'];
+
+  var TIMELINES = {
+    kitchen:       '2–4',
+    bathroom:      '2–3',
+    primary_bath:  '2–4',
+    basement:      '2–4',
+    legal_suite:   '3–5',
+    rear_addition: '8–14',
+    second_storey: '10–16',
+    laneway:       '10–16',
+    full_reno:     '10–18',
+    custom_home:   '14–22'
+  };
+
+  var FINISH = { standard: 1.0, premium: 1.6, luxury: 2.6 };
+
+  // Default sqft per type
+  var DEFAULT_SQFT = { rear_addition: 800, custom_home: 2500 };
+
+  var selType = null;
+  var selFinish = 'standard';
+
+  // Type button clicks
+  var typeGrid = document.getElementById('typeGrid');
+  typeGrid.addEventListener('click', function(e) {
+    var btn = e.target.closest('.type-btn');
+    if (!btn) return;
+    selType = btn.dataset.type;
+    // Update button styles
+    var btns = typeGrid.querySelectorAll('.type-btn');
+    btns.forEach(function(b) { b.classList.remove('selected'); });
+    btn.classList.add('selected');
+    // Show/hide size input
+    var sizeStep = document.getElementById('sizeStep');
+    if (PER_SQFT.indexOf(selType) > -1) {
+      sizeStep.style.display = '';
+      document.getElementById('sizeInput').value = DEFAULT_SQFT[selType] || 800;
+    } else {
+      sizeStep.style.display = 'none';
+    }
+  });
+
+  // Finish card clicks
+  var finishCards = document.querySelectorAll('.finish-card');
+  finishCards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      finishCards.forEach(function(c) { c.classList.remove('selected'); });
+      card.classList.add('selected');
+      selFinish = card.querySelector('input[type="radio"]').value;
+    });
+  });
+
+  // Format as CAD dollars
+  function fmt(n) {
+    var rounded = Math.round(n / 1000) * 1000;
+    return '$' + rounded.toLocaleString('en-CA');
+  }
+
+  // Calculate
+  document.getElementById('calcBtn').addEventListener('click', function() {
+    if (!selType) {
+      // Highlight step 1 to nudge user
+      typeGrid.style.outline = '2px solid var(--accent)';
+      typeGrid.style.borderRadius = '10px';
+      setTimeout(function() { typeGrid.style.outline = ''; }, 1800);
+      return;
+    }
+
+    var base = BASE[selType];
+    var hoodMult = parseFloat(document.getElementById('hoodSelect').value);
+    var finishMult = FINISH[selFinish];
+    var low, high;
+
+    if (PER_SQFT.indexOf(selType) > -1) {
+      var sqft = Math.max(100, parseInt(document.getElementById('sizeInput').value, 10) || DEFAULT_SQFT[selType]);
+      low  = base[0] * sqft * hoodMult * finishMult;
+      high = base[1] * sqft * hoodMult * finishMult;
+    } else {
+      low  = base[0] * hoodMult * finishMult;
+      high = base[1] * hoodMult * finishMult;
+    }
+
+    document.getElementById('resultRange').textContent = fmt(low) + ' – ' + fmt(high);
+    document.getElementById('resultTimeline').innerHTML =
+      'Estimated timeline: <strong>' + TIMELINES[selType] + ' months</strong>';
+
+    var panel = document.getElementById('resultPanel');
+    panel.classList.add('visible');
+    // Scroll to result
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+})();
+</script>
+</body>
+</html>
