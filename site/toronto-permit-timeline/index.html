@@ -121,6 +121,14 @@ p { margin: 0; }
 .btn-ghost:hover { background: var(--ink); color: var(--bg); }
 .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px); background: color-mix(in oklch, var(--bg) 78%, transparent); border-bottom: 1px solid color-mix(in oklch, var(--line) 60%, transparent); }
 .nav-drop { position: relative; }
+.nav-drop::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: -10px;
+  right: -10px;
+  height: 14px;
+}
 .nav-drop-trigger { display: flex; align-items: center; gap: 4px; cursor: default; }
 .nav-drop-menu { display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px; min-width: 220px; box-shadow: 0 8px 32px color-mix(in oklch, var(--ink) 12%, transparent); z-index: 100; }
 .nav-drop:hover .nav-drop-menu { display: flex; flex-direction: column; }

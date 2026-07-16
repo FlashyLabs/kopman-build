@@ -1144,6 +1144,15 @@ section { padding: clamp(72px, 11vw, 140px) 0; scroll-margin-top: 80px; }
 
 
 /* Institutional mega-menu */
+.nav-drop { position: relative; }
+.nav-drop::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: -10px;
+  right: -10px;
+  height: 14px;
+}
 .nav-mega-menu {
   display: none;
   position: absolute;
