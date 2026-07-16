@@ -200,6 +200,64 @@ p { margin: 0; }
   ]
 }
 </script>
+<style>
+/* Institutional mega-menu */
+.nav-mega-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 14px);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 12px 40px color-mix(in oklch, var(--ink) 10%, transparent);
+  z-index: 200;
+}
+.nav-drop:hover .nav-mega-menu { display: grid; }
+.nav-mega-2col {
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 32px;
+  width: 460px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.nav-mega-3col {
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px 24px;
+  width: 580px;
+  right: 0;
+  left: auto;
+}
+.mega-col { display: flex; flex-direction: column; }
+.mega-col-head {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3, #888);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.mega-col a {
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 13.5px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.mega-col a:hover { background: var(--bg-2); color: var(--ink); }
+.mega-featured { font-weight: 600 !important; color: var(--ink) !important; }
+.mega-region-desc {
+  font-size: 12px;
+  color: var(--ink-3, #888);
+  line-height: 1.55;
+  margin-top: 10px;
+  padding: 0 8px;
+}
+.mega-col--accent .mega-col-head { color: var(--accent, #8B6914); }
+</style>
 </head>
 <body>
 <header class="nav">
@@ -212,32 +270,61 @@ p { margin: 0; }
       <a href="/#about">About</a>
       <div class="nav-drop">
         <span class="nav-drop-trigger">Services <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <div class="nav-drop-menu">
-          <a href="/renovation-contractor-toronto/">Renovation Contractor</a>
-          <a href="/custom-home-builder-toronto/">Custom Home Builder</a>
-          <a href="/general-contractor-toronto/">General Contractor</a>
-          <a href="/design-build-toronto/">Design-Build</a>
-          <a href="/muskoka-home-builder/">Muskoka Home Builder</a>
-          <hr class="nav-drop-rule">
-          <a href="/basement-renovation-toronto/">Basement Renovation</a>
-          <a href="/kitchen-renovation-toronto/">Kitchen Renovation</a>
-          <a href="/bathroom-renovation-toronto/">Bathroom Renovation</a>
-          <a href="/home-addition-toronto/">Home Additions</a>
+        <div class="nav-mega-menu nav-mega-2col">
+          <div class="mega-col">
+            <p class="mega-col-head">Design &amp; Construction</p>
+            <a href="/custom-home-builder-toronto/">Custom Home Building</a>
+            <a href="/design-build-toronto/">Design-Build</a>
+            <a href="/general-contractor-toronto/">General Contracting</a>
+            <a href="/renovation-contractor-toronto/">Renovation Contractor</a>
+            <a href="/muskoka-home-builder/">Muskoka Home Builder</a>
+          </div>
+          <div class="mega-col">
+            <p class="mega-col-head">Renovation Specialties</p>
+            <a href="/kitchen-renovation-toronto/">Kitchen Renovation</a>
+            <a href="/bathroom-renovation-toronto/">Bathroom Renovation</a>
+            <a href="/basement-renovation-toronto/">Basement Renovation</a>
+            <a href="/home-addition-toronto/">Home Additions</a>
+            <a href="/second-storey-addition-leaside/">Second Storey Addition</a>
+            <a href="/laneway-house-leslieville/">Laneway House</a>
+          </div>
         </div>
       </div>
       <div class="nav-drop">
-        <span class="nav-drop-trigger">Locations <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <div class="nav-drop-menu">
-          <a href="/renovation-contractor-north-york/">North York</a>
-          <a href="/renovation-contractor-etobicoke/">Etobicoke</a>
-          <a href="/renovation-contractor-scarborough/">Scarborough</a>
-          <a href="/renovation-contractor-mississauga/">Mississauga</a>
-          <a href="/renovation-contractor-oakville/">Oakville</a>
-          <a href="/renovation-contractor-richmond-hill/">Richmond Hill</a>
-          <a href="/renovation-contractor-markham/">Markham</a>
+        <span class="nav-drop-trigger">Markets <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="nav-mega-menu nav-mega-3col">
+          <div class="mega-col">
+            <p class="mega-col-head">Toronto</p>
+            <a href="/renovation-contractor-rosedale/">Rosedale</a>
+            <a href="/renovation-contractor-forest-hill/">Forest Hill</a>
+            <a href="/renovation-contractor-leaside/">Leaside</a>
+            <a href="/renovation-contractor-annex/">The Annex</a>
+            <a href="/renovation-contractor-cabbagetown/">Cabbagetown</a>
+            <a href="/renovation-contractor-riverdale/">Riverdale</a>
+            <a href="/renovation-contractor-beaches/">The Beaches</a>
+            <a href="/renovation-contractor-yorkville/">Yorkville</a>
+            <a href="/renovation-contractor-leslieville/">Leslieville</a>
+          </div>
+          <div class="mega-col">
+            <p class="mega-col-head">Greater Toronto</p>
+            <a href="/renovation-contractor-north-york/">North York</a>
+            <a href="/renovation-contractor-etobicoke/">Etobicoke</a>
+            <a href="/renovation-contractor-scarborough/">Scarborough</a>
+            <a href="/renovation-contractor-mississauga/">Mississauga</a>
+            <a href="/renovation-contractor-oakville/">Oakville</a>
+            <a href="/renovation-contractor-richmond-hill/">Richmond Hill</a>
+            <a href="/renovation-contractor-markham/">Markham</a>
+            <a href="/renovation-contractor-vaughan/">Vaughan</a>
+            <a href="/renovation-contractor-burlington/">Burlington</a>
+          </div>
+          <div class="mega-col mega-col--accent">
+            <p class="mega-col-head">Muskoka</p>
+            <a href="/muskoka-home-builder/" class="mega-featured">Muskoka Home Builder</a>
+            <p class="mega-region-desc">Custom home construction and cottage renovation across the Muskoka Lakes — Bracebridge, Gravenhurst, Huntsville, and the lake communities.</p>
+          </div>
         </div>
       </div>
-      <a href="/blog/">Blog</a>
+      <a href="/blog/">Insights</a>
       <a href="/#contact">Contact</a>
     </nav>
     <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
