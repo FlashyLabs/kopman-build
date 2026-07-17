@@ -301,6 +301,18 @@ p { margin: 0; }
   margin-right: 14px;
   vertical-align: super;
 }
+.drawer-resources {
+  margin-top: 24px;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.drawer-resources-head {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px;
+}
+.drawer-resources a { font-size: 14px; color: var(--ink-2); padding: 5px 0; }
+.drawer-resources a:hover { color: var(--ink); }
 .drawer-foot {
   margin-top: auto;
   padding-top: 24px;
@@ -1346,11 +1358,21 @@ section { padding: clamp(72px, 11vw, 140px) 0; scroll-margin-top: 80px; }
   </div>
   <nav class="drawer-links" aria-label="Mobile">
     <a href="#about"    data-close><span class="num">01</span>About</a>
-    <a href="#services" data-close><span class="num">02</span>Services</a>
-    <a href="#projects" data-close><span class="num">03</span>Projects</a>
-    <a href="#process"  data-close><span class="num">04</span>Process</a>
+    <a href="#projects" data-close><span class="num">02</span>Projects</a>
+    <a href="/blog/"               ><span class="num">03</span>Insights</a>
+    <a href="/for-professionals/"  ><span class="num">04</span>For Professionals</a>
     <a href="#contact"  data-close><span class="num">05</span>Contact</a>
   </nav>
+  <div class="drawer-resources">
+    <p class="drawer-resources-head">Resources</p>
+    <a href="/renovation-cost-index/">Cost Index Q3 2026</a>
+    <a href="/renovation-budget-calculator/">Budget Calculator</a>
+    <a href="/toronto-permit-timeline/">Permit Timeline</a>
+    <a href="/toronto-renovation-guide/">Toronto Renovation Guide</a>
+    <a href="/custom-home-building-guide/">Custom Home Building Guide</a>
+    <a href="/laneway-house-guide/">Laneway House Guide</a>
+    <a href="/second-storey-addition-guide/">Second Storey Addition Guide</a>
+  </div>
   <div class="drawer-foot">
     <a href="#contact" class="btn btn-primary" data-close>Request a Consultation
       <svg class="arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">

@@ -359,9 +359,77 @@ p { margin: 0; }
       <a href="/blog/">Insights</a>
       <a href="/for-professionals/">For Professionals</a>
     </nav>
-    <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
+    <div class="nav-actions">
+      <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
+<div class="mob-drawer" id="mobDrawer" aria-hidden="true">
+  <div class="mob-drawer-top">
+    <a href="/" class="brand">
+      <svg viewBox="0 0 32 32" fill="currentColor"><rect x="5" y="4" width="4" height="24"/><polygon points="9,16 24,4 29,4 14,16"/><polygon points="9,16 24,28 29,28 14,16"/></svg>
+      Kopman Build
+    </a>
+    <button class="menu-btn menu-btn--x" id="closeBtn" aria-label="Close menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mob-nav">
+    <a href="/#about" class="mob-link">About</a>
+    <div class="mob-group">
+      <button class="mob-group-btn" aria-expanded="false">Services</button>
+      <div class="mob-group-body">
+        <a href="/custom-home-builder-toronto/">Custom Home Building</a>
+        <a href="/design-build-toronto/">Design-Build</a>
+        <a href="/general-contractor-toronto/">General Contracting</a>
+        <a href="/renovation-contractor-toronto/">Renovation Contractor</a>
+        <a href="/muskoka-home-builder/">Muskoka Home Builder</a>
+        <a href="/kitchen-renovation-toronto/">Kitchen Renovation</a>
+        <a href="/bathroom-renovation-toronto/">Bathroom Renovation</a>
+        <a href="/basement-renovation-toronto/">Basement Renovation</a>
+        <a href="/home-addition-toronto/">Home Additions</a>
+        <a href="/second-storey-addition-leaside/">Second Storey Addition</a>
+        <a href="/laneway-house-leslieville/">Laneway House</a>
+      </div>
+    </div>
+    <div class="mob-group">
+      <button class="mob-group-btn" aria-expanded="false">Markets</button>
+      <div class="mob-group-body">
+        <a href="/renovation-contractor-rosedale/">Rosedale</a>
+        <a href="/renovation-contractor-forest-hill/">Forest Hill</a>
+        <a href="/renovation-contractor-leaside/">Leaside</a>
+        <a href="/renovation-contractor-annex/">The Annex</a>
+        <a href="/renovation-contractor-yorkville/">Yorkville</a>
+        <a href="/renovation-contractor-leslieville/">Leslieville</a>
+        <a href="/renovation-contractor-north-york/">North York</a>
+        <a href="/renovation-contractor-etobicoke/">Etobicoke</a>
+        <a href="/renovation-contractor-mississauga/">Mississauga</a>
+        <a href="/renovation-contractor-oakville/">Oakville</a>
+        <a href="/muskoka-home-builder/">Muskoka</a>
+      </div>
+    </div>
+    <div class="mob-group">
+      <button class="mob-group-btn" aria-expanded="false">Resources</button>
+      <div class="mob-group-body">
+        <a href="/renovation-cost-index/">Cost Index Q3 2026</a>
+        <a href="/renovation-budget-calculator/">Budget Calculator</a>
+        <a href="/toronto-permit-timeline/">Permit Timeline</a>
+        <a href="/toronto-renovation-guide/">Toronto Renovation Guide</a>
+        <a href="/custom-home-building-guide/">Custom Home Building Guide</a>
+        <a href="/laneway-house-guide/">Laneway House Guide</a>
+        <a href="/second-storey-addition-guide/">Second Storey Addition Guide</a>
+      </div>
+    </div>
+    <a href="/blog/" class="mob-link">Insights</a>
+    <a href="/for-professionals/" class="mob-link">For Professionals</a>
+  </nav>
+  <div class="mob-drawer-foot">
+    <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
+  </div>
+</div>
 
 <div class="wrap">
   <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -714,5 +782,26 @@ p { margin: 0; }
 </div>
 
 <footer class="footer"><div class="wrap footer-grid"><div class="footer-col footer-col--brand"><a href="/" class="footer-brand"><svg viewBox="0 0 32 32" fill="currentColor" width="24" height="24" aria-hidden="true"><rect x="5" y="4" width="4" height="24"/><polygon points="9,16 24,4 29,4 14,16"/><polygon points="9,16 24,28 29,28 14,16"/></svg> Kopman Build</a><p class="footer-desc">A privately-held construction and development firm founded in 1999, serving private clients across Toronto, the GTA, and Muskoka.</p><span class="footer-region">Toronto · GTA · Muskoka</span></div><div class="footer-col"><h5 class="footer-heading">Services</h5><ul class="footer-links"><li><a href="/renovation-contractor-toronto/">Renovation Contractor</a></li><li><a href="/custom-home-builder-toronto/">Custom Home Builder</a></li><li><a href="/general-contractor-toronto/">General Contractor</a></li><li><a href="/design-build-toronto/">Design-Build</a></li><li><a href="/muskoka-home-builder/">Muskoka Home Builder</a></li><li><a href="/basement-renovation-toronto/">Basement Renovation</a></li><li><a href="/kitchen-renovation-toronto/">Kitchen Renovation</a></li><li><a href="/bathroom-renovation-toronto/">Bathroom Renovation</a></li><li><a href="/home-addition-toronto/">Home Additions</a></li></ul></div><div class="footer-col"><h5 class="footer-heading">Locations</h5><ul class="footer-links"><li><a href="/renovation-contractor-north-york/">North York</a></li><li><a href="/renovation-contractor-etobicoke/">Etobicoke</a></li><li><a href="/renovation-contractor-scarborough/">Scarborough</a></li><li><a href="/renovation-contractor-mississauga/">Mississauga</a></li><li><a href="/renovation-contractor-oakville/">Oakville</a></li><li><a href="/renovation-contractor-richmond-hill/">Richmond Hill</a></li><li><a href="/renovation-contractor-markham/">Markham</a></li></ul></div><div class="footer-col"><h5 class="footer-heading">Resources</h5><ul class="footer-links"><li><a href="/renovation-cost-index/">Cost Index Q3 2026</a></li><li><a href="/renovation-budget-calculator/">Budget Calculator</a></li><li><a href="/toronto-permit-timeline/">Permit Timeline</a></li><li><a href="/for-professionals/">For Professionals</a></li><li><a href="/toronto-renovation-guide/">Renovation Guide</a></li><li><a href="/blog/">All Insights</a></li></ul></div></div><div class="wrap footer-bottom"><span>&#169; 1999 &#8212; <span id="yr"></span> Kopman Build. All rights reserved.</span><a href="/">kopmanbuild.com</a></div></footer><script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn');
+  var closeBtn=document.getElementById('closeBtn');
+  var drawer=document.getElementById('mobDrawer');
+  if(!btn||!drawer) return;
+  function open(){drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');btn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+  function close(){drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',open);
+  if(closeBtn) closeBtn.addEventListener('click',close);
+  document.querySelectorAll('.mob-group-btn').forEach(function(t){
+    t.addEventListener('click',function(){
+      var exp=this.getAttribute('aria-expanded')==='true';
+      this.setAttribute('aria-expanded',String(!exp));
+      var body=this.nextElementSibling;
+      if(body) body.classList.toggle('open',!exp);
+    });
+  });
+  drawer.addEventListener('click',function(e){if(e.target===drawer) close();});
+})();
+</script>
 </body>
 </html>

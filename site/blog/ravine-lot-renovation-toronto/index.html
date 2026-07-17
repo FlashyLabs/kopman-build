@@ -119,6 +119,121 @@
   padding: 0 8px;
 }
 .mega-col--accent .mega-col-head { color: var(--accent, #8B6914); }
+/* ── Mobile nav ── */
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.menu-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 10px;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+.menu-btn span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: transform .2s, opacity .2s;
+}
+.menu-btn--x span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.menu-btn--x span:nth-child(2) { opacity: 0; }
+.menu-btn--x span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+@media (max-width: 880px) {
+  .menu-btn { display: flex; }
+  .nav-actions .btn { display: none; }
+}
+/* Drawer */
+.mob-drawer {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 200;
+  transform: translateX(100%);
+  transition: transform .32s cubic-bezier(.4,0,.2,1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.mob-drawer.open { transform: translateX(0); }
+.mob-drawer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gutter, 24px);
+  height: 72px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 1;
+}
+.mob-nav { flex: 1; }
+.mob-link {
+  display: block;
+  padding: 18px var(--gutter, 24px);
+  font-family: var(--f-display, serif);
+  font-size: 22px;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.mob-group { border-bottom: 1px solid var(--line); }
+.mob-group-btn {
+  width: 100%;
+  text-align: left;
+  padding: 18px var(--gutter, 24px);
+  font-family: var(--f-display, serif);
+  font-size: 22px;
+  color: var(--ink-2);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mob-group-btn::after {
+  content: '+';
+  font-family: var(--f-sans, sans-serif);
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--ink-3);
+  line-height: 1;
+  transition: transform .2s;
+}
+.mob-group-btn[aria-expanded="true"] { color: var(--ink); }
+.mob-group-btn[aria-expanded="true"]::after { transform: rotate(45deg); }
+.mob-group-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s ease;
+  background: var(--bg-2);
+}
+.mob-group-body.open { max-height: 800px; }
+.mob-group-body a {
+  display: block;
+  padding: 11px var(--gutter, 24px) 11px calc(var(--gutter, 24px) + 16px);
+  font-size: 14px;
+  color: var(--ink-2);
+  border-bottom: 1px solid color-mix(in oklch, var(--line) 50%, transparent);
+}
+.mob-group-body a:last-child { border-bottom: none; }
+.mob-group-body a:hover { color: var(--ink); }
+.mob-drawer-foot {
+  padding: 24px var(--gutter, 24px);
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.mob-drawer-foot .btn { width: 100%; justify-content: center; }
+
 </style>
 </head>
 <body>
@@ -207,9 +322,77 @@
       <a href="/blog/">Insights</a>
       <a href="/for-professionals/">For Professionals</a>
     </nav>
-    <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
+    <div class="nav-actions">
+      <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
+<div class="mob-drawer" id="mobDrawer" aria-hidden="true">
+  <div class="mob-drawer-top">
+    <a href="/" class="brand">
+      <svg viewBox="0 0 32 32" fill="currentColor"><rect x="5" y="4" width="4" height="24"/><polygon points="9,16 24,4 29,4 14,16"/><polygon points="9,16 24,28 29,28 14,16"/></svg>
+      Kopman Build
+    </a>
+    <button class="menu-btn menu-btn--x" id="closeBtn" aria-label="Close menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mob-nav">
+    <a href="/#about" class="mob-link">About</a>
+    <div class="mob-group">
+      <button class="mob-group-btn" aria-expanded="false">Services</button>
+      <div class="mob-group-body">
+        <a href="/custom-home-builder-toronto/">Custom Home Building</a>
+        <a href="/design-build-toronto/">Design-Build</a>
+        <a href="/general-contractor-toronto/">General Contracting</a>
+        <a href="/renovation-contractor-toronto/">Renovation Contractor</a>
+        <a href="/muskoka-home-builder/">Muskoka Home Builder</a>
+        <a href="/kitchen-renovation-toronto/">Kitchen Renovation</a>
+        <a href="/bathroom-renovation-toronto/">Bathroom Renovation</a>
+        <a href="/basement-renovation-toronto/">Basement Renovation</a>
+        <a href="/home-addition-toronto/">Home Additions</a>
+        <a href="/second-storey-addition-leaside/">Second Storey Addition</a>
+        <a href="/laneway-house-leslieville/">Laneway House</a>
+      </div>
+    </div>
+    <div class="mob-group">
+      <button class="mob-group-btn" aria-expanded="false">Markets</button>
+      <div class="mob-group-body">
+        <a href="/renovation-contractor-rosedale/">Rosedale</a>
+        <a href="/renovation-contractor-forest-hill/">Forest Hill</a>
+        <a href="/renovation-contractor-leaside/">Leaside</a>
+        <a href="/renovation-contractor-annex/">The Annex</a>
+        <a href="/renovation-contractor-yorkville/">Yorkville</a>
+        <a href="/renovation-contractor-leslieville/">Leslieville</a>
+        <a href="/renovation-contractor-north-york/">North York</a>
+        <a href="/renovation-contractor-etobicoke/">Etobicoke</a>
+        <a href="/renovation-contractor-mississauga/">Mississauga</a>
+        <a href="/renovation-contractor-oakville/">Oakville</a>
+        <a href="/muskoka-home-builder/">Muskoka</a>
+      </div>
+    </div>
+    <div class="mob-group">
+      <button class="mob-group-btn" aria-expanded="false">Resources</button>
+      <div class="mob-group-body">
+        <a href="/renovation-cost-index/">Cost Index Q3 2026</a>
+        <a href="/renovation-budget-calculator/">Budget Calculator</a>
+        <a href="/toronto-permit-timeline/">Permit Timeline</a>
+        <a href="/toronto-renovation-guide/">Toronto Renovation Guide</a>
+        <a href="/custom-home-building-guide/">Custom Home Building Guide</a>
+        <a href="/laneway-house-guide/">Laneway House Guide</a>
+        <a href="/second-storey-addition-guide/">Second Storey Addition Guide</a>
+      </div>
+    </div>
+    <a href="/blog/" class="mob-link">Insights</a>
+    <a href="/for-professionals/" class="mob-link">For Professionals</a>
+  </nav>
+  <div class="mob-drawer-foot">
+    <a href="/#contact" class="btn btn-primary">Request a Consultation</a>
+  </div>
+</div>
 <div class="wrap">
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <a href="/">Home</a><span>&#8594;</span><a href="/blog/">Blog</a><span>&#8594;</span><span>Building or Renovating on a Ravine Lot in Toronto</span>
@@ -470,5 +653,26 @@
   </div>
 </footer>
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn');
+  var closeBtn=document.getElementById('closeBtn');
+  var drawer=document.getElementById('mobDrawer');
+  if(!btn||!drawer) return;
+  function open(){drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');btn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+  function close(){drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',open);
+  if(closeBtn) closeBtn.addEventListener('click',close);
+  document.querySelectorAll('.mob-group-btn').forEach(function(t){
+    t.addEventListener('click',function(){
+      var exp=this.getAttribute('aria-expanded')==='true';
+      this.setAttribute('aria-expanded',String(!exp));
+      var body=this.nextElementSibling;
+      if(body) body.classList.toggle('open',!exp);
+    });
+  });
+  drawer.addEventListener('click',function(e){if(e.target===drawer) close();});
+})();
+</script>
 </body>
 </html>
