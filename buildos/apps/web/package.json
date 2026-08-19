@@ -25,7 +25,11 @@
     "lucide-react": "^0.474.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "tailwind-merge": "^2.6.0"
+    "tailwind-merge": "^2.6.0",
+    "@aws-sdk/client-s3": "^3.726.1",
+    "@aws-sdk/s3-request-presigner": "^3.726.1",
+    "@anthropic-ai/sdk": "^0.36.3",
+    "resend": "^4.1.2"
   },
   "devDependencies": {
     "@types/react": "^19.0.7",
