@@ -12,6 +12,10 @@ import { inventoryRouter } from "./routers/inventory"
 import { quotesRouter } from "./routers/quotes"
 import { billingRouter } from "./routers/billing"
 import { onboardingRouter } from "./routers/onboarding"
+import { marketplaceRouter } from "./routers/marketplace"
+import { videoQuotesRouter } from "./routers/video-quotes"
+import { whiteLabelRouter } from "./routers/white-label"
+import { intelligenceRouter } from "./routers/intelligence"
 
 export const appRouter = router({
   leads: leadsRouter,
@@ -27,6 +31,10 @@ export const appRouter = router({
   quotes: quotesRouter,
   billing: billingRouter,
   onboarding: onboardingRouter,
+  marketplace: marketplaceRouter,
+  videoQuotes: videoQuotesRouter,
+  whiteLabel: whiteLabelRouter,
+  intelligence: intelligenceRouter,
 })
 
 export type AppRouter = typeof appRouter
