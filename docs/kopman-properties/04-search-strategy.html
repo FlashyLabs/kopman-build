@@ -1,0 +1,808 @@
+<title>Entity Hub, Not Link Ring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* KOPMAN GROUP — shared artifact token system
+   Inherits from kopmanbuild.com: Instrument Serif / Geist / Geist Mono, warm near-black.
+   Differentiates for the Properties arm: concrete ground (cooler than Build's linen),
+   dock-amber signal replacing terracotta, cold steel as a second data axis. */
+:root{
+  --ground:#E9E7E2; --ground-2:#DFDCD5; --panel:#F4F2EE; --panel-2:#E3E0D9;
+  --ink:#17181A; --ink-2:#4A4C50; --ink-3:#7C7E82;
+  --line:#CBC8C0; --line-2:#B4B0A6;
+  --signal:#A96C14; --signal-soft:#EFE0C8;
+  --steel:#3A5464; --steel-soft:#DCE3E7;
+  --good:#3F6B4A; --warn:#A96C14; --crit:#8E3B2F;
+  --f-d:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --f-s:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --f-m:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --max:1180px; --gut:clamp(20px,4vw,56px);
+}
+@media (prefers-color-scheme:dark){
+ :root:not([data-theme="light"]){
+  --ground:#141517; --ground-2:#1B1D20; --panel:#1E2124; --panel-2:#26292D;
+  --ink:#E9E7E2; --ink-2:#B3B1AC; --ink-3:#84868A;
+  --line:#313438; --line-2:#3F4348;
+  --signal:#D2932F; --signal-soft:#3A2E1A;
+  --steel:#7FA3B8; --steel-soft:#1E2A32;
+  --good:#6E9E79; --warn:#D2932F; --crit:#C4705F;
+ }
+}
+:root[data-theme="dark"]{
+  --ground:#141517; --ground-2:#1B1D20; --panel:#1E2124; --panel-2:#26292D;
+  --ink:#E9E7E2; --ink-2:#B3B1AC; --ink-3:#84868A;
+  --line:#313438; --line-2:#3F4348;
+  --signal:#D2932F; --signal-soft:#3A2E1A;
+  --steel:#7FA3B8; --steel-soft:#1E2A32;
+  --good:#6E9E79; --warn:#D2932F; --crit:#C4705F;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-s);
+  font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+h1,h2,h3,h4{text-wrap:balance;margin:0;font-weight:400}
+h1{font-family:var(--f-d);font-size:clamp(42px,6.5vw,86px);line-height:1.02;letter-spacing:-.02em}
+h2{font-family:var(--f-d);font-size:clamp(30px,4vw,50px);line-height:1.08;letter-spacing:-.015em}
+h3{font-family:var(--f-d);font-size:clamp(22px,2.4vw,30px);line-height:1.15}
+h4{font-family:var(--f-s);font-size:16px;font-weight:600;letter-spacing:-.005em}
+p{margin:0 0 1em;max-width:68ch}
+a{color:inherit;text-underline-offset:3px;text-decoration-color:var(--line-2)}
+a:hover{text-decoration-color:var(--signal)}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+em{font-family:var(--f-d);font-style:italic}
+/* mono meta / eyebrows */
+.eyebrow{font-family:var(--f-m);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:14px}
+.mono{font-family:var(--f-m);font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+/* title block — the drawing-set device */
+.titleblock{border:1px solid var(--line);background:var(--panel);display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin:0}
+.tb{padding:14px 18px;border-right:1px solid var(--line)}
+.tb:last-child{border-right:0}
+.tb dt{font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 5px}
+.tb dd{margin:0;font-family:var(--f-m);font-size:13px;font-variant-numeric:tabular-nums}
+/* sheet sections */
+section{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+.sheet{font-family:var(--f-m);font-size:11px;letter-spacing:.14em;color:var(--signal)}
+/* rules & measured lines */
+.rule{height:1px;background:var(--line);border:0;margin:0}
+/* cards / panels */
+.panel{background:var(--panel);border:1px solid var(--line);padding:clamp(20px,3vw,32px)}
+.grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.grid > *{background:var(--panel);padding:clamp(18px,2.4vw,28px)}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+/* data tables */
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:400;white-space:nowrap}
+td.n,th.n{text-align:right;font-family:var(--f-m);font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tr.total td{border-top:2px solid var(--ink);font-weight:600;background:var(--panel-2)}
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-m);font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border:1px solid var(--line-2);
+  border-radius:2px;color:var(--ink-2);white-space:nowrap}
+.chip.sig{border-color:var(--signal);color:var(--signal);background:var(--signal-soft)}
+.chip.stl{border-color:var(--steel);color:var(--steel);background:var(--steel-soft)}
+.chip.ok{border-color:var(--good);color:var(--good)}
+.chip.no{border-color:var(--crit);color:var(--crit)}
+/* verification marker — every number is sourced or flagged */
+.v{font-family:var(--f-m);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:2px 5px;border-radius:2px;vertical-align:2px;margin-left:6px;white-space:nowrap}
+.v-src{background:var(--steel-soft);color:var(--steel);border:1px solid var(--steel)}
+.v-est{background:var(--signal-soft);color:var(--signal);border:1px solid var(--signal)}
+/* stat */
+.stat{display:block}
+.stat b{display:block;font-family:var(--f-d);font-size:clamp(32px,4.2vw,52px);
+  line-height:1;font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stat span{display:block;font-family:var(--f-m);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-top:10px}
+ul,ol{max-width:68ch;padding-left:1.15em}
+li{margin-bottom:.45em}
+.lede{font-size:clamp(18px,1.6vw,21px);line-height:1.5;color:var(--ink-2);max-width:60ch}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.hero{padding:clamp(48px,7vw,90px) 0 clamp(40px,5vw,64px);border-top:0}
+.hero h1{margin:26px 0 0}.hero h1 em{color:var(--signal)}
+figure{margin:0}
+figcaption{font-family:var(--f-m);font-size:11.5px;line-height:1.55;color:var(--ink-3);
+  margin-top:16px;max-width:64ch;border-left:2px solid var(--signal);padding-left:12px}
+svg.dia{max-width:100%;height:auto;display:block;color:var(--ink)}
+.callout{border:1px solid var(--signal);background:var(--signal-soft);padding:24px 26px;margin:34px 0}
+.callout .eyebrow{color:var(--signal);margin-bottom:10px}.callout p:last-child{margin-bottom:0}
+.warnbox{border:1px solid var(--crit);border-left-width:4px;padding:22px 24px;margin:30px 0;background:var(--panel)}
+.warnbox .eyebrow{color:var(--crit)}.warnbox p:last-child{margin-bottom:0}
+/* keyword cluster block */
+.cl{border:1px solid var(--line);background:var(--panel);margin-top:22px}
+.cl > header{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;
+  justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+.cl > header h4{margin:0;font-size:17px}
+.cl .own{font-family:var(--f-m);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.cl-body{padding:18px 22px}
+.kw{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.kw span{font-family:var(--f-m);font-size:12px;padding:5px 9px;border:1px solid var(--line-2);
+  border-radius:2px;color:var(--ink-2);background:var(--ground)}
+.kw span.h{border-color:var(--crit);color:var(--crit)}
+.kw span.w{border-color:var(--good);color:var(--good)}
+.kw span.o{border-color:var(--signal);color:var(--signal);background:var(--signal-soft)}
+.tier{font-family:var(--f-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);margin:18px 0 0;display:block}
+.corr{display:grid;grid-template-columns:1fr auto;gap:10px 16px;align-items:center;margin-top:22px}
+.corr .lab{font-size:15px}
+.corr .barwrap{display:grid;grid-template-columns:1fr 54px;gap:12px;align-items:center;min-width:190px}
+.corr .bar{height:12px;background:var(--line);position:relative}
+.corr .bar i{display:block;height:100%;background:var(--steel)}
+.corr .bar i.hi{background:var(--signal)}
+.corr .v2{font-family:var(--f-m);font-size:12.5px;font-variant-numeric:tabular-nums;text-align:right}
+.do{border-left:3px solid var(--good);padding-left:15px;margin-bottom:20px}
+.dont{border-left:3px solid var(--crit);padding-left:15px;margin-bottom:20px}
+.do h4,.dont h4{margin-bottom:5px}.do p,.dont p{margin:0;font-size:15px;color:var(--ink-2)}
+code{font-family:var(--f-m);font-size:.9em;background:var(--ground-2);padding:1px 4px;border-radius:2px}
+pre{font-family:var(--f-m);font-size:12.5px;line-height:1.6;background:var(--panel);
+  border:1px solid var(--line);padding:20px 22px;overflow-x:auto;margin-top:20px}
+pre code{background:none;padding:0}
+@media(max-width:620px){.corr{grid-template-columns:1fr}}
+
+/* SVG accents follow the theme tokens (literals kept in markup for portability) */
+svg.dia [fill="#A96C14"]{fill:var(--signal)}
+svg.dia [stroke="#A96C14"]{stroke:var(--signal)}
+svg.dia [fill="#8E3B2F"]{fill:var(--crit)}
+svg.dia [stroke="#8E3B2F"]{stroke:var(--crit)}
+svg.dia marker polygon[fill="#A96C14"]{fill:var(--signal)}
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <dl class="titleblock">
+    <div class="tb"><dt>Document</dt><dd>Search &amp; LLM Strategy</dd></div>
+    <div class="tb"><dt>Scope</dt><dd>All three domains</dd></div>
+    <div class="tb"><dt>Sheet</dt><dd>04 of 04</dd></div>
+    <div class="tb"><dt>Issued</dt><dd>2026-08-23</dd></div>
+    <div class="tb"><dt>Status</dt><dd>Board draft</dd></div>
+  </dl>
+
+  <h1>Entity hub,<br>not link <em>ring</em>.</h1>
+
+  <p class="lede" style="margin-top:32px">The brief asked for a ring keyword cluster. The structure
+  is right; the word is wrong, and the difference decides whether this works. Here is the
+  architecture, the clusters per domain, and the one finding that should move most of the budget.</p>
+</header>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 04.1</span> &nbsp;— &nbsp;The correction</span>
+  <h2>Why "ring" is the wrong word</h2>
+  <p style="margin-top:24px">A literal three-way link ring between commonly-owned domains does not
+  fail because it is penalised. It fails because <strong>it is silently discounted</strong> — search
+  engines recognise same-entity links and give them little weight. No notice, no manual action,
+  nothing to appeal<span class="v v-src">Source</span>.</p>
+
+  <p>The pattern that <em>does</em> attract enforcement is narrower and easy to avoid. A legitimate
+  corporate group trips several private-blog-network signals by nature — shared hosting, shared
+  analytics, shared WHOIS, a shared design system. Those are not the violation.
+  <strong>The signal that separates a corporate group from a link network is anchor text and
+  placement.</strong> A group cross-links with brand anchors in identity contexts. A network
+  cross-links with commercial exact-match anchors from body content.</p>
+
+  <div class="warnbox">
+    <span class="eyebrow">One hard rule for the build</span>
+    <p style="margin-bottom:0">Never use a commercial-intent exact-match anchor on any cross-domain
+    link between Kopman properties. <strong>Brand and navigational anchors only.</strong>
+    "Kopman Build" and "part of the Kopman Group" are correct. "warehouse for sale Scarborough"
+    pointing from one Kopman domain to another is the exact pattern that gets a network classified
+    as a network.</p>
+  </div>
+
+  <div class="callout">
+    <span class="eyebrow">What the ring is actually for</span>
+    <p style="margin-bottom:0">The payoff is not PageRank — that gets discounted regardless. It is
+    <strong>entity consolidation</strong>: making "Kopman" resolve as one organisation across
+    Google's Knowledge Graph and, more importantly, across language-model retrieval, so a mention of
+    any arm reinforces all three. Design the ring for machine entity resolution, not for link
+    equity. That changes what you build — schema, consistent identity data, shared press surfaces
+    and a small number of genuinely editorial cross-links, not a templated footer block.</p>
+  </div>
+
+  <p style="margin-top:34px">There is a real cost to running three domains, and the board should
+  price it honestly: <strong>kopman.properties starts at zero authority and cannot borrow
+  kopmanbuild.com's by linking to it.</strong> Separation is still the right call — a warehouse
+  investor and a homeowner planning a kitchen share no vocabulary or buying cycle — but budget for
+  Properties to earn its own authority rather than assuming it inherits any.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 04.2</span> &nbsp;— &nbsp;Architecture</span>
+  <h2>How the three domains link</h2>
+
+  <figure style="margin-top:40px">
+  <svg class="dia" viewBox="0 0 900 400" role="img" aria-label="Link architecture across three Kopman domains. Both operating companies link up to kopman.group from a footer identity line and About page using brand anchors. The group site links down to each arm from a companies module. Sibling links between Build and Properties are restricted to in-content links from a specific named project page to its counterpart, never templated.">
+    <defs>
+      <marker id="up" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
+      <marker id="sg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#A96C14"/></marker>
+    </defs>
+    <rect x="330" y="20" width="240" height="70" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <text x="450" y="48" text-anchor="middle" font-family="Georgia,serif" font-size="19" fill="currentColor">kopman.group</text>
+    <text x="450" y="70" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.2" fill="currentColor" opacity=".62">ENTITY ANCHOR · 8 PAGES</text>
+
+    <rect x="40" y="212" width="250" height="76" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <text x="165" y="242" text-anchor="middle" font-family="Georgia,serif" font-size="17" fill="currentColor">kopmanbuild.com</text>
+    <text x="165" y="263" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".62">CONSTRUCTION · 630 PAGES</text>
+    <text x="165" y="279" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" fill="#8E3B2F">PRUNE BEFORE EXPANDING</text>
+
+    <rect x="610" y="212" width="250" height="76" fill="none" stroke="#A96C14" stroke-width="1.8"/>
+    <text x="735" y="242" text-anchor="middle" font-family="Georgia,serif" font-size="17" fill="#A96C14">kopman.properties</text>
+    <text x="735" y="263" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#A96C14" opacity=".85">INDUSTRIAL · 40–80 PAGES</text>
+    <text x="735" y="279" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" fill="#A96C14" opacity=".7">BUILD SMALL, BUILD REAL</text>
+
+    <path d="M 150 210 L 150 140 L 340 140 L 340 92" stroke="currentColor" stroke-width="1.3" fill="none" marker-end="url(#up)"/>
+    <text x="196" y="132" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor" opacity=".72">UP · footer identity + About</text>
+    <text x="196" y="146" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor" opacity=".55">anchor: "Kopman Group"</text>
+
+    <path d="M 750 210 L 750 140 L 560 140 L 560 92" stroke="currentColor" stroke-width="1.3" fill="none" marker-end="url(#up)"/>
+    <text x="592" y="132" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor" opacity=".72">UP · footer identity + About</text>
+    <text x="592" y="146" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor" opacity=".55">anchor: "Kopman Group"</text>
+
+    <path d="M 400 92 L 400 176 L 200 176 L 200 210" stroke="currentColor" stroke-width="1.3" fill="none" marker-end="url(#up)"/>
+    <text x="222" y="170" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor" opacity=".72">DOWN · companies module</text>
+
+    <path d="M 500 92 L 500 176 L 700 176 L 700 210" stroke="currentColor" stroke-width="1.3" fill="none" marker-end="url(#up)"/>
+    <text x="556" y="170" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor" opacity=".72">DOWN · companies module</text>
+
+    <path d="M 292 244 L 606 244" stroke="#A96C14" stroke-width="2" fill="none" marker-end="url(#sg)" marker-start="url(#sg)" stroke-dasharray="6 4"/>
+    <text x="449" y="234" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#A96C14">SIDEWAYS · EARNED PER INSTANCE</text>
+    <text x="449" y="316" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#A96C14">IN-CONTENT ONLY · NAMED PROJECT TO ITS COUNTERPART</text>
+    <text x="449" y="334" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#8E3B2F">NEVER A TEMPLATE SLOT · NEVER SITEWIDE</text>
+    <text x="449" y="368" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.2" fill="currentColor" opacity=".55">EVERY CROSS-DOMAIN ANCHOR IS A BRAND NAME, NEVER A COMMERCIAL PHRASE</text>
+  </svg>
+  <figcaption>The vertical links are standard corporate practice and can be templated. The amber
+  sideways link is the one that must be earned per instance: a Properties asset page describing a
+  dock retrofit links to the Build page for the crew that performed it, because that relationship is
+  real. Fire it from a template on every page and the whole structure reclassifies.</figcaption>
+  </figure>
+
+  <div class="tbl-scroll" style="margin-top:36px">
+  <table>
+    <thead><tr><th>Link</th><th>Placement</th><th>Anchor</th><th>Templated?</th></tr></thead>
+    <tbody>
+      <tr><td>Build → Group</td><td>Footer identity line + About</td><td class="mono">Kopman Group</td><td><span class="chip ok">Yes</span></td></tr>
+      <tr><td>Properties → Group</td><td>Footer identity line + About</td><td class="mono">Kopman Group</td><td><span class="chip ok">Yes</span></td></tr>
+      <tr><td>Group → Build</td><td>Companies module + <code>/build/</code></td><td class="mono">Kopman Build</td><td><span class="chip ok">Yes</span></td></tr>
+      <tr><td>Group → Properties</td><td>Companies module + <code>/properties/</code></td><td class="mono">Kopman Properties</td><td><span class="chip ok">Yes</span></td></tr>
+      <tr><td><strong>Build ↔ Properties</strong></td><td><strong>In-content, named project only</strong></td><td>Descriptive, non-commercial</td><td><span class="chip no">Never</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:18px;font-size:15.5px;color:var(--ink-2)">Sibling cross-links should remain a
+  small minority of pages on each domain, each tied to a named project. And
+  <strong>kopman.group must never restate Build's service copy</strong> — a group with heavy
+  duplicate content across its domains can end up with less total traffic than a single-domain
+  competitor despite having more sites<span class="v v-src">Source</span>. The parent is a different
+  genre entirely: identity, leadership, track record, press, careers.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 04.3</span> &nbsp;— &nbsp;Clusters</span>
+  <h2>What each domain targets</h2>
+  <p style="margin-top:24px">Four clusters, one per domain plus a shared one at the intersection.
+  The shared cluster is the strategic asset — it is the only place where owning both a builder and a
+  property company produces content nobody else can write.</p>
+
+  <span class="tier">Legend</span>
+  <div class="kw" style="margin-bottom:6px">
+    <span class="h">aggregator-owned — do not target</span>
+    <span>contested — target selectively</span>
+    <span class="w">winnable — thin SERPs</span>
+    <span class="o">uncontested — own it</span>
+  </div>
+
+  <div class="cl">
+    <header><h4>Cluster A — Kopman Group</h4><span class="own">kopman.group · brand + corporate only</span></header>
+    <div class="cl-body">
+      <p style="font-size:15px;margin-bottom:0">The parent ranks for its own name and for the people
+      behind it. Nothing else. A group site publishing a page targeting "renovation contractor
+      Toronto" cannibalises the arm that has spent years earning it.</p>
+      <div class="kw">
+        <span class="o">kopman group</span><span class="o">kopman group of companies</span>
+        <span class="o">kopman build owner</span><span class="o">kopman properties</span>
+        <span class="w">kopman group leadership</span><span class="w">kopman construction toronto</span>
+        <span class="w">gta construction group of companies</span>
+      </div>
+      <span class="tier">Its real job</span>
+      <p style="font-size:15px;margin:10px 0 0">Be the entity anchor. Eight pages, a named leadership
+      page with real biographies, and a news feed that gives the outside world something to cite.</p>
+    </div>
+  </div>
+
+  <div class="cl">
+    <header><h4>Cluster B — Kopman Build</h4><span class="own">kopmanbuild.com · service × location, pruned</span></header>
+    <div class="cl-body">
+      <p style="font-size:15px">The estate already exists — 630 pages across 10 services and 60
+      neighbourhoods. It needs pruning before it needs extending (Sheet 04.5). The guides are the
+      genuinely valuable assets and should become the hubs everything else links into.</p>
+      <span class="tier">Head — contested, keep</span>
+      <div class="kw">
+        <span>custom home builder toronto</span><span>renovation contractor toronto</span>
+        <span>design build toronto</span><span>general contractor gta</span>
+        <span>laneway house toronto</span><span>muskoka home builder</span>
+      </div>
+      <span class="tier">Location — keep only where real work has been done</span>
+      <div class="kw">
+        <span class="w">custom home builder rosedale</span><span class="w">basement renovation scarborough</span>
+        <span class="w">second storey addition leaside</span><span class="w">kitchen renovation mississauga</span>
+        <span class="h">…and 596 more — audit before keeping</span>
+      </div>
+      <span class="tier">Guides — the hubs, and the proprietary-data assets</span>
+      <div class="kw">
+        <span class="o">toronto renovation cost index</span><span class="o">toronto permit timeline</span>
+        <span class="o">renovation budget calculator</span><span class="o">laneway house guide</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cl" style="border-color:var(--signal)">
+    <header style="background:var(--signal-soft)"><h4 style="color:var(--signal)">Cluster C — Kopman Properties</h4><span class="own" style="color:var(--signal)">kopman.properties · new build, small and real</span></header>
+    <div class="cl-body">
+      <div class="warnbox" style="margin-top:0">
+        <span class="eyebrow">Do not fight the aggregators</span>
+        <p style="margin-bottom:0">Every commercial-intent GTA industrial search result is owned end
+        to end by LoopNet, Zolo, CommercialCafe, CityFeet and Spacelist. Toronto alone shows 373
+        industrial listings on LoopNet and 701 on Zolo<span class="v v-src">Source</span>. A single
+        owner-operator with a handful of buildings cannot out-inventory CoStar and Yardi — and thin
+        listing pages are precisely the scaled-content profile that gets penalised.
+        <strong>Syndicate listings to them. Win search somewhere they structurally cannot go.</strong></p>
+      </div>
+      <span class="tier">Head — transactional, aggregator-owned, do not target directly</span>
+      <div class="kw">
+        <span class="h">industrial space for lease mississauga</span><span class="h">warehouse for lease toronto</span>
+        <span class="h">commercial property for sale brampton</span>
+      </div>
+      <span class="tier">Spec-qualified long tail — the winnable transactional band</span>
+      <div class="kw">
+        <span class="w">warehouse with loading dock for lease burlington</span>
+        <span class="w">dock level warehouse gta</span>
+        <span class="w">small bay industrial mississauga</span>
+        <span class="w">5000 sq ft industrial unit for lease brampton</span>
+        <span class="w">industrial condo for sale scarborough</span>
+        <span class="w">drive-in door warehouse oakville</span>
+        <span class="w">truck level door warehouse scarborough</span>
+      </div>
+      <p style="font-size:14.5px;color:var(--ink-3);margin:12px 0 0">Aggregator faceted navigation
+      handles spec-qualified queries poorly. Target these only where there is real inventory behind
+      the page.</p>
+      <span class="tier">Submarket + market data — the only programmatic element</span>
+      <div class="kw">
+        <span class="w">scarborough industrial market</span><span class="w">brampton industrial vacancy rate</span>
+        <span class="w">burlington industrial rents</span><span class="w">mississauga small bay industrial</span>
+      </div>
+      <p style="font-size:14.5px;color:var(--ink-3);margin:12px 0 0">Eight market pages, each
+      carrying live quarterly vacancy and rent data. <strong>These survive scaled-content
+      enforcement precisely because they contain statistics no model can guess</strong> — and that
+      same property makes them citation magnets for AI answers.</p>
+      <span class="tier">Vendor acquisition — commercially the most valuable page on the site</span>
+      <div class="kw">
+        <span class="o">sell my warehouse toronto</span><span class="o">sell industrial building gta</span>
+        <span class="o">who buys old warehouses ontario</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cl" style="border-color:var(--good)">
+    <header style="background:var(--panel-2)"><h4>Cluster D — The intersection</h4><span class="own">the asset nobody else can build</span></header>
+    <div class="cl-body">
+      <p style="font-size:15px"><strong>Verified finding: there is no authoritative Ontario-specific
+      content on the cost, permit path, or feasibility of adding loading docks to an existing
+      industrial building.</strong> The search results for those queries return US equipment
+      suppliers and dock-service vendors almost exclusively. The single Ontario result found was a
+      concrete subcontractor's page<span class="v v-src">Source</span>.</p>
+      <p style="font-size:15px">The best-performing Canadian article on industrial retrofits is a
+      <em>Globe and Mail</em> piece from over a decade ago. That is how open this field is.</p>
+      <div class="kw">
+        <span class="o">cost to add a loading dock ontario</span>
+        <span class="o">adding loading dock to warehouse toronto permit</span>
+        <span class="o">truck level door installation cost gta</span>
+        <span class="o">dock leveller cost canada</span>
+        <span class="o">warehouse with no loading dock what to do</span>
+        <span class="o">functionally obsolete warehouse gta</span>
+        <span class="o">industrial building retrofit cost ontario</span>
+        <span class="o">site plan approval loading dock toronto</span>
+        <span class="o">truck apron requirements 53 foot trailer</span>
+        <span class="o">converting drive-in door to truck level</span>
+        <span class="o">E zone loading requirements toronto</span>
+        <span class="o">industrial retrofit vs new build cost ontario</span>
+      </div>
+      <span class="tier">Why this cluster is the strategy</span>
+      <ol style="font-size:15px;margin:12px 0 0">
+        <li><strong>Uncontested in Canada</strong> — verified empty, not assumed empty.</li>
+        <li><strong>It sits exactly at Build × Properties</strong>, which makes it the legitimate,
+        non-manufactured justification for every sibling cross-link in Sheet 04.2.</li>
+        <li><strong>It is backed by proprietary cost data Kopman actually owns</strong> from real
+        projects — the one thing that survives scaled-content enforcement and the one thing language
+        models preferentially cite.</li>
+        <li><strong>It recruits vendors.</strong> The owner of a dock-deficient warehouse searching
+        "cost to add a loading dock Ontario" is a potential seller. This cluster is an acquisition
+        channel disguised as content marketing.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="eyebrow">The vocabulary bridge — a cheap, real edge</span>
+    <p style="margin-bottom:0">Canadian brokers and tenants say <strong>"truck level"</strong> and
+    <strong>"drive-in."</strong> US content — which dominates the corpora language models are
+    trained on — says <strong>"dock-high"</strong> and <strong>"grade-level."</strong> Kopman must
+    use both, consistently, on every page: the models are trained on US-majority text while the
+    buyers type Canadian terms. Almost nobody bridges this deliberately.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 04.4</span> &nbsp;— &nbsp;LLM strategy</span>
+  <h2>The finding that should move the budget</h2>
+  <p style="margin-top:24px">A study of 75,000 brands measured which signals correlate with being
+  surfaced in AI answers<span class="v v-src">Source</span>. The result reorders conventional SEO
+  priorities substantially.</p>
+
+  <div class="corr">
+    <span class="lab">Mentions on YouTube</span>
+    <span class="barwrap"><span class="bar"><i class="hi" style="width:100%"></i></span><span class="v2">0.737</span></span>
+    <span class="lab"><strong>Branded web mentions</strong></span>
+    <span class="barwrap"><span class="bar"><i class="hi" style="width:90%"></i></span><span class="v2">0.664</span></span>
+    <span class="lab">Branded anchor text</span>
+    <span class="barwrap"><span class="bar"><i style="width:71%"></i></span><span class="v2">0.527</span></span>
+    <span class="lab">Brand search volume</span>
+    <span class="barwrap"><span class="bar"><i style="width:53%"></i></span><span class="v2">0.392</span></span>
+    <span class="lab">Backlinks</span>
+    <span class="barwrap"><span class="bar"><i style="width:30%"></i></span><span class="v2">0.218</span></span>
+    <span class="lab">Content volume</span>
+    <span class="barwrap"><span class="bar"><i style="width:26%"></i></span><span class="v2">0.194</span></span>
+  </div>
+  <p style="margin-top:20px;font-size:14px;color:var(--ink-3)">Correlation with AI visibility.
+  Correlation is not causation, and these are relative rather than absolute — but the ordering is
+  consistent across replications.</p>
+
+  <div class="callout">
+    <span class="eyebrow">The strategic implication</span>
+    <p><strong>Branded mentions correlate roughly three times as strongly as backlinks, and content
+    volume ranks last.</strong> Earned media accounts for around 84% of AI citations; paid placement
+    accounts for 0.3%<span class="v v-src">Source</span>. Content distributed through third-party
+    outlets was cited at 34% against an 8% baseline for the brand's own
+    site<span class="v v-src">Source</span>.</p>
+    <p style="margin-bottom:0">The ring strategy as originally framed is an owned-media strategy.
+    <strong>The highest-return investment available here is not the 700th page — it is getting
+    "Kopman" said out loud</strong> in RENX, Daily Commercial News, Storeys, BILD and OHBA channels,
+    trade press and on YouTube. The group structure helps: three brands give three story angles that
+    all co-occur with the same name.</p>
+  </div>
+
+  <p style="margin-top:34px">One targeting note with real teeth: there is only about
+  <strong class="mono">2%</strong> overlap between the journalists PR teams pitch most and the
+  journalists AI actually cites<span class="v v-src">Source</span>. <strong>Chase the publications
+  that appear in AI answers for your target queries, not the ones with the most prestige.</strong>
+  Run the queries first, then build the media list from what you see.</p>
+
+  <h3 style="margin-top:52px">Two things widely sold as AI strategy that the evidence does not support</h3>
+
+  <div class="dont" style="margin-top:26px">
+    <h4>Schema markup does not drive AI citations</h4>
+    <p>A matched-control study of 1,885 pages that added JSON-LD, against ~4,000 controls, measured
+    AI Mode +2.4%, ChatGPT +2.2% and AI Overviews −4.6% — statistical noise<span class="v v-src">Source</span>.
+    A separate controlled experiment found ChatGPT and Perplexity <strong>tokenise JSON-LD as raw
+    text</strong> rather than parsing it as structured data.
+    <br><br><strong>Do not abandon schema — reclassify it.</strong> Its justification is Google rich
+    results and Knowledge Graph entity resolution, where it genuinely works and where this group
+    needs it (Sheet 04.6). It is a one-time infrastructure spend, not an ongoing AI programme. If a
+    vendor pitches schema as a generative-search tactic, that pitch is behind the evidence.</p>
+  </div>
+
+  <div class="dont">
+    <h4>llms.txt is not a strategy</h4>
+    <p>Across 300,000 domains, adoption is about 10%. Of the roughly 38,000 domains with a valid
+    file, <strong>97% received zero requests for it</strong> in the month measured. Google's
+    documentation states it has no effect on Search or AI Overviews — the file is simply
+    ignored<span class="v v-src">Source</span>.
+    <br><br>Ship it if it costs nothing. Never put it on a strategy slide, and never pay for it.
+    <strong>What actually matters at the crawler layer is the opposite action:</strong> verify that
+    <code>robots.txt</code> does <em>not</em> block <code>GPTBot</code>, <code>OAI-SearchBot</code>,
+    <code>ClaudeBot</code>, <code>PerplexityBot</code>, <code>Google-Extended</code> or
+    <code>bingbot</code>. Accidental AI-crawler blocking is common and would silently zero out this
+    entire programme.</p>
+  </div>
+
+  <h3 style="margin-top:52px">What does work, once you are in the candidate set</h3>
+  <p style="margin-top:18px">The peer-reviewed study on generative-engine optimisation (SIGKDD 2024,
+  ~10,000 queries) tested content modifications and found overall visibility gains of
+  <strong class="mono">22–41%</strong><span class="v v-src">Source</span>:</p>
+  <div class="tbl-scroll" style="margin-top:22px">
+  <table>
+    <thead><tr><th>Tactic</th><th class="n">Reported lift</th><th>Application to Kopman</th></tr></thead>
+    <tbody>
+      <tr><td>Add direct quotations</td><td class="n">~41%</td><td>Quote the brokers, engineers and municipal staff involved in a retrofit</td></tr>
+      <tr><td>Add statistics</td><td class="n">~33%</td><td>Publish real cost-per-dock and rent data — Kopman has this, nobody else does</td></tr>
+      <tr><td>Improve fluency</td><td class="n">~29%</td><td>Editorial pass on everything published</td></tr>
+      <tr><td>Cite sources</td><td class="n">~28%</td><td>Cite CBRE, Colliers, municipal by-laws by name and number</td></tr>
+      <tr><td><strong>Keyword stuffing</strong></td><td class="n"><strong>negative</strong></td><td>—</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:18px;font-size:15.5px;color:var(--ink-2)"><strong>The limitation matters as
+  much as the finding.</strong> The study tested rewriting a passage that had <em>already been
+  retrieved</em>. It tells you how to win the citation once your page is in the candidate set; it
+  says nothing about getting into that set. Sequence accordingly: <strong>get indexed → get
+  mentioned → then optimise the passage.</strong> Secondary sources disagree on the exact
+  per-tactic percentages — verify against the paper before quoting them externally.</p>
+
+  <h3 style="margin-top:52px">Writing for retrieval</h3>
+  <div class="grid g2" style="margin-top:26px">
+    <div>
+      <h4 style="margin-bottom:10px">Answer in self-contained blocks</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Google's AI Mode decomposes one query
+      into 8–16 parallel sub-queries and <strong>selects passages, not pages</strong>. Write
+      40–170-word blocks that each fully resolve one sub-question without needing the surrounding
+      context. A page that answers several sub-queries at once outranks one that answers only the
+      head question.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Tables beat prose</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Comparison matrices and tables present
+      discrete labelled data points that models parse without ambiguity. A cost table with units and
+      sources will be cited where the same information in paragraphs will not.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Length, then freshness</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Long-form is cited around 3.2× more than
+      sub-1,000-word content, with an optimum near 2,500–3,500 words. But <strong>85% of AI
+      Overview citations come from content published in the last two years.</strong> A refresh
+      cadence tied to <em>real</em> data updates is required — bumping a timestamp without a
+      substantive change is itself a scaled-content signal.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Submit to Bing</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">ChatGPT's retrieval draws on Bing's
+      index alongside its own crawler. Bing Webmaster Tools registration for all three domains is
+      free, takes an afternoon, and is skipped by most Canadian firms. It is the cheapest action in
+      this document.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 04.5</span> &nbsp;— &nbsp;Risk</span>
+  <h2>Prune Build before expanding Properties</h2>
+
+  <p style="margin-top:24px">Google's March 2026 core update explicitly named scaled content abuse.
+  Sites publishing large sets of near-identical pages saw traffic losses reported at
+  <strong class="mono">60–90%</strong><span class="v v-src">Source</span>. The policy does not
+  prohibit templated or AI-assisted content — it targets volume without proportional value.</p>
+
+  <p>The audit of kopmanbuild.com's estate found the following. These are measurements from the live
+  source, not estimates.</p>
+
+  <div class="tbl-scroll" style="margin-top:28px">
+  <table>
+    <thead><tr><th>Measurement</th><th class="n">Finding</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td>Content shared between sibling location pages</td><td class="n">~98.2%</td><td><span class="chip no">Critical</span> Of 398 content lines, 14 differ</td></tr>
+      <tr><td>Pages with zero inbound internal links</td><td class="n">574 / 630</td><td><span class="chip no">Critical</span> Crawl-starved; only 56 link targets exist</td></tr>
+      <tr><td>Sitemap URLs returning 404</td><td class="n">60</td><td><span class="chip">High</span> All <code>/blog/*</code>, never built</td></tr>
+      <tr><td>Pages missing breadcrumb schema</td><td class="n">590 / 630</td><td><span class="chip">Medium</span></td></tr>
+      <tr><td>Pages missing FAQ schema</td><td class="n">280 / 630</td><td><span class="chip">Medium</span></td></tr>
+      <tr><td>Pages with a working Open Graph image</td><td class="n">0 / 630</td><td><span class="chip">High</span> <code>og.jpg</code> referenced, never uploaded</td></tr>
+      <tr><td>Pages with any analytics tag</td><td class="n">0 / 630</td><td><span class="chip no">Critical</span> No attribution for any of this work</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p style="margin-top:26px">The 98.2% figure is the one that matters. Normalising the city name and
+  diffing <code>basement-renovation-scarborough</code> against
+  <code>basement-renovation-brampton</code> leaves <strong>seven differing line pairs out of
+  398</strong> — one descriptor sentence, one FAQ sentence, and the <code>areaServed</code> array.
+  Word counts across four sampled cities were 2,326 / 2,327 / 2,328 / 2,329.</p>
+
+  <p>A 10 × 60 cross-product is the highest-risk programmatic shape there is, because it produces 60
+  near-identical pages per service <em>and</em> 10 per neighbourhood. A 60-page location set is
+  defensible. A 600-page cross-product with 14 unique lines per page is not.</p>
+
+  <div class="warnbox">
+    <span class="eyebrow">Sequence this correctly</span>
+    <p style="margin-bottom:0"><strong>Prune Kopman Build before kopman.properties launches and
+    before the group entity links them together.</strong> An entity link from a domain carrying this
+    risk is a liability transferred to two new domains, not an asset shared with them.</p>
+  </div>
+
+  <h3 style="margin-top:44px">Remediation, in order</h3>
+  <ol style="margin-top:20px;font-size:16px">
+    <li><strong>Fix the contact form first.</strong> It shows a success message and discards the
+    enquiry. Nothing else on this list matters while the site cannot receive a lead.</li>
+    <li><strong>Install analytics.</strong> Every recommendation below needs a baseline, and there
+    is currently none.</li>
+    <li><strong>Pull Search Console data and audit by cell.</strong> How many of the 630 have had
+    zero impressions in 90 days? Has Kopman actually performed that service in that neighbourhood?
+    A page for work never done there is a doorway page by intent and an experience liability.</li>
+    <li><strong>Prune hard.</strong> Remove or de-index every cell with no project history and no
+    impressions. <strong>A 250-page estate where every page is real beats 691 where 400 are
+    filler</strong> — and the pruning is itself a positive quality signal.</li>
+    <li><strong>Inject proprietary data into the survivors.</strong> Each surviving location page
+    needs at least one of: a named completed project with photographs, real permit turnaround days
+    for that municipality, local cost data, a real client quote, or a genuine local regulatory note.
+    Toronto, Vaughan and Muskoka differ materially on permits, conservation authority review, septic
+    and heritage — that difference is the content.</li>
+    <li><strong>Wire the estate into the guides.</strong> Every location page should link into the
+    cost index and permit timeline with a locality-specific data cut. That makes the hub genuinely
+    valuable and gives each spoke a reason to exist.</li>
+    <li><strong>Fix the orphans and the 404s.</strong> Build real internal paths to every page that
+    survives; remove the 60 blog URLs from the sitemap or write the posts.</li>
+    <li><strong>Generate Open Graph images.</strong> Per page, showing the actual work.</li>
+  </ol>
+
+  <div class="callout">
+    <span class="eyebrow">And for Kopman Properties — do not repeat the pattern</span>
+    <p style="margin-bottom:0">With eight target submarkets and a handful of buildings, the honest
+    page count is <strong>40–80 pages of real substance, not 400 of template</strong>: eight market
+    pages carrying live quarterly data, one rich page per owned asset, and the dock-retrofit
+    advisory cluster. The market pages are the only programmatic element, and they survive precisely
+    because they carry statistics no model can reconstruct.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 04.6</span> &nbsp;— &nbsp;Entity</span>
+  <h2>Making "Kopman" one thing</h2>
+  <p style="margin-top:24px">This is where schema still earns its keep. The goal is that a search
+  engine, and a language model reading its output, resolves all three domains to a single
+  organisation.</p>
+
+<pre><code>// kopman.group
+{ "@context":"https://schema.org", "@type":"Organization",
+  "@id":"https://kopman.group/#organization",
+  "name":"Kopman Group", "foundingDate":"1999",
+  "subOrganization":[
+    {"@id":"https://kopmanbuild.com/#organization"},
+    {"@id":"https://kopman.properties/#organization"}],
+  "sameAs":["https://www.linkedin.com/company/…",
+            "http://www.wikidata.org/entity/Q…",     // Linked Data URI, not /wiki/
+            "https://www.crunchbase.com/…"] }
+
+// kopmanbuild.com
+{ "@type":"GeneralContractor",                        // subtype beats plain Organization
+  "@id":"https://kopmanbuild.com/#organization",
+  "parentOrganization":{"@id":"https://kopman.group/#organization"}, … }
+
+// kopman.properties
+{ "@type":"Organization",                             // NOT RealEstateAgent — see note
+  "@id":"https://kopman.properties/#organization",
+  "parentOrganization":{"@id":"https://kopman.group/#organization"}, … }</code></pre>
+
+  <div class="warnbox">
+    <span class="eyebrow">Two details that are wrong on most sites</span>
+    <p><strong>Do not mark Kopman Properties as <code>RealEstateAgent</code>.</strong> That subtype
+    implies brokerage. If Properties is a principal and owner-operator rather than a licensed
+    brokerage, the markup is a misrepresentation — and in Ontario it is a RECO compliance question
+    as much as a schema one. <strong>Put it to counsel before launch</strong>, because the same
+    answer governs how every public-facing page describes the business.</p>
+    <p style="margin-bottom:0"><strong>Use the Wikidata Linked Data URI</strong>
+    (<code>http://www.wikidata.org/entity/Qxxxx</code>), not the browser <code>/wiki/</code> path —
+    entity resolution expects the former. And a <code>sameAs</code> array pointing at dead URLs
+    declares equivalence to nothing; audit it annually.</p>
+  </div>
+
+  <h3 style="margin-top:44px">Wikidata — achievable, and in this order</h3>
+  <p style="margin-top:16px">Wikidata has no Wikipedia-style notability bar, and it is considerably
+  more attainable than a Wikipedia page while feeding the same Knowledge
+  Graph<span class="v v-src">Source</span>. But external references must exist <em>before</em> the
+  item, or it gets deleted:</p>
+  <ol style="margin-top:14px;font-size:15.5px">
+    <li>Secure 3–5 durable third-party references — Ontario corporate registry, a RENX or Daily
+    Commercial News mention, a BILD or OHBA membership listing, a completed-project write-up.</li>
+    <li>Create the Kopman Group item citing those.</li>
+    <li>Create child items for Build and Properties with parent/subsidiary statements.</li>
+    <li>Add official website statements to each.</li>
+    <li>Mirror all three into <code>sameAs</code> across the three domains.</li>
+  </ol>
+  <p style="margin-top:14px;font-size:15px;color:var(--ink-3)">Expect 6–12 months before a Knowledge
+  Panel appears, if one appears at all.</p>
+
+  <h3 style="margin-top:44px">Google Business Profile — two, not three</h3>
+  <p style="margin-top:16px">Where two brands operate independently at one address, separate
+  profiles are permitted<span class="v v-src">Source</span>. If Build and Properties are genuinely
+  separate entities with separate phone lines, staff and signage, they are entitled to one profile
+  each at the shared head office. Expect video verification and be ready to demonstrate the
+  independence.</p>
+  <div class="dont" style="margin-top:20px">
+    <h4>Do not create a third profile for Kopman Group</h4>
+    <p>A holding company with no walk-in customers does not qualify, and it looks like precisely the
+    pattern Google is currently enforcing against. Let the parent live in the Knowledge Graph, not
+    in the local pack.</p>
+  </div>
+  <div class="dont">
+    <h4>Do not create a Muskoka address that is not staffed</h4>
+    <p>If Kopman Build has a genuine staffed Muskoka location, that is a legitimate second profile.
+    If it is service-area only, configure it as a service area on the existing profile. A fabricated
+    address is the single highest-risk action available anywhere in this plan.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 04.7</span> &nbsp;— &nbsp;Measurement</span>
+  <h2>Set the contract before the work starts</h2>
+  <div class="grid g2" style="margin-top:30px">
+    <div>
+      <h4 style="margin-bottom:10px">What to expect</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">AI referral traffic runs around
+      <strong class="mono">1%</strong> of sessions on most business sites, and only 14% of marketers
+      track it separately. ChatGPT's share of AI referrals fell from 87.4% to
+      <strong class="mono">62.6%</strong> between late 2025 and early 2026, with Claude at 18.5%,
+      Gemini 10.6% and Perplexity 7.3%<span class="v v-src">Source</span> — so instrument for
+      several, not one.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Why it still justifies itself</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">AI referrals convert at roughly
+      <strong class="mono">4–5×</strong> organic<span class="v v-src">Source</span>. On a
+      $2M–$20M industrial transaction, <strong>one qualified inbound pays for the entire
+      programme.</strong> Do not let anyone benchmark this on session volume.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:44px">The four things to actually track</h3>
+  <ol style="margin-top:18px;font-size:16px">
+    <li><strong>Citation share against a fixed prompt panel.</strong> Write 30 target prompts a real
+    buyer or vendor would ask — "who buys obsolete warehouses in the GTA", "cost to add a loading
+    dock in Ontario", "custom home builder in Rosedale" — and check monthly across ChatGPT, Claude,
+    Gemini, Perplexity and AI Overviews. This, not traffic, is the primary metric.</li>
+    <li><strong>AI crawler hits in server logs.</strong> A leading indicator that runs months ahead
+    of referral traffic. If GPTBot and ClaudeBot are not fetching, nothing downstream will happen.</li>
+    <li><strong>Branded mention volume.</strong> The 0.664 correlation signal. Track mentions of
+    "Kopman" across the web and on YouTube — this is the lever with the highest measured leverage.</li>
+    <li><strong>A GA4 AI-referral channel group</strong> — source matching
+    <code>chatgpt|perplexity|claude|gemini|copilot</code>. Roughly ten minutes of work; without it
+    these sessions misattribute to direct traffic and the programme looks like it did nothing.</li>
+  </ol>
+</section>
+
+<section style="padding-bottom:clamp(64px,9vw,120px)">
+  <span class="eyebrow"><span class="sheet">Sheet 04.8</span> &nbsp;— &nbsp;Sequence</span>
+  <h2>Order of work</h2>
+
+  <div class="tbl-scroll" style="margin-top:30px">
+  <table>
+    <thead><tr><th>When</th><th>Do</th><th>Why now</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">Week 1</td><td>Fix the contact form; install analytics; verify robots.txt allows AI crawlers; register all three domains in Bing Webmaster Tools; add the GA4 AI channel group</td><td>Cheapest actions available, and everything else needs them in place first</td></tr>
+      <tr><td class="mono">Weeks 2–6</td><td>Search Console audit of all 630 pages; prune the dead cells; fix the 60 sitemap 404s; generate Open Graph images</td><td>Must precede the entity link, or the liability spreads</td></tr>
+      <tr><td class="mono">Weeks 4–10</td><td>Entity schema across all three domains; secure the third-party references; create Wikidata items; two Google Business Profiles</td><td>The entity graph should be consistent from the day the new domains launch</td></tr>
+      <tr><td class="mono">Months 2–4</td><td>Write Cluster D — the dock-retrofit corpus, using Kopman's own cost data</td><td>Verified uncontested. Recruits vendors while it builds authority</td></tr>
+      <tr><td class="mono">Months 3–6</td><td>Launch kopman.properties at 40–80 pages; syndicate listings to LoopNet, Zolo, CommercialCafe, Spacelist</td><td>Small and real. Never compete with aggregators on inventory</td></tr>
+      <tr><td class="mono">Ongoing</td><td>Earned media programme — trade press, YouTube, published deal numbers. Build the media list from outlets that appear in AI answers, not from prestige</td><td><strong>The highest-leverage line in this table</strong></td></tr>
+      <tr><td class="mono">Quarterly</td><td>Refresh market pages and the cost index with real new data; re-run the prompt panel</td><td>85% of AI citations go to content under two years old</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout" style="margin-top:44px">
+    <span class="eyebrow">The strategy in one paragraph</span>
+    <p style="margin-bottom:0">Build an entity hub, not a link ring — brand anchors up and down,
+    editorial sibling links only where a named project genuinely connects two domains. Prune Kopman
+    Build's 630 pages to the ones that are real before linking anything to them. Do not fight
+    aggregators for transactional industrial keywords; own the dock-retrofit corpus instead, which is
+    verifiably empty in Canada, sits exactly where the two businesses meet, and is backed by cost
+    data only this group possesses. Then spend the marginal dollar on getting "Kopman" mentioned by
+    other people rather than on publishing another page — because that is what the evidence says
+    actually determines whether a machine recommends you.</p>
+  </div>
+</section>
+
+<footer style="border-top:1px solid var(--line);padding:34px 0 56px">
+  <dl class="titleblock" style="border:0;background:transparent">
+    <div class="tb" style="border-right:0;padding-left:0"><dt>Sheet</dt><dd>04 — Search &amp; LLM Strategy</dd></div>
+    <div class="tb" style="border-right:0"><dt>Set</dt><dd>01 Positioning · 02 Business Plan · 03 Design · 04 Search</dd></div>
+    <div class="tb" style="border-right:0"><dt>Status</dt><dd>Board draft</dd></div>
+  </dl>
+</footer>
+
+</div>

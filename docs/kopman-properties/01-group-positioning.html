@@ -1,0 +1,638 @@
+<title>One Group, Whole Build</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* KOPMAN GROUP — shared artifact token system
+   Inherits from kopmanbuild.com: Instrument Serif / Geist / Geist Mono, warm near-black.
+   Differentiates for the Properties arm: concrete ground (cooler than Build's linen),
+   dock-amber signal replacing terracotta, cold steel as a second data axis. */
+:root{
+  --ground:#E9E7E2; --ground-2:#DFDCD5; --panel:#F4F2EE; --panel-2:#E3E0D9;
+  --ink:#17181A; --ink-2:#4A4C50; --ink-3:#7C7E82;
+  --line:#CBC8C0; --line-2:#B4B0A6;
+  --signal:#A96C14; --signal-soft:#EFE0C8;
+  --steel:#3A5464; --steel-soft:#DCE3E7;
+  --good:#3F6B4A; --warn:#A96C14; --crit:#8E3B2F;
+  --f-d:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --f-s:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --f-m:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --max:1180px; --gut:clamp(20px,4vw,56px);
+}
+@media (prefers-color-scheme:dark){
+ :root:not([data-theme="light"]){
+  --ground:#141517; --ground-2:#1B1D20; --panel:#1E2124; --panel-2:#26292D;
+  --ink:#E9E7E2; --ink-2:#B3B1AC; --ink-3:#84868A;
+  --line:#313438; --line-2:#3F4348;
+  --signal:#D2932F; --signal-soft:#3A2E1A;
+  --steel:#7FA3B8; --steel-soft:#1E2A32;
+  --good:#6E9E79; --warn:#D2932F; --crit:#C4705F;
+ }
+}
+:root[data-theme="dark"]{
+  --ground:#141517; --ground-2:#1B1D20; --panel:#1E2124; --panel-2:#26292D;
+  --ink:#E9E7E2; --ink-2:#B3B1AC; --ink-3:#84868A;
+  --line:#313438; --line-2:#3F4348;
+  --signal:#D2932F; --signal-soft:#3A2E1A;
+  --steel:#7FA3B8; --steel-soft:#1E2A32;
+  --good:#6E9E79; --warn:#D2932F; --crit:#C4705F;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-s);
+  font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+h1,h2,h3,h4{text-wrap:balance;margin:0;font-weight:400}
+h1{font-family:var(--f-d);font-size:clamp(42px,6.5vw,86px);line-height:1.02;letter-spacing:-.02em}
+h2{font-family:var(--f-d);font-size:clamp(30px,4vw,50px);line-height:1.08;letter-spacing:-.015em}
+h3{font-family:var(--f-d);font-size:clamp(22px,2.4vw,30px);line-height:1.15}
+h4{font-family:var(--f-s);font-size:16px;font-weight:600;letter-spacing:-.005em}
+p{margin:0 0 1em;max-width:68ch}
+a{color:inherit;text-underline-offset:3px;text-decoration-color:var(--line-2)}
+a:hover{text-decoration-color:var(--signal)}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+em{font-family:var(--f-d);font-style:italic}
+/* mono meta / eyebrows */
+.eyebrow{font-family:var(--f-m);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:14px}
+.mono{font-family:var(--f-m);font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+/* title block — the drawing-set device */
+.titleblock{border:1px solid var(--line);background:var(--panel);display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin:0}
+.tb{padding:14px 18px;border-right:1px solid var(--line)}
+.tb:last-child{border-right:0}
+.tb dt{font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 5px}
+.tb dd{margin:0;font-family:var(--f-m);font-size:13px;font-variant-numeric:tabular-nums}
+/* sheet sections */
+section{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+.sheet{font-family:var(--f-m);font-size:11px;letter-spacing:.14em;color:var(--signal)}
+/* rules & measured lines */
+.rule{height:1px;background:var(--line);border:0;margin:0}
+/* cards / panels */
+.panel{background:var(--panel);border:1px solid var(--line);padding:clamp(20px,3vw,32px)}
+.grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.grid > *{background:var(--panel);padding:clamp(18px,2.4vw,28px)}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+/* data tables */
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:400;white-space:nowrap}
+td.n,th.n{text-align:right;font-family:var(--f-m);font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tr.total td{border-top:2px solid var(--ink);font-weight:600;background:var(--panel-2)}
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-m);font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border:1px solid var(--line-2);
+  border-radius:2px;color:var(--ink-2);white-space:nowrap}
+.chip.sig{border-color:var(--signal);color:var(--signal);background:var(--signal-soft)}
+.chip.stl{border-color:var(--steel);color:var(--steel);background:var(--steel-soft)}
+.chip.ok{border-color:var(--good);color:var(--good)}
+.chip.no{border-color:var(--crit);color:var(--crit)}
+/* verification marker — every number is sourced or flagged */
+.v{font-family:var(--f-m);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:2px 5px;border-radius:2px;vertical-align:2px;margin-left:6px;white-space:nowrap}
+.v-src{background:var(--steel-soft);color:var(--steel);border:1px solid var(--steel)}
+.v-est{background:var(--signal-soft);color:var(--signal);border:1px solid var(--signal)}
+/* stat */
+.stat{display:block}
+.stat b{display:block;font-family:var(--f-d);font-size:clamp(32px,4.2vw,52px);
+  line-height:1;font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stat span{display:block;font-family:var(--f-m);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-top:10px}
+ul,ol{max-width:68ch;padding-left:1.15em}
+li{margin-bottom:.45em}
+.lede{font-size:clamp(18px,1.6vw,21px);line-height:1.5;color:var(--ink-2);max-width:60ch}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* — page-specific — */
+.hero{padding:clamp(48px,7vw,90px) 0 clamp(40px,5vw,64px);border-top:0}
+.hero h1{margin:26px 0 0}
+.hero h1 em{color:var(--signal)}
+.arm{display:grid;grid-template-columns:auto 1fr;gap:0 20px;align-items:start}
+.arm .idx{font-family:var(--f-m);font-size:11px;letter-spacing:.1em;color:var(--signal);
+  border:1px solid var(--signal);padding:3px 7px;border-radius:2px;white-space:nowrap}
+.arm .dom{font-family:var(--f-m);font-size:12px;color:var(--ink-3);display:block;margin:4px 0 12px}
+figure{margin:0}
+figcaption{font-family:var(--f-m);font-size:11.5px;line-height:1.55;color:var(--ink-3);
+  margin-top:16px;max-width:62ch;border-left:2px solid var(--signal);padding-left:12px}
+svg.dia{max-width:100%;height:auto;display:block;color:var(--ink)}
+.seq{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.seq > div{background:var(--panel);padding:20px 22px;display:grid;
+  grid-template-columns:112px 1fr;gap:20px;align-items:start}
+.seq .when{font-family:var(--f-m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal)}
+.risk{border-left:3px solid var(--crit);padding-left:16px;margin-bottom:22px}
+.risk h4{margin-bottom:5px}
+.risk p{color:var(--ink-2);font-size:15.5px;margin:0}
+@media(max-width:620px){.seq > div{grid-template-columns:1fr;gap:8px}
+  .arm{grid-template-columns:1fr;gap:12px}.arm .idx{justify-self:start}}
+
+/* SVG accents follow the theme tokens (literals kept in markup for portability) */
+svg.dia [fill="#A96C14"]{fill:var(--signal)}
+svg.dia [stroke="#A96C14"]{stroke:var(--signal)}
+svg.dia [fill="#8E3B2F"]{fill:var(--crit)}
+svg.dia [stroke="#8E3B2F"]{stroke:var(--crit)}
+svg.dia marker polygon[fill="#A96C14"]{fill:var(--signal)}
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <dl class="titleblock">
+    <div class="tb"><dt>Document</dt><dd>Positioning &amp; Vision</dd></div>
+    <div class="tb"><dt>Entity</dt><dd>Kopman Group</dd></div>
+    <div class="tb"><dt>Sheet</dt><dd>01 of 04</dd></div>
+    <div class="tb"><dt>Issued</dt><dd>2026-08-23</dd></div>
+    <div class="tb"><dt>Status</dt><dd>Board draft</dd></div>
+  </dl>
+
+  <h1>One group.<br>The <em>whole</em> build.</h1>
+
+  <p class="lede" style="margin-top:32px">Most builders sell their margin. Kopman Group is being
+  built to keep it — by owning the buildings its own trades improve, and running both on software
+  it already wrote.</p>
+</header>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 01.1</span> &nbsp;— &nbsp;The position</span>
+  <h2>What Kopman Group is</h2>
+
+  <p style="margin-top:24px">Kopman Group is a Greater Toronto Area real estate and construction
+  group. It has been building since 1999, across the GTA and Muskoka, under the Kopman Build name.
+  The group structure formalises what the business already does — and adds the arm that has been
+  missing.</p>
+
+  <p>The operating claim is narrow and testable: <strong>a group that can design, permit, build,
+  own and operate a property internally does not pay anyone else to do those things.</strong> Every
+  fee a conventional developer pays out — general contractor, project manager, construction
+  manager — is a fee Kopman Group pays to itself, and can therefore convert into equity in the
+  asset rather than expense against it.</p>
+
+  <p>That is the entire thesis. Everything below is its consequence.</p>
+
+  <div class="grid g3" style="margin-top:40px">
+    <div><span class="stat"><b>1999</b><span>Building since</span></span></div>
+    <div><span class="stat"><b>GTA<span style="font-size:.5em"> + </span>MUSKOKA</b><span>Operating footprint</span></span></div>
+    <div><span class="stat"><b>3&nbsp;+&nbsp;2</b><span>Arms live, planned</span></span></div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 01.2</span> &nbsp;— &nbsp;Group architecture</span>
+  <h2>How the arms connect</h2>
+  <p style="margin-top:24px">The group is not a holding company with unrelated subsidiaries. Each
+  arm is a supplier to, or a customer of, the others. The edges below are the point — they are what
+  a competitor buying any single one of these businesses could not replicate.</p>
+
+  <figure style="margin-top:44px">
+  <svg class="dia" viewBox="0 0 900 470" role="img" aria-label="Kopman Group architecture: Kopman Build supplies construction at cost to Kopman Properties, which returns retrofit pipeline; BuildOS runs both and is licensed to third-party builders; Kopman Capital and Kopman Muskoka are planned arms.">
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <polygon points="0,0 10,5 0,10" fill="currentColor"/>
+      </marker>
+      <marker id="ars" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <polygon points="0,0 10,5 0,10" fill="#A96C14"/>
+      </marker>
+    </defs>
+
+    <!-- parent -->
+    <rect x="330" y="18" width="240" height="62" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="450" y="44" text-anchor="middle" font-family="Georgia,serif" font-size="19" fill="currentColor">Kopman Group</text>
+    <text x="450" y="65" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" letter-spacing="1.4" fill="currentColor" opacity=".62">KOPMAN.GROUP</text>
+
+    <!-- spine -->
+    <line x1="450" y1="80" x2="450" y2="112" stroke="currentColor" stroke-width="1.2"/>
+    <line x1="150" y1="112" x2="750" y2="112" stroke="currentColor" stroke-width="1.2"/>
+    <line x1="150" y1="112" x2="150" y2="150" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"/>
+    <line x1="450" y1="112" x2="450" y2="150" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"/>
+    <line x1="750" y1="112" x2="750" y2="150" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"/>
+
+    <!-- three live arms -->
+    <rect x="40" y="152" width="220" height="86" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="150" y="182" text-anchor="middle" font-family="Georgia,serif" font-size="17" fill="currentColor">Kopman Build</text>
+    <text x="150" y="201" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" letter-spacing="1.2" fill="currentColor" opacity=".62">KOPMANBUILD.COM</text>
+    <text x="150" y="222" text-anchor="middle" font-size="11.5" fill="currentColor" opacity=".78">Construction · est. 1999</text>
+
+    <rect x="340" y="152" width="220" height="86" fill="none" stroke="#A96C14" stroke-width="2"/>
+    <text x="450" y="182" text-anchor="middle" font-family="Georgia,serif" font-size="17" fill="#A96C14">Kopman Properties</text>
+    <text x="450" y="201" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" letter-spacing="1.2" fill="#A96C14" opacity=".85">KOPMAN.PROPERTIES</text>
+    <text x="450" y="222" text-anchor="middle" font-size="11.5" fill="#A96C14">Ownership · new</text>
+
+    <rect x="640" y="152" width="220" height="86" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="750" y="182" text-anchor="middle" font-family="Georgia,serif" font-size="17" fill="currentColor">BuildOS</text>
+    <text x="750" y="201" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" letter-spacing="1.2" fill="currentColor" opacity=".62">SOFTWARE · BUILT</text>
+    <text x="750" y="222" text-anchor="middle" font-size="11.5" fill="currentColor" opacity=".78">Operating layer</text>
+
+    <!-- Build <-> Properties : the load-bearing edge -->
+    <line x1="260" y1="180" x2="338" y2="180" stroke="#A96C14" stroke-width="2" marker-end="url(#ars)"/>
+    <text x="299" y="172" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#A96C14">builds at cost</text>
+    <line x1="338" y1="212" x2="260" y2="212" stroke="#A96C14" stroke-width="2" marker-end="url(#ars)"/>
+    <text x="299" y="228" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#A96C14">returns pipeline</text>
+
+    <!-- BuildOS runs both -->
+    <path d="M 640 195 L 600 195" stroke="currentColor" stroke-width="1.2" fill="none" marker-end="url(#ar)"/>
+    <text x="620" y="187" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".72">runs</text>
+    <path d="M 750 238 L 750 268 L 150 268 L 150 240" stroke="currentColor" stroke-width="1.2" fill="none" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+    <text x="450" y="283" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".72">runs quoting, CRM, project delivery</text>
+
+    <!-- external revenue -->
+    <rect x="640" y="316" width="220" height="52" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="750" y="339" text-anchor="middle" font-size="12.5" fill="currentColor" opacity=".8">Third-party builders</text>
+    <text x="750" y="357" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".6">SaaS licensees</text>
+    <line x1="750" y1="238" x2="750" y2="314" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"/>
+    <text x="762" y="280" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".72">licensed to</text>
+
+    <!-- planned arms -->
+    <line x1="150" y1="316" x2="560" y2="316" stroke="currentColor" stroke-width="0" />
+    <rect x="40" y="316" width="220" height="52" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 3" opacity=".62"/>
+    <text x="150" y="339" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="currentColor" opacity=".7">Kopman Capital</text>
+    <text x="150" y="357" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor" opacity=".5">PLANNED · CO-INVEST</text>
+
+    <rect x="340" y="316" width="220" height="52" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 3" opacity=".62"/>
+    <text x="450" y="339" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="currentColor" opacity=".7">Kopman Muskoka</text>
+    <text x="450" y="357" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor" opacity=".5">PLANNED · RECREATIONAL</text>
+
+    <line x1="450" y1="392" x2="450" y2="410" stroke="currentColor" stroke-width="0"/>
+    <text x="450" y="424" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.3" fill="currentColor" opacity=".55">SOLID = OPERATING TODAY&nbsp;&nbsp;·&nbsp;&nbsp;DASHED = PLANNED</text>
+    <text x="450" y="446" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.3" fill="#A96C14">AMBER = THE LOAD-BEARING EDGE</text>
+  </svg>
+  <figcaption>The amber pair is the whole argument. Kopman Build delivers retrofit work to Kopman
+  Properties at cost rather than at a marked-up contract price; Kopman Properties returns a pipeline
+  of buildings that need exactly the work Build sells. Remove either arrow and the group is just
+  two ordinary companies with a shared surname.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 01.3</span> &nbsp;— &nbsp;The arms</span>
+  <h2>Five arms, three live</h2>
+
+  <div style="display:grid;gap:34px;margin-top:36px">
+    <div class="arm">
+      <span class="idx">ARM 01</span>
+      <div>
+        <h3>Kopman Build</h3>
+        <span class="dom">kopmanbuild.com &nbsp;·&nbsp; operating since 1999</span>
+        <p>The construction arm and the group's origin. Custom homes, full-house renovations,
+        additions, laneway houses and design-build across the GTA and Muskoka. It carries the
+        licences, the trade relationships, the estimating discipline and the twenty-six-year
+        track record that every other arm borrows credibility from.</p>
+        <p style="margin:0"><strong>Role in the group:</strong> the production capability. It is
+        the reason Kopman Properties can underwrite a retrofit at cost instead of at a quote.</p>
+      </div>
+    </div>
+
+    <div class="arm">
+      <span class="idx">ARM 02</span>
+      <div>
+        <h3>Kopman Properties</h3>
+        <span class="dom">kopman.properties &nbsp;·&nbsp; launching</span>
+        <p>The properties and ownership arm. Its opening thesis is industrial: acquire GTA
+        warehouses that are structurally sound but functionally obsolete — grade-level loading
+        only, no docks, tired services — and retrofit them into space the ordinary shipping,
+        storage and small-bay tenant can actually occupy. Detailed in Sheet 02.</p>
+        <p style="margin:0"><strong>Role in the group:</strong> the balance sheet. It converts
+        Build's labour into owned, appreciating assets and recurring rent.</p>
+      </div>
+    </div>
+
+    <div class="arm">
+      <span class="idx">ARM 03</span>
+      <div>
+        <h3>BuildOS</h3>
+        <span class="dom">software &nbsp;·&nbsp; built, pre-launch</span>
+        <p>The group's operating system, and already a real codebase rather than a plan: a
+        multi-tenant platform covering CRM and lead capture, project delivery, quoting with an
+        AI video-to-quote pipeline, inventory, referrals, loyalty, marketing automation, a trade
+        marketplace, cost intelligence and white-label deployment — with billing and tenant
+        onboarding wired.</p>
+        <p style="margin:0"><strong>Role in the group:</strong> the margin defence. It runs
+        Build and Properties, and is licensable to the same builders Kopman competes with —
+        turning operational discipline into a second revenue line.</p>
+      </div>
+    </div>
+
+    <div class="arm" style="opacity:.72">
+      <span class="idx" style="color:var(--ink-3);border-color:var(--line-2)">ARM 04</span>
+      <div>
+        <h3>Kopman Capital</h3>
+        <span class="dom">planned &nbsp;·&nbsp; not before the third asset closes</span>
+        <p style="margin:0">The co-investment vehicle. Once Kopman Properties has three completed
+        retrofits with audited cost-to-complete and realised rent, the track record supports
+        raising outside capital against it — deal-by-deal syndication first, a discretionary
+        vehicle only later. Standing this arm up before there is a track record to sell would
+        invert the sequence and price the group's credibility against a spreadsheet.</p>
+      </div>
+    </div>
+
+    <div class="arm" style="opacity:.72">
+      <span class="idx" style="color:var(--ink-3);border-color:var(--line-2)">ARM 05</span>
+      <div>
+        <h3>Kopman Muskoka</h3>
+        <span class="dom">planned &nbsp;·&nbsp; already latent in Build's demand</span>
+        <p style="margin:0">Recreational and cottage-country development. Kopman Build already
+        markets to Muskoka and holds the operating knowledge — shoreline road allowances, seasonal
+        trade scheduling, septic and well work — that GTA-only builders lack. The arm exists to
+        stop that knowledge being sold one cottage at a time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 01.4</span> &nbsp;— &nbsp;The compounding logic</span>
+  <h2>Where the same crew ends up</h2>
+  <p style="margin-top:24px">A construction business and a property business look similar from the
+  outside — both put crews on sites. They are not similar. The difference is what the group owns
+  when the crew drives away.</p>
+
+  <figure style="margin-top:44px">
+  <svg class="dia" viewBox="0 0 900 400" role="img" aria-label="Comparison of two paths for the same construction crew. As a third-party contractor, the work converts to a one-time fee and the relationship ends. Inside the group, the same work converts to a rent increase capitalised into asset value that the group keeps and can refinance.">
+    <defs>
+      <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <polygon points="0,0 10,5 0,10" fill="currentColor"/>
+      </marker>
+      <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <polygon points="0,0 10,5 0,10" fill="#A96C14"/>
+      </marker>
+    </defs>
+
+    <!-- shared origin -->
+    <rect x="20" y="160" width="150" height="72" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="95" y="188" text-anchor="middle" font-size="13.5" fill="currentColor">Same crew,</text>
+    <text x="95" y="207" text-anchor="middle" font-size="13.5" fill="currentColor">same scope,</text>
+    <text x="95" y="224" text-anchor="middle" font-size="13.5" fill="currentColor">same cost</text>
+
+    <!-- split -->
+    <line x1="170" y1="196" x2="200" y2="196" stroke="currentColor" stroke-width="1.2"/>
+    <line x1="200" y1="86" x2="200" y2="306" stroke="currentColor" stroke-width="1.2"/>
+    <line x1="200" y1="86" x2="240" y2="86" stroke="currentColor" stroke-width="1.2" marker-end="url(#a2)"/>
+    <line x1="200" y1="306" x2="240" y2="306" stroke="#A96C14" stroke-width="2" marker-end="url(#a3)"/>
+
+    <!-- PATH A -->
+    <text x="243" y="42" font-family="ui-monospace,monospace" font-size="10.5" letter-spacing="1.4" fill="currentColor" opacity=".6">PATH A — AS A CONTRACTOR, FOR SOMEONE ELSE</text>
+    <rect x="243" y="58" width="168" height="56" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    <text x="327" y="82" text-anchor="middle" font-size="12.5" fill="currentColor">Work delivered</text>
+    <text x="327" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".65">on client's building</text>
+
+    <line x1="411" y1="86" x2="451" y2="86" stroke="currentColor" stroke-width="1.2" marker-end="url(#a2)"/>
+    <text x="431" y="78" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor" opacity=".65">bills</text>
+
+    <rect x="453" y="58" width="168" height="56" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    <text x="537" y="82" text-anchor="middle" font-size="12.5" fill="currentColor">One-time fee</text>
+    <text x="537" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".65">taxed, then spent</text>
+
+    <line x1="621" y1="86" x2="661" y2="86" stroke="currentColor" stroke-width="1.2" marker-end="url(#a2)"/>
+    <rect x="663" y="58" width="180" height="56" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="753" y="82" text-anchor="middle" font-size="12.5" fill="currentColor" opacity=".75">Group owns nothing</text>
+    <text x="753" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".55">start again at zero</text>
+
+    <path d="M 753 114 L 753 138 L 327 138 L 327 118" stroke="currentColor" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#a2)"/>
+    <text x="540" y="133" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor" opacity=".5">must win the next job to earn again</text>
+
+    <!-- PATH B -->
+    <text x="243" y="278" font-family="ui-monospace,monospace" font-size="10.5" letter-spacing="1.4" fill="#A96C14">PATH B — INSIDE THE GROUP, ON ITS OWN BUILDING</text>
+    <rect x="243" y="290" width="168" height="56" fill="none" stroke="#A96C14" stroke-width="1.8"/>
+    <text x="327" y="314" text-anchor="middle" font-size="12.5" fill="#A96C14">Work delivered</text>
+    <text x="327" y="332" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#A96C14" opacity=".8">on group's building</text>
+
+    <line x1="411" y1="318" x2="451" y2="318" stroke="#A96C14" stroke-width="2" marker-end="url(#a3)"/>
+    <text x="431" y="310" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" fill="#A96C14">lifts rent</text>
+
+    <rect x="453" y="290" width="168" height="56" fill="none" stroke="#A96C14" stroke-width="1.8"/>
+    <text x="537" y="314" text-anchor="middle" font-size="12.5" fill="#A96C14">Rent × 1 ÷ cap rate</text>
+    <text x="537" y="332" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#A96C14" opacity=".8">capitalised into value</text>
+
+    <line x1="621" y1="318" x2="661" y2="318" stroke="#A96C14" stroke-width="2" marker-end="url(#a3)"/>
+    <rect x="663" y="290" width="180" height="56" fill="none" stroke="#A96C14" stroke-width="1.8"/>
+    <text x="753" y="314" text-anchor="middle" font-size="12.5" fill="#A96C14">Group owns the asset</text>
+    <text x="753" y="332" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#A96C14" opacity=".8">rent + refinanceable</text>
+
+    <path d="M 753 288 L 753 258 L 95 258 L 95 236" stroke="#A96C14" stroke-width="1.4" fill="none" stroke-dasharray="4 3" marker-end="url(#a3)"/>
+    <text x="424" y="252" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" fill="#A96C14">refinance proceeds fund the next acquisition — the loop closes</text>
+
+    <!-- divider -->
+    <line x1="20" y1="196" x2="20" y2="196" stroke="currentColor"/>
+  </svg>
+  <figcaption>Both paths consume identical labour and materials. Path A ends in cash that must be
+  re-earned from scratch; Path B ends in an asset whose refinancing proceeds buy the next building.
+  Only Path B compounds — and only a group that owns both the builder and the building can take it.</figcaption>
+  </figure>
+
+  <div class="grid g3" style="margin-top:48px">
+    <div>
+      <h4 style="margin-bottom:10px">Cost basis, not quoted price</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Retrofit scope enters the underwriting
+      at Build's internal cost. A competing buyer underwrites the same building at a general
+      contractor's tendered price. On identical assumptions, Kopman can bid higher and still clear
+      its return — or bid the same and clear more.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Certainty of execution</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">The largest risk in value-add industrial
+      is that the retrofit overruns. Kopman is not estimating a stranger's ability to deliver — it
+      is scheduling its own crews, against its own historical cost data, on scope it performs weekly.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Two revenue shapes</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Construction revenue is lumpy, won
+      job-by-job, and stops when the phone stops. Rent is contracted, recurring and bankable. The
+      group is deliberately building the second on top of the first.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 01.5</span> &nbsp;— &nbsp;Domain &amp; brand architecture</span>
+  <h2>Three domains, one entity</h2>
+  <p style="margin-top:24px">The group runs separate domains rather than folding everything into
+  one site. That is the right call — a warehouse investor and a homeowner planning a kitchen share
+  no vocabulary, no buying cycle and no notion of what "good" looks like. But separate domains only
+  work if search engines and language models can see that one organisation stands behind all three.</p>
+
+  <div class="tbl-scroll" style="margin-top:32px">
+  <table>
+    <thead><tr><th>Domain</th><th>Entity</th><th>Audience</th><th>Sells</th><th>Proves</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="mono">kopman.group</td>
+        <td>Kopman Group</td>
+        <td>Capital partners, vendors, press, senior hires</td>
+        <td>Nothing directly</td>
+        <td>That the other two are backed by something real</td>
+      </tr>
+      <tr>
+        <td class="mono">kopmanbuild.com</td>
+        <td>Kopman Build</td>
+        <td>Homeowners, architects, referral trades</td>
+        <td>Construction services</td>
+        <td>Twenty-six years of delivery</td>
+      </tr>
+      <tr>
+        <td class="mono">kopman.properties</td>
+        <td>Kopman Properties</td>
+        <td>Tenants, brokers, vendors, co-investors</td>
+        <td>Space, and eventually units of deals</td>
+        <td>That the group can execute the retrofit it promises</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3 style="margin-top:48px">The rules that hold it together</h3>
+  <ol style="margin-top:18px">
+    <li><strong>One entity graph.</strong> <code class="mono">kopman.group</code> declares both
+    operating companies as <code class="mono">subOrganization</code>; each child declares
+    <code class="mono">parentOrganization</code> back. Every domain carries the same
+    <code class="mono">sameAs</code> set. This is what makes the three sites one entity to a
+    search engine rather than three unrelated small businesses.</li>
+    <li><strong>Cross-links are editorial, never sitewide.</strong> A footer link farm between
+    sibling domains is the pattern search engines discount. A link from a Properties case study
+    to the Build page describing the exact retrofit trade is the pattern they reward. Detailed in
+    Sheet 04.</li>
+    <li><strong>One visual system, two temperatures.</strong> Shared typography and near-black;
+    Build stays warm linen, Properties moves to concrete. A visitor should recognise the family
+    without mistaking the two businesses for each other. Detailed in Sheet 03.</li>
+    <li><strong>The group site never competes for the children's keywords.</strong> It ranks for
+    <em>Kopman Group</em>, leadership names and corporate queries. It must not publish a page
+    targeting "renovation contractor Toronto" — that cannibalises the arm that has earned it.</li>
+  </ol>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 01.6</span> &nbsp;— &nbsp;Sequence</span>
+  <h2>Order of operations</h2>
+  <p style="margin-top:24px">The sequence below is deliberate. Each phase exists to produce the
+  evidence the next phase has to sell.</p>
+
+  <div class="seq" style="margin-top:34px">
+    <div>
+      <span class="when">Phase 0<br>Immediate</span>
+      <div>
+        <h4>Repair the foundation</h4>
+        <p style="margin:0;font-size:15.5px;color:var(--ink-2)">Before either new domain launches,
+        fix what the audit found on kopmanbuild.com: the contact form that discards every enquiry,
+        the 574 unlinked pages, the placeholder offices and phone numbers, and the absence of any
+        analytics. New domains inheriting this stack would inherit these faults. Non-negotiable and
+        first — it is also the cheapest work in this document.</p>
+      </div>
+    </div>
+    <div>
+      <span class="when">Phase 1<br>Q4 2026</span>
+      <div>
+        <h4>Stand up the group entity</h4>
+        <p style="margin:0;font-size:15.5px;color:var(--ink-2)"><code class="mono">kopman.group</code>
+        launches as a small, dense corporate site — position, arms, leadership, contact. Entity
+        schema wired across all three domains simultaneously so the graph is consistent from day one.</p>
+      </div>
+    </div>
+    <div>
+      <span class="when">Phase 2<br>Q4 2026 – Q1 2027</span>
+      <div>
+        <h4>First acquisition</h4>
+        <p style="margin:0;font-size:15.5px;color:var(--ink-2)">Kopman Properties closes one
+        dock-deficient GTA warehouse. <code class="mono">kopman.properties</code> launches alongside
+        it — thesis, standards, and the live project documented from before-photos forward. One real
+        building outranks any amount of claimed capability.</p>
+      </div>
+    </div>
+    <div>
+      <span class="when">Phase 3<br>2027</span>
+      <div>
+        <h4>Complete, lease, publish</h4>
+        <p style="margin:0;font-size:15.5px;color:var(--ink-2)">Retrofit delivered, space leased,
+        and the full cost-to-complete and rent achieved published as a case study. This document
+        becomes the group's single most valuable marketing asset and the basis of every later
+        conversation with capital.</p>
+      </div>
+    </div>
+    <div>
+      <span class="when">Phase 4<br>2027 – 2028</span>
+      <div>
+        <h4>Repeat twice, then raise</h4>
+        <p style="margin:0;font-size:15.5px;color:var(--ink-2)">Assets two and three, on the same
+        playbook, to prove the first was a process rather than a fluke. Only then does Kopman
+        Capital open, and only against three audited outcomes.</p>
+      </div>
+    </div>
+    <div>
+      <span class="when">Phase 5<br>2028+</span>
+      <div>
+        <h4>Externalise BuildOS</h4>
+        <p style="margin:0;font-size:15.5px;color:var(--ink-2)">The software is licensed to
+        third-party builders once it has run three of the group's own retrofits end to end. Selling
+        an operating system the seller does not run on is the fastest way to lose the room.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 01.7</span> &nbsp;— &nbsp;Candour</span>
+  <h2>What has to be true</h2>
+  <p style="margin-top:24px">The thesis is sound but not costless. These are the conditions that
+  would break it, stated plainly so the board can price them.</p>
+
+  <div style="margin-top:34px">
+    <div class="risk">
+      <h4>Internal work must be priced honestly</h4>
+      <p>"Build at cost" is an advantage only if the cost is real. If Build absorbs overruns on
+      group projects to make Properties' returns look good, the group has moved a loss rather than
+      avoided one. Every internal contract needs an arm's-length written scope and a market
+      benchmark, or the reported returns are fiction — and any future outside investor will find it.</p>
+    </div>
+    <div class="risk">
+      <h4>Construction capacity is finite and rivalrous</h4>
+      <p>Every crew-week spent on a group asset is a crew-week not sold to a paying client. The
+      first retrofit will compete directly with Build's revenue. That opportunity cost belongs in
+      the underwriting as a real line, not a footnote.</p>
+    </div>
+    <div class="risk">
+      <h4>Industrial is a different discipline, not an adjacent one</h4>
+      <p>Residential construction expertise does not transfer cleanly to dock design, truck-court
+      geometry, ESFR sprinkler engineering or industrial leasing. The group needs at least one
+      person with genuine industrial experience before the first close — hired, partnered or
+      retained. This is the largest single execution gap.</p>
+    </div>
+    <div class="risk">
+      <h4>Environmental risk can end a deal after closing</h4>
+      <p>Older GTA industrial buildings carry contamination history. A Phase II finding can exceed
+      the entire retrofit budget. Every acquisition must be conditional on Phase I, and on Phase II
+      wherever prior use warrants it — with no exceptions made for a competitive process.</p>
+    </div>
+    <div class="risk">
+      <h4>Credibility is currently borrowed against claims not yet verified</h4>
+      <p>kopmanbuild.com presently advertises offices in New York, London, Dubai and Singapore with
+      "address forthcoming" and placeholder telephone numbers, alongside press mentions and project
+      statistics its own documentation marks as illustrative. An institutional properties arm cannot
+      launch behind that. Either substantiate the claims or remove them — before a broker or a
+      capital partner reads them first.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding-bottom:clamp(64px,9vw,120px)">
+  <span class="eyebrow"><span class="sheet">Sheet 01.8</span> &nbsp;— &nbsp;Position</span>
+  <h2>The sentence</h2>
+  <p class="lede" style="margin-top:28px;max-width:52ch;font-family:var(--f-d);
+     font-size:clamp(24px,3.2vw,38px);line-height:1.25;color:var(--ink)">
+    Kopman Group builds in the Greater Toronto Area and Muskoka, and increasingly builds for
+    itself — buying buildings that need exactly the work it has done since 1999, and keeping
+    what that work creates.</p>
+  <p style="margin-top:36px;color:var(--ink-3);font-size:15px;max-width:62ch">Every page across
+  the three domains should be defensible as an expansion of that sentence. Anything that is not
+  is either a different company or a claim the group has not yet earned.</p>
+</section>
+
+<footer style="border-top:1px solid var(--line);padding:34px 0 56px">
+  <dl class="titleblock" style="border:0;background:transparent">
+    <div class="tb" style="border-right:0;padding-left:0"><dt>Sheet</dt><dd>01 — Positioning &amp; Vision</dd></div>
+    <div class="tb" style="border-right:0"><dt>Next</dt><dd>02 — Business Plan &amp; Go-to-Market</dd></div>
+    <div class="tb" style="border-right:0"><dt>Issued</dt><dd>2026-08-23 · Board draft</dd></div>
+  </dl>
+</footer>
+
+</div>

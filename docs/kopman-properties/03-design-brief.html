@@ -1,0 +1,588 @@
+<title>Concrete and Linen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* KOPMAN GROUP — shared artifact token system
+   Inherits from kopmanbuild.com: Instrument Serif / Geist / Geist Mono, warm near-black.
+   Differentiates for the Properties arm: concrete ground (cooler than Build's linen),
+   dock-amber signal replacing terracotta, cold steel as a second data axis. */
+:root{
+  --ground:#E9E7E2; --ground-2:#DFDCD5; --panel:#F4F2EE; --panel-2:#E3E0D9;
+  --ink:#17181A; --ink-2:#4A4C50; --ink-3:#7C7E82;
+  --line:#CBC8C0; --line-2:#B4B0A6;
+  --signal:#A96C14; --signal-soft:#EFE0C8;
+  --steel:#3A5464; --steel-soft:#DCE3E7;
+  --good:#3F6B4A; --warn:#A96C14; --crit:#8E3B2F;
+  --f-d:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --f-s:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --f-m:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --max:1180px; --gut:clamp(20px,4vw,56px);
+}
+@media (prefers-color-scheme:dark){
+ :root:not([data-theme="light"]){
+  --ground:#141517; --ground-2:#1B1D20; --panel:#1E2124; --panel-2:#26292D;
+  --ink:#E9E7E2; --ink-2:#B3B1AC; --ink-3:#84868A;
+  --line:#313438; --line-2:#3F4348;
+  --signal:#D2932F; --signal-soft:#3A2E1A;
+  --steel:#7FA3B8; --steel-soft:#1E2A32;
+  --good:#6E9E79; --warn:#D2932F; --crit:#C4705F;
+ }
+}
+:root[data-theme="dark"]{
+  --ground:#141517; --ground-2:#1B1D20; --panel:#1E2124; --panel-2:#26292D;
+  --ink:#E9E7E2; --ink-2:#B3B1AC; --ink-3:#84868A;
+  --line:#313438; --line-2:#3F4348;
+  --signal:#D2932F; --signal-soft:#3A2E1A;
+  --steel:#7FA3B8; --steel-soft:#1E2A32;
+  --good:#6E9E79; --warn:#D2932F; --crit:#C4705F;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-s);
+  font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+h1,h2,h3,h4{text-wrap:balance;margin:0;font-weight:400}
+h1{font-family:var(--f-d);font-size:clamp(42px,6.5vw,86px);line-height:1.02;letter-spacing:-.02em}
+h2{font-family:var(--f-d);font-size:clamp(30px,4vw,50px);line-height:1.08;letter-spacing:-.015em}
+h3{font-family:var(--f-d);font-size:clamp(22px,2.4vw,30px);line-height:1.15}
+h4{font-family:var(--f-s);font-size:16px;font-weight:600;letter-spacing:-.005em}
+p{margin:0 0 1em;max-width:68ch}
+a{color:inherit;text-underline-offset:3px;text-decoration-color:var(--line-2)}
+a:hover{text-decoration-color:var(--signal)}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+em{font-family:var(--f-d);font-style:italic}
+/* mono meta / eyebrows */
+.eyebrow{font-family:var(--f-m);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:14px}
+.mono{font-family:var(--f-m);font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+/* title block — the drawing-set device */
+.titleblock{border:1px solid var(--line);background:var(--panel);display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin:0}
+.tb{padding:14px 18px;border-right:1px solid var(--line)}
+.tb:last-child{border-right:0}
+.tb dt{font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 5px}
+.tb dd{margin:0;font-family:var(--f-m);font-size:13px;font-variant-numeric:tabular-nums}
+/* sheet sections */
+section{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+.sheet{font-family:var(--f-m);font-size:11px;letter-spacing:.14em;color:var(--signal)}
+/* rules & measured lines */
+.rule{height:1px;background:var(--line);border:0;margin:0}
+/* cards / panels */
+.panel{background:var(--panel);border:1px solid var(--line);padding:clamp(20px,3vw,32px)}
+.grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.grid > *{background:var(--panel);padding:clamp(18px,2.4vw,28px)}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+/* data tables */
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:400;white-space:nowrap}
+td.n,th.n{text-align:right;font-family:var(--f-m);font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tr.total td{border-top:2px solid var(--ink);font-weight:600;background:var(--panel-2)}
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-m);font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border:1px solid var(--line-2);
+  border-radius:2px;color:var(--ink-2);white-space:nowrap}
+.chip.sig{border-color:var(--signal);color:var(--signal);background:var(--signal-soft)}
+.chip.stl{border-color:var(--steel);color:var(--steel);background:var(--steel-soft)}
+.chip.ok{border-color:var(--good);color:var(--good)}
+.chip.no{border-color:var(--crit);color:var(--crit)}
+/* verification marker — every number is sourced or flagged */
+.v{font-family:var(--f-m);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:2px 5px;border-radius:2px;vertical-align:2px;margin-left:6px;white-space:nowrap}
+.v-src{background:var(--steel-soft);color:var(--steel);border:1px solid var(--steel)}
+.v-est{background:var(--signal-soft);color:var(--signal);border:1px solid var(--signal)}
+/* stat */
+.stat{display:block}
+.stat b{display:block;font-family:var(--f-d);font-size:clamp(32px,4.2vw,52px);
+  line-height:1;font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stat span{display:block;font-family:var(--f-m);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-top:10px}
+ul,ol{max-width:68ch;padding-left:1.15em}
+li{margin-bottom:.45em}
+.lede{font-size:clamp(18px,1.6vw,21px);line-height:1.5;color:var(--ink-2);max-width:60ch}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* — design-brief specifics — */
+.hero{padding:clamp(48px,7vw,90px) 0 clamp(40px,5vw,64px);border-top:0}
+.hero h1{margin:26px 0 0}.hero h1 em{color:var(--signal)}
+figure{margin:0}
+figcaption{font-family:var(--f-m);font-size:11.5px;line-height:1.55;color:var(--ink-3);
+  margin-top:16px;max-width:62ch;border-left:2px solid var(--signal);padding-left:12px}
+svg.dia{max-width:100%;height:auto;display:block;color:var(--ink)}
+/* swatches — rendered from the actual spec values */
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(146px,1fr));gap:14px;margin-top:26px}
+.sw figure{border:1px solid var(--line)}
+.sw .chipbox{height:74px;display:block;border-bottom:1px solid var(--line)}
+.sw .meta{padding:9px 11px;background:var(--panel)}
+.sw .meta b{display:block;font-size:12.5px;font-weight:500;margin-bottom:3px}
+.sw .meta code{font-family:var(--f-m);font-size:10.5px;color:var(--ink-3);text-transform:uppercase}
+.sw .meta i{display:block;font-style:normal;font-family:var(--f-m);font-size:9.5px;
+  color:var(--ink-3);margin-top:5px;letter-spacing:.06em}
+/* three-temperature bands */
+.temps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);margin-top:30px}
+.temp{padding:26px 24px}
+.temp .dom{font-family:var(--f-m);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:14px;display:block}
+.temp h3{font-size:26px;margin-bottom:10px}
+.temp p{font-size:14.5px;line-height:1.55;margin:0}
+.temp .bar{display:flex;height:26px;margin:18px 0 0;border:1px solid rgba(0,0,0,.12)}
+.temp .bar span{flex:1}
+/* type specimen */
+.spec{border:1px solid var(--line);background:var(--panel);padding:0;margin-top:26px}
+.spec > div{padding:20px 24px;border-bottom:1px solid var(--line);display:grid;
+  grid-template-columns:190px 1fr;gap:24px;align-items:baseline}
+.spec > div:last-child{border-bottom:0}
+.spec .lbl{font-family:var(--f-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.spec .lbl em{display:block;font-style:normal;font-family:var(--f-m);
+  text-transform:none;letter-spacing:0;margin-top:5px;font-size:11px;color:var(--ink-3);opacity:.85}
+/* component demos */
+.demo{border:1px solid var(--line-2);background:var(--panel);padding:24px;margin-top:8px}
+.demo-label{font-family:var(--f-m);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin:34px 0 0;display:block}
+.dockrow{display:flex;gap:5px;margin-top:14px;flex-wrap:wrap}
+.dockrow i{font-style:normal;font-family:var(--f-m);font-size:10.5px;width:32px;height:32px;
+  display:grid;place-items:center;border:1px solid var(--line-2);color:var(--ink-3)}
+.dockrow i.on{border-color:var(--signal);background:var(--signal-soft);color:var(--signal)}
+.stack{display:flex;height:34px;border:1px solid var(--line-2);margin-top:6px;font-family:var(--f-m);font-size:10px}
+.stack span{display:grid;place-items:center;color:#fff;white-space:nowrap;overflow:hidden}
+.do{border-left:3px solid var(--good);padding-left:15px;margin-bottom:20px}
+.dont{border-left:3px solid var(--crit);padding-left:15px;margin-bottom:20px}
+.do h4,.dont h4{margin-bottom:5px}
+.do p,.dont p{margin:0;font-size:15px;color:var(--ink-2)}
+.map{font-family:var(--f-m);font-size:12.5px;line-height:1.95;background:var(--panel);
+  border:1px solid var(--line);padding:22px 24px;overflow-x:auto;margin-top:24px}
+.map b{font-weight:500;color:var(--signal)}
+.map span{color:var(--ink-3)}
+@media(max-width:640px){.spec > div{grid-template-columns:1fr;gap:10px}}
+
+/* SVG accents follow the theme tokens (literals kept in markup for portability) */
+svg.dia [fill="#A96C14"]{fill:var(--signal)}
+svg.dia [stroke="#A96C14"]{stroke:var(--signal)}
+svg.dia [fill="#8E3B2F"]{fill:var(--crit)}
+svg.dia [stroke="#8E3B2F"]{stroke:var(--crit)}
+svg.dia marker polygon[fill="#A96C14"]{fill:var(--signal)}
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <dl class="titleblock">
+    <div class="tb"><dt>Document</dt><dd>UI / UX Design Brief</dd></div>
+    <div class="tb"><dt>Scope</dt><dd>kopman.group · kopman.properties</dd></div>
+    <div class="tb"><dt>Sheet</dt><dd>03 of 04</dd></div>
+    <div class="tb"><dt>Issued</dt><dd>2026-08-23</dd></div>
+    <div class="tb"><dt>Basis</dt><dd>kopmanbuild.com source</dd></div>
+  </dl>
+
+  <h1>Concrete<br>and <em>linen</em>.</h1>
+
+  <p class="lede" style="margin-top:32px">Kopman Build already has a design system — a good one.
+  This brief extends it to two new domains without diluting it, and gives the industrial arm the
+  colder register its subject demands.</p>
+</header>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 03.1</span> &nbsp;— &nbsp;Inheritance</span>
+  <h2>What already exists</h2>
+  <p style="margin-top:24px">The values below are not proposals. They were read directly out of
+  <code class="mono">site/index.html</code> on kopmanbuild.com and are live in production today.
+  They are the group's design DNA and the new domains inherit them.</p>
+
+  <div class="sw">
+    <figure><span class="chipbox" style="background:#f3efe8"></span><span class="meta"><b>Linen</b><code>#f3efe8</code><i>--bg · page ground</i></span></figure>
+    <figure><span class="chipbox" style="background:#ebe6dc"></span><span class="meta"><b>Concrete light</b><code>#ebe6dc</code><i>--bg-2 · bands</i></span></figure>
+    <figure><span class="chipbox" style="background:#1a1a18"></span><span class="meta"><b>Warm black</b><code>#1a1a18</code><i>--ink · --bg-3</i></span></figure>
+    <figure><span class="chipbox" style="background:#3a3a36"></span><span class="meta"><b>Ink 2</b><code>#3a3a36</code><i>--ink-2 · secondary</i></span></figure>
+    <figure><span class="chipbox" style="background:#6b675f"></span><span class="meta"><b>Ink 3</b><code>#6b675f</code><i>--ink-3 · mono meta</i></span></figure>
+    <figure><span class="chipbox" style="background:#d8d3c8"></span><span class="meta"><b>Hairline</b><code>#d8d3c8</code><i>--line</i></span></figure>
+    <figure><span class="chipbox" style="background:oklch(58% 0.09 45)"></span><span class="meta"><b>Terracotta</b><code>oklch(58% .09 45)</code><i>--accent · Build only</i></span></figure>
+    <figure><span class="chipbox" style="background:oklch(40% 0.08 45)"></span><span class="meta"><b>Terracotta ink</b><code>oklch(40% .08 45)</code><i>--accent-ink</i></span></figure>
+  </div>
+
+  <h3 style="margin-top:52px">Typefaces — carried across all three domains, unchanged</h3>
+  <div class="spec">
+    <div>
+      <span class="lbl">Display<em>Instrument Serif</em></span>
+      <span style="font-family:var(--f-d);font-size:clamp(30px,4vw,46px);line-height:1.05">Built deliberately, <em>since 1999</em></span>
+    </div>
+    <div>
+      <span class="lbl">Interface &amp; body<em>Geist · 300/400/500/600</em></span>
+      <span style="font-size:17px;line-height:1.55">Grade-level loading only. Twenty-two-foot clear.
+      Sound structure, obsolete configuration — the gap this group closes.</span>
+    </div>
+    <div>
+      <span class="lbl">Data &amp; meta<em>Geist Mono · 400/500</em></span>
+      <span class="mono" style="font-size:13px;line-height:1.7">DOCK 04 · LEVELLER 30,000 LB · CLEAR 22'-0"<br>ACQ $4,250,000 &nbsp; RETRO $1,180,000 &nbsp; ALL-IN $5,430,000</span>
+    </div>
+  </div>
+  <p style="margin-top:20px;color:var(--ink-3);font-size:14.5px">Keeping all three faces is the
+  single strongest continuity signal available. A visitor who moves from a Build project page to a
+  Properties asset page should feel one company, not two vendors.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 03.2</span> &nbsp;— &nbsp;The core move</span>
+  <h2>One family, three temperatures</h2>
+  <p style="margin-top:24px">Build sells craft to homeowners; its warmth is correct and should not
+  change. Properties sells industrial competence to brokers and tenants, and warm linen reads soft
+  in that room. The differentiation is carried entirely by <strong>ground temperature and accent</strong>
+  — type, near-black, hairline discipline and layout logic stay constant.</p>
+
+  <div class="temps">
+    <div class="temp" style="background:#f5f3ef;color:#1a1a18">
+      <span class="dom" style="color:#6b675f">kopman.group</span>
+      <h3 style="color:#1a1a18">Neutral authority</h3>
+      <p style="color:#3a3a36">The parent is the quietest of the three. Near-neutral paper, no
+      arm-specific accent, the most white space and the least imagery. It exists to look
+      unmistakably permanent — a company that owns other companies, not one that is selling you
+      something on this page.</p>
+      <span class="bar"><span style="background:#f5f3ef"></span><span style="background:#e6e3dd"></span><span style="background:#1a1a18"></span><span style="background:#6b675f"></span></span>
+    </div>
+    <div class="temp" style="background:#f3efe8;color:#1a1a18">
+      <span class="dom" style="color:#6b675f">kopmanbuild.com</span>
+      <h3 style="color:#1a1a18">Warm — unchanged</h3>
+      <p style="color:#3a3a36">Linen ground, terracotta accent, editorial serif. This is a
+      residential craft brand and it already works. The only changes proposed for Build are
+      corrections, not redesign — listed in Sheet 03.8.</p>
+      <span class="bar"><span style="background:#f3efe8"></span><span style="background:#ebe6dc"></span><span style="background:#1a1a18"></span><span style="background:oklch(58% .09 45)"></span></span>
+    </div>
+    <div class="temp" style="background:#E9E7E2;color:#17181A">
+      <span class="dom" style="color:#7C7E82">kopman.properties</span>
+      <h3 style="color:#17181A">Cold — new</h3>
+      <p style="color:#4A4C50">Ground shifts from linen to poured concrete: the yellow is pulled
+      out, a trace of grey pushed in. Terracotta is replaced by <strong>dock amber</strong> — the
+      ochre of loading-bay markings — used only for signal, never decoration. A cold steel blue
+      joins as a second data axis for charts and comparables.</p>
+      <span class="bar"><span style="background:#E9E7E2"></span><span style="background:#DFDCD5"></span><span style="background:#17181A"></span><span style="background:#A96C14"></span><span style="background:#3A5464"></span></span>
+    </div>
+  </div>
+
+  <h3 style="margin-top:52px">Kopman Properties — full token set</h3>
+  <div class="sw">
+    <figure><span class="chipbox" style="background:#E9E7E2"></span><span class="meta"><b>Concrete</b><code>#E9E7E2</code><i>--ground</i></span></figure>
+    <figure><span class="chipbox" style="background:#DFDCD5"></span><span class="meta"><b>Concrete 2</b><code>#DFDCD5</code><i>--ground-2 · bands</i></span></figure>
+    <figure><span class="chipbox" style="background:#F4F2EE"></span><span class="meta"><b>Panel</b><code>#F4F2EE</code><i>--panel · cards</i></span></figure>
+    <figure><span class="chipbox" style="background:#17181A"></span><span class="meta"><b>Cold black</b><code>#17181A</code><i>--ink</i></span></figure>
+    <figure><span class="chipbox" style="background:#4A4C50"></span><span class="meta"><b>Ink 2</b><code>#4A4C50</code><i>--ink-2</i></span></figure>
+    <figure><span class="chipbox" style="background:#CBC8C0"></span><span class="meta"><b>Hairline</b><code>#CBC8C0</code><i>--line</i></span></figure>
+    <figure><span class="chipbox" style="background:#A96C14"></span><span class="meta"><b>Dock amber</b><code>#A96C14</code><i>--signal · sparingly</i></span></figure>
+    <figure><span class="chipbox" style="background:#3A5464"></span><span class="meta"><b>Steel</b><code>#3A5464</code><i>--steel · data axis 2</i></span></figure>
+  </div>
+  <p style="margin-top:22px;color:var(--ink-3);font-size:14.5px"><strong>Dark theme is mandatory,
+  not optional.</strong> Brokers and investors read on phones at night. Ground inverts to
+  <code class="mono">#141517</code>, panels to <code class="mono">#1E2124</code>, amber lifts to
+  <code class="mono">#D2932F</code> and steel to <code class="mono">#7FA3B8</code> to hold contrast.
+  Define every colour as a token on <code class="mono">:root</code> and redefine only the tokens in
+  the dark blocks — never declare a colour for the first time inside a media query.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 03.3</span> &nbsp;— &nbsp;Type scale</span>
+  <h2>One scale, both sites</h2>
+  <p style="margin-top:24px">Build's existing scale is sound and is adopted wholesale. The single
+  addition is a <strong>data tier</strong> — Properties publishes far more numbers than Build, and
+  numbers need their own treatment.</p>
+
+  <div class="tbl-scroll" style="margin-top:30px">
+  <table>
+    <thead><tr><th>Role</th><th>Face</th><th>Size</th><th class="n">Weight</th><th class="n">Tracking</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>Hero</td><td>Instrument Serif</td><td class="mono">clamp(56px, 11vw, 168px)</td><td class="n">400</td><td class="n">−0.02em</td><td>One per page, above the fold</td></tr>
+      <tr><td>Section</td><td>Instrument Serif</td><td class="mono">clamp(40px, 5.6vw, 84px)</td><td class="n">400</td><td class="n">−0.02em</td><td>Section openers</td></tr>
+      <tr><td>Subhead</td><td>Instrument Serif</td><td class="mono">clamp(22px, 2.4vw, 34px)</td><td class="n">400</td><td class="n">−0.01em</td><td>Cards, property names</td></tr>
+      <tr><td>Lede</td><td>Geist</td><td class="mono">clamp(18px, 1.6vw, 21px)</td><td class="n">400</td><td class="n">0</td><td>One paragraph under a hero</td></tr>
+      <tr><td>Body</td><td>Geist</td><td class="mono">17px / 1.6</td><td class="n">400</td><td class="n">0</td><td>All running text</td></tr>
+      <tr><td><strong>Data — new</strong></td><td>Geist Mono</td><td class="mono">13–15px, tabular-nums</td><td class="n">400/500</td><td class="n">0</td><td>Specs, prices, dock schedules</td></tr>
+      <tr><td>Caption</td><td>Geist</td><td class="mono">13px</td><td class="n">400</td><td class="n">0</td><td>Image and figure captions</td></tr>
+      <tr><td>Eyebrow</td><td>Geist Mono</td><td class="mono">11px uppercase</td><td class="n">400</td><td class="n">0.14em</td><td>Section labels, meta</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:22px;color:var(--ink-2);font-size:15.5px"><strong>The one hard rule:</strong>
+  every figure that a reader might compare against another figure — price, size, clear height,
+  rent, cap rate — is set in Geist Mono with <code class="mono">font-variant-numeric: tabular-nums</code>.
+  Proportional digits make columns of money impossible to scan, and on a property site that is most
+  of the content.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 03.4</span> &nbsp;— &nbsp;Components</span>
+  <h2>The parts that are new</h2>
+  <p style="margin-top:24px">Build's component set — sticky blurred nav, service grid, process
+  steps, contact form — carries over. Properties needs five components Build has no use for. All
+  five come from the same source: the language of a drawing set.</p>
+
+  <span class="demo-label">Component 01 — Title block</span>
+  <div class="demo" style="padding:0">
+    <dl class="titleblock" style="border:0">
+      <div class="tb"><dt>Asset</dt><dd>KP-001</dd></div>
+      <div class="tb"><dt>Submarket</dt><dd>Scarborough</dd></div>
+      <div class="tb"><dt>Size</dt><dd>34,974 SF</dd></div>
+      <div class="tb"><dt>Clear</dt><dd>18'-0"</dd></div>
+      <div class="tb"><dt>Stage</dt><dd>Underwriting</dd></div>
+    </dl>
+  </div>
+  <p style="font-size:14.5px;color:var(--ink-3);margin-top:12px">Opens every asset page, every case
+  study and every investor document. Borrowed directly from the title block on a drawing sheet —
+  the reader learns the frame before the argument. Collapses to two columns on mobile.</p>
+
+  <span class="demo-label">Component 02 — Dock schedule</span>
+  <div class="demo">
+    <span class="mono" style="font-size:11px;letter-spacing:.1em;color:var(--ink-3)">EXISTING — 0 TRUCK-LEVEL / 4 DRIVE-IN</span>
+    <div class="dockrow"><i>—</i><i>—</i><i>—</i><i>—</i><i>—</i><i>—</i><i>—</i><i>—</i></div>
+    <span class="mono" style="font-size:11px;letter-spacing:.1em;color:var(--signal);display:block;margin-top:18px">PROPOSED — 6 TRUCK-LEVEL / 2 DRIVE-IN</span>
+    <div class="dockrow"><i class="on">01</i><i class="on">02</i><i class="on">03</i><i class="on">04</i><i class="on">05</i><i class="on">06</i><i>DI</i><i>DI</i></div>
+  </div>
+  <p style="font-size:14.5px;color:var(--ink-3);margin-top:12px">The numbering here is not
+  decoration — dock positions are genuinely numbered on a real site plan, and the count is the
+  literal subject of the business. Amber marks what Kopman adds. This single component communicates
+  the entire thesis faster than a paragraph.</p>
+
+  <span class="demo-label">Component 03 — Cost stack</span>
+  <div class="demo">
+    <span class="mono" style="font-size:11px;color:var(--ink-3)">ALL-IN BASIS PER SF</span>
+    <div class="stack">
+      <span style="background:#3A5464;flex:74">ACQUISITION 74%</span>
+      <span style="background:#A96C14;flex:20">RETROFIT 20%</span>
+      <span style="background:#7C7E82;flex:6">SOFT 6%</span>
+    </div>
+    <p style="font-size:13px;color:var(--ink-3);margin:12px 0 0">Illustrative proportions — every
+    published stack must carry its own sourced figures.</p>
+  </div>
+  <p style="font-size:14.5px;color:var(--ink-3);margin-top:12px">Steel for capital the group
+  deploys, amber for the work the group performs. The amber band is Kopman's differentiator made
+  visible: it is the only segment a competing buyer pays a third party for.</p>
+
+  <span class="demo-label">Component 04 — Provenance marker</span>
+  <div class="demo">
+    <p style="margin:0;font-size:16px">GTA average industrial sale price <strong class="mono">$355/SF</strong><span class="v v-src">Source</span> against a shallow-bay observed range of <strong class="mono">$351–$876/SF</strong><span class="v v-est">Derived</span>.</p>
+  </div>
+  <p style="font-size:14.5px;color:var(--ink-3);margin-top:12px"><strong>The most important
+  component in the system.</strong> Every number published by Properties carries a marker: sourced,
+  or derived. Brokers and investors discount unattributed numbers to zero, and the group's existing
+  construction site is currently carrying illustrative statistics with no such marking. Making
+  provenance a visible design element turns a liability into a credibility signal.</p>
+
+  <span class="demo-label">Component 05 — Before / after pair</span>
+  <div class="demo">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)">
+      <div style="background:var(--panel-2);padding:16px;min-height:96px;display:flex;flex-direction:column;justify-content:space-between">
+        <span class="chip">Acquired condition</span>
+        <span class="mono" style="font-size:11.5px;color:var(--ink-3)">Photography · dated · geotagged</span>
+      </div>
+      <div style="background:var(--signal-soft);padding:16px;min-height:96px;display:flex;flex-direction:column;justify-content:space-between;border-left:2px solid var(--signal)">
+        <span class="chip sig">Proposed</span>
+        <span class="mono" style="font-size:11.5px;color:var(--signal)">Rendering · marked as rendering</span>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:14.5px;color:var(--ink-3);margin-top:12px">Always paired, always the same
+  camera position, always labelled. A rendering must never be presentable as a photograph — label
+  it in the image itself, not only in the caption, because the image is what gets screenshotted
+  into a broker's email.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 03.5</span> &nbsp;— &nbsp;Information architecture</span>
+  <h2>What each site is made of</h2>
+
+  <h3 style="margin-top:38px">kopman.group — small, dense, permanent</h3>
+  <div class="map">
+    <b>/</b> <span>· position, the arms, the numbers, leadership, contact — one page, seven sections</span><br>
+    <b>/group/</b> <span>· structure, ownership, history from 1999</span><br>
+    <b>/leadership/</b> <span>· named people with real bios — the highest-value page on the site</span><br>
+    <b>/build/</b> &nbsp;<b>/properties/</b> <span>· one page per arm, each linking out to its own domain</span><br>
+    <b>/buildos/</b> <span>· the software arm</span><br>
+    <b>/news/</b> <span>· acquisitions, completions, appointments — the entity-signal engine</span><br>
+    <b>/contact/</b> <span>· one real address, one real phone number</span>
+  </div>
+  <p style="margin-top:18px;font-size:15.5px;color:var(--ink-2)">Roughly eight pages. Resist growth.
+  A parent site that starts publishing service pages is competing with its own children — see
+  Sheet 04. Its job is to be the entity anchor and to look like it has been there for twenty-six
+  years, because it has.</p>
+
+  <h3 style="margin-top:48px">kopman.properties — a thesis, then the evidence</h3>
+  <div class="map">
+    <b>/</b> <span>· the thesis in one screen: the gap, the retrofit, the standard</span><br>
+    <b>/thesis/</b> <span>· the long-form argument, with sourced market data</span><br>
+    <b>/standard/</b> <span>· the Kopman retrofit specification — what every asset gets</span><br>
+    <b>/portfolio/</b> <span>· index of assets</span><br>
+    <b>/portfolio/&lt;asset&gt;/</b> <span>· per-asset: title block, dock schedule, before/after, specs</span><br>
+    <b>/available/</b> <span>· space for lease or sale — the transactional page</span><br>
+    <b>/available/&lt;submarket&gt;/</b> <span>· Scarborough, Brampton, Mississauga, Burlington…</span><br>
+    <b>/insights/</b> <span>· the obsolescence data nobody else publishes</span><br>
+    <b>/sell-your-building/</b> <span>· vendor acquisition — the off-market sourcing page</span><br>
+    <b>/about/</b> &nbsp;<b>/contact/</b>
+  </div>
+  <p style="margin-top:18px;font-size:15.5px;color:var(--ink-2)"><code class="mono">/sell-your-building/</code>
+  is easy to overlook and may be the commercially most valuable page on the site. The scarce input
+  in this business is off-market obsolete stock, and the owner of a tired warehouse who wants out
+  is searching for someone to call. Give them one.</p>
+
+  <h3 style="margin-top:48px">Two audiences, one site — the split that matters</h3>
+  <p style="margin-top:18px">Properties serves two readers who want opposite things, and the design
+  must not average them:</p>
+  <div class="grid g2" style="margin-top:24px">
+    <div>
+      <span class="chip stl">Reader A — the tenant or buyer</span>
+      <p style="margin:14px 0 0;font-size:15px;color:var(--ink-2)">Wants square footage, clear
+      height, dock count, power, drive time to the 401, and a phone number. Impatient, often on a
+      phone, often forwarded a link by a broker. Their path must be: land → specs → contact, in
+      under three screens. No thesis, no narrative.</p>
+    </div>
+    <div>
+      <span class="chip sig">Reader B — the vendor, broker or investor</span>
+      <p style="margin:14px 0 0;font-size:15px;color:var(--ink-2)">Wants evidence that Kopman can
+      actually execute: completed retrofits, real cost data, sourced market analysis, named people.
+      Patient, reads long-form, returns more than once. Their path is: thesis → standard → portfolio
+      → contact.</p>
+    </div>
+  </div>
+  <p style="margin-top:22px;font-size:15.5px;color:var(--ink-2)">The homepage must fork visibly
+  within the first screen — one route labelled for space, one for the thesis. A single blended
+  homepage serves neither.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 03.6</span> &nbsp;— &nbsp;Imagery</span>
+  <h2>Photography direction</h2>
+  <p style="margin-top:24px">This is the area where a property site most often fails, and the one
+  where Kopman currently has the least in hand. Build's site references an
+  <code class="mono">og.jpg</code> that does not exist on the server; every social and messaging
+  preview across all 630 of its pages currently renders blank. Properties cannot repeat that.</p>
+
+  <div style="margin-top:34px">
+    <div class="do"><h4>Photograph the unglamorous condition honestly</h4><p>Cracked apron, rusted
+    grade door, ponded roof, the exact wall where the dock will be cut. Buyers of value-add do not
+    want to see a pretty building — they want to see that the seller understood what was wrong with
+    it. Honest "before" imagery is the single strongest credibility signal available to this brand.</p></div>
+    <div class="do"><h4>Fix the camera position and return to it</h4><p>Mark the position on the site
+    plan at acquisition and shoot from it at every milestone. A true fixed-position sequence is
+    impossible to fake and reads instantly as real.</p></div>
+    <div class="do"><h4>Shoot in flat overcast light</h4><p>Industrial buildings photograph badly in
+    hard sun — the yard blows out and the dock wall goes black. Overcast reads factual, and factual
+    is the brand.</p></div>
+    <div class="do"><h4>Include a truck at the dock in at least one frame per asset</h4><p>It is the
+    proof photograph. It shows the retrofit works at the only scale that matters.</p></div>
+    <div class="dont"><h4>Never use stock warehouse photography</h4><p>Brokers recognise it
+    immediately, and a stock photograph of someone else's building on a page about your building is
+    the fastest way to lose a vendor's trust.</p></div>
+    <div class="dont"><h4>Never publish a rendering that could be mistaken for a photograph</h4><p>Label
+    renderings inside the image. A rendering passed off as a completed building is a
+    misrepresentation a broker will remember permanently.</p></div>
+    <div class="dont"><h4>Never ship a page without a real Open Graph image</h4><p>Every asset page
+    needs its own 1200×630 OG image showing that specific building. This is how the page appears
+    when a broker pastes it into email — the most common way it will ever be seen.</p></div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 03.7</span> &nbsp;— &nbsp;Motion &amp; access</span>
+  <h2>Restraint and reach</h2>
+  <div class="grid g2" style="margin-top:30px">
+    <div>
+      <h4 style="margin-bottom:12px">Motion</h4>
+      <p style="font-size:15px;color:var(--ink-2)">Build's existing treatment — a single
+      <code class="mono">IntersectionObserver</code> reveal at 0.08 threshold — is correct and
+      carries over unchanged. Properties adds exactly one motion idea: on an asset page, the
+      before/after pair cross-fades on scroll or on drag. Nothing else moves.</p>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Institutional readers distrust animated
+      property sites; motion reads as sales pressure. Honour
+      <code class="mono">prefers-reduced-motion</code> — currently absent from Build's stylesheet
+      and required on both new sites.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:12px">Accessibility — non-negotiable</h4>
+      <ul style="font-size:15px;color:var(--ink-2);margin:0;padding-left:1.1em">
+        <li>4.5:1 minimum on body text in both themes. Amber <code class="mono">#A96C14</code> on
+        concrete clears it; the lighter dark-theme amber is specified precisely to hold it.</li>
+        <li>Amber must never be the <em>only</em> carrier of meaning — pair it with a label or
+        border, since a dock diagram in amber alone excludes colour-blind readers.</li>
+        <li>Visible <code class="mono">:focus-visible</code> on every control. Brokers use keyboards.</li>
+        <li>Every data table gets real <code class="mono">&lt;th&gt;</code> scope and an
+        <code class="mono">overflow-x</code> wrapper so the page body never scrolls sideways.</li>
+        <li>Minimum body size 17px. Property specs are frequently read on a phone in a parking lot.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 03.8</span> &nbsp;— &nbsp;Corrections</span>
+  <h2>What must be fixed on Build first</h2>
+  <p style="margin-top:24px">These are not redesign proposals. They are defects found in the live
+  kopmanbuild.com source, and every one of them would be inherited by the new domains if they are
+  cloned from it.</p>
+
+  <div class="tbl-scroll" style="margin-top:30px">
+  <table>
+    <thead><tr><th>Defect</th><th>Where</th><th>Effect</th><th>Severity</th></tr></thead>
+    <tbody>
+      <tr><td>Contact form does not submit anywhere</td><td class="mono">index.html:2096</td><td>Every enquiry since launch shows the user a success message and is discarded</td><td><span class="chip no">Critical</span></td></tr>
+      <tr><td>574 of 630 pages have no inbound internal link</td><td>Site-wide</td><td>Crawl-starved; the content estate is largely invisible</td><td><span class="chip no">Critical</span></td></tr>
+      <tr><td>Location pages ~98% identical to each other</td><td>600 pages</td><td>Exposure under scaled-content-abuse policy</td><td><span class="chip no">Critical</span></td></tr>
+      <tr><td><code class="mono">og.jpg</code> referenced but absent</td><td>All 630 pages</td><td>Blank previews in every share, email and AI surface</td><td><span class="chip">High</span></td></tr>
+      <tr><td>Placeholder phone <code class="mono">+1-000-000-0000</code></td><td>JSON-LD</td><td>Broken entity data; no click-to-call anywhere on the site</td><td><span class="chip">High</span></td></tr>
+      <tr><td>Offices in New York, London, Dubai, Singapore — "address forthcoming"</td><td>Contact section</td><td>Contradicts GTA + Muskoka positioning; unverifiable to a capital partner</td><td><span class="chip no">Critical</span></td></tr>
+      <tr><td>60 sitemap URLs return 404</td><td class="mono">sitemap.xml</td><td>All are <code class="mono">/blog/*</code> posts that were never built</td><td><span class="chip">High</span></td></tr>
+      <tr><td>No analytics of any kind</td><td>Site-wide</td><td>Zero attribution — no way to measure any of this work</td><td><span class="chip">High</span></td></tr>
+      <tr><td>590 of 630 pages missing breadcrumb schema</td><td>Site-wide</td><td>Weaker rich results and weaker entity structure</td><td><span class="chip">Medium</span></td></tr>
+      <tr><td><code class="mono">prefers-reduced-motion</code> not honoured</td><td>Stylesheet</td><td>Accessibility gap</td><td><span class="chip">Medium</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:24px;font-size:15.5px;color:var(--ink-2)">The first item is the one to act on
+  today. A construction firm that has been silently discarding its own enquiries has a lead-generation
+  problem no amount of design will fix — and it is roughly an hour of work to correct.</p>
+</section>
+
+<section style="padding-bottom:clamp(64px,9vw,120px)">
+  <span class="eyebrow"><span class="sheet">Sheet 03.9</span> &nbsp;— &nbsp;Build spec</span>
+  <h2>How to build it</h2>
+  <div class="grid g2" style="margin-top:30px">
+    <div>
+      <h4 style="margin-bottom:12px">kopman.group</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Static, hand-authored, no framework —
+      matching Build's approach, which is genuinely well-suited to an eight-page site. Eight files,
+      one stylesheet, no build step. It will still be correct in ten years, which is the point of a
+      parent-company site.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:12px">kopman.properties</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Next.js with a content layer. Asset
+      pages are data-driven — one record per building generates the title block, dock schedule,
+      spec table, OG image and JSON-LD. This is the one place a framework earns its cost, because
+      the same asset data must render as a web page, a PDF brochure and structured data.</p>
+    </div>
+  </div>
+  <h3 style="margin-top:44px">Shared, mandatory on both</h3>
+  <ul style="margin-top:16px">
+    <li>Token-based theming with light, dark and system all handled — no colour declared for the
+    first time inside a media query.</li>
+    <li>Per-page generated OG images. No shared fallback, and never a missing file.</li>
+    <li>Entity schema wired on day one: <code class="mono">parentOrganization</code>,
+    <code class="mono">subOrganization</code>, matching <code class="mono">sameAs</code> across all
+    three domains.</li>
+    <li>A real form endpoint, with server-side storage and an email notification, verified by a live
+    test submission before launch. BuildOS already contains the lead capture to receive it.</li>
+    <li>Analytics and call tracking from the first deploy — instrumentation added later cannot
+    measure the launch it was meant to evaluate.</li>
+  </ul>
+</section>
+
+<footer style="border-top:1px solid var(--line);padding:34px 0 56px">
+  <dl class="titleblock" style="border:0;background:transparent">
+    <div class="tb" style="border-right:0;padding-left:0"><dt>Sheet</dt><dd>03 — UI/UX Design Brief</dd></div>
+    <div class="tb" style="border-right:0"><dt>Basis</dt><dd>kopmanbuild.com source, read 2026-08-23</dd></div>
+    <div class="tb" style="border-right:0"><dt>Status</dt><dd>Board draft</dd></div>
+  </dl>
+</footer>
+
+</div>

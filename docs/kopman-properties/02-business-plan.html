@@ -1,0 +1,1134 @@
+<title>The Dock-Deficient Thesis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* KOPMAN GROUP — shared artifact token system
+   Inherits from kopmanbuild.com: Instrument Serif / Geist / Geist Mono, warm near-black.
+   Differentiates for the Properties arm: concrete ground (cooler than Build's linen),
+   dock-amber signal replacing terracotta, cold steel as a second data axis. */
+:root{
+  --ground:#E9E7E2; --ground-2:#DFDCD5; --panel:#F4F2EE; --panel-2:#E3E0D9;
+  --ink:#17181A; --ink-2:#4A4C50; --ink-3:#7C7E82;
+  --line:#CBC8C0; --line-2:#B4B0A6;
+  --signal:#A96C14; --signal-soft:#EFE0C8;
+  --steel:#3A5464; --steel-soft:#DCE3E7;
+  --good:#3F6B4A; --warn:#A96C14; --crit:#8E3B2F;
+  --f-d:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --f-s:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --f-m:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --max:1180px; --gut:clamp(20px,4vw,56px);
+}
+@media (prefers-color-scheme:dark){
+ :root:not([data-theme="light"]){
+  --ground:#141517; --ground-2:#1B1D20; --panel:#1E2124; --panel-2:#26292D;
+  --ink:#E9E7E2; --ink-2:#B3B1AC; --ink-3:#84868A;
+  --line:#313438; --line-2:#3F4348;
+  --signal:#D2932F; --signal-soft:#3A2E1A;
+  --steel:#7FA3B8; --steel-soft:#1E2A32;
+  --good:#6E9E79; --warn:#D2932F; --crit:#C4705F;
+ }
+}
+:root[data-theme="dark"]{
+  --ground:#141517; --ground-2:#1B1D20; --panel:#1E2124; --panel-2:#26292D;
+  --ink:#E9E7E2; --ink-2:#B3B1AC; --ink-3:#84868A;
+  --line:#313438; --line-2:#3F4348;
+  --signal:#D2932F; --signal-soft:#3A2E1A;
+  --steel:#7FA3B8; --steel-soft:#1E2A32;
+  --good:#6E9E79; --warn:#D2932F; --crit:#C4705F;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-s);
+  font-size:17px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+h1,h2,h3,h4{text-wrap:balance;margin:0;font-weight:400}
+h1{font-family:var(--f-d);font-size:clamp(42px,6.5vw,86px);line-height:1.02;letter-spacing:-.02em}
+h2{font-family:var(--f-d);font-size:clamp(30px,4vw,50px);line-height:1.08;letter-spacing:-.015em}
+h3{font-family:var(--f-d);font-size:clamp(22px,2.4vw,30px);line-height:1.15}
+h4{font-family:var(--f-s);font-size:16px;font-weight:600;letter-spacing:-.005em}
+p{margin:0 0 1em;max-width:68ch}
+a{color:inherit;text-underline-offset:3px;text-decoration-color:var(--line-2)}
+a:hover{text-decoration-color:var(--signal)}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+em{font-family:var(--f-d);font-style:italic}
+/* mono meta / eyebrows */
+.eyebrow{font-family:var(--f-m);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin-bottom:14px}
+.mono{font-family:var(--f-m);font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+/* title block — the drawing-set device */
+.titleblock{border:1px solid var(--line);background:var(--panel);display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin:0}
+.tb{padding:14px 18px;border-right:1px solid var(--line)}
+.tb:last-child{border-right:0}
+.tb dt{font-family:var(--f-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 5px}
+.tb dd{margin:0;font-family:var(--f-m);font-size:13px;font-variant-numeric:tabular-nums}
+/* sheet sections */
+section{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+.sheet{font-family:var(--f-m);font-size:11px;letter-spacing:.14em;color:var(--signal)}
+/* rules & measured lines */
+.rule{height:1px;background:var(--line);border:0;margin:0}
+/* cards / panels */
+.panel{background:var(--panel);border:1px solid var(--line);padding:clamp(20px,3vw,32px)}
+.grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.grid > *{background:var(--panel);padding:clamp(18px,2.4vw,28px)}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+/* data tables */
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:400;white-space:nowrap}
+td.n,th.n{text-align:right;font-family:var(--f-m);font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tr.total td{border-top:2px solid var(--ink);font-weight:600;background:var(--panel-2)}
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-m);font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border:1px solid var(--line-2);
+  border-radius:2px;color:var(--ink-2);white-space:nowrap}
+.chip.sig{border-color:var(--signal);color:var(--signal);background:var(--signal-soft)}
+.chip.stl{border-color:var(--steel);color:var(--steel);background:var(--steel-soft)}
+.chip.ok{border-color:var(--good);color:var(--good)}
+.chip.no{border-color:var(--crit);color:var(--crit)}
+/* verification marker — every number is sourced or flagged */
+.v{font-family:var(--f-m);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:2px 5px;border-radius:2px;vertical-align:2px;margin-left:6px;white-space:nowrap}
+.v-src{background:var(--steel-soft);color:var(--steel);border:1px solid var(--steel)}
+.v-est{background:var(--signal-soft);color:var(--signal);border:1px solid var(--signal)}
+/* stat */
+.stat{display:block}
+.stat b{display:block;font-family:var(--f-d);font-size:clamp(32px,4.2vw,52px);
+  line-height:1;font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stat span{display:block;font-family:var(--f-m);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-top:10px}
+ul,ol{max-width:68ch;padding-left:1.15em}
+li{margin-bottom:.45em}
+.lede{font-size:clamp(18px,1.6vw,21px);line-height:1.5;color:var(--ink-2);max-width:60ch}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* — business plan specifics — */
+.hero{padding:clamp(48px,7vw,90px) 0 clamp(40px,5vw,64px);border-top:0}
+.hero h1{margin:26px 0 0}.hero h1 em{color:var(--signal)}
+figure{margin:0}
+figcaption{font-family:var(--f-m);font-size:11.5px;line-height:1.55;color:var(--ink-3);
+  margin-top:16px;max-width:64ch;border-left:2px solid var(--signal);padding-left:12px}
+svg.dia{max-width:100%;height:auto;display:block;color:var(--ink)}
+.callout{border:1px solid var(--signal);background:var(--signal-soft);padding:24px 26px;margin:34px 0}
+.callout .eyebrow{color:var(--signal);margin-bottom:10px}
+.callout p:last-child{margin-bottom:0}
+.warnbox{border:1px solid var(--crit);border-left-width:4px;padding:22px 24px;margin:30px 0;background:var(--panel)}
+.warnbox .eyebrow{color:var(--crit)}
+.warnbox p:last-child{margin-bottom:0}
+/* case study */
+.cs{border:1px solid var(--line-2);margin-top:44px;background:var(--panel)}
+.cs > header{padding:26px 28px 22px;border-bottom:1px solid var(--line)}
+.cs > header h3{margin:0 0 6px}
+.cs .addr{font-family:var(--f-m);font-size:12.5px;color:var(--ink-3);display:block;margin-bottom:14px}
+.cs-body{padding:26px 28px}
+.cs-body > h4{margin:30px 0 12px}
+.cs-body > h4:first-child{margin-top:0}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(126px,1fr));gap:1px;
+  background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.specs div{background:var(--panel);padding:13px 15px}
+.specs dt{font-family:var(--f-m);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:5px}
+.specs dd{margin:0;font-family:var(--f-m);font-size:14px;font-variant-numeric:tabular-nums}
+.money{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:14px}
+.money > div{background:var(--panel);padding:13px 17px;display:flex;justify-content:space-between;
+  align-items:baseline;gap:16px;flex-wrap:wrap}
+.money .k{font-size:14.5px}
+.money .val{font-family:var(--f-m);font-variant-numeric:tabular-nums;font-size:14.5px;white-space:nowrap}
+.money > div.tot{background:var(--panel-2);border-top:2px solid var(--ink)}
+.money > div.tot .k,.money > div.tot .val{font-weight:600;font-size:15.5px}
+.money > div.sig{background:var(--signal-soft)}
+.money > div.sig .k,.money > div.sig .val{color:var(--signal)}
+.gate{display:grid;grid-template-columns:auto 1fr;gap:12px 14px;align-items:start;margin-top:8px}
+.gate .m{font-family:var(--f-m);font-size:11px;padding:2px 7px;border-radius:2px;white-space:nowrap;
+  border:1px solid currentColor}
+.gate .pass{color:var(--good)}.gate .fail{color:var(--crit)}.gate .unk{color:var(--ink-3)}
+.gate p{margin:0;font-size:14.5px;color:var(--ink-2)}
+@media(max-width:620px){.money > div{flex-direction:column;gap:3px}}
+
+/* SVG accents follow the theme tokens (literals kept in markup for portability) */
+svg.dia [fill="#A96C14"]{fill:var(--signal)}
+svg.dia [stroke="#A96C14"]{stroke:var(--signal)}
+svg.dia [fill="#8E3B2F"]{fill:var(--crit)}
+svg.dia [stroke="#8E3B2F"]{stroke:var(--crit)}
+svg.dia marker polygon[fill="#A96C14"]{fill:var(--signal)}
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <dl class="titleblock">
+    <div class="tb"><dt>Document</dt><dd>Business Plan &amp; GTM</dd></div>
+    <div class="tb"><dt>Entity</dt><dd>Kopman Group / Properties</dd></div>
+    <div class="tb"><dt>Sheet</dt><dd>02 of 04</dd></div>
+    <div class="tb"><dt>Issued</dt><dd>2026-08-23</dd></div>
+    <div class="tb"><dt>Status</dt><dd>Board draft</dd></div>
+  </dl>
+
+  <h1>Buy the box<br>nobody can <em>use</em>.</h1>
+
+  <p class="lede" style="margin-top:32px">The opening thesis survives contact with the numbers —
+  but not in the form it was proposed. The money is not in charging more rent for a dock. It is in
+  turning one unleasable building into six leasable bays.</p>
+</header>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 02.0</span> &nbsp;— &nbsp;Read this first</span>
+  <h2>How to read the numbers</h2>
+  <p style="margin-top:24px">Two research desks were run for this plan — one on the GTA industrial
+  market and live listings, one on Ontario retrofit construction costs. Both hit the same wall:
+  <strong>this environment's network policy blocked direct access to every primary source</strong>
+  — CBRE, Colliers, JLL, LoopNet, Realtor.ca, municipal by-law PDFs, Altus. Search-engine synthesis
+  worked; opening the underlying document did not.</p>
+
+  <div class="warnbox">
+    <span class="eyebrow">Provenance rule</span>
+    <p>Nothing in this document has been read at its source by the team that assembled it. Every
+    figure is marked <span class="v v-src">Source</span> — appeared in search results attributed to
+    a named publisher — or <span class="v v-est">Derived</span> — our own arithmetic or estimating
+    judgement. There is deliberately no "verified" tier.</p>
+    <p><strong>No figure here should enter an investment committee memo until it has been re-pulled
+    from the primary document.</strong> Property listings in particular must be re-confirmed with
+    the listing broker: several show signs of being stale, and one carries an MLS prefix suggesting
+    a 2024 vintage.</p>
+  </div>
+
+  <p>We would rather hand the board a plan that says exactly which numbers are soft than one that
+  reads cleanly and cannot be defended in a room.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 02.1</span> &nbsp;— &nbsp;The correction</span>
+  <h2>The thesis, revised</h2>
+
+  <p style="margin-top:24px">The proposition brought to the boardroom was: buy warehouses without
+  loading docks, add docks and ramps, and sell or lease into a wider market. The market research
+  supports the premise. <strong>The cost research does not support the mechanism.</strong></p>
+
+  <p>Costed properly against Ontario conditions, a six-dock conversion on a 30,000 sf building
+  carries roughly <strong class="mono">$2.06M</strong><span class="v v-est">Derived</span> of dock
+  and truck-court scope once contingency and soft costs are loaded — about
+  <strong class="mono">$68.80</strong> per square foot of building, or
+  <strong class="mono">~$344,000 per dock position</strong> all-in. At a 6.5% exit cap, that spend
+  has to produce a <strong class="mono">$4.47/sf</strong> net rent lift merely to break even.</p>
+
+  <p>The plausible rent premium for dock-loaded over grade-only small-bay space in the GTA is
+  <strong class="mono">$1.50–$3.50/sf</strong><span class="v v-est">Derived</span> — and no
+  published source for it exists anywhere our desks could reach. On rent lift alone, the trade is
+  underwater.</p>
+
+  <div class="callout">
+    <span class="eyebrow">The revision</span>
+    <p style="font-size:18px;line-height:1.5"><strong>Docks are not a rent story. They are a
+    leasability story.</strong> The value is not created by charging a dock premium on space you
+    could already lease. It is created by converting a building that <em>almost nobody can occupy</em>
+    into one that <em>almost anybody can</em> — and then subdividing it into the unit size the market
+    is actually short of.</p>
+    <p style="margin-bottom:0">Underwrite vacancy-to-occupancy, not rent-to-higher-rent. The dock is
+    the key that unlocks the subdivision; the subdivision is where the margin lives.</p>
+  </div>
+
+  <h3 style="margin-top:48px">The pricing evidence that makes the case</h3>
+  <p style="margin-top:18px">Seven live GTA asking prices were recovered. Sorted by size, the
+  pattern is unambiguous — and it is the opposite of what the original thesis assumed.</p>
+
+  <div class="tbl-scroll" style="margin-top:26px">
+  <table>
+    <thead><tr><th>Property</th><th class="n">Size SF</th><th class="n">Asking</th><th class="n">$/SF</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>Malvern, Scarborough</td><td class="n">3,006</td><td class="n">$1,499,994</td><td class="n">$499</td><td>Exit comp</td></tr>
+      <tr><td>60-62 Advance Rd, Etobicoke</td><td class="n">5,595</td><td class="n">$4,899,000</td><td class="n">$876</td><td>Small-bay premium fully priced</td></tr>
+      <tr><td>NE Scarborough freestanding</td><td class="n">15,300</td><td class="n">$7,490,000</td><td class="n">$490</td><td>—</td></tr>
+      <tr><td>Gervais Dr, North York</td><td class="n">20,510</td><td class="n">$9,495,000</td><td class="n">$463</td><td>—</td></tr>
+      <tr><td><strong>30 Dovedale Ct, Scarborough</strong></td><td class="n">34,974</td><td class="n">$12,950,000</td><td class="n">$370</td><td>At market average</td></tr>
+      <tr><td>Burlington freehold</td><td class="n">35,593</td><td class="n">$12,500,000</td><td class="n">$351</td><td>Cheapest in set</td></tr>
+      <tr><td>46 Hedgedale Rd, Brampton</td><td class="n">43,748</td><td class="n">$18,811,640</td><td class="n">$430</td><td><em>Already dock-loaded</em></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:16px;font-size:14px;color:var(--ink-3)">Asking prices <span class="v v-src">Source</span>;
+  $/SF is our arithmetic <span class="v v-est">Derived</span>. GTA average industrial sale price was
+  <strong class="mono">$355/SF</strong> in Q1 2026 and <strong class="mono">$354/SF</strong> in Q4
+  2025 — effectively flat since early 2024 <span class="v v-src">Source</span>.</p>
+
+  <div class="callout" style="border-color:var(--steel);background:var(--steel-soft)">
+    <span class="eyebrow" style="color:var(--steel)">The arbitrage, stated precisely</span>
+    <p style="margin-bottom:0;font-size:17px">Small buildings already carry the small-bay premium in
+    the ask — <strong class="mono">$463</strong> to <strong class="mono">$876/SF</strong>. Buying
+    small destroys the trade. <strong>Buy 30,000–60,000 sf of obsolete stock at $350–$400/SF,
+    retrofit and demise it into 3,000–8,000 sf bays, and exit into a market visibly clearing at
+    $460–$900/SF.</strong> The spread is the business.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 02.2</span> &nbsp;— &nbsp;Market</span>
+  <h2>The gap, evidenced</h2>
+
+  <div class="grid g4" style="margin-top:34px">
+    <div><span class="stat"><b>&gt;80%</b><span>Shallow-bay stock built pre-2000</span></span></div>
+    <div><span class="stat"><b>5%</b><span>Delivered since 2010</span></span></div>
+    <div><span class="stat"><b>$355</b><span>GTA avg sale $/SF, Q1 2026</span></span></div>
+    <div><span class="stat"><b>11</b><span>Consecutive quarters of rent decline</span></span></div>
+  </div>
+  <p style="margin-top:20px;font-size:14px;color:var(--ink-3)">All four <span class="v v-src">Source</span>.
+  CBRE defines shallow-bay as under 50,000 sf with 14–28' clear — precisely the target box.</p>
+
+  <h3 style="margin-top:52px">Why the stock is stranded</h3>
+  <p style="margin-top:18px">The GTA built almost no small-bay industrial for a generation. Nearly
+  half the shallow-bay inventory predates 1980<span class="v v-src">Source</span>, and new supply
+  went overwhelmingly to big-box distribution. Shallow-bay vacancy has run <em>below</em> overall
+  industrial vacancy since 2017, and the gap widened through the last development
+  cycle<span class="v v-src">Source</span>.</p>
+  <p>Meanwhile the buildings themselves aged out of usefulness. Modern distribution expects roughly
+  one dock door per 5,000–10,000 sf<span class="v v-src">Source</span>. Buildings at 18–24' clear
+  command materially lower rents than modern stock, and below 18' clear is described as essentially
+  obsolete for logistics use<span class="v v-src">Source</span>. A grade-level-only building cannot
+  take a 53' trailer at all.</p>
+
+  <div class="warnbox">
+    <span class="eyebrow">The number that does not exist</span>
+    <p><strong>No published GTA figure for the price or rent discount on grade-level-only versus
+    dock-loaded industrial could be found by either research desk.</strong> It is the single input
+    this thesis is most sensitive to, and the market does not publish it.</p>
+    <p style="margin-bottom:0">Two readings. Either the spread is thinner than assumed and nobody
+    has proven it — or the absence <em>is</em> the moat, because pricing it requires paired-comp
+    analysis on messy small assets plus a credible retrofit cost, which is exactly the pair of
+    things an owner-builder has and a fund does not. <strong>Commission a paired-comp study from a
+    GTA appraiser before the first close.</strong> Treat it as thesis-validation spend, not overhead.</p>
+  </div>
+
+  <h3 style="margin-top:48px">Submarket conditions</h3>
+  <div class="tbl-scroll" style="margin-top:24px">
+  <table>
+    <thead><tr><th>Submarket</th><th class="n">Availability</th><th class="n">Avg net asking rent</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td>GTA overall</td><td class="n">5.0–5.8%</td><td class="n">$16.36–$16.49</td><td>~11-year availability high</td></tr>
+      <tr><td>Toronto Central</td><td class="n">4.0%</td><td class="n">—</td><td>Tightest; employment land converting away</td></tr>
+      <tr><td><strong>Scarborough</strong></td><td class="n">—</td><td class="n">$14.30 avg achieved</td><td>Q2 2026 leases $12.75–$15.50</td></tr>
+      <tr><td>GTA West</td><td class="n">5.3%</td><td class="n">$16.88</td><td>Sharpest quarterly fall in eight years</td></tr>
+      <tr><td><strong>Brampton</strong></td><td class="n">6.3%</td><td class="n">$16.65</td><td>Softest of the four targets</td></tr>
+      <tr><td><strong>Mississauga</strong></td><td class="n">—</td><td class="n">$17.00–$21.00 modern</td><td>Strongest rents in the set</td></tr>
+      <tr><td><strong>Burlington</strong></td><td class="n">5.2%</td><td class="n">$15.20</td><td>Most competitive in GTA West</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:16px;font-size:14px;color:var(--ink-3)">All <span class="v v-src">Source</span>,
+  Q1/Q2 2026. <strong>Sources conflict on Brampton availability</strong> (6.3% rising vs 5.6%
+  falling) — resolve before committing to that submarket.</p>
+
+  <div class="callout">
+    <span class="eyebrow">Timing</span>
+    <p style="margin-bottom:0">Rents are roughly 9.7%<span class="v v-est">Derived</span> below the
+    Q2 2024 peak, but sale prices have been flat at ~$355/SF since early 2024. Either cap rates
+    compressed on falling income, or — more likely — <strong>vendors have not repriced and there is
+    a bid/ask standoff.</strong> Absorption has been positive four straight quarters and active
+    construction is down 52% from its 2023 peak. This reads as a late-stage correction. It is a
+    floor call, not a recovery call, and it rewards patience and off-market sourcing over speed.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 02.3</span> &nbsp;— &nbsp;Operating model</span>
+  <h2>How the group executes</h2>
+  <p style="margin-top:24px">Kopman Group's structure is the reason this plan is credible. A
+  financial buyer must tender the retrofit and accept a contractor's price and a contractor's
+  schedule. Kopman performs it.</p>
+
+  <figure style="margin-top:40px">
+  <svg class="dia" viewBox="0 0 900 260" role="img" aria-label="The acquisition to lease-up loop: Kopman Properties sources and acquires a dock-deficient building, Kopman Build delivers the retrofit at internal cost, the asset is demised into small bays and leased, and refinancing proceeds fund the next acquisition.">
+    <defs><marker id="f1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#A96C14"/></marker></defs>
+    <g font-family="ui-monospace,monospace">
+    <rect x="14" y="60" width="176" height="76" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="102" y="88" text-anchor="middle" font-size="12.5" fill="currentColor" font-family="Georgia,serif">01 · Source</text>
+    <text x="102" y="107" text-anchor="middle" font-size="10" fill="currentColor" opacity=".7">Off-market, dock-deficient</text>
+    <text x="102" y="122" text-anchor="middle" font-size="10" fill="currentColor" opacity=".7">Coverage screen first</text>
+
+    <rect x="228" y="60" width="176" height="76" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="316" y="88" text-anchor="middle" font-size="12.5" fill="currentColor" font-family="Georgia,serif">02 · Acquire</text>
+    <text x="316" y="107" text-anchor="middle" font-size="10" fill="currentColor" opacity=".7">$350–$400/SF target</text>
+    <text x="316" y="122" text-anchor="middle" font-size="10" fill="currentColor" opacity=".7">Phase I/II conditional</text>
+
+    <rect x="442" y="60" width="176" height="76" fill="none" stroke="#A96C14" stroke-width="2.2"/>
+    <text x="530" y="88" text-anchor="middle" font-size="12.5" fill="#A96C14" font-family="Georgia,serif">03 · Retrofit</text>
+    <text x="530" y="107" text-anchor="middle" font-size="10" fill="#A96C14">KOPMAN BUILD · AT COST</text>
+    <text x="530" y="122" text-anchor="middle" font-size="10" fill="#A96C14">Docks · demise · services</text>
+
+    <rect x="656" y="60" width="176" height="76" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="744" y="88" text-anchor="middle" font-size="12.5" fill="currentColor" font-family="Georgia,serif">04 · Lease</text>
+    <text x="744" y="107" text-anchor="middle" font-size="10" fill="currentColor" opacity=".7">3,000–8,000 sf bays</text>
+    <text x="744" y="122" text-anchor="middle" font-size="10" fill="currentColor" opacity=".7">Widest tenant pool</text>
+
+    <line x1="190" y1="98" x2="226" y2="98" stroke="currentColor" stroke-width="1.3" marker-end="url(#f1)"/>
+    <line x1="404" y1="98" x2="440" y2="98" stroke="currentColor" stroke-width="1.3" marker-end="url(#f1)"/>
+    <line x1="618" y1="98" x2="654" y2="98" stroke="currentColor" stroke-width="1.3" marker-end="url(#f1)"/>
+
+    <path d="M 744 136 L 744 186 L 102 186 L 102 138" stroke="#A96C14" stroke-width="1.6" fill="none" stroke-dasharray="5 4" marker-end="url(#f1)"/>
+    <text x="423" y="204" text-anchor="middle" font-size="10.5" fill="#A96C14">05 · REFINANCE STABILISED NOI — PROCEEDS FUND THE NEXT ACQUISITION</text>
+    <text x="423" y="232" text-anchor="middle" font-size="10" fill="currentColor" opacity=".55">THE AMBER STAGE IS THE ONLY ONE A COMPETING BUYER PAYS A THIRD PARTY FOR</text>
+    </g>
+  </svg>
+  <figcaption>Stage 03 is performed internally at cost. On identical assumptions a competing buyer
+  carries a general contractor's margin on that stage — so Kopman can bid higher and still clear its
+  return, or bid level and clear more.</figcaption>
+  </figure>
+
+  <h3 style="margin-top:52px">The acquisition screen</h3>
+  <p style="margin-top:18px">Applied in this order. A property failing gate 1 or 2 is not repriced,
+  it is dropped.</p>
+  <div class="grid g2" style="margin-top:26px">
+    <div>
+      <h4 style="margin-bottom:10px">Gate 1 — Truck court depth</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Measure from the proposed dock wall to
+      the property line. <strong>Under 100 ft: kill.</strong> 100–120 ft: single-trailer only,
+      discount rents. <strong>130 ft is the minimum underwritable.</strong> 150–180 ft is good;
+      over 180 ft supports trailer-storage income<span class="v v-src">Source</span>. Physical
+      feasibility, not zoning, is the likeliest deal-killer.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Gate 2 — Site coverage</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Building area ÷ lot area. Above ~45%
+      there is rarely room for a court. This is why the screen runs before any financial analysis:
+      a cheap building on a tight lot cannot be fixed at any price.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Gate 3 — Wall structure</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">In precast panel buildings, panels are
+      often individually load-bearing, and cutting a 9-ft opening can require replacing a whole
+      panel rather than framing an opening. A structural walk-through before going firm turns a
+      $25,500 opening into a known quantity or a walk-away.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Gate 4 — Soil</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Bore the <em>dock-well footprint</em>
+      during due diligence. A dock well means excavating 300–600 m³ beside a building that may have
+      held solvents or a fuel tank. Failing O.Reg 406/19 characterisation moves disposal from ~$60
+      to $150–$350/m³ — a <strong>$150,000–$300,000 surprise</strong> and 8–12 weeks.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:52px">Four findings that change the economics</h3>
+  <div class="tbl-scroll" style="margin-top:24px">
+  <table>
+    <thead><tr><th>Finding</th><th>Effect</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Gang the docks.</strong> A shared depressed well spreads retaining wall across positions — ~45 lf per position versus ~130 lf for an isolated dock.</td><td>Cost per position falls from <strong class="mono">$150k–$260k</strong> to <strong class="mono">$85k–$190k</strong>. Never build singles.</td></tr>
+      <tr><td><strong>Development charges are zero.</strong> DC Act s.4 exempts enlargement of an existing industrial building by 50% or less. A dock conversion adds no GFA and no change of use.<span class="v v-src">Source</span></td><td>Removes a line most brokers pencil in. Peel also cut DCs 50% to Nov 2026.</td></tr>
+      <tr><td><strong>No Record of Site Condition needed.</strong> An RSC is triggered by a change to a <em>more sensitive</em> use. Industrial to industrial does not trigger it.<span class="v v-src">Source</span></td><td>Saves <strong class="mono">$25k–$150k</strong> against a typical underwriting.</td></tr>
+      <tr><td><strong>Never raise a roof.</strong> A roof lift costs $25–$70/sf; the rent delta between 18' and 28' clear capitalises to roughly $15–$38/sf.</td><td>Value-destructive at every point in the range. If clear height is unusable, reprice or walk.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3 style="margin-top:52px">The capital-light alternative</h3>
+  <p style="margin-top:18px">A portable steel yard ramp costs <strong class="mono">$18,000–$35,000</strong>,
+  needs no permit, no site plan approval and no construction, and is chattel that can be depreciated
+  or moved. Against <strong class="mono">$130,000</strong> for a dock position, it is frequently the
+  better answer where only one or two truck positions are needed. <strong>Every deal should be
+  modelled both ways</strong> — the ramp case is the downside scenario that keeps a marginal
+  acquisition alive.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 02.4</span> &nbsp;— &nbsp;Exit route</span>
+  <h2>The finding that decides the business</h2>
+  <p style="margin-top:24px">Three live candidates were underwritten two ways: held for income, and
+  subdivided and sold to owner-occupiers. <strong>Held for income, every one of them fails — by
+  margins too large to close with better assumptions.</strong></p>
+
+  <div class="tbl-scroll" style="margin-top:30px">
+  <table>
+    <thead><tr><th>Asset</th><th class="n">All-in $/SF</th><th class="n">Income value $/SF</th><th class="n">Gap</th><th>Hold verdict</th></tr></thead>
+    <tbody>
+      <tr><td>30 Dovedale Ct, Scarborough</td><td class="n">$484</td><td class="n">$256</td><td class="n">−$228</td><td><span class="chip no">Fails</span></td></tr>
+      <tr><td>1075 Clark Blvd, Brampton</td><td class="n">$596</td><td class="n">$276</td><td class="n">−$320</td><td><span class="chip no">Fails</span></td></tr>
+      <tr><td>1140 Blair Rd, Burlington</td><td class="n">$438</td><td class="n">$260</td><td class="n">−$178</td><td><span class="chip no">Fails</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:16px;font-size:14px;color:var(--ink-3)">Income value at a 5.75% cap on
+  stabilised NOI, net of 5% vacancy and 3% management <span class="v v-est">Derived</span>.
+  Rents assumed at or slightly above submarket average for renovated dock-loaded small bay.</p>
+
+  <p style="margin-top:26px">The reason is visible in the market data. Asking prices have been flat
+  at ~$355/SF since early 2024 while rents fell for eleven straight quarters. At today's asking
+  prices these buildings imply roughly a <strong class="mono">4%</strong> cap<span class="v v-est">Derived</span>
+  against a reported Class B range of <strong class="mono">5.25–6.00%</strong><span class="v v-src">Source</span>.
+  Vendors have not repriced.</p>
+
+  <div class="callout">
+    <span class="eyebrow">The conclusion</span>
+    <p style="font-size:18px;line-height:1.5"><strong>Kopman Properties is a merchant developer,
+    not an income landlord.</strong> The buyer who pays $460–$900/SF for small-bay GTA industrial is
+    an owner-occupier — a trades business, a distributor, an importer — who is comparing the price
+    against building new or against rent, not against a cap rate. That buyer is the exit.</p>
+    <p style="margin-bottom:0">Which means the product is not a leased building. It is
+    <strong>six individually saleable small-bay units</strong>, each with its own dock, its own
+    service and its own washroom. Build for the owner-occupier, sell to the owner-occupier, and
+    recycle the capital.</p>
+  </div>
+
+  <h3 style="margin-top:48px">The exit comparables</h3>
+  <div class="tbl-scroll" style="margin-top:24px">
+  <table>
+    <thead><tr><th>Comparable</th><th class="n">Size SF</th><th class="n">$/SF</th><th>Relevance</th></tr></thead>
+    <tbody>
+      <tr><td>7447 Bren Rd, Mississauga</td><td class="n">small bay</td><td class="n">$928</td><td>Cited small-bay premium transaction</td></tr>
+      <tr><td>60-62 Advance Rd, Etobicoke</td><td class="n">5,595</td><td class="n">$876</td><td>Asking, 12' clear, grade only</td></tr>
+      <tr><td>1075 Clark Blvd, Brampton</td><td class="n">35,842</td><td class="n">$519</td><td>Cited small-bay premium transaction</td></tr>
+      <tr><td>Malvern, Scarborough</td><td class="n">3,006</td><td class="n">$499</td><td><strong>Closest to target unit size</strong></td></tr>
+      <tr><td>NE Scarborough freestanding</td><td class="n">15,300</td><td class="n">$490</td><td>18' clear, partial dock</td></tr>
+      <tr><td>Gervais Dr, North York</td><td class="n">20,510</td><td class="n">$463</td><td>—</td></tr>
+      <tr><td>46 Hedgedale Rd, Brampton</td><td class="n">43,748</td><td class="n">$430</td><td><strong>The finished-product comp</strong> — 4 TL / 2 DI, electric levellers, 1200A</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:16px;font-size:14px;color:var(--ink-3)">All asking or cited prices
+  <span class="v v-src">Source</span>; $/SF ours <span class="v v-est">Derived</span>.
+  <strong>Note the inverse relationship with size</strong> — that inversion is the entire trade.
+  Every case below is therefore tested at $550, $600 and $650/SF exits, with $600 as base.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 02.5</span> &nbsp;— &nbsp;Case studies</span>
+  <h2>Three buildings on the market</h2>
+
+  <div class="warnbox">
+    <span class="eyebrow">On photography — read before presenting</span>
+    <p>The brief asked for before photographs and after renderings. <strong>We have not supplied
+    them, and we will not fabricate them.</strong> Every listing site was egress-blocked in this
+    environment, so no real photograph of any of these three buildings could be obtained — and a
+    generated image of a real, addressable property that a vendor or broker might see would be a
+    misrepresentation, not a rendering.</p>
+    <p>What follows instead are <strong>schematic before/after site plans</strong> drawn to the
+    published lot and building dimensions. For board purposes these carry more decision-relevant
+    information than a photograph: they show the dock bank, the court depth and the coverage
+    headroom, which is what the screen actually turns on.</p>
+    <p style="margin-bottom:0"><strong>To commission the real imagery</strong>, request from each
+    listing broker: (1) the marketing photo set and any drone imagery, (2) the site plan or SRPR,
+    (3) elevation photographs of the proposed dock wall, and (4) permission to shoot. Kopman Build
+    can then produce a genuine rendering from the survey — labelled as a rendering, in-image, per
+    the design brief.</p>
+  </div>
+</section>
+
+<section style="border-top:0;padding-top:0">
+<div class="cs">
+  <header>
+    <span class="chip sig" style="margin-bottom:12px">Case 01 · Scarborough · Lead candidate</span>
+    <h3>30 Dovedale Court</h3>
+    <span class="addr">Toronto (Scarborough), ON M1S 5A7 &nbsp;·&nbsp; MLS E13168958 &nbsp;·&nbsp; Colliers</span>
+  </header>
+
+  <dl class="specs">
+    <div><dt>Size</dt><dd>34,974 SF</dd></div>
+    <div><dt>Lot</dt><dd>2.19 ac</dd></div>
+    <div><dt>Coverage</dt><dd>36.7%</dd></div>
+    <div><dt>Clear</dt><dd>18'-0"</dd></div>
+    <div><dt>Power</dt><dd>600 A</dd></div>
+    <div><dt>Office</dt><dd>~4,000 SF</dd></div>
+    <div><dt>Zoning</dt><dd>E 0.7</dd></div>
+    <div><dt>Asking</dt><dd>$12,950,000</dd></div>
+  </dl>
+
+  <div class="cs-body">
+    <h4>Why it screens first</h4>
+    <p>At <strong class="mono">$370/SF</strong> this is the only candidate priced at the GTA average
+    rather than at a small-bay premium — the vendor is pricing it as ordinary industrial stock.
+    18' clear sits exactly at the obsolescence threshold, and <strong>36.7% coverage on 2.19 acres
+    means there is almost certainly apron depth for a real truck court</strong>, which is the
+    binding physical constraint on this entire strategy.</p>
+    <p>Zoning is <strong class="mono">E 0.7</strong> — Toronto Employment Industrial. On a 95,396 SF
+    lot that permits roughly <strong class="mono">66,800 SF</strong> of GFA against 34,974 existing,
+    leaving about <strong class="mono">31,800 SF</strong> of expansion headroom<span class="v v-est">Derived</span>
+    that is not in the price.</p>
+
+    <h4>The decisive unknown</h4>
+    <p><strong>The loading configuration is not published anywhere.</strong> Three independent
+    searches across Colliers, REALTOR.ca, Zolo and two syndication sites return an identical
+    marketing paragraph citing clear height, office area, amperage, acreage and "the ability to
+    accommodate 53-foot trailer access" — and no door count of any kind.</p>
+    <p>On an otherwise complete spec sheet, that omission is informative. Brokers lead with dock
+    counts when docks are a selling feature. Substituting a phrase describing <em>yard</em>
+    manoeuvrability for the door count is consistent with a grade-dominant
+    configuration<span class="v v-est">Derived</span> — which is favourable to us. <strong>One
+    phone call to the listing agent settles it, and it is the highest-value ten minutes on the
+    board's list.</strong></p>
+
+    <figure style="margin-top:30px">
+  <svg class="dia" viewBox="0 0 900 244" role="img" aria-label="Site plan comparison for 30 Dovedale Court, Scarborough. Existing condition shows grade-level doors only along the building wall with open yard beyond. Proposed condition shows a bank of six numbered truck-level dock positions plus two retained grade doors, with a truck court of approximately 130 feet depth.">
+    <text x="215" y="26" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" letter-spacing="1.5" fill="currentColor">EXISTING — GRADE LEVEL ONLY</text>
+    <rect x="18" y="42" width="392" height="172" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="5 4" opacity=".55"/>
+    <text x="22" y="229" font-family="ui-monospace,monospace" font-size="9" fill="currentColor" opacity=".5">PROPERTY LINE</text>
+    <rect x="40" y="62" width="250" height="84" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <text x="165.0" y="108.0" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".7">EXISTING BUILDING</text>
+    <rect x="81.66666666666666" y="143" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="89.66666666666666" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <rect x="157.0" y="143" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="165.0" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <rect x="232.33333333333331" y="143" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="240.33333333333331" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <line x1="165.0" y1="172" x2="165.0" y2="214" stroke="currentColor" stroke-width="1"/>
+    <line x1="160.0" y1="172" x2="170.0" y2="172" stroke="currentColor" stroke-width="1"/>
+    <line x1="160.0" y1="214" x2="170.0" y2="214" stroke="currentColor" stroke-width="1"/>
+    <text x="174.0" y="196.0" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor">YARD</text>
+    <line x1="446" y1="18" x2="446" y2="230" stroke="currentColor" stroke-width="1" opacity=".3"/>
+    <text x="675" y="26" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" letter-spacing="1.5" fill="#A96C14">PROPOSED — DOCK BANK + TRUCK COURT</text>
+    <rect x="478" y="42" width="392" height="172" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="5 4" opacity=".55"/>
+    <text x="482" y="229" font-family="ui-monospace,monospace" font-size="9" fill="currentColor" opacity=".5">PROPERTY LINE</text>
+    <rect x="500" y="62" width="250" height="84" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <text x="625.0" y="108.0" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".7">EXISTING BUILDING</text>
+    <rect x="519.125" y="143" width="14" height="6" fill="#A96C14"/>
+    <text x="526.125" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D1</text>
+    <rect x="547.375" y="143" width="14" height="6" fill="#A96C14"/>
+    <text x="554.375" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D2</text>
+    <rect x="575.625" y="143" width="14" height="6" fill="#A96C14"/>
+    <text x="582.625" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D3</text>
+    <rect x="603.875" y="143" width="14" height="6" fill="#A96C14"/>
+    <text x="610.875" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D4</text>
+    <rect x="632.125" y="143" width="14" height="6" fill="#A96C14"/>
+    <text x="639.125" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D5</text>
+    <rect x="660.375" y="143" width="14" height="6" fill="#A96C14"/>
+    <text x="667.375" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D6</text>
+    <rect x="687.625" y="143" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="695.625" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <rect x="715.875" y="143" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="723.875" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <line x1="625.0" y1="172" x2="625.0" y2="214" stroke="#A96C14" stroke-width="1"/>
+    <line x1="620.0" y1="172" x2="630.0" y2="172" stroke="#A96C14" stroke-width="1"/>
+    <line x1="620.0" y1="214" x2="630.0" y2="214" stroke="#A96C14" stroke-width="1"/>
+    <text x="634.0" y="196.0" font-family="ui-monospace,monospace" font-size="9.5" fill="#A96C14">~130 FT</text>
+  </svg>
+  <figcaption>Schematic plan, not a survey. Proportions reflect the published 2.19-acre lot and 34,974 sf footprint (36.7% coverage). The dock bank is shown on the elevation with the deepest available setback; the actual wall is subject to the structural walk-through and a real survey.</figcaption>
+  </figure>
+
+    <h4 style="margin-top:34px">Screen</h4>
+    <div class="gate">
+      <span class="m pass">GATE 1 PASS</span><p><strong>Truck court.</strong> 36.7% coverage on 2.19 ac leaves adequate depth on at least one elevation. Confirm ~130 ft to the property line by survey.</p>
+      <span class="m pass">GATE 2 PASS</span><p><strong>Coverage.</strong> 36.7%, comfortably inside the 45% ceiling.</p>
+      <span class="m unk">GATE 3 OPEN</span><p><strong>Wall structure.</strong> Construction type not published. Structural walk-through required before firming.</p>
+      <span class="m unk">GATE 4 OPEN</span><p><strong>Soil.</strong> Long-tenured industrial occupancy. Bore the dock-well footprint during due diligence — this is the largest unpriced risk.</p>
+    </div>
+
+    <h4 style="margin-top:34px">Numbers</h4>
+    <div class="money">
+      <div><span class="k">Acquisition — asking</span><span class="val">$12,950,000&nbsp;&nbsp;<span style="color:var(--ink-3)">$370/SF</span></span></div>
+      <div><span class="k">Retrofit — targeted scope, 6 ganged docks</span><span class="val">$3,972,000&nbsp;&nbsp;<span style="color:var(--ink-3)">$114/SF</span></span></div>
+      <div class="tot"><span class="k">All-in basis</span><span class="val">$16,922,000&nbsp;&nbsp;$484/SF</span></div>
+      <div><span class="k">Retrofit range (low – high)</span><span class="val">$2,780,000 – $5,760,000</span></div>
+      <div><span class="k">Hold for income — value at 5.75% cap</span><span class="val" style="color:var(--crit)">$8,968,000&nbsp;&nbsp;$256/SF</span></div>
+      <div class="sig"><span class="k"><strong>Exit — subdivide &amp; sell at $600/SF</strong></span><span class="val"><strong>$20,145,000 net &nbsp;·&nbsp; +19.0% on cost</strong></span></div>
+      <div><span class="k">Sensitivity — $550/SF exit</span><span class="val">+9.1% on cost</span></div>
+      <div><span class="k">Sensitivity — $650/SF exit</span><span class="val">+29.0% on cost</span></div>
+    </div>
+    <p style="font-size:14px;color:var(--ink-3);margin-top:14px">Retrofit scope: 6 ganged dock
+    positions, 4 new wall openings, truck court and apron, storm and OGS, 600A distribution with
+    six-bay sub-metering, LED relight net of IESO rebate, targeted demolition, demising for six
+    bays with washrooms. <strong>Excludes roof replacement, ESFR and office fit-out</strong> —
+    each is a condition-driven adder, and together they would add roughly $52/SF.</p>
+
+    <h4 style="margin-top:30px">Verdict</h4>
+    <p style="margin-bottom:0"><strong>Proceed to broker verification and LOI at or below asking.</strong>
+    The base case clears a ~19% margin on cost over roughly 18 months — real but not generous, and
+    it depends entirely on a $600/SF exit holding. Bid discipline matters more than speed here:
+    every $25/SF conceded at acquisition costs about 5 points of margin.</p>
+  </div>
+</div>
+</section>
+
+<section style="border-top:0;padding-top:0">
+<div class="cs" style="border-color:var(--crit)">
+  <header>
+    <span class="chip no" style="margin-bottom:12px">Case 02 · Brampton · Fails on price</span>
+    <h3>1075 Clark Boulevard</h3>
+    <span class="addr">Brampton, ON L6T 3W4 &nbsp;·&nbsp; LoopNet 35095900 &nbsp;·&nbsp; Airport Intermodal Business Park</span>
+  </header>
+
+  <dl class="specs">
+    <div><dt>Size</dt><dd>35,842 SF</dd></div>
+    <div><dt>Excess land</dt><dd>1.5 ac fenced</dd></div>
+    <div><dt>Clear</dt><dd>18'-0"</dd></div>
+    <div><dt>Loading</dt><dd>4 TL + 4 DI</dd></div>
+    <div><dt>Cranes</dt><dd>5 overhead</dd></div>
+    <div><dt>Zoning</dt><dd>M4-512</dd></div>
+    <div><dt>Price signal</dt><dd>$519/SF</dd></div>
+    <div><dt>Implied</dt><dd>~$18,602,000</dd></div>
+  </dl>
+
+  <div class="cs-body">
+    <h4>The purest expression of the thesis — and the clearest lesson</h4>
+    <p>Physically this is the best fit in the entire candidate set. <strong>Five overhead cranes and
+    a fully enclosed drive-through wash bay</strong> is <em>literally</em> the profile the thesis
+    describes: a heavy-industrial user's fitted-out box that no third-party logistics or e-commerce
+    tenant can occupy as it stands. Half the doors are grade-level. There are 1.5 fenced acres of
+    excess land for apron and phasing. It sits in Brampton's largest employment cluster with
+    Highway 407, 410 and 427 access.</p>
+    <p>It is also, on the only price signal available, <strong class="mono">$519/SF</strong> — cited
+    in Q1 2026 market commentary as a small-bay premium datapoint<span class="v v-src">Source</span>.
+    <strong>The asking price was not recoverable</strong> despite repeated searching; $519/SF is the
+    figure the market attached to this address, and at 35,842 SF it implies roughly
+    <strong class="mono">$18,602,000</strong><span class="v v-est">Derived</span>.</p>
+
+    <figure style="margin-top:30px">
+  <svg class="dia" viewBox="0 0 900 248" role="img" aria-label="Site plan comparison for 1075 Clark Boulevard, Brampton. Existing condition shows four truck-level and four drive-in doors. Proposed condition consolidates six truck-level dock positions into one ganged bank with two grade doors retained, with 1.5 acres of fenced excess land beyond the truck court.">
+    <text x="215" y="26" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" letter-spacing="1.5" fill="currentColor">EXISTING — GRADE LEVEL ONLY</text>
+    <rect x="18" y="42" width="392" height="176" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="5 4" opacity=".55"/>
+    <text x="22" y="233" font-family="ui-monospace,monospace" font-size="9" fill="currentColor" opacity=".5">PROPERTY LINE</text>
+    <rect x="40" y="62" width="250" height="84" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <text x="165.0" y="108.0" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".7">EXISTING BUILDING</text>
+    <rect x="72.25" y="143" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="80.25" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <rect x="128.75" y="143" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="136.75" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <rect x="185.25" y="143" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="193.25" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <rect x="241.75" y="143" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="249.75" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <line x1="165.0" y1="172" x2="165.0" y2="218" stroke="currentColor" stroke-width="1"/>
+    <line x1="160.0" y1="172" x2="170.0" y2="172" stroke="currentColor" stroke-width="1"/>
+    <line x1="160.0" y1="218" x2="170.0" y2="218" stroke="currentColor" stroke-width="1"/>
+    <text x="174.0" y="198.0" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor">YARD</text>
+    <line x1="446" y1="18" x2="446" y2="234" stroke="currentColor" stroke-width="1" opacity=".3"/>
+    <text x="675" y="26" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" letter-spacing="1.5" fill="#A96C14">PROPOSED — DOCK BANK + TRUCK COURT</text>
+    <rect x="478" y="42" width="392" height="176" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="5 4" opacity=".55"/>
+    <text x="482" y="233" font-family="ui-monospace,monospace" font-size="9" fill="currentColor" opacity=".5">PROPERTY LINE</text>
+    <rect x="500" y="62" width="250" height="84" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <text x="625.0" y="108.0" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".7">EXISTING BUILDING</text>
+    <rect x="519.125" y="143" width="14" height="6" fill="#A96C14"/>
+    <text x="526.125" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D1</text>
+    <rect x="547.375" y="143" width="14" height="6" fill="#A96C14"/>
+    <text x="554.375" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D2</text>
+    <rect x="575.625" y="143" width="14" height="6" fill="#A96C14"/>
+    <text x="582.625" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D3</text>
+    <rect x="603.875" y="143" width="14" height="6" fill="#A96C14"/>
+    <text x="610.875" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D4</text>
+    <rect x="632.125" y="143" width="14" height="6" fill="#A96C14"/>
+    <text x="639.125" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D5</text>
+    <rect x="660.375" y="143" width="14" height="6" fill="#A96C14"/>
+    <text x="667.375" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D6</text>
+    <rect x="687.625" y="143" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="695.625" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <rect x="715.875" y="143" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="723.875" y="163" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <line x1="625.0" y1="172" x2="625.0" y2="218" stroke="#A96C14" stroke-width="1"/>
+    <line x1="620.0" y1="172" x2="630.0" y2="172" stroke="#A96C14" stroke-width="1"/>
+    <line x1="620.0" y1="218" x2="630.0" y2="218" stroke="#A96C14" stroke-width="1"/>
+    <text x="634.0" y="198.0" font-family="ui-monospace,monospace" font-size="9.5" fill="#A96C14">1.5 AC SPARE</text>
+  </svg>
+  <figcaption>Schematic plan, not a survey. 1075 Clark Blvd already carries four truck-level positions; the retrofit adds two to complete a single ganged bank and converts the balance of the grade doors. The 1.5-acre fenced excess land sits beyond the court.</figcaption>
+  </figure>
+
+    <h4 style="margin-top:34px">Screen</h4>
+    <div class="gate">
+      <span class="m pass">GATE 1 PASS</span><p><strong>Truck court.</strong> 1.5 acres of fenced excess land; already serves four truck-level positions.</p>
+      <span class="m unk">GATE 2 OPEN</span><p><strong>Coverage.</strong> Total lot area not published, so coverage cannot be computed. The 1.5 spare acres suggest it passes.</p>
+      <span class="m unk">GATE 3 OPEN</span><p><strong>Wall structure.</strong> Not published.</p>
+      <span class="m fail">GATE 5 FAIL</span><p><strong>Price.</strong> At $519/SF the acquisition alone exceeds our all-in target. The retrofit is cheap here — only two docks to add — but the entry price consumes the entire margin.</p>
+    </div>
+
+    <h4 style="margin-top:34px">Numbers</h4>
+    <div class="money">
+      <div><span class="k">Acquisition — at the $519/SF signal</span><span class="val">$18,602,000&nbsp;&nbsp;<span style="color:var(--ink-3)">$519/SF</span></span></div>
+      <div><span class="k">Retrofit — add 2 docks, de-fit cranes, demise 5 bays</span><span class="val">$2,776,000&nbsp;&nbsp;<span style="color:var(--ink-3)">$77/SF</span></span></div>
+      <div class="tot"><span class="k">All-in basis</span><span class="val">$21,378,000&nbsp;&nbsp;$596/SF</span></div>
+      <div><span class="k">Hold for income — value at 5.75% cap</span><span class="val" style="color:var(--crit)">$9,909,000&nbsp;&nbsp;$276/SF</span></div>
+      <div><span class="k" style="color:var(--crit)"><strong>Exit — subdivide &amp; sell at $600/SF</strong></span><span class="val" style="color:var(--crit)"><strong>$20,645,000 net &nbsp;·&nbsp; −3.4% on cost</strong></span></div>
+      <div><span class="k">Sensitivity — $650/SF exit</span><span class="val">+4.6% on cost</span></div>
+      <div><span class="k">Sensitivity — $700/SF exit</span><span class="val">+12.7% on cost</span></div>
+      <div class="sig"><span class="k"><strong>Maximum supportable bid at a 20% margin</strong></span><span class="val"><strong>~$14,900,000 &nbsp;·&nbsp; $416/SF</strong></span></div>
+    </div>
+
+    <h4 style="margin-top:30px">Verdict</h4>
+    <p><strong>Do not bid at $519/SF. It loses money at a $600/SF exit even though the retrofit is
+    the cheapest of the three.</strong> This case is in the pack deliberately: it is the discipline
+    test. The building that looks most like the thesis is not the building that makes the most
+    money, and a board that cannot decline this one will overpay for the next one.</p>
+    <p style="margin-bottom:0"><strong>Action:</strong> recover the actual asking price from LoopNet
+    35095900. If the real ask is materially below the $519/SF signal — or if it has sat unsold long
+    enough for the vendor to move toward <strong class="mono">$416/SF</strong> — it re-enters the
+    pipeline immediately, because the physical asset is excellent.</p>
+  </div>
+</div>
+</section>
+
+<section style="border-top:0;padding-top:0">
+<div class="cs" style="border-color:var(--good)">
+  <header>
+    <span class="chip ok" style="margin-bottom:12px">Case 03 · Burlington · Best economics</span>
+    <h3>1140 Blair Road</h3>
+    <span class="addr">Burlington, ON L7M 1K9 &nbsp;·&nbsp; Colliers can2013801 &nbsp;·&nbsp; MLS W9771460 / 40671194</span>
+  </header>
+
+  <dl class="specs">
+    <div><dt>Size</dt><dd>35,593 SF</dd></div>
+    <div><dt>Lot</dt><dd>3.58 ac</dd></div>
+    <div><dt>Coverage</dt><dd>22.8%</dd></div>
+    <div><dt>Clear</dt><dd>22'-0"</dd></div>
+    <div><dt>Loading</dt><dd>3 TL + 2 DI</dd></div>
+    <div><dt>Power</dt><dd>600 A</dd></div>
+    <div><dt>Zoning</dt><dd>GE1</dd></div>
+    <div><dt>Asking</dt><dd>$12,500,000</dd></div>
+  </dl>
+
+  <div class="cs-body">
+    <h4>Cheapest entry, deepest yard, and a second story in the land</h4>
+    <p>At <strong class="mono">$351/SF</strong> this is the lowest basis in the set and the only one
+    below the GTA average. It also has the best physical characteristics: <strong>22' clear — above
+    the obsolescence threshold rather than at it — and 22.8% site coverage on 3.58 acres</strong>,
+    the deepest yard of any candidate by a wide margin. Taxes are $93,737/yr. QEW access serves both
+    the GTA and Hamilton.</p>
+    <p>The honest qualification: with <strong>three truck-level positions already in place</strong>,
+    the pure dock uplift here is smaller than the thesis assumes. The retrofit adds three positions
+    to complete a single ganged bank and demises the building — it does not rescue an unusable
+    asset.</p>
+
+    <div class="callout" style="margin:24px 0">
+      <span class="eyebrow">The second thesis hiding in this lot</span>
+      <p style="margin-bottom:0">GE1 permits up to 50% lot coverage. On 155,945 SF that is roughly
+      <strong class="mono">77,970 SF</strong> of permitted GFA against 35,593
+      existing — approximately <strong class="mono">42,000 SF of unbuilt, already-zoned
+      GFA</strong><span class="v v-est">Derived</span> included in the $12.5M price. For a group
+      that owns a construction company, that is not an obsolescence play at all. It is a
+      <strong>build-on-owned-land play</strong>, and it is a different risk profile that the board
+      should underwrite separately rather than fold into this one.</p>
+    </div>
+
+    <figure style="margin-top:30px">
+  <svg class="dia" viewBox="0 0 900 268" role="img" aria-label="Site plan comparison for 1140 Blair Road, Burlington. Existing condition shows three truck-level and two drive-in doors on a large low-coverage site. Proposed condition shows six ganged truck-level dock positions with a truck court exceeding 180 feet and substantial remaining land for expansion.">
+    <text x="215" y="26" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" letter-spacing="1.5" fill="currentColor">EXISTING — GRADE LEVEL ONLY</text>
+    <rect x="18" y="42" width="392" height="196" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="5 4" opacity=".55"/>
+    <text x="22" y="253" font-family="ui-monospace,monospace" font-size="9" fill="currentColor" opacity=".5">PROPERTY LINE</text>
+    <rect x="40" y="60" width="250" height="78" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <text x="165.0" y="103.0" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".7">EXISTING BUILDING</text>
+    <rect x="81.66666666666666" y="135" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="89.66666666666666" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <rect x="157.0" y="135" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="165.0" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <rect x="232.33333333333331" y="135" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="240.33333333333331" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <line x1="165.0" y1="164" x2="165.0" y2="238" stroke="currentColor" stroke-width="1"/>
+    <line x1="160.0" y1="164" x2="170.0" y2="164" stroke="currentColor" stroke-width="1"/>
+    <line x1="160.0" y1="238" x2="170.0" y2="238" stroke="currentColor" stroke-width="1"/>
+    <text x="174.0" y="204.0" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor">YARD</text>
+    <line x1="446" y1="18" x2="446" y2="254" stroke="currentColor" stroke-width="1" opacity=".3"/>
+    <text x="675" y="26" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" letter-spacing="1.5" fill="#A96C14">PROPOSED — DOCK BANK + TRUCK COURT</text>
+    <rect x="478" y="42" width="392" height="196" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="5 4" opacity=".55"/>
+    <text x="482" y="253" font-family="ui-monospace,monospace" font-size="9" fill="currentColor" opacity=".5">PROPERTY LINE</text>
+    <rect x="500" y="60" width="250" height="78" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <text x="625.0" y="103.0" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".7">EXISTING BUILDING</text>
+    <rect x="519.125" y="135" width="14" height="6" fill="#A96C14"/>
+    <text x="526.125" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D1</text>
+    <rect x="547.375" y="135" width="14" height="6" fill="#A96C14"/>
+    <text x="554.375" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D2</text>
+    <rect x="575.625" y="135" width="14" height="6" fill="#A96C14"/>
+    <text x="582.625" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D3</text>
+    <rect x="603.875" y="135" width="14" height="6" fill="#A96C14"/>
+    <text x="610.875" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D4</text>
+    <rect x="632.125" y="135" width="14" height="6" fill="#A96C14"/>
+    <text x="639.125" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D5</text>
+    <rect x="660.375" y="135" width="14" height="6" fill="#A96C14"/>
+    <text x="667.375" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="#A96C14">D6</text>
+    <rect x="687.625" y="135" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="695.625" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <rect x="715.875" y="135" width="16" height="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <text x="723.875" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8.5" fill="currentColor" opacity=".65">GR</text>
+    <line x1="625.0" y1="164" x2="625.0" y2="238" stroke="#A96C14" stroke-width="1"/>
+    <line x1="620.0" y1="164" x2="630.0" y2="164" stroke="#A96C14" stroke-width="1"/>
+    <line x1="620.0" y1="238" x2="630.0" y2="238" stroke="#A96C14" stroke-width="1"/>
+    <text x="634.0" y="204.0" font-family="ui-monospace,monospace" font-size="9.5" fill="#A96C14">180 FT+</text>
+  </svg>
+  <figcaption>Schematic plan, not a survey. At 22.8% coverage on 3.58 acres, 1140 Blair Road has the deepest yard in the candidate set — and roughly 42,000 sf of unbuilt GFA permitted under GE1, shown as the expansion envelope.</figcaption>
+  </figure>
+
+    <h4 style="margin-top:34px">Screen</h4>
+    <div class="gate">
+      <span class="m pass">GATE 1 PASS</span><p><strong>Truck court.</strong> 22.8% coverage on 3.58 ac — the deepest yard in the set, comfortably beyond the 180 ft premium threshold.</p>
+      <span class="m pass">GATE 2 PASS</span><p><strong>Coverage.</strong> 22.8%, the strongest score of any candidate.</p>
+      <span class="m unk">GATE 3 OPEN</span><p><strong>Wall structure.</strong> Not published. Year built also unpublished across every source.</p>
+      <span class="m fail">GATE 6 FAIL</span><p><strong>Availability.</strong> One aggregator carries this address titled <em>"Sold"</em>, and the listing dates to 31 October 2024 — roughly 22 months old. <strong>Verify status before any other work.</strong></p>
+    </div>
+
+    <h4 style="margin-top:34px">Numbers</h4>
+    <div class="money">
+      <div><span class="k">Acquisition — asking</span><span class="val">$12,500,000&nbsp;&nbsp;<span style="color:var(--ink-3)">$351/SF</span></span></div>
+      <div><span class="k">Retrofit — 3 added docks, court, demise 5 bays</span><span class="val">$3,099,000&nbsp;&nbsp;<span style="color:var(--ink-3)">$87/SF</span></span></div>
+      <div class="tot"><span class="k">All-in basis</span><span class="val">$15,599,000&nbsp;&nbsp;$438/SF</span></div>
+      <div><span class="k">Hold for income — value at 5.75% cap</span><span class="val" style="color:var(--crit)">$9,269,000&nbsp;&nbsp;$260/SF</span></div>
+      <div class="sig"><span class="k"><strong>Exit — subdivide &amp; sell at $600/SF</strong></span><span class="val"><strong>$20,502,000 net &nbsp;·&nbsp; +31.4% on cost</strong></span></div>
+      <div><span class="k">Sensitivity — $550/SF exit</span><span class="val">+20.5% on cost</span></div>
+      <div><span class="k">Sensitivity — $650/SF exit</span><span class="val">+42.4% on cost</span></div>
+      <div><span class="k">Excluded from the above — 42,000 SF unbuilt GFA</span><span class="val">Underwrite separately</span></div>
+    </div>
+
+    <h4 style="margin-top:30px">Verdict</h4>
+    <p style="margin-bottom:0"><strong>Best economics in the set — and it still clears 20% at a
+    $550/SF exit, the only candidate that does.</strong> The downside case is where this asset
+    separates itself. Verify availability first; if it has sold, the profile is the template for
+    what to hunt in Halton. Note that the return here comes from cheap entry and a deep lot, not
+    from the dock retrofit — which is the clearest possible confirmation of the revised thesis.</p>
+  </div>
+</div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 02.6</span> &nbsp;— &nbsp;Watch list</span>
+  <h2>Mississauga remains open</h2>
+  <p style="margin-top:24px">No Mississauga candidate could be brought to case-study standard. The
+  best lead is <strong>2640 Argentia Road</strong> (33,040 SF on 1.86 acres, 40.8%
+  coverage<span class="v v-est">Derived</span>, a single 14'×12' drive-in door with
+  <strong>no truck-level doors cited in any source</strong>, one 5-ton crane, gated rear storage,
+  Highway 401 exposure, Colliers can2017694).</p>
+  <p>The shape is right — grade-level-only manufacturing stock with apron room. But asking price,
+  clear height, year built and zoning are all unpublished, and while Colliers carries it as for
+  sale, two recent MLS listings market it <em>for lease</em> at $16.50–$17.95/SF, so its
+  availability is doubtful. <strong>It is a lead, not a candidate.</strong> One call to Colliers
+  resolves it.</p>
+  <p style="margin-bottom:0">Screened out in Mississauga as already dock-loaded, for the record:
+  2200 Drew Rd (48,307 SF, 9 dock + 2 drive-in) and a 43,074 SF asset on the Oakville border
+  (26' clear, 4 TL + 1 DI). Neither offers retrofit uplift.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 02.7</span> &nbsp;— &nbsp;Schedule</span>
+  <h2>Eighteen months, and one seasonal trap</h2>
+  <p style="margin-top:24px">Close to occupancy runs <strong class="mono">14–24 months</strong>,
+  base case <strong class="mono">18</strong><span class="v v-est">Derived</span>. Site plan control
+  is the critical path, not construction.</p>
+
+  <div class="tbl-scroll" style="margin-top:30px">
+  <table>
+    <thead><tr><th>Phase</th><th class="n">Duration</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>Close → consultants, survey, geotech, Phase I/II</td><td class="n">6–10 wks</td><td>Bore the dock-well footprint here</td></tr>
+      <tr><td>Schematic + design development, structural assessment</td><td class="n">6–8 wks</td><td>—</td></tr>
+      <tr><td>Pre-application meeting</td><td class="n">3–6 wks</td><td>Mandatory in Mississauga</td></tr>
+      <tr><td><strong>Site plan control → conditional approval</strong></td><td class="n"><strong>6–12 mo</strong></td><td><strong>Critical path.</strong> Statutory decision is 60 days from a <em>complete</em> application; reality with resubmissions, conservation authority and Regional sign-off is 8 months</td></tr>
+      <tr><td>Working drawings</td><td class="n">8–12 wks</td><td>Overlaps SPA — not additive</td></tr>
+      <tr><td>Building permit, Group F</td><td class="n">6–14 wks</td><td>Permit fee is ~$35–42k on 30,000 sf — a rounding error</td></tr>
+      <tr><td>Tender + award</td><td class="n">4–6 wks</td><td>Internal — Kopman Build</td></tr>
+      <tr><td>Construction</td><td class="n">5–8 mo</td><td>See seasonality below</td></tr>
+      <tr><td>Deficiency, inspection, occupancy, turnover</td><td class="n">4–6 wks</td><td>—</td></tr>
+      <tr class="total"><td><strong>Close → occupancy</strong></td><td class="n"><strong>14–24 mo</strong></td><td><strong>Base 18</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="warnbox">
+    <span class="eyebrow">The seasonality trap — model it explicitly</span>
+    <p>Ontario asphalt plants close from roughly mid-November to mid-April. Cold-weather concrete
+    adds 10–20%, and winter excavation of frozen ground adds more.</p>
+    <p><strong>If site plan approval lands in September, you cannot pave until May.</strong> That is
+    a six-month dead carry that appears in no cost table and is the single largest schedule risk in
+    this plan.</p>
+    <p style="margin-bottom:0"><strong>Sequencing rule:</strong> target SPA approval for
+    February–March so site works run April to October in one season. Back-solving, that means
+    <strong>closing in June–August of the prior year</strong>. Acquisition timing is a scheduling
+    decision, not just a pricing one.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 02.8</span> &nbsp;— &nbsp;Go to market</span>
+  <h2>Selling the bays</h2>
+  <p style="margin-top:24px">The product is six owner-occupier units, not a leased building. That
+  changes the entire marketing approach — and it starts long before completion.</p>
+
+  <div class="grid g2" style="margin-top:32px">
+    <div>
+      <h4 style="margin-bottom:10px">Pre-sell from the site plan</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Owner-occupiers buy 12–18 months ahead
+      because they are timing a lease expiry. Release units at conditional approval, not at
+      completion. Deposits taken during construction de-risk the exit and remove the single largest
+      assumption in the underwriting — that $600/SF holds.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Syndicate listings, do not fight aggregators</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">LoopNet, Zolo, CommercialCafe and
+      Spacelist own every transactional GTA industrial search result — Toronto alone shows 373
+      industrial listings on LoopNet against our handful<span class="v v-src">Source</span>. They
+      are the distribution channel. Publish to them; win search somewhere else entirely (Sheet 04).</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Broker the exit, do not disintermediate it</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Small-bay owner-occupiers come through
+      brokers. Pay full commission and pay it visibly — the same brokers are the source of the next
+      off-market acquisition. Kopman Properties needs to be the buyer brokers call first, and that
+      reputation is bought on the sell side.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Sell the specification, not the building</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Publish a fixed "Kopman standard" — dock
+      with hydraulic leveller and shelter, dedicated 3-phase service and sub-meter, own washroom,
+      LED throughout, 130 ft court. A repeatable published standard lets a buyer compare against a
+      new-build quote and lets Kopman price consistently across assets.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Open the vendor channel</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">The scarce input is off-market obsolete
+      stock. The owner of a tired warehouse who wants out is looking for someone to call — and there
+      is no obvious number to call in the GTA today. A <code class="mono">/sell-your-building/</code>
+      page plus direct outreach to long-tenured industrial owners is the cheapest acquisition
+      channel available, and it avoids the bid/ask standoff entirely.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Publish the real numbers</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">"We bought at $X/SF, spent $Y on docks,
+      sold at $Z" is a genre with essentially zero Canadian supply. It is also the most efficient
+      marketing this group can do — it recruits vendors, brokers and co-investors simultaneously,
+      and it is exactly the content that earns citation in AI search.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:52px">Who the buyer is</h3>
+  <p style="margin-top:18px">Named tenant and buyer types for GTA small-bay
+  space<span class="v v-src">Source</span>: local service providers, specialty trades, light
+  manufacturers, regional distributors, last-mile operators, e-commerce and direct-to-consumer
+  brands, food and beverage, construction and trades companies, importers and distributors, and
+  event and entertainment companies. The owner-occupier bid is live and documented — cited
+  transactions include a roughly $100M acquisition by Mapei Inc. and a purchase by Forest
+  Contractors Group.</p>
+  <p><strong>Kopman Build's own client base is a channel.</strong> A construction firm operating
+  across the GTA since 1999 knows a great many trades businesses that are currently renting space
+  they have outgrown. That list is an asset no competing developer has.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 02.9</span> &nbsp;— &nbsp;Capital</span>
+  <h2>What the first deal needs</h2>
+  <div class="tbl-scroll" style="margin-top:28px">
+  <table>
+    <thead><tr><th>Item</th><th class="n">Base case</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>Acquisition</td><td class="n">$12,500,000</td><td>Blair Rd basis; Dovedale $12.95M</td></tr>
+      <tr><td>Retrofit — targeted scope</td><td class="n">$3,100,000</td><td>Delivered by Kopman Build at cost</td></tr>
+      <tr><td class="n" style="text-align:left"><strong>All-in project cost</strong></td><td class="n"><strong>$15,600,000</strong></td><td><strong>$438/SF</strong></td></tr>
+      <tr><td>Senior debt at 65% LTC</td><td class="n">($10,140,000)</td><td>Construction facility; verify appetite for value-add industrial</td></tr>
+      <tr><td class="total" style="text-align:left"><strong>Equity required</strong></td><td class="n"><strong>$5,460,000</strong></td><td>Before carry</td></tr>
+      <tr><td>Interest carry, 18 mo at ~7%</td><td class="n">$1,065,000</td><td>On drawn balance — <strong>not in the returns above</strong></td></tr>
+      <tr><td>Site works letter of credit</td><td class="n">~$620,000</td><td>100% of site works, held through SPA; carries at 1.5–2.5%/yr</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="warnbox">
+    <span class="eyebrow">Correction to the case-study returns</span>
+    <p style="margin-bottom:0">The percentages in each case study are <strong>margin on project
+    cost, before financing</strong>. Interest carry of roughly $1.07M over 18 months reduces the
+    Blair Road base case from +31.4% to approximately <strong class="mono">+24.6%</strong> on cost,
+    and Dovedale from +19.0% to roughly <strong class="mono">+12.5%</strong><span class="v v-est">Derived</span>.
+    On equity the leveraged returns are higher, but so is the risk. <strong>The board should see the
+    levered, after-carry number before it approves a bid</strong> — build the full model before LOI.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sheet">Sheet 02.10</span> &nbsp;— &nbsp;Risk</span>
+  <h2>What breaks this</h2>
+  <div style="margin-top:32px">
+    <div class="risk" style="border-left:3px solid var(--crit);padding-left:16px;margin-bottom:22px">
+      <h4 style="margin-bottom:5px">The exit price is one assumption carrying the whole plan</h4>
+      <p style="margin:0;font-size:15.5px;color:var(--ink-2)">Every case turns on a $600/SF
+      subdivided exit inferred from seven asking prices, none confirmed at source and at least one
+      probably stale. At $550/SF, Dovedale returns 9.1% before carry — which after financing is
+      roughly break-even. <strong>Pre-selling units is the mitigation; commissioning a paired-comp
+      appraisal is the verification. Do both before committing.</strong></p>
+    </div>
+    <div class="risk" style="border-left:3px solid var(--crit);padding-left:16px;margin-bottom:22px">
+      <h4 style="margin-bottom:5px">Subdivision may need approvals nobody has priced</h4>
+      <p style="margin:0;font-size:15.5px;color:var(--ink-2)">Selling six units separately means
+      condominium registration or severance — a planning process with its own timeline, cost and
+      refusal risk, and it is <strong>not in any number in this document</strong>. This is the
+      largest single gap in the plan as it stands. Get a planning opinion before the first LOI.</p>
+    </div>
+    <div class="risk" style="border-left:3px solid var(--crit);padding-left:16px;margin-bottom:22px">
+      <h4 style="margin-bottom:5px">Contaminated soil at the dock well</h4>
+      <p style="margin:0;font-size:15.5px;color:var(--ink-2)">Excavating 300–600 m³ beside a former
+      manufacturing building. Failing O.Reg 406/19 characterisation moves disposal from ~$60/m³ to
+      $150–$350/m³ — $150,000–$300,000 and 8–12 weeks. Bore during due diligence, not after close.</p>
+    </div>
+    <div class="risk" style="border-left:3px solid var(--crit);padding-left:16px;margin-bottom:22px">
+      <h4 style="margin-bottom:5px">Load-bearing precast walls</h4>
+      <p style="margin:0;font-size:15.5px;color:var(--ink-2)">Where panels carry roof loads
+      individually, a 9-ft opening can mean replacing a panel rather than framing an opening —
+      turning a $25,500 item into a multiple of that, six times over. A structural walk-through
+      before firming is non-negotiable.</p>
+    </div>
+    <div class="risk" style="border-left:3px solid var(--crit);padding-left:16px;margin-bottom:22px">
+      <h4 style="margin-bottom:5px">Kopman Build has no industrial track record</h4>
+      <p style="margin:0;font-size:15.5px;color:var(--ink-2)">Residential construction expertise
+      does not transfer to dock design, truck-court geometry, ESFR engineering or industrial
+      leasing. <strong>Hire or partner for genuine industrial experience before the first close.</strong>
+      It is the largest execution gap in the group.</p>
+    </div>
+    <div class="risk" style="border-left:3px solid var(--crit);padding-left:16px;margin-bottom:22px">
+      <h4 style="margin-bottom:5px">Internal pricing must be arm's length</h4>
+      <p style="margin:0;font-size:15.5px;color:var(--ink-2)">If Build absorbs overruns to flatter
+      Properties' returns, the group has relocated a loss, not avoided one — and any future investor
+      will find it in diligence. Written scopes and a market benchmark on every internal contract.</p>
+    </div>
+    <div class="risk" style="border-left:3px solid var(--crit);padding-left:16px">
+      <h4 style="margin-bottom:5px">Entering an eleven-quarter rent decline</h4>
+      <p style="margin:0;font-size:15.5px;color:var(--ink-2)">Absorption has been positive four
+      quarters and construction starts are down 52% from peak, but this is a floor call, not a
+      recovery call. The plan should survive a further 10% rent decline — and on a sell-to-owner-occupier
+      exit it largely does, since that buyer is comparing against replacement cost rather than rent.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding-bottom:clamp(64px,9vw,120px)">
+  <span class="eyebrow"><span class="sheet">Sheet 02.11</span> &nbsp;— &nbsp;Next</span>
+  <h2>Ten actions</h2>
+  <ol style="margin-top:26px;font-size:16px">
+    <li><strong>Four phone calls, this week.</strong> Colliers on 30 Dovedale — get the door count
+    and year built. LoopNet 35095900 on 1075 Clark — get the asking price. Colliers on 1140 Blair —
+    is it sold? Colliers on 2640 Argentia — price, clear height, sale or lease.</li>
+    <li><strong>Commission the paired-comp study.</strong> Grade-level-only versus dock-loaded,
+    same submarket, vintage and size band. This is the number the thesis lives on and it does not
+    exist publicly. Treat it as thesis-validation spend.</li>
+    <li><strong>Get a planning opinion on subdivision.</strong> Condominium registration versus
+    severance, timeline and cost. The exit strategy depends on it and it is currently unpriced.</li>
+    <li><strong>Have Kopman Build price a model retrofit</strong> — six ganged docks, court, 600A
+    service, demising — against its own historical cost data. Replace our estimates with real ones.
+    This is the group's proprietary advantage; use it.</li>
+    <li><strong>Re-pull the market reports</strong> from an unrestricted connection: CBRE Q2 2026,
+    Colliers Q1 2026, Cresa Q1 2026, Avison Young Q1 2026. Rebuild Sheet 02.2 with confirmed figures
+    and resolve the Brampton availability conflict.</li>
+    <li><strong>Pull the by-laws.</strong> Toronto Chapter 220 loading rates for E zones; Mississauga
+    Section 8; Brampton Section 30 <em>plus its exception schedule</em>; and confirm whether Burlington
+    By-law 2020 or 09-2026 governs a given parcel — that transition is a live diligence risk.</li>
+    <li><strong>Screen every candidate on site coverage first.</strong> No apron, no deal — before
+    any financial analysis is run.</li>
+    <li><strong>Time the close for June–August</strong> so approvals land in February–March and site
+    works run in one season.</li>
+    <li><strong>Recruit industrial capability</strong> — hire, partner or retain — before the first
+    close, not after.</li>
+    <li><strong>Fix kopmanbuild.com's contact form.</strong> Unrelated to this plan and the highest
+    return per hour available to the group: the construction arm has been silently discarding every
+    web enquiry it has ever received.</li>
+  </ol>
+
+  <div class="callout" style="margin-top:44px">
+    <span class="eyebrow">The plan in one paragraph</span>
+    <p style="margin-bottom:0;font-size:17px">Buy 30,000–60,000 sf of functionally obsolete GTA
+    industrial at $350–$400/SF on lots under 45% coverage. Gang the docks into one shared well,
+    demise into six owner-occupier bays, and sell into a market clearing at $460–$900/SF. Do not
+    hold for income — the income math fails by $180–$320/SF. Do not overpay for the building that
+    best fits the story. And do not start until the exit comp is verified, because a $50/SF move in
+    the exit price is the difference between a 19% margin and a 9% one.</p>
+  </div>
+</section>
+
+<footer style="border-top:1px solid var(--line);padding:34px 0 56px">
+  <dl class="titleblock" style="border:0;background:transparent">
+    <div class="tb" style="border-right:0;padding-left:0"><dt>Sheet</dt><dd>02 — Business Plan &amp; GTM</dd></div>
+    <div class="tb" style="border-right:0"><dt>Next</dt><dd>03 — Design Brief &nbsp;·&nbsp; 04 — Search Strategy</dd></div>
+    <div class="tb" style="border-right:0"><dt>Status</dt><dd>Board draft · figures unverified at source</dd></div>
+  </dl>
+</footer>
+
+</div>
