@@ -2,18 +2,40 @@ import { drizzle } from "drizzle-orm/postgres-js"
 import postgres from "postgres"
 import * as schema from "./schema"
 
-const connectionString = process.env.DATABASE_URL
-if (!connectionString) throw new Error("DATABASE_URL is required")
+// Lazy initialization — clients created on first use so build succeeds without DB env vars
+let _db: ReturnType<typeof drizzle> | null = null
+let _migrationClient: ReturnType<typeof postgres> | null = null
 
-// Migration client bypasses RLS
-export const migrationClient = postgres(
-  process.env.DATABASE_URL_MIGRATOR ?? connectionString,
-  { max: 1 }
-)
+export function getMigrationClient() {
+  if (!_migrationClient) {
+    const url = process.env.DATABASE_URL_MIGRATOR ?? process.env.DATABASE_URL
+    if (!url) throw new Error("DATABASE_URL is required")
+    _migrationClient = postgres(url, { max: 1 })
+  }
+  return _migrationClient
+}
 
-// App client goes through RLS — always call withTenant() before querying
-const pgClient = postgres(connectionString, { max: 10 })
-export const db = drizzle(pgClient, { schema })
+function getDb() {
+  if (!_db) {
+    const url = process.env.DATABASE_URL
+    if (!url) throw new Error("DATABASE_URL is required")
+    _db = drizzle(postgres(url, { max: 10 }), { schema })
+  }
+  return _db
+}
+
+// Proxy so callers use `db.select(...)` unchanged
+export const db = new Proxy({} as ReturnType<typeof drizzle>, {
+  get(_target, prop) {
+    return (getDb() as any)[prop]
+  },
+})
+
+export const migrationClient = new Proxy({} as ReturnType<typeof postgres>, {
+  get(_target, prop) {
+    return (getMigrationClient() as any)[prop]
+  },
+})
 
 // Wrap a callback in a transaction with tenant_id set for RLS
 export async function withTenant<T>(
