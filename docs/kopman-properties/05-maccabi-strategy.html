@@ -1,0 +1,1003 @@
+<title>Non-Disruptive Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* MACCABI PARTNERS — the joint venture of two houses.
+   Ground sits between GDA's cool paper (#FAFAF7) and Kopman's warm linen (#f3efe8).
+   Ink sits between GDA's midnight navy (#0B1220) and Kopman's warm black (#1a1a18).
+   Bronze sits between GDA's burnished gold (#A8894E) and Kopman's dock amber (#A96C14).
+   Type is a literal JV: Newsreader from Gord's house, Geist / Geist Mono from Kopman's. */
+:root{
+  --paper:#F6F4EF; --band:#EFECE4; --card:#FBFAF7; --dark:#12161C;
+  --ink:#12161C; --ink-2:#3B424C; --slate:#4F5866;
+  --line:#DCD8CF; --line-2:#C7C2B7;
+  --bronze:#8A6636; --bronze-ink:#7A5A2E; --bronze-soft:#EDE3D2;
+  --inv:#F6F4EF;
+  --pos:#3D6147; --neg:#8A3A2E; --warn:#8A6636;
+  --f-d:"Newsreader",Georgia,"Times New Roman",serif;
+  --f-s:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --f-m:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --max:1220px; --gut:clamp(20px,4vw,56px);
+}
+@media (prefers-color-scheme:dark){
+ :root:not([data-theme="light"]){
+  --paper:#0F1216; --band:#161A20; --card:#171C22; --dark:#0A0D11;
+  --ink:#EDEAE3; --ink-2:#B6BCC5; --slate:#97A1B0;
+  --line:#272C33; --line-2:#343A42;
+  --bronze:#C79A55; --bronze-ink:#D4AA6A; --bronze-soft:#2A2115;
+  --inv:#EDEAE3;
+  --pos:#7FA98C; --neg:#C4796B; --warn:#C79A55;
+ }
+}
+:root[data-theme="dark"]{
+  --paper:#0F1216; --band:#161A20; --card:#171C22; --dark:#0A0D11;
+  --ink:#EDEAE3; --ink-2:#B6BCC5; --slate:#97A1B0;
+  --line:#272C33; --line-2:#343A42;
+  --bronze:#C79A55; --bronze-ink:#D4AA6A; --bronze-soft:#2A2115;
+  --inv:#EDEAE3;
+  --pos:#7FA98C; --neg:#C4796B; --warn:#C79A55;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-s);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+h1,h2,h3,h4{margin:0;font-weight:400;text-wrap:balance}
+h1{font-family:var(--f-d);font-size:clamp(40px,6vw,80px);line-height:1.04;letter-spacing:-.018em}
+h2{font-family:var(--f-d);font-size:clamp(29px,3.8vw,48px);line-height:1.1;letter-spacing:-.014em}
+h3{font-family:var(--f-d);font-size:clamp(21px,2.3vw,29px);line-height:1.16;letter-spacing:-.008em}
+h4{font-family:var(--f-s);font-size:16px;font-weight:600;letter-spacing:-.004em}
+p{margin:0 0 1em;max-width:70ch}
+em{font-style:italic}
+a{color:inherit;text-underline-offset:3px;text-decoration-color:var(--line-2)}
+a:hover{text-decoration-color:var(--bronze)}
+:focus-visible{outline:2px solid var(--bronze);outline-offset:3px;border-radius:2px}
+ul,ol{max-width:70ch;padding-left:1.15em}
+li{margin-bottom:.45em}
+code{font-family:var(--f-m);font-size:.88em;background:var(--band);padding:1px 5px;border-radius:2px}
+/* running head / section numerals — the annual-report device */
+.eyebrow{font-family:var(--f-m);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--slate);display:block}
+.sec-no{color:var(--bronze-ink)}
+.mono{font-family:var(--f-m);font-variant-numeric:tabular-nums}
+.lede{font-size:clamp(18px,1.5vw,21px);line-height:1.5;color:var(--ink-2);max-width:60ch}
+section{padding:clamp(56px,7.5vw,104px) 0;border-top:1px solid var(--line)}
+.s-head{margin-bottom:clamp(34px,4vw,56px)}
+.s-head .eyebrow{margin-bottom:18px}
+.s-head p{margin-top:20px}
+/* colophon block */
+.colo{border-top:1px solid var(--ink);border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:0}
+.colo div{padding:14px 18px 15px;border-right:1px solid var(--line)}
+.colo div:last-child{border-right:0}
+.colo dt{font-family:var(--f-m);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--slate);margin:0 0 6px}
+.colo dd{margin:0;font-family:var(--f-m);font-size:13px;font-variant-numeric:tabular-nums}
+/* margin-note layout — prospectus rail */
+.rail{display:grid;grid-template-columns:168px 1fr;gap:clamp(20px,3vw,48px);align-items:start}
+.rail > .note{font-family:var(--f-m);font-size:11px;line-height:1.65;color:var(--slate);
+  border-top:1px solid var(--line-2);padding-top:10px}
+.rail > .note b{display:block;color:var(--bronze-ink);font-weight:400;margin-bottom:5px;
+  letter-spacing:.12em;text-transform:uppercase;font-size:10px}
+/* grids */
+.grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.grid > *{background:var(--card);padding:clamp(20px,2.6vw,30px)}
+.g2{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(178px,1fr))}
+/* stat */
+.stat b{display:block;font-family:var(--f-d);font-size:clamp(30px,3.8vw,50px);line-height:1;
+  font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stat span{display:block;font-family:var(--f-m);font-size:10px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--slate);margin-top:12px;line-height:1.55}
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:540px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-m);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--slate);font-weight:400;white-space:nowrap}
+td.n,th.n{text-align:right;font-family:var(--f-m);font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-m);font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;padding:4px 9px;border:1px solid var(--line-2);
+  border-radius:2px;color:var(--slate);white-space:nowrap}
+.chip.br{border-color:var(--bronze);color:var(--bronze-ink);background:var(--bronze-soft)}
+.chip.no{border-color:var(--neg);color:var(--neg)}
+.chip.ok{border-color:var(--pos);color:var(--pos)}
+/* callouts */
+.call{border:1px solid var(--bronze);background:var(--bronze-soft);padding:clamp(22px,2.8vw,34px);margin:clamp(28px,3.4vw,44px) 0}
+.call .eyebrow{color:var(--bronze-ink);margin-bottom:14px}
+.call p:last-child{margin-bottom:0}
+.call .big{font-family:var(--f-d);font-size:clamp(21px,2.4vw,31px);line-height:1.24;
+  margin-bottom:16px;max-width:30ch}
+.warn{border:1px solid var(--neg);border-left-width:4px;background:var(--card);
+  padding:20px 24px;margin:26px 0}
+.warn .eyebrow{color:var(--neg);margin-bottom:10px}
+.warn p:last-child{margin-bottom:0}
+/* copy blocks — the comms kit */
+.copy{border:1px solid var(--line-2);background:var(--card);margin-top:16px}
+.copy header{padding:12px 18px;border-bottom:1px solid var(--line);display:flex;
+  justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
+.copy header h4{margin:0;font-size:14px}
+.copy .len{font-family:var(--f-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
+.copy .body{padding:20px 22px;font-size:16px;line-height:1.65}
+.copy .body p:last-child{margin-bottom:0}
+.copy .body.mono{font-family:var(--f-m);font-size:13.5px;line-height:1.75;white-space:pre-wrap}
+figure{margin:0}
+figcaption{font-family:var(--f-m);font-size:11px;line-height:1.65;color:var(--slate);
+  margin-top:18px;max-width:64ch;border-left:2px solid var(--bronze);padding-left:13px}
+svg.dia{max-width:100%;height:auto;display:block;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:760px){.rail{grid-template-columns:1fr;gap:14px}
+  .rail > .note{border-top:0;border-left:2px solid var(--line-2);padding:0 0 0 12px}}
+.hero{padding:clamp(44px,6vw,82px) 0 clamp(36px,4.5vw,58px);border-top:0}
+.hero h1{margin:26px 0 0}
+.hero h1 em{color:var(--bronze-ink)}
+.refine{border-top:1px solid var(--line)}
+.refine > article{display:grid;grid-template-columns:96px 1fr;gap:clamp(16px,2.4vw,36px);
+  padding:clamp(24px,3vw,38px) 0;border-bottom:1px solid var(--line);align-items:start}
+.refine .n{font-family:var(--f-m);font-size:10.5px;letter-spacing:.14em;color:var(--bronze-ink);padding-top:7px}
+.refine h3{margin-bottom:12px}
+.refine .was{font-size:15px;color:var(--slate);border-left:2px solid var(--line-2);
+  padding-left:13px;margin-bottom:14px;max-width:62ch}
+.refine .was b{color:var(--ink-2);font-weight:500}
+@media(max-width:680px){.refine > article{grid-template-columns:1fr;gap:10px}
+  .refine .n{padding-top:0}}
+
+/* SVG accents follow the theme tokens (literals kept in markup for portability) */
+svg.dia [fill="#8A6636"]{fill:var(--bronze)}
+svg.dia [stroke="#8A6636"]{stroke:var(--bronze)}
+svg.dia marker polygon[fill="#8A6636"]{fill:var(--bronze)}
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <dl class="colo">
+    <div><dt>Document</dt><dd>Corporate Strategy</dd></div>
+    <div><dt>Entity</dt><dd>Maccabi Partners</dd></div>
+    <div><dt>Form</dt><dd>Joint venture</dd></div>
+    <div><dt>Issued</dt><dd>2026-08-23</dd></div>
+    <div><dt>Status</dt><dd>Founders' draft</dd></div>
+  </dl>
+
+  <h1>Capital for the<br>technology that<br><em>doesn't</em> displace.</h1>
+
+  <p class="lede" style="margin-top:30px">Maccabi Partners is a joint venture between Gord Holdings
+  and Kopman Holdings. It backs technology that makes established industries better rather than
+  technology that tries to end them — starting with the one industry both founders can see
+  from the inside.</p>
+</header>
+
+<section>
+  <span class="eyebrow"><span class="sec-no">01</span> &nbsp;·&nbsp; Position</span>
+  <h2>The sentence</h2>
+
+  <div class="rail" style="margin-top:32px">
+    <div class="note"><b>Read first</b>This document proposes a position, not a fact pattern.
+    Everything in it is a founders' draft for discussion between Michael Gord and Dustin Kopman.
+    No figure here has been audited and no entity described has been formed.</div>
+    <div>
+      <p style="font-family:var(--f-d);font-size:clamp(22px,2.7vw,34px);line-height:1.28;
+         max-width:32ch;color:var(--ink);margin-bottom:26px">
+        Maccabi Partners buys and builds ordinary businesses, and makes them exceptional with
+        technology that never threatens them.</p>
+
+      <p>That sentence is doing three jobs at once, and each is deliberate.</p>
+      <p><strong>"Ordinary businesses"</strong> — construction, property, trades, services. Real
+      companies with real revenue, in industries nobody calls exciting. This is where the founders'
+      operating experience actually lives, and it is the opposite of where most technology capital
+      goes.</p>
+      <p><strong>"Technology that never threatens them"</strong> — software built to raise an
+      operator's margin, not to disintermediate the operator. The technology serves the business.
+      Where most venture capital funds the company trying to replace the incumbent, Maccabi funds
+      the incumbent and gives it the tools.</p>
+      <p><strong>"Buys and builds"</strong> — permanent ownership, not a fund with a clock. The
+      vehicle is a joint venture between two family offices. It has no exit date because it does
+      not need one.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sec-no">02</span> &nbsp;·&nbsp; Refinement</span>
+  <h2>What we would change<br>about the idea</h2>
+  <p class="lede" style="margin-top:20px">The concept as described is sound. Five refinements make
+  it defensible in a room with people who do this professionally.</p>
+
+  <div class="refine" style="margin-top:clamp(30px,3.6vw,48px)">
+
+    <article>
+      <span class="n">R — 01</span>
+      <div>
+        <h3>Stop calling it a private equity firm</h3>
+        <p class="was"><b>As described:</b> "a private equity vehicle focused on non-disruptive
+        technologies."</p>
+        <p>It is not a private equity fund and it should not present as one. There is no blind pool,
+        no limited partners, no management fee, no carry, and no fund term. It is a
+        <strong>joint-venture holding company between two family offices</strong> — permanent
+        capital, deployed at the principals' discretion.</p>
+        <p>Three reasons the distinction matters. It is <em>true</em>, and sophisticated readers
+        detect the difference instantly. It is <em>stronger</em> — permanent capital with no clock
+        is a genuine advantage over sponsors who must exit in five years, and operators being
+        acquired care about that more than about brand. And it is <em>cleaner</em>: a public website
+        describing a fund is marketing securities, which brings Ontario securities regulation into
+        scope in a way that describing a holding company does not.</p>
+        <p style="margin-bottom:0">Use "private equity" to describe the <em>discipline</em>. Use
+        "joint venture" and "permanent capital" to describe the <em>structure</em>.</p>
+      </div>
+    </article>
+
+    <article>
+      <span class="n">R — 02</span>
+      <div>
+        <h3>"Non-disruptive" is a real school of thought — claim the lineage</h3>
+        <p class="was"><b>As described:</b> non-disruptive technologies, as a category preference.</p>
+        <p>Non-disruptive creation is not a coinage. It is the thesis of <em>Beyond Disruption</em>
+        (W. Chan Kim and Renée Mauborgne, Harvard Business Review Press, 2023) — the Blue Ocean
+        authors' argument that innovation can create new markets and new jobs
+        <strong>without displacing industries, companies or workers</strong>, and that the
+        displacement most innovators treat as a cost of doing business is in fact optional.</p>
+        <p>Anchoring to a named, peer-reviewed body of work does something no amount of positioning
+        copy can: it gives a small firm an intellectual position that is larger than its balance
+        sheet. Maccabi is not inventing a category. It is applying an established one to industries
+        the authors never wrote about.</p>
+        <p style="margin-bottom:0">It also supplies the moral argument, which matters more than
+        finance people admit. Disruption in the trades means putting builders out of work.
+        Non-disruptive technology means the same builder, better equipped.</p>
+      </div>
+    </article>
+
+    <article>
+      <span class="n">R — 03</span>
+      <div>
+        <h3>The rollup is the most crowded trade in North American private equity</h3>
+        <p class="was"><b>As described:</b> the private equity vehicle behind the Kopman Build
+        rollup.</p>
+        <p>Add-on acquisitions were <strong class="mono">75.9%</strong> of all US buyout activity in
+        Q2 2025 — above the five-year average of 72.5% and still
+        rising<span class="chip" style="margin-left:6px">Reported</span>. The specific sectors named
+        as most active in 2026 include HVAC, plumbing, roofing, electrical contracting and
+        landscaping. <strong>Every one of those is a construction trade.</strong></p>
+        <p>So "we are rolling up trades" is not a differentiator; it is table stakes, and Maccabi
+        will bid against sponsors with more capital and dedicated deal teams. The differentiation
+        has to be somewhere else, and it is:</p>
+        <ul style="margin-top:12px">
+          <li><strong>The operator is the sponsor.</strong> Most rollups are financial buyers
+          acquiring operators they will never be able to run. Here the operating company came
+          first, and has been building since 1999.</li>
+          <li><strong>The software is built in-house</strong>, on the group's own sites, before it
+          is sold to anyone. It is not a portfolio-wide ERP bolted on after close.</li>
+          <li><strong>The capital is permanent.</strong> A seller handing over a business they spent
+          thirty years building would rather sell to someone who is not required to flip it.</li>
+        </ul>
+        <p style="margin-bottom:0">Lead with alignment. Never lead with the strategy.</p>
+      </div>
+    </article>
+
+    <article>
+      <span class="n">R — 04</span>
+      <div>
+        <h3>Say plainly that it is small, and make that the point</h3>
+        <p class="was"><b>As described:</b> "currently small but hopefully one day big."</p>
+        <p>That instinct is right and should survive into the public copy. Emerging managers lose
+        credibility by writing like established ones — the language of a firm with billions under
+        management, attached to a firm with one operating relationship, reads as pretence and is
+        recognised immediately.</p>
+        <p style="margin-bottom:0">The honest version is stronger: <em>two family offices, one
+        operating platform, and a thesis we intend to prove on our own capital before we ever
+        manage anyone else's.</em> That sentence is disarming, unfalsifiable, and true. It also
+        makes the first outside investor's decision easy to frame, because by then there will be a
+        record instead of a projection.</p>
+      </div>
+    </article>
+
+    <article>
+      <span class="n">R — 05</span>
+      <div>
+        <h3>Concentration is the risk, and it is total</h3>
+        <p class="was"><b>As described:</b> Maccabi holds equity in both Kopman companies.</p>
+        <p>On day one Maccabi is <strong>one operator, one sector, one metropolitan area, one
+        founder relationship.</strong> There is no diversification of any kind. If Kopman Build has
+        a bad two years, Maccabi has a bad two years, and the relationship between the two families
+        absorbs the strain.</p>
+        <p style="margin-bottom:0">This is survivable and normal for a first vehicle — but it must
+        be written down, not discovered. Concentration disclosed reads as discipline; concentration
+        omitted and later noticed reads as something else entirely.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sec-no">03</span> &nbsp;·&nbsp; Structure</span>
+  <h2>Who owns what,<br>and why it aligns</h2>
+  <p class="lede" style="margin-top:20px">Two family offices, one shared vehicle, and a deliberate
+  crossing of interests that did not exist before.</p>
+
+  <figure style="margin-top:clamp(34px,4vw,54px)">
+  <svg class="dia" viewBox="0 0 900 462" role="img" aria-label="Ownership structure. Michael Gord owns Gord Holdings; Dustin Kopman owns Kopman Holdings. Both jointly own Maccabi Partners. Gord Holdings separately owns GDA Group, which pursues disruptive technology. Kopman Holdings owns Kopman Group, comprising Kopman Build, Kopman Properties and BuildOS. Maccabi Partners takes equity stakes in Kopman Build and Kopman Properties, which is the crossing that aligns the two families.">
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
+      <marker id="br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#8A6636"/></marker>
+    </defs>
+
+    <!-- principals -->
+    <text x="128" y="20" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.4" fill="currentColor" opacity=".55">PRINCIPAL</text>
+    <rect x="28" y="30" width="200" height="44" fill="none" stroke="currentColor" stroke-width="1.3"/>
+    <text x="128" y="58" text-anchor="middle" font-size="14" fill="currentColor">Michael Gord</text>
+
+    <text x="772" y="20" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.4" fill="currentColor" opacity=".55">PRINCIPAL</text>
+    <rect x="672" y="30" width="200" height="44" fill="none" stroke="currentColor" stroke-width="1.3"/>
+    <text x="772" y="58" text-anchor="middle" font-size="14" fill="currentColor">Dustin Kopman</text>
+
+    <line x1="128" y1="74" x2="128" y2="106" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"/>
+    <line x1="772" y1="74" x2="772" y2="106" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"/>
+
+    <!-- family offices -->
+    <rect x="28" y="108" width="200" height="52" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <text x="128" y="132" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="currentColor">Gord Holdings</text>
+    <text x="128" y="150" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" letter-spacing="1.1" fill="currentColor" opacity=".58">FAMILY OFFICE</text>
+
+    <rect x="672" y="108" width="200" height="52" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <text x="772" y="132" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="currentColor">Kopman Holdings</text>
+    <text x="772" y="150" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" letter-spacing="1.1" fill="currentColor" opacity=".58">FAMILY OFFICE</text>
+
+    <!-- JV -->
+    <path d="M 128 160 L 128 196 L 380 196" stroke="#8A6636" stroke-width="2" fill="none" marker-end="url(#br)"/>
+    <path d="M 772 160 L 772 196 L 520 196" stroke="#8A6636" stroke-width="2" fill="none" marker-end="url(#br)"/>
+    <rect x="380" y="172" width="140" height="48" fill="none" stroke="#8A6636" stroke-width="2.4"/>
+    <text x="450" y="194" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="#8A6636">Maccabi</text>
+    <text x="450" y="211" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="#8A6636">Partners</text>
+    <text x="450" y="240" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9.5" letter-spacing="1.2" fill="#8A6636">JOINT VENTURE · SPLIT TBD</text>
+
+    <!-- operating houses -->
+    <line x1="128" y1="160" x2="128" y2="268" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"/>
+    <rect x="28" y="270" width="200" height="52" fill="none" stroke="currentColor" stroke-width="1.3" stroke-dasharray="0"/>
+    <text x="128" y="293" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="currentColor">GDA Group</text>
+    <text x="128" y="311" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1" fill="currentColor" opacity=".58">DISRUPTIVE TECHNOLOGY</text>
+
+    <line x1="772" y1="160" x2="772" y2="268" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)"/>
+    <rect x="672" y="270" width="200" height="52" fill="none" stroke="currentColor" stroke-width="1.3"/>
+    <text x="772" y="293" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="currentColor">Kopman Group</text>
+    <text x="772" y="311" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" letter-spacing="1" fill="currentColor" opacity=".58">EST. 1999 · GTA &amp; MUSKOKA</text>
+
+    <!-- operating companies -->
+    <rect x="614" y="352" width="126" height="46" fill="none" stroke="currentColor" stroke-width="1" opacity=".85"/>
+    <text x="677" y="373" text-anchor="middle" font-size="12" fill="currentColor">Kopman Build</text>
+    <text x="677" y="389" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="currentColor" opacity=".55">CONSTRUCTION</text>
+    <rect x="750" y="352" width="126" height="46" fill="none" stroke="currentColor" stroke-width="1" opacity=".85"/>
+    <text x="813" y="373" text-anchor="middle" font-size="12" fill="currentColor">Kopman Props.</text>
+    <text x="813" y="389" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="currentColor" opacity=".55">INDUSTRIAL</text>
+    <path d="M 772 322 L 772 336 L 677 336 L 677 350" stroke="currentColor" stroke-width="1" fill="none" marker-end="url(#ar)"/>
+    <path d="M 772 336 L 813 336 L 813 350" stroke="currentColor" stroke-width="1" fill="none" marker-end="url(#ar)"/>
+
+    <!-- THE CROSSING -->
+    <path d="M 450 222 L 450 424 L 677 424" stroke="#8A6636" stroke-width="2.4" fill="none"/>
+    <path d="M 677 424 L 677 402" stroke="#8A6636" stroke-width="2.4" fill="none" marker-end="url(#br)"/>
+    <path d="M 677 424 L 813 424 L 813 402" stroke="#8A6636" stroke-width="2.4" fill="none" marker-end="url(#br)"/>
+    <text x="452" y="300" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.1" fill="#8A6636">EQUITY STAKES</text>
+    <text x="452" y="316" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.1" fill="#8A6636">— THE CROSSING</text>
+
+    <text x="240" y="448" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" letter-spacing="1.3" fill="#8A6636">BRONZE = WHAT DID NOT EXIST BEFORE</text>
+  </svg>
+  <figcaption>The bronze path is the whole arrangement. Without it, two families own two unrelated
+  groups. With it, Gord Holdings gains exposure to a twenty-six-year-old operating business, Kopman
+  Holdings gains a capital partner and a platform, and both principals are paid by the same
+  outcome. Remove the crossing and Maccabi is a name on a certificate.</figcaption>
+  </figure>
+
+  <div class="warn">
+    <span class="eyebrow">Open items — resolve before formation</span>
+    <p>Four things this diagram cannot yet state, and each needs an answer in writing before any of
+    it becomes public:</p>
+    <p><strong>The ownership split of Maccabi</strong> between the two holdings companies.
+    <strong>The size of the stakes</strong> Maccabi takes in Kopman Build and Kopman Properties, and
+    whether those stakes are purchased, contributed or earned. <strong>What Kopman Holdings receives
+    in exchange</strong> — capital, services, or Maccabi equity. And <strong>whether GDA Group sits
+    inside or outside</strong> the arrangement, which is a live question because it determines
+    whether Maccabi ever competes with it for a deal.</p>
+    <p style="margin-bottom:0">A joint venture between friends is easiest to paper when nobody
+    needs it papered.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sec-no">04</span> &nbsp;·&nbsp; Thesis</span>
+  <h2>Non-disruptive,<br>precisely defined</h2>
+
+  <div class="rail" style="margin-top:32px">
+    <div class="note"><b>Lineage</b>W. Chan Kim &amp; Renée Mauborgne, <em>Beyond Disruption:
+    Innovate and Achieve Growth without Displacing Industries, Companies, or Jobs</em>. Harvard
+    Business Review Press, 2023. The same authors' earlier work is <em>Blue Ocean Strategy</em>.</div>
+    <div>
+      <p>Disruption creates value by destroying something. A disruptive company wins share that
+      belonged to an incumbent; the gain on one side of the ledger is a loss on the other, and the
+      loss lands on real firms and real employment. That trade is often worth making, and it is the
+      basis of most technology investing. It is also, as a matter of arithmetic, only one of two
+      available paths.</p>
+      <p><strong>Non-disruptive creation is the other.</strong> It opens markets that did not exist,
+      or lifts the productivity of markets that already do, without taking share from anyone.
+      Nobody's business is ended for the new value to appear.</p>
+      <p>Maccabi applies that idea to a narrow and unglamorous field: <strong>software and systems
+      that make established operating businesses measurably better at what they already do.</strong>
+      Estimating, scheduling, cost intelligence, procurement, quality control, client management.
+      Not marketplaces that disintermediate the contractor. Not platforms that turn a trade into a
+      commodity. Tools the operator owns and the operator's margin absorbs.</p>
+    </div>
+  </div>
+
+  <figure style="margin-top:clamp(38px,4.4vw,56px)">
+  <svg class="dia" viewBox="0 0 900 300" role="img" aria-label="Two paths to value. In the disruptive path, a new entrant takes share from an incumbent, so the market total is unchanged and the incumbent shrinks. In the non-disruptive path, technology raises the incumbent's own output, so the market grows and nobody is displaced. GDA Group operates on the first path; Maccabi Partners on the second.">
+    <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="currentColor"/></marker>
+      <marker id="b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon points="0,0 10,5 0,10" fill="#8A6636"/></marker></defs>
+
+    <text x="20" y="22" font-family="ui-monospace,monospace" font-size="10.5" letter-spacing="1.5" fill="currentColor" opacity=".6">DISRUPTIVE — VALUE MOVES</text>
+    <text x="20" y="40" font-family="ui-monospace,monospace" font-size="9.5" fill="currentColor" opacity=".45">GDA GROUP OPERATES HERE</text>
+    <rect x="20" y="54" width="150" height="62" fill="none" stroke="currentColor" stroke-width="1.3"/>
+    <text x="95" y="80" text-anchor="middle" font-size="12.5" fill="currentColor">Incumbent</text>
+    <text x="95" y="98" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".6">100 units</text>
+    <line x1="180" y1="85" x2="222" y2="85" stroke="currentColor" stroke-width="1.3" marker-end="url(#a2)"/>
+    <rect x="228" y="54" width="98" height="62" fill="none" stroke="currentColor" stroke-width="1.3"/>
+    <text x="277" y="80" text-anchor="middle" font-size="12.5" fill="currentColor">Incumbent</text>
+    <text x="277" y="98" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".6">40</text>
+    <rect x="330" y="54" width="98" height="62" fill="none" stroke="currentColor" stroke-width="1.3" stroke-dasharray="4 3"/>
+    <text x="379" y="80" text-anchor="middle" font-size="12.5" fill="currentColor">Entrant</text>
+    <text x="379" y="98" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="currentColor" opacity=".6">60</text>
+    <text x="452" y="90" font-family="ui-monospace,monospace" font-size="11" fill="currentColor" opacity=".72">market still 100 · jobs move or vanish</text>
+
+    <line x1="20" y1="146" x2="880" y2="146" stroke="currentColor" stroke-opacity=".22" stroke-width="1"/>
+
+    <text x="20" y="180" font-family="ui-monospace,monospace" font-size="10.5" letter-spacing="1.5" fill="#8A6636">NON-DISRUPTIVE — VALUE APPEARS</text>
+    <text x="20" y="198" font-family="ui-monospace,monospace" font-size="9.5" fill="#8A6636" opacity=".72">MACCABI PARTNERS OPERATES HERE</text>
+    <rect x="20" y="212" width="150" height="62" fill="none" stroke="#8A6636" stroke-width="1.6"/>
+    <text x="95" y="238" text-anchor="middle" font-size="12.5" fill="#8A6636">Incumbent</text>
+    <text x="95" y="256" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#8A6636" opacity=".8">100 units</text>
+    <line x1="180" y1="243" x2="222" y2="243" stroke="#8A6636" stroke-width="2" marker-end="url(#b2)"/>
+    <text x="201" y="234" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#8A6636">+ tools</text>
+    <rect x="228" y="212" width="200" height="62" fill="none" stroke="#8A6636" stroke-width="2"/>
+    <text x="328" y="238" text-anchor="middle" font-size="12.5" fill="#8A6636">Same incumbent</text>
+    <text x="328" y="256" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#8A6636" opacity=".8">140 — at a better margin</text>
+    <text x="452" y="248" font-family="ui-monospace,monospace" font-size="11" fill="#8A6636">market now 140 · nobody displaced</text>
+  </svg>
+  <figcaption>The distinction is not a matter of degree. In the upper path the market total is
+  unchanged and the question is only who holds it. In the lower path the total moves, and the firm
+  that captures the gain is the one that was already there. Maccabi only invests where the second
+  diagram describes what happens.</figcaption>
+  </figure>
+
+  <h3 style="margin-top:clamp(44px,5vw,66px)">Two vehicles, one spectrum</h3>
+  <p style="margin-top:16px">This is also why Maccabi does not compete with GDA Group for a single
+  deal. GDA's stated position is <em>global capital for disruptive technology</em>. Maccabi's is its
+  exact complement. Between them, Gord Holdings covers the whole innovation spectrum without either
+  vehicle ever bidding against the other.</p>
+
+  <div class="tbl" style="margin-top:26px">
+    <table>
+      <caption class="eyebrow" style="text-align:left;padding:12px 15px;border-bottom:1px solid var(--line)">The two vehicles compared</caption>
+      <thead><tr><th scope="col"></th><th scope="col">GDA Group</th><th scope="col">Maccabi Partners</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Position</strong></td><td>Global capital for disruptive technology</td><td>Capital for non-disruptive technology</td></tr>
+        <tr><td><strong>Effect on incumbents</strong></td><td>Displaces them</td><td>Equips them</td></tr>
+        <tr><td><strong>Where value comes from</strong></td><td>Share taken from an existing market</td><td>Output added to an existing market</td></tr>
+        <tr><td><strong>Typical target</strong></td><td>Technology company entering an industry</td><td>Industry company adopting technology</td></tr>
+        <tr><td><strong>Geography</strong></td><td>Global</td><td>Greater Toronto Area first</td></tr>
+        <tr><td><strong>Structure</strong></td><td>Merchant bank &amp; capital markets</td><td>Joint-venture permanent capital</td></tr>
+        <tr><td><strong>Horizon</strong></td><td>Transaction-led</td><td>Indefinite</td></tr>
+        <tr><td><strong>Owned by</strong></td><td>Gord Holdings</td><td>Gord Holdings &amp; Kopman Holdings</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="call">
+    <span class="eyebrow">The name</span>
+    <p class="big">The Maccabees restored. They did not replace.</p>
+    <p>The etymology of <em>Maccabee</em> is genuinely contested. The most widely held reading traces
+    it to the Aramaic <em class="mono">maqqəḇa</em> — a hammer — for Judah's conduct in battle.
+    Others read it as an acronym of <em>Mi kamokha ba'elim Adonai</em>, or as a form meaning
+    "the one designated." Scholarship has not settled it, and any brand story built on the name
+    should say so rather than pick the convenient version.</p>
+    <p style="margin-bottom:0">What is not contested is what the Maccabees did when they won: they
+    cleaned and rededicated a building that already stood. The festival that commemorates it,
+    Hanukkah, is named for that dedication rather than for the victory. A hammer is a builder's
+    tool before it is a weapon — and restoring rather than replacing is, two thousand years early,
+    the thesis of this firm.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sec-no">05</span> &nbsp;·&nbsp; Mandate</span>
+  <h2>What Maccabi buys</h2>
+  <p class="lede" style="margin-top:20px">Generic criteria describe roughly sixty per cent of
+  middle-market vehicles. These are written to exclude.</p>
+
+  <div class="grid g2" style="margin-top:clamp(30px,3.6vw,46px)">
+    <div>
+      <span class="eyebrow" style="margin-bottom:14px">We invest in</span>
+      <ul style="margin:0;padding-left:1.05em;font-size:15.5px;color:var(--ink-2)">
+        <li>Owner-operated businesses in construction, property, trades and adjacent services</li>
+        <li>Companies with real revenue and real customers — not pre-revenue technology</li>
+        <li>Situations where a software or systems layer measurably raises the operator's margin</li>
+        <li>Greater Toronto Area and Southern Ontario, where the founders can be on site</li>
+        <li>Sellers who care where their business and their people end up</li>
+        <li>Control or meaningful minority positions, held without a defined exit date</li>
+      </ul>
+    </div>
+    <div>
+      <span class="eyebrow" style="margin-bottom:14px">We do not invest in</span>
+      <ul style="margin:0;padding-left:1.05em;font-size:15.5px;color:var(--ink-2)">
+        <li>Technology whose business model requires an existing industry to shrink</li>
+        <li>Marketplaces that disintermediate the operator we would otherwise back</li>
+        <li>Pre-revenue or pre-product companies — that is GDA Group's remit, not this one</li>
+        <li>Anything requiring a five-year exit to work</li>
+        <li>Businesses neither principal could stand in front of and explain</li>
+        <li>Sectors where Maccabi would be bidding against a dedicated sponsor with a deal team</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:clamp(44px,5vw,64px)">The value-creation model</h3>
+  <p style="margin-top:16px">Four levers, in the order they are pulled. The discipline is that
+  nothing in the fourth column is underwritten at entry.</p>
+
+  <div class="tbl" style="margin-top:24px">
+    <table>
+      <thead><tr><th scope="col">Lever</th><th scope="col">What it is</th><th scope="col">Who executes</th><th scope="col">Underwritten?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>01 · Acquire well</strong></td><td>Buy owner-operated businesses at private-market multiples, in a market where sellers value continuity over headline price</td><td>Maccabi</td><td><span class="chip ok">Yes</span></td></tr>
+        <tr><td><strong>02 · Operate better</strong></td><td>Apply the group's existing estimating, scheduling and cost discipline — the systems Kopman Build already runs on</td><td>Kopman Group</td><td><span class="chip ok">Yes</span></td></tr>
+        <tr><td><strong>03 · Equip with software</strong></td><td>Deploy BuildOS across acquired operators; the tooling is built and proven internally before it is rolled out</td><td>Kopman Group</td><td><span class="chip">Partly</span></td></tr>
+        <tr><td><strong>04 · Re-rate at scale</strong></td><td>Multiple expansion from consolidating small operators into one professionalised platform</td><td>Market</td><td><span class="chip no">Never</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:16px;font-size:14.5px;color:var(--slate)">Multiple arbitrage is the most
+  cited driver of buy-and-build returns and the least controllable. It should be an outcome the
+  vehicle enjoys, never an assumption it depends on. Any deal that only works on lever four is a
+  deal Maccabi declines.</p>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sec-no">06</span> &nbsp;·&nbsp; Governance</span>
+  <h2>The conflicts,<br>written down first</h2>
+  <p class="lede" style="margin-top:20px">A vehicle owned by two families, investing in one family's
+  operating companies, employing the other family's other vehicle in adjacent markets. The conflicts
+  are structural. They are also entirely manageable if named early.</p>
+
+  <div class="grid g2" style="margin-top:clamp(30px,3.6vw,46px)">
+    <div>
+      <h4 style="margin-bottom:10px">Related-party pricing</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Maccabi will own stakes in companies
+      that transact with each other and with their own shareholders. Every internal contract needs a
+      written scope and an external benchmark. If Kopman Build performs work for a Maccabi-owned
+      company at a preferential rate, that is a transfer between shareholders, and it must be
+      visible as one.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Allocation between vehicles</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">If an opportunity is both disruptive and
+      adjacent to construction, does it go to GDA or Maccabi? Write the rule now, while it is
+      hypothetical. The natural line is the thesis itself: <em>if it wins by displacing an
+      incumbent, it is not a Maccabi deal.</em></p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Time and attention</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Both principals have day jobs running
+      other things. A vehicle that depends on two part-time founders will move at the speed of the
+      busier one. Decide what each owes the venture in hours and in decision rights, and decide it
+      before a deal is on a clock.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Exit and deadlock</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Two-party joint ventures deadlock. A
+      shotgun clause, a valuation mechanic and a tag-along are unglamorous to negotiate at formation
+      and impossible to negotiate at the point they are needed. This is the single most valuable
+      hour of legal work the venture will buy.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Regulatory posture</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">While Maccabi invests only the
+      principals' own capital, it is a holding company and its website is corporate information. The
+      moment it accepts outside capital it is distributing securities in Ontario, and prospectus,
+      registration and marketing rules apply to everything already published. Get Canadian
+      securities counsel before the first outside dollar — not after.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Serial acquisition scrutiny</h4>
+      <p style="font-size:15px;color:var(--ink-2);margin:0">Competition regulators in North America
+      have begun treating strings of individually small acquisitions as reviewable in aggregate where
+      they build local dominance. At current scale this is remote. At the scale the venture is aiming
+      for, in a single metropolitan trade market, it is foreseeable and worth tracking.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sec-no">07</span> &nbsp;·&nbsp; Evidence</span>
+  <h2>What the market says</h2>
+
+  <div class="grid g4" style="margin-top:clamp(28px,3.4vw,44px)">
+    <div><span class="stat"><b>75.9%</b><span>Of US buyout activity was add-on deals, Q2 2025</span></span></div>
+    <div><span class="stat"><b>72.5%</b><span>Five-year average — the strategy is still accelerating</span></span></div>
+    <div><span class="stat"><b>31.6%</b><span>Avg IRR on buy-and-build in the deepest public study</span></span></div>
+    <div><span class="stat"><b>23.1%</b><span>Avg IRR on standalone buyouts, same study</span></span></div>
+  </div>
+
+  <div class="warn" style="margin-top:30px">
+    <span class="eyebrow">Handle these two numbers carefully</span>
+    <p style="margin-bottom:0">The IRR comparison is the most quoted statistic in buy-and-build and
+    the most misused. The underlying study covers <strong>predominantly European transactions exited
+    between 1998 and 2012</strong>. It is old, geographically narrow, and predates both the current
+    interest-rate environment and the crowding described in Refinement 03. Cite it as evidence that
+    the strategy has historically worked, never as a forecast of what this vehicle will earn — and
+    never in any document that could be read as an offer.</p>
+  </div>
+
+  <div class="rail" style="margin-top:36px">
+    <div class="note"><b>Reading</b>The same sources that support the strategy also describe its
+    crowding. Both belong in the narrative. A thesis that only cites its own tailwinds is a
+    marketing document.</div>
+    <div>
+      <p>The mechanics behind those returns are consistent across sources: buying small operators at
+      lower multiples and selling a consolidated platform at higher ones; procurement, overhead and
+      density economics that only appear at scale; and the professionalisation of management,
+      pricing and systems in businesses that never had them.</p>
+      <p>All three are available to Maccabi. Only the third is fully within its control, and it
+      happens to be the one the founders are actually equipped to execute — because one of them has
+      been running the professionalised version of exactly these businesses since 1999.</p>
+      <p style="margin-bottom:0">The honest read of the evidence is therefore: <strong>the strategy
+      works, the strategy is crowded, and the third lever is where a small operator-led vehicle can
+      still win.</strong></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sec-no">08</span> &nbsp;·&nbsp; Candour</span>
+  <h2>What has to be true</h2>
+
+  <div style="margin-top:clamp(28px,3.4vw,44px);display:grid;gap:22px">
+    <div class="warn" style="margin:0">
+      <span class="eyebrow">Risk 01 — Total concentration</span>
+      <p style="margin-bottom:0">One operator, one sector, one city, one relationship. There is no
+      diversification and there will not be for some time. A bad two years at Kopman Build is a bad
+      two years for Maccabi, and the strain lands on a friendship as well as a balance sheet.</p>
+    </div>
+    <div class="warn" style="margin:0">
+      <span class="eyebrow">Risk 02 — The software is a promise, not a product</span>
+      <p style="margin-bottom:0">BuildOS is real code, but it has not yet run a full year of the
+      group's own projects, and it has never been deployed into an acquired company. Lever three of
+      the value-creation model is unproven. Underwrite deals as though it does not exist, and treat
+      it as upside until a second operator is live on it.</p>
+    </div>
+    <div class="warn" style="margin:0">
+      <span class="eyebrow">Risk 03 — Two part-time principals</span>
+      <p style="margin-bottom:0">Neither founder is doing this full time. Proprietary deal flow in a
+      crowded market is a full-time job, and the vehicle will lose competitive processes to sponsors
+      with dedicated teams. The answer is not to compete on speed — it is to buy only where the
+      relationship, not the process, produced the opportunity.</p>
+    </div>
+    <div class="warn" style="margin:0">
+      <span class="eyebrow">Risk 04 — Permanent capital cuts both ways</span>
+      <p style="margin-bottom:0">No clock means no forced sales, and it also means no forced
+      discipline. Funds are compelled to mark, report and exit. A family joint venture can carry an
+      underperforming asset indefinitely because nobody makes it stop. Adopt a reporting cadence and
+      a written impairment trigger voluntarily, or the advantage becomes the flaw.</p>
+    </div>
+    <div class="warn" style="margin:0">
+      <span class="eyebrow">Risk 05 — The name carries meaning that is not yours to spend</span>
+      <p style="margin-bottom:0">Maccabi is a name with deep and specific significance, and it is
+      already borne by institutions worldwide. Using it commits the firm to conduct that can stand
+      beside it, and it is worth confirming there is no trademark conflict in the relevant classes.
+      Chosen deliberately it is an asset. Chosen casually it is a liability that compounds.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sec-no">09</span> &nbsp;·&nbsp; Communications</span>
+  <h2>The corporate<br>communications kit</h2>
+  <p class="lede" style="margin-top:20px">Written to be used, not adapted. Everything below is
+  final copy except where a bracket marks a fact only the founders can supply.</p>
+
+  <h3 style="margin-top:clamp(38px,4.4vw,58px)">Boilerplate — three lengths</h3>
+  <p style="margin-top:12px;font-size:15px;color:var(--slate);max-width:64ch">Every organisation
+  needs these three and should never write a fourth. The short form ends a press release; the medium
+  form opens a deck; the long form sits on the About page.</p>
+
+  <div class="copy">
+    <header><h4>Short</h4><span class="len">25 words · release footer</span></header>
+    <div class="body"><p>Maccabi Partners is a joint venture between Gord Holdings and Kopman
+    Holdings, investing permanent capital in established operating businesses and the technology
+    that makes them better.</p></div>
+  </div>
+
+  <div class="copy">
+    <header><h4>Medium</h4><span class="len">55 words · deck &amp; profile</span></header>
+    <div class="body"><p>Maccabi Partners is a joint venture between the family offices of Michael
+    Gord and Dustin Kopman. It invests permanent capital in owner-operated businesses across
+    construction, property and adjacent services in Southern Ontario, and in the non-disruptive
+    technology that raises their productivity — backing the incumbent rather than the company
+    trying to replace it.</p></div>
+  </div>
+
+  <div class="copy">
+    <header><h4>Long</h4><span class="len">110 words · About page</span></header>
+    <div class="body"><p>Maccabi Partners is a joint venture between Gord Holdings and Kopman
+    Holdings — the family offices of Michael Gord, founder of GDA Group, and Dustin Kopman, founder
+    of Kopman Group, a Greater Toronto Area construction business operating since 1999.</p>
+    <p>Maccabi invests permanent capital in owner-operated businesses in construction, property,
+    trades and adjacent services, and in the technology that makes them measurably better at what
+    they already do. It takes the non-disruptive path deliberately: the firm backs the operator
+    rather than the entrant trying to displace them.</p>
+    <p style="margin-bottom:0">The firm holds its investments without a defined exit date and
+    invests its principals' own capital.</p></div>
+  </div>
+
+  <h3 style="margin-top:clamp(42px,4.8vw,64px)">The one-liner and the pitch</h3>
+
+  <div class="copy">
+    <header><h4>One-liner</h4><span class="len">For an introduction</span></header>
+    <div class="body"><p style="font-family:var(--f-d);font-size:21px;line-height:1.4">"We buy good,
+    boring businesses and give them technology that makes them better instead of technology that
+    puts them out of work."</p></div>
+  </div>
+
+  <div class="copy">
+    <header><h4>Thirty seconds</h4><span class="len">Spoken — read it aloud before using it</span></header>
+    <div class="body"><p>"Maccabi is a joint venture between my family office and Dustin Kopman's.
+    Dustin has run a construction business in Toronto since 1999. Most technology capital in this
+    space funds the company trying to disintermediate the builder — we do the opposite. We buy
+    owner-operated businesses and equip them with software built on our own job sites first.</p>
+    <p style="margin-bottom:0">It is permanent capital, so there is no fund clock and no forced
+    exit, which matters enormously to a founder selling something they spent thirty years building.
+    We are small and we are deliberately proving it on our own money before we manage anyone
+    else's."</p></div>
+  </div>
+
+  <h3 style="margin-top:clamp(42px,4.8vw,64px)">Message house</h3>
+  <p style="margin-top:12px;font-size:15px;color:var(--slate);max-width:64ch">One core message, three
+  pillars, and the proof each pillar rests on. Every piece of communication traces to one of these
+  three — anything that does not is off-message and should be cut.</p>
+
+  <div class="call" style="margin-top:24px">
+    <span class="eyebrow">Core message</span>
+    <p class="big" style="margin-bottom:0">Technology should make good businesses better, not make
+    them obsolete.</p>
+  </div>
+
+  <div class="grid g3" style="margin-top:20px">
+    <div>
+      <span class="eyebrow" style="margin-bottom:12px">Pillar 01 — Aligned</span>
+      <p style="font-size:15px;color:var(--ink-2)">The operator and the capital are the same people.
+      We are not a fund that bought a builder; we are a builder that raised a fund alongside it.</p>
+      <p style="font-size:13.5px;color:var(--slate);margin:0"><strong>Proof:</strong> Kopman Group,
+      operating since 1999. BuildOS, built on the group's own sites. Both principals invest their
+      own capital.</p>
+    </div>
+    <div>
+      <span class="eyebrow" style="margin-bottom:12px">Pillar 02 — Non-disruptive</span>
+      <p style="font-size:15px;color:var(--ink-2)">We back the incumbent. Our technology raises the
+      operator's margin; it never depends on the operator's decline.</p>
+      <p style="font-size:13.5px;color:var(--slate);margin:0"><strong>Proof:</strong> the published
+      mandate excluding disintermediating models. The intellectual lineage in
+      <em>Beyond Disruption</em>. GDA Group holds the disruptive mandate separately.</p>
+    </div>
+    <div>
+      <span class="eyebrow" style="margin-bottom:12px">Pillar 03 — Permanent</span>
+      <p style="font-size:15px;color:var(--ink-2)">No fund term, no forced exit, no clock. We can
+      hold a business for as long as it deserves to be held.</p>
+      <p style="font-size:13.5px;color:var(--slate);margin:0"><strong>Proof:</strong> family-office
+      capital, joint-venture structure, no third-party limited partners and no defined term.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:clamp(42px,4.8vw,64px)">Objection handling</h3>
+  <div class="tbl" style="margin-top:22px">
+    <table>
+      <thead><tr><th scope="col">You will hear</th><th scope="col">Answer with</th></tr></thead>
+      <tbody>
+        <tr><td>"You have no track record as a fund."</td><td>Correct — and we are not asking anyone to fund one. We are investing our own capital in a business one of us has run since 1999. When there is a record, we will show it.</td></tr>
+        <tr><td>"Everyone is rolling up trades right now."</td><td>They are, and most of them are financial buyers who have never run one. We are not competing on price or process. We buy where the relationship produced the opportunity.</td></tr>
+        <tr><td>"Non-disruptive sounds like a way of saying unambitious."</td><td>It is the opposite. Disruption takes share from a fixed market. We are trying to raise what the market produces. One is a transfer; the other is growth.</td></tr>
+        <tr><td>"Isn't this just Kopman with extra steps?"</td><td>Today it is largely Kopman, and we say so. The structure exists so that it does not stay that way — and so both families are paid by the same outcome when it does not.</td></tr>
+        <tr><td>"Two part-time founders."</td><td>True, and it caps how many processes we can run. It does not cap the ones that come to us because Dustin has been in this market for twenty-six years.</td></tr>
+        <tr><td>"Why the name?"</td><td>The Maccabees are remembered for winning a fight and then rebuilding what was already there. That is the thesis.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top:clamp(42px,4.8vw,64px)">Announcement release</h3>
+  <p style="margin-top:12px;font-size:15px;color:var(--slate);max-width:64ch">Template for formation.
+  Brackets mark facts only the founders can supply. Note that it announces a
+  <em>structure</em> and a <em>thesis</em> — never a target return, a fund size, or an offer.</p>
+
+  <div class="copy">
+    <header><h4>For immediate release</h4><span class="len">Template · ~320 words</span></header>
+    <div class="body mono">TORONTO, [DATE] — Gord Holdings and Kopman Holdings today announced the
+formation of Maccabi Partners, a joint-venture investment vehicle focused on
+established operating businesses and non-disruptive technology.
+
+Maccabi Partners is owned jointly by the family offices of Michael Gord, founder
+of GDA Group, and Dustin Kopman, founder of Kopman Group, a Greater Toronto Area
+construction business operating since 1999. The vehicle invests the principals'
+own capital and holds its positions without a defined exit date.
+
+The firm's mandate is owner-operated businesses in construction, property, trades
+and adjacent services in Southern Ontario, together with the software and systems
+that raise their productivity. Maccabi's stated position is that technology
+should improve established businesses rather than displace them — the
+"non-disruptive creation" thesis set out by W. Chan Kim and Renée Mauborgne in
+Beyond Disruption (Harvard Business Review Press, 2023).
+
+At formation, Maccabi Partners holds equity positions in [Kopman Build and Kopman
+Properties / DETAIL TO CONFIRM].
+
+"[Quote — Dustin Kopman. Should speak to what changes for an operator: a capital
+partner who has been on a job site, and no clock. Two sentences.]"
+
+"[Quote — Michael Gord. Should speak to why this sits alongside GDA rather than
+inside it: the two vehicles cover opposite halves of the innovation spectrum.
+Two sentences.]"
+
+The firm is not currently raising or accepting outside capital.
+
+ABOUT MACCABI PARTNERS
+[Insert short boilerplate — 25 words.]
+
+ABOUT GORD HOLDINGS
+[One sentence. To confirm.]
+
+ABOUT KOPMAN HOLDINGS
+[One sentence. To confirm.]
+
+MEDIA CONTACT
+[Name, email, telephone.]</div>
+  </div>
+
+  <h3 style="margin-top:clamp(42px,4.8vw,64px)">The seller letter</h3>
+  <p style="margin-top:12px;font-size:15px;color:var(--slate);max-width:64ch">Commercially the most
+  valuable document here. It is what a sixty-year-old owner of a profitable trades business reads
+  when deciding whether to reply. It sells continuity, not price.</p>
+
+  <div class="copy">
+    <header><h4>Direct approach to an owner</h4><span class="len">Template · keep under 200 words</span></header>
+    <div class="body mono">Dear [NAME],
+
+I run a construction business in [CITY] — we have been building here since 1999.
+Over the last few years I have been buying a small number of businesses like
+yours, together with my partner Michael Gord.
+
+I am writing directly rather than through a broker because I suspect you get
+several of those a month, and because what we do is different enough to be worth
+one paragraph of your time.
+
+We are not a fund. We do not have investors who need their money back in five
+years, so we do not have to sell what we buy. When we acquire a business we keep
+the name, we keep the people, and we put our own systems and software behind it
+to make the work easier and the margins better.
+
+If you have thought about what happens to [COMPANY] eventually — and most owners
+have — I would be glad to have a conversation with no process attached to it. If
+the timing is wrong, I would still like to know you.
+
+[SIGNATURE]
+Dustin Kopman
+Maccabi Partners · Kopman Group</div>
+  </div>
+
+  <h3 style="margin-top:clamp(42px,4.8vw,64px)">Leadership biographies</h3>
+  <p style="margin-top:12px;font-size:15px;color:var(--slate);max-width:64ch">Structure only. Named
+  individuals with specific attribution are what sophisticated readers look for, and inventing that
+  detail is the one unrecoverable error in this whole document.</p>
+
+  <div class="grid g2" style="margin-top:20px">
+    <div>
+      <h4 style="margin-bottom:10px">Each biography, in this order</h4>
+      <ol style="margin:0;padding-left:1.1em;font-size:15px;color:var(--ink-2)">
+        <li>Name and role at Maccabi</li>
+        <li>The operating fact that earns the reader's attention — what they have actually built or run, with a date</li>
+        <li>Specific attribution: named companies, named transactions, named outcomes</li>
+        <li>Their other current roles, stated plainly, including the potential conflicts</li>
+        <li>One human sentence — where they live, what they do otherwise</li>
+      </ol>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px">Facts required before publication</h4>
+      <ul style="margin:0;padding-left:1.05em;font-size:15px;color:var(--ink-2)">
+        <li>Michael Gord — founding date and role at GDA Group, prior ventures, verifiable transaction history</li>
+        <li>Dustin Kopman — founding date at Kopman Group (1999 per existing materials), scale of the business in terms both could substantiate</li>
+        <li>Any other principals, advisers or board members</li>
+        <li>Photography of both principals</li>
+        <li>Confirmation of what each is willing to have publicly attached to the venture</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow"><span class="sec-no">10</span> &nbsp;·&nbsp; Voice</span>
+  <h2>How the firm sounds</h2>
+
+  <div class="grid g2" style="margin-top:clamp(28px,3.4vw,44px)">
+    <div>
+      <span class="eyebrow" style="margin-bottom:14px">Always</span>
+      <ul style="margin:0;padding-left:1.05em;font-size:15.5px;color:var(--ink-2)">
+        <li><strong>Plain, short, declarative.</strong> The register is a letter from an operator, not a memorandum from a bank.</li>
+        <li><strong>Concrete nouns.</strong> Loading docks, estimating software, job sites, payroll. Never "solutions," "synergies" or "value creation opportunities."</li>
+        <li><strong>Numbers with provenance</strong> or no numbers at all.</li>
+        <li><strong>Admit the size.</strong> Small and honest beats large and unverifiable.</li>
+        <li><strong>Name the people.</strong> Firms of this size are their principals.</li>
+      </ul>
+    </div>
+    <div>
+      <span class="eyebrow" style="margin-bottom:14px">Never</span>
+      <ul style="margin:0;padding-left:1.05em;font-size:15.5px;color:var(--ink-2)">
+        <li><strong>Any target return, projection or performance figure</strong> in public material. This is a legal line, not a stylistic one.</li>
+        <li><strong>"Fund," "LP," "AUM" or "carry"</strong> until they are true.</li>
+        <li><strong>Borrowed institutional grandeur</strong> — no unstaffed offices, no illustrative statistics, no logos the firm has not earned.</li>
+        <li><strong>Disruption language.</strong> It is the opposite of the thesis and reads as unexamined.</li>
+        <li><strong>Anything that could be read as an offer</strong> to sell a security.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="copy" style="margin-top:26px">
+    <header><h4>Standing disclaimer</h4><span class="len">Site footer &amp; every document</span></header>
+    <div class="body mono">Maccabi Partners is a private joint-venture holding company. It invests
+the capital of its principals. Nothing on this site is an offer to sell or a
+solicitation of an offer to buy any security, nor is it investment, legal or tax
+advice. Information is provided for general corporate purposes, may not be
+current, and is subject to change without notice. Past results of any business
+described are not indicative of future results.
+
+[Review with Canadian securities counsel before publication and again before
+accepting any capital from outside the principals.]</div>
+  </div>
+</section>
+
+<section style="padding-bottom:clamp(56px,7vw,100px)">
+  <span class="eyebrow"><span class="sec-no">11</span> &nbsp;·&nbsp; Sequence</span>
+  <h2>Order of operations</h2>
+
+  <div class="tbl" style="margin-top:clamp(28px,3.4vw,44px)">
+    <table>
+      <thead><tr><th scope="col">When</th><th scope="col">Do</th><th scope="col">Why now</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">First</td><td>Answer the four open items in the structure diagram — ownership split, stake size, consideration, and whether GDA sits inside or outside</td><td>Everything downstream is unwritable until these are settled</td></tr>
+        <tr><td class="mono">First</td><td>Paper the joint venture: deadlock, valuation, shotgun, tag-along, decision rights, time commitment</td><td>Negotiable now, impossible later</td></tr>
+        <tr><td class="mono">Early</td><td>Trademark search on "Maccabi Partners" in the relevant classes</td><td>The name carries meaning and is widely borne; confirm before it is printed</td></tr>
+        <tr><td class="mono">Early</td><td>Canadian securities counsel review of the site and this positioning</td><td>Cheapest while the answer is still "no securities are being offered"</td></tr>
+        <tr><td class="mono">Launch</td><td>Publish maccabi.partners — thesis, structure, mandate, named principals, disclaimer</td><td>The firm needs an address before it has a portfolio</td></tr>
+        <tr><td class="mono">Launch</td><td>Formation release, and the seller letter into a named list of Southern Ontario operators</td><td>The letter is the commercial engine; the release is the credential</td></tr>
+        <tr><td class="mono">Year one</td><td>Complete one acquisition outside Kopman Group</td><td>The single fact that turns a structure into a firm</td></tr>
+        <tr><td class="mono">Year one</td><td>Deploy BuildOS into that acquired business and measure the margin change</td><td>Converts lever three from a promise into evidence</td></tr>
+        <tr><td class="mono">Later</td><td>Only then consider outside capital — and rebuild every public document for a regulated context first</td><td>By then there is a record instead of a projection</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="call" style="margin-top:clamp(38px,4.4vw,58px)">
+    <span class="eyebrow">The whole document in one paragraph</span>
+    <p style="margin-bottom:0;font-size:17px">Maccabi Partners is a permanent-capital joint venture
+    between two family offices, not a private equity fund, and should say so. It backs established
+    operating businesses and the technology that improves them rather than replaces them — a thesis
+    with a real intellectual lineage and a precise complement to GDA Group's disruptive mandate. The
+    rollup strategy it will pursue is the most crowded in North American private equity, so it must
+    lead with alignment rather than strategy: the operator is the sponsor, the software is built
+    in-house, and the capital has no clock. It is concentrated in a single operator today and should
+    admit that plainly. Paper the joint venture and clear the name before anything is published.</p>
+  </div>
+</section>
+
+<footer style="border-top:1px solid var(--line);padding:30px 0 54px">
+  <dl class="colo" style="border:0">
+    <div style="border-right:0;padding-left:0"><dt>Document</dt><dd>Corporate Strategy</dd></div>
+    <div style="border-right:0"><dt>Companion</dt><dd>maccabi.partners landing page</dd></div>
+    <div style="border-right:0"><dt>Status</dt><dd>Founders' draft · nothing herein is an offer</dd></div>
+  </dl>
+</footer>
+
+</div>

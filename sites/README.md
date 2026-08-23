@@ -5,6 +5,7 @@ contact form. Both are deployed as **separate Vercel projects** from this one re
 
 ```
 sites/
+├── maccabi-partners/      → maccabi.partners
 ├── kopman-group/          → kopman.group
 │   ├── index.html         single page, self-contained CSS + JS
 │   ├── api/contact.js     serverless contact endpoint (Resend)
