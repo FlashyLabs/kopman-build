@@ -1,0 +1,8 @@
+# Dependabot — GitHub Actions version updates.
+# Part of the estate-wide hardening baseline.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

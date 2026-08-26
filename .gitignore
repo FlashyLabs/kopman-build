@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+
+# builds / caches
+.next/
+out/
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+
+# env files — real secrets live in Vercel / GCP Secret Manager, never in git
+.env
+.env.*
+!.env.example
+
+# logs / os / coverage
+*.log
+npm-debug.log*
+.DS_Store
+coverage/
+.vercel
