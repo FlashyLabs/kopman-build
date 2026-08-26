@@ -2,7 +2,8 @@ node_modules
 .next
 .turbo
 dist
-*.env
+.env*
+!.env.example
 .env.local
 .env.production
 .vercel
