@@ -1,0 +1,52 @@
+name: CI
+
+# This repository is mostly a large static site (~690 committed HTML pages)
+# with a small Next app under buildos/. It carried no CI at all, which meant
+# nothing checked the app's types or build before a deploy.
+#
+# The gate is deliberately what can pass today: HTML integrity across the
+# committed site, and typecheck + build for the app when its manifest is
+# present. It is a floor to build on, not a claim of coverage.
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  site:
+    name: Static site integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Every committed page is non-empty and has a title
+        run: |
+          fail=0
+          while IFS= read -r f; do
+            if [ ! -s "$f" ]; then echo "EMPTY: $f"; fail=1; continue; fi
+            grep -qi '<title' "$f" || { echo "NO <title>: $f"; fail=1; }
+          done < <(find . -name '*.html' -not -path './node_modules/*' -not -path './.git/*')
+          exit $fail
+
+  app:
+    name: App typecheck + build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Typecheck and build the app, if it has a manifest
+        run: |
+          if [ -f buildos/package.json ]; then
+            cd buildos
+            npm ci || npm install
+            npm run typecheck --if-present
+            npm run build --if-present
+          else
+            echo "No app manifest at buildos/ — nothing to build."
+          fi
