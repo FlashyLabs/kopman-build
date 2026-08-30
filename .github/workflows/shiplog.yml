@@ -15,7 +15,6 @@ name: Shiplog
 
 on:
   push:
-    branches: ['claude/repo-update-EeLrY']
     paths-ignore:
       - 'shiplog.fragment.json'
   schedule:
@@ -34,6 +33,7 @@ concurrency:
 jobs:
   emit:
     runs-on: ubuntu-latest
+    if: github.event_name != 'push' || github.ref_name == github.event.repository.default_branch
     steps:
       - uses: actions/checkout@v4
         with:

@@ -1,6 +1,5 @@
 {
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "agent": "agent/kopman-build-bot",
-  "branch": "claude/repo-update-EeLrY"
+  "agent": "agent/kopman-build-bot"
 }
