@@ -244,3 +244,23 @@ styles/
 ```
 
 Re-use the design tokens table above; the visual system is intentionally token-driven so a port is mechanical.
+
+---
+
+## Where the application lives
+
+This repository is the **marketing site only**. `vercel.json` deploys `site/`,
+a set of static location pages, and nothing else here is built or served.
+
+Build OS — the multi-tenant operations platform for the engagement — used to sit
+in a `buildos/` directory here as well. It was an exact, byte-for-byte copy of
+the standalone Build OS repository: not deployed by this project, not built by
+it, and with nothing to notice if the two ever disagreed. On 2026-08-30 they
+did disagree, within an hour of somebody fixing dead imports in one of them.
+
+It is removed. The application is one repository now, and this one is the site.
+
+`buildos/apps/web/.env.vercel` went with it. That file carried a live
+`AUTH_SECRET` and six other credentials, and it was untracked before this
+change — but **removal is not rotation**. Those values are in the history of
+two repositories, they stay there, and they are still to be rotated.
