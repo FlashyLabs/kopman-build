@@ -2,8 +2,44 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-30T19:25:31.352Z",
+  "generated": "2026-08-30T21:56:46.578Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/9abc81b545bc",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T21:56:15Z",
+      "kind": "infra",
+      "title": "Remove the second copy of Build OS; this repository is the site",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "`vercel.json` deploys `site/` and nothing else here is built or served. The\n`buildos/` directory was an exact, byte-for-byte copy of the standalone Build\nOS repository — 54 source files, not deployed by this project, not built by it,\nand with nothing anywhere to notice if the two ever disagreed.\n\nThey disagreed within an hour of somebody fixing dead imports in one of them,\nwhich is the whole argument: a copy with no drift test does not fail, it\ndiverges, and the first person to find out is whoever debugs a fix that is\npresent in one repository and absent in the other.\n\nOne thing was worth carrying across and has been: this copy's `.gitignore`\nrecorded *why* it matches the whole `.env` family — `*.env` does not match\n`.env.vercel`, and that gap is how a live AUTH_SECRET and six other credentials\nreached a tracked file on 2026-08-23. The pattern was already right in the\nstandalone repository; the reason was only written here. It is written there\nnow.\n\nThe credential file was already untracked. **Removal is not rotation** — those\nvalues are in the history of two repositories, they stay there, and they are\nstill to be rotated.\n\nThis also settles what this repository is asked for. It has no application\nsource now, so it owes no lint config and no test suite; it owes a deployed\nsite, which it has.\n\nKind: chore\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01BEaXzktRU5ZPe3R2NY7CKD",
+      "refs": {
+        "commit": "9abc81b545bcb71fb7efa8f1da56600bff520ac1"
+      },
+      "digest": "1dbf9d23235b7d5218ffc5ae45a6abce12b3806b534d51f1cc60af9f108e4554"
+    },
+    {
+      "id": "ship/kopman-build/86bab113fbb1",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T19:32:53Z",
+      "kind": "docs",
+      "title": "Carry the house rules, so an agent stops having to guess them",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "Twenty of thirty-five repositories had no CLAUDE.md or AGENTS.md, and an\nagent with no repository doc guesses. Every avoidable mistake made across\nthis estate on 2026-08-30 happened in a repository without one — and each\nwas a fact that is true everywhere rather than a fact about that\nrepository:\n\n  work pushed to `main` in eleven repositories whose default branch is not\n  `main`, deploying nothing and read by nobody, with the push succeeding;\n\n  a vendored emitter trusted after its source changed, so a privacy hold\n  added that morning did nothing in sixteen repositories and published the\n  entry it was meant to withhold;\n\n  a copyright holder guessed as the studio on a client's site;\n\n  measurements reported from a working copy while claiming to describe the\n  branch that ships — twice, in two tools, by two agents, four hours apart.\n\nNone of that is repo-specific knowledge, and writing it thirty-five times\nwould drift the first time it changed. It is declared in\n`tools/estate-house-rules.mjs` in flashyos and synced between two markers.\nEverything outside the markers is this repository's own and is never\ntouched.\n\nWhere this file is new it says the repository is not yet described, which\nis true. A generated description would be wrong and would read as\nauthoritative; admitting the gap is a task somebody can close in a minute.\n\nKind: docs",
+      "refs": {
+        "commit": "86bab113fbb1dae691e6cc1f4773382f59b15a16"
+      },
+      "digest": "c9a5502dfb4493a75dc16392e4ecdc25ebecd8cf94f06a1f3c200c5b71c6b986"
+    },
     {
       "id": "ship/kopman-build/5875278b2c74",
       "repo": "repo/kopman-build",
