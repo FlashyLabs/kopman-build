@@ -12,7 +12,7 @@
     "michaelgord@michaels-macbook-pro.local": "person/michael",
     "noreply@anthropic.com": "agent/claude"
   },
-  "visibility": "private",
+  "visibility": "public",
   "lexicon": "imperative",
   "prBase": "https://github.com/FlashyLabs/kopman-build/pull/"
 }

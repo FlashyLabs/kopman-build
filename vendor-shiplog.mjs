@@ -8,7 +8,7 @@
 // install to do it. So: copy this file in, run it with node, get a sealed,
 // valid fragment derived from the history the repository already has.
 //
-//   node vendor-shiplog.mjs emit [--since 2026-01-01] [--out shiplog.fragment.json]
+//   node vendor-shiplog.mjs emit [--since 2026-01-01] [--rev origin/main] [--out F] [--rederive]
 //   node vendor-shiplog.mjs verify <fragment.json>
 //
 // Configure once in .shiplog/config.json:
@@ -188,6 +188,49 @@ export function parseGitLog(raw) {
   }).filter((c) => c.sha && c.at)
 }
 
+/**
+ * An address that belongs to a machine rather than a person.
+ *
+ * A fixed list and one convention, deliberately: `[bot]@` is GitHub's own
+ * marker, and the local parts below are the identities CI actually commits
+ * under — including `shiplog` and `backlog`, which are the two workflows this
+ * format installs and which would otherwise file their own refresh commits
+ * under a person.
+ *
+ * Not a heuristic. Matching on something looser — the domain, a `bot` prefix —
+ * would file people under `agent/` on the strength of their email provider,
+ * which is the same error pointed the other way. An address this does not
+ * recognise is reported as unmapped and attributed to nobody in particular;
+ * the fix is a line in `authors`, which is the author saying so.
+ */
+export const UNATTRIBUTED_AGENT = 'agent/unattributed'
+
+const MACHINE_LOCAL_PARTS = new Set([
+  'actions', 'github-actions', 'dependabot', 'renovate', 'shiplog', 'backlog',
+])
+
+export function isMachineAddress(email) {
+  const address = String(email).toLowerCase().trim()
+  if (address === 'noreply@anthropic.com') return true
+  if (address.includes('[bot]@')) return true
+  return MACHINE_LOCAL_PARTS.has(address.split('@')[0])
+}
+
+
+/**
+ * A commit this format's own workflows made, refreshing a file they generate.
+ *
+ * The log was recording its own bookkeeping as things that shipped: three
+ * entries in flashy-ledger reading "shipped/1: refresh the log". A generated
+ * file being regenerated is not work, and counting it inflates both the entry
+ * count and the agent share — the two numbers this record exists to make
+ * honest. Anchored to the exact subjects the emitted workflows commit under,
+ * so a person writing about the format is not filtered out.
+ */
+const BOOKKEEPING_RE = /^(shipped\/1: refresh the log|backlog\/1: refresh the fragment)$/
+
+export const isOwnBookkeeping = (subject) => BOOKKEEPING_RE.test((subject ?? '').trim())
+
 export function fromCommits(commits, options) {
   const repoSlug = options.repo.replace(/^repo\//, '')
   const asserted = options.asserted ?? new Date().toISOString().slice(0, 10)
@@ -197,16 +240,30 @@ export function fromCommits(commits, options) {
     ? buildLexicon(options.lexicon === 'imperative' ? IMPERATIVE_LEXICON : options.lexicon)
     : undefined
   const declaredKinds = options.kinds ?? {}
+  const held = options.held ?? {}
   const nodeFor = (email) => {
     const mapped = authors[email.toLowerCase()]
     if (mapped) return mapped
     unmapped.add(email)
-    return options.defaultAuthor
+    // `defaultAuthor` is a fallback for a *person* whose address is not in the
+    // table yet. An address that is plainly a machine's must never reach it.
+    //
+    // This estate ran with `authors: {}` and a `defaultAuthor` of
+    // `person/michael`, and the log came back 116 entries, 0 by an agent, 116
+    // by a person — while 95 of the 107 commits behind it were authored by
+    // `noreply@anthropic.com`. The emitter did print "2 unmapped authors", and
+    // a warning that the run then contradicts is not a guard.
+    //
+    // Human/agent attribution is the number this whole record exists to make
+    // checkable. Getting it wrong in the safe direction — an unnamed agent —
+    // costs a config entry. Getting it wrong the other way credits a person
+    // with work they did not do, in a document built to be cited.
+    return isMachineAddress(email) ? UNATTRIBUTED_AGENT : options.defaultAuthor
   }
 
   const shipped = options.keepIntegrationMerges
     ? commits
-    : commits.filter((c) => !isIntegrationMerge(c.subject))
+    : commits.filter((c) => !isIntegrationMerge(c.subject) && !isOwnBookkeeping(c.subject))
 
   const entries = shipped.map((commit) => {
     const message = `${commit.subject}\n${commit.body ?? ''}`
@@ -227,7 +284,21 @@ export function fromCommits(commits, options) {
       by: by.length ? by : [options.defaultAuthor],
       asserted,
       assertedBy: options.assertedBy,
-      visibility: options.visibility ?? 'private',
+      // A repository publishes; an entry may still be held back.
+      //
+      // `visibility` is one field and it turns a whole log public. That is the
+      // right shape for the decision — but it is not the only decision. An
+      // entry can describe a security gap that is still open: this estate has
+      // one saying which file in which repository carried a live signing
+      // secret, that the secret is in git history on two repositories, and
+      // that it has not been rotated. Publishing the log publishes the
+      // exploitation route.
+      //
+      // So `.shiplog/held.json` lists shas that stay private whatever the
+      // repository default is. Held rather than deleted: the entry is still in
+      // the repository's own full record, still sealed, still countable. What
+      // changes is only whether a stranger can read it.
+      visibility: held[commit.sha] || held[commit.sha.slice(0, 12)] ? 'private' : (options.visibility ?? 'private'),
     }
     const detail = (commit.body ?? '').trim()
     if (detail) entry.detail = detail.slice(0, 2000)
@@ -292,6 +363,10 @@ const CONFIG = '.shiplog/config.json'
 // sha → kind, for the third of real history that is a noun phrase with no verb
 // to read. A person decides once and it is written down here.
 const KINDS = '.shiplog/kinds.json'
+// Shas held private regardless of the repository's `visibility`. Values are the
+// reason, so the file says why rather than just listing hashes somebody must
+// then go and reconstruct.
+const HELD = '.shiplog/held.json'
 const FORMAT = '%H%x1f%aI%x1f%aE%x1f%s%x1f%b%x1e'
 
 /**
@@ -307,6 +382,21 @@ const FORMAT = '%H%x1f%aI%x1f%aE%x1f%s%x1f%b%x1e'
  * `rev` exists for the one case that is neither: deriving a log for a branch
  * you are not on.
  */
+/**
+ * The existing entries plus any newly derived ones, newest first.
+ *
+ * An entry that is already in the fragment wins over a freshly derived one of
+ * the same id. They should be identical; if they are not, the sealed one is the
+ * record and the new one is a re-derivation under different config — and a
+ * regeneration is not the place to silently restate history.
+ */
+export function mergeEntries(existing, derived) {
+  const byId = new Map()
+  for (const entry of derived) byId.set(entry.id, entry)
+  for (const entry of existing) byId.set(entry.id, entry)
+  return [...byId.values()].sort((a, b) => String(b.at).localeCompare(String(a.at)))
+}
+
 export const revOf = (config) => config?.rev ?? 'HEAD'
 
 export function readGitLog({ rev = 'HEAD', since } = {}) {
@@ -330,14 +420,52 @@ function run(argv) {
 
   if (!existsSync(CONFIG)) throw new Error(`${CONFIG} is missing — see the header of this file for its shape`)
   const config = JSON.parse(readFileSync(CONFIG, 'utf8'))
-  const raw = readGitLog({ rev: revOf(config), since: flag('since') })
+  // `--rev` overrides what the log is derived from. CI never needs it — a
+  // runner checks out the default branch and `HEAD` is the right answer — but
+  // a person correcting a fragment from a feature branch does, because their
+  // own first-parent line is not the trunk's and deriving from it would file
+  // the branch's shape as the repository's history.
+  const raw = readGitLog({ rev: flag('rev') ?? revOf(config), since: flag('since') })
   // A recorded human decision per commit, for the ones nothing can read.
   const kinds = existsSync(KINDS) ? JSON.parse(readFileSync(KINDS, 'utf8')) : {}
-  const { entries, unmapped } = fromCommits(parseGitLog(raw), { ...deriveOptionsFrom(config), kinds })
+  const held = existsSync(HELD) ? JSON.parse(readFileSync(HELD, 'utf8')) : {}
+  const derived = fromCommits(parseGitLog(raw), { ...deriveOptionsFrom(config), kinds, held })
+  const { unmapped } = derived
   const out = flag('out') ?? 'shiplog.fragment.json'
-  // The root output is the repository's own full record — every tier.
+
+  // Sealed and never decays — which has to survive a regeneration, or it is a
+  // sentence rather than a property.
+  //
+  // The log is derived with `--first-parent`, so it tells the trunk's story
+  // rather than every commit. The consequence nobody saw coming: a commit that
+  // is first-parent while you are on a branch stops being first-parent the
+  // moment that branch is merged. Emit again and it is simply gone. Running
+  // this in flashyos on 2026-08-30 took the fragment from 84 entries to 102 by
+  // adding 32 and *deleting 14* whose commits were still perfectly reachable.
+  //
+  // So an emit is a union, not a replacement. Entries already in the fragment
+  // are kept byte-for-byte — they are sealed, and re-deriving one would
+  // recompute a digest that is not ours to recompute — and only genuinely new
+  // ids are added. The result is append-only for the same reason the
+  // Directory's assertions are: a record of the past that a later commit can
+  // quietly shorten is not evidence of anything.
+  // `--rederive` discards what is there and takes the derivation as it stands.
+  //
+  // There has to be a way to correct a derivation that was wrong — this
+  // estate's first log filed 95 agent-authored commits under a person, and
+  // append-only would otherwise have made that permanent. But it is a stated
+  // act, never something a scheduled run does on its own: CI runs plain `emit`,
+  // and plain `emit` cannot shorten or restate the record. Correct before you
+  // publish; after publication a re-derivation is a revision somebody else has
+  // already cited.
+  const rederive = argv.includes('--rederive')
+  const kept = !rederive && existsSync(out) ? (JSON.parse(readFileSync(out, 'utf8')).entries ?? []) : []
+  const entries = mergeEntries(kept, derived.entries)
+  const added = entries.length - kept.length
+
   writeFileSync(out, `${JSON.stringify(fragmentOf(config, entries), null, 2)}\n`)
-  console.log(`${entries.length} entries → ${out}`)
+  const how = rederive ? ' (re-derived — previous entries discarded)' : kept.length ? ` (${added} new, ${kept.length} kept)` : ''
+  console.log(`${entries.length} entries → ${out}${how}`)
 
   // The served copy is the PUBLIC PROJECTION and never the full record.
   // Written rather than copied by a workflow, so there is one implementation,

@@ -2,8 +2,26 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-30T16:15:01.810Z",
+  "generated": "2026-08-30T17:02:22.512Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/22c8015f1e8d",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T16:18:23+00:00",
+      "kind": "fix",
+      "title": "Map the estate's commit addresses to who they belong to",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "`authors` was empty and `defaultAuthor` filed every entry under one identity,\nso this log looked fully attributed while agent-authored commits were recorded\nas the person named as the default.\n\nThe map is declared once in flashyos `tools/estate-authors.mjs` and synced\nhere. Five addresses are left unmapped on purpose, each with a stated reason.\n\nKind: fix",
+      "refs": {
+        "commit": "22c8015f1e8d4fbeb0d8d5a2747b71a92361cd75"
+      },
+      "digest": "462cafc78c0a008f1bf87bbb1f2dbed023d21cb1ed11d87590eb6fce35fdd075"
+    },
     {
       "id": "ship/kopman-build/3ab62668b44b",
       "repo": "repo/kopman-build",
@@ -15,12 +33,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Each workflow triggered on `branches: ['<the default branch at adoption>']`.\nEleven repositories in this estate have a `claude/*` branch as their GitHub\ndefault; renaming one to `main` is the right thing to do and would have stopped\nits workflow firing. Nothing would have failed — the fragment would simply have\nstopped advancing, and a stale changelog reads exactly like a current one.\n\nThe trigger now matches any push and the job is gated on\n`github.ref_name == github.event.repository.default_branch`, resolved per run,\nso a rename is survived rather than discovered. `branch` is dropped from the\nconfig: nothing read it, and a stored branch name is a snapshot of something\nthat changes.\n\nKind: fix",
       "refs": {
         "commit": "3ab62668b44bee1704c03b930a3e83147f59c892"
       },
-      "digest": "85ae4a4cebdc3a8e87c9652c3a39fced3afe21fc59caabccbb943bbe5f1cc813"
+      "digest": "c8480c3bf6261dfdc1221456ea0eddb31fb47398a887f98630e11e8d8302bdeb"
     },
     {
       "id": "ship/kopman-build/7a0d6fc87c0d",
@@ -33,12 +51,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "The derived log was classified only by conventional-commit prefixes, and\nthis repository writes declarative English. Unclassified went from 76%\nto 8% by reading the estate's declared imperative lexicon, looking\npast a project prefix to the verb behind it, and dropping merges of\nanother branch into this line — which are not things that shipped.\n\nNothing is published: entries remain private and the served copy is the\npublic projection.\n\nKind: infra\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01FDosmV9fXV6oZ9NXe7PZ76",
       "refs": {
         "commit": "7a0d6fc87c0dc16b75f0074714e41d9a91ac7e21"
       },
-      "digest": "c56bebc9fb479687a34b733e13b19f834678075a7a7b199b6eeee94855ddd7bb"
+      "digest": "e9f8d3d9bf89621c925ca1b2933bf14ed371f1d9416fc676846a7171b9201376"
     },
     {
       "id": "ship/kopman-build/df00f2b74a13",
@@ -51,12 +69,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Adoption wrote `main`, and this repository has no `main` — its remote\nHEAD is a branch named after the change that created it. A workflow\nwritten for a branch that does not exist is the silent kind of broken:\nit is present, it reads correctly, and it never fires.\n\nFixed in the adopt command too, which now asks the remote for its HEAD\nwhen the local refs say nothing and neither main nor master was fetched.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01FDosmV9fXV6oZ9NXe7PZ76",
       "refs": {
         "commit": "df00f2b74a138cea8c64a73730a90563881b16a1"
       },
-      "digest": "2958b2e1a2b7326073b95e08498cb083b0c138564f487b76a0ba40b38d47b978"
+      "digest": "2b39b35480a6450bf48736a61193013a0e02438499ecfca9fdc68919d2814de1"
     },
     {
       "id": "ship/kopman-build/9cfea7998658",
@@ -69,12 +87,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "This repository now publishes the two tenses the estate records: what it\nintends, and what it shipped. Both are emitted by a dependency-free\nvendored script, so nothing here gains a toolchain it did not have.\n\nNothing is published by this commit. Backlog items are filed private and\nreach the served fragment only when a named human promotes one; shipped\nentries land private until someone changes one field in\n.shiplog/config.json. The served copy is the public projection and the\nemitter writes it, so a private record cannot reach a URL through a\nforgotten copy step.\n\nDerived 24 entries from this repository's own history, every seal\nrecomputed. Org org/kopman-build, served at none.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01FDosmV9fXV6oZ9NXe7PZ76",
       "refs": {
         "commit": "9cfea7998658c3f7b2e16ccad5cce2a2139036df"
       },
-      "digest": "383374cc70c67757356775483ff6ebb05cf3a2b09aa9da77142159f5b73c8888"
+      "digest": "5bbe113606a356ce6b09070894007849e295c58f001668f9c9e174e8146eccb2"
     },
     {
       "id": "ship/kopman-build/bcac6270c7b4",
@@ -87,11 +105,11 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "refs": {
         "commit": "bcac6270c7b464a7e7f9a6e3986f780bbd5cb6ae"
       },
-      "digest": "7b362fc2adba8fc98c7af758418b958c32e79884c99eab5c9e0e0d168558f880"
+      "digest": "9343ae62741af2c6ef3a6364db5b5d94d984931f9b7416a7c792a69a7815e7e8"
     },
     {
       "id": "ship/kopman-build/e79714cedf20",
@@ -104,12 +122,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Vercel was defaulting to npm (no lockfile present), which fails on\nworkspace:* protocol. Adding pnpm-lock.yaml and pnpm-workspace.yaml\nforces Vercel to detect and use pnpm.",
       "refs": {
         "commit": "e79714cedf20f98a9fd412b1d24ece99209d41b0"
       },
-      "digest": "228eac9ae0f58d3b1698d7f63d8c367f8828893bcb66d28de2e708eb25c674bf"
+      "digest": "108c586dad317a4dac2b553228993d447af6b4833a8417d57b3bb9e80503e796"
     },
     {
       "id": "ship/kopman-build/a3cde50fde9d",
@@ -122,11 +140,11 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "refs": {
         "commit": "a3cde50fde9d564de85fd867aa500b9262db2464"
       },
-      "digest": "57264076ebd0d8c533910625f262505ca9d1aab370b85a7b2aa2763276ff1896"
+      "digest": "6b82c127737291024a818495361400a2da2b02116dc9c9fbdaa7010520e93ea8"
     },
     {
       "id": "ship/kopman-build/f78aabb0fa3d",
@@ -159,12 +177,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Video-to-Quote Pipeline:\n- Presigned R2 upload for video files (500MB cap, 15min TTL)\n- Frame extraction worker dispatch (Railway service, AWS Batch in Phase 6)\n- Claude Vision analysis of up to 20 keyframes — rooms identified, condition notes,\n  per-line-item confidence levels, flagged issues, recommended follow-up\n- Secure frame-extraction webhook receiver (shared secret auth)\n- Full job lifecycle: uploading → extracting → analyzing → complete/failed\n\nCost Intelligence Engine:\n- Historical benchmark queries (P25/avg/P75 contract value per project type)\n- Quote audit: flags quotes >40% above/below tenant's own historical average\n- AI margin report (Haiku) — natural language executive summary per period\n\nMarketplace (multi-firm lead routing):\n- Seller side: list overflow leads with AI-generated PII-free summary, set price\n- Buyer side: browse available leads by city/type/price, claim via Stripe payment\n- Platform commission (10%) via Stripe Connect application_fee_amount\n- Contact info released only after payment confirmed via webhook\n- Lead TTL: 72h auto-expiry (pg_cron snippet in migration)\n- Revenue tracking: leads sold, gross/net revenue per origin tenant\n\nWhite-label (Enterprise):\n- Custom domain, brand name, primary color, logo, favicon, custom CSS\n- hideBuiltWith flag, supportEmail override\n- brandTokens endpoint for CSS variable injection\n- Gated behind assertFeatureAccess(\"white_label\") → Enterprise plan only\n\nDB Phase 5 schema + migration:\n- marketplace_profiles, marketplace_leads, lead_purchases\n- video_quote_jobs (with RLS)\n- whitelabel_configs\n- Grants + pg_cron lead expiry snippet\n\nCo-Authored-By: Michael Gord <michael@gda.capital>",
       "refs": {
         "commit": "431fe657f8d89f6f1cb75946c50fb2c789b1e696"
       },
-      "digest": "0f1f7aa33fa60d510238cd9360c28158685aa62cced6f9dd35e5522ad8b2700d"
+      "digest": "50fcc2417875a56d5a47edee36c0cf4a9b339f6c807bf196273f29e3f04f34e5"
     },
     {
       "id": "ship/kopman-build/79662cbe3e96",
@@ -178,12 +196,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Stripe SaaS Billing:\n- Three plans: Starter ($99), Growth ($299), Enterprise ($999/mo)\n- Checkout session creation with 14-day trial\n- Customer Portal for self-serve plan changes / cancellation\n- Webhook handler: checkout.session.completed, subscription.updated/deleted, payment_failed\n- Plan auto-synced to tenant.plan on every subscription event\n\nPlan Gating:\n- assertUserLimit / assertProjectLimit / assertAiQuoteLimit per plan\n- assertFeatureAccess gates content machine, referrals, loyalty, marketing, inventory, white-label\n\nStripe Connect:\n- Per-tenant Connect account (standard) for collecting customer payments\n- Onboarding link generation, payment intent creation on connected accounts\n\nTenant Onboarding:\n- 5-step checklist: profile → plan → payments → social\n- Team invite flow (FlashyID-backed, placeholder user record claimed on first login)\n- Plan comparison endpoint with feature lists\n- Save social credentials (Meta + Google) to tenant_settings\n\nUI:\n- /onboarding checklist page with progress bar\n- /settings/billing page with current plan + upgrade/downgrade cards\n\nDB Migration 0001:\n- stripe_connect_account_id + stripe_connect_onboarded on tenant_settings\n- RLS policy for tenant_settings\n- Indexes on stripe_subscription_id + stripe_customer_id\n\nCo-Authored-By: Michael Gord <michael@gda.capital>",
       "refs": {
         "commit": "79662cbe3e968894369b461f464db815d4b457ec"
       },
-      "digest": "f6b9397a5778b3a38bf9e69c84192d969cc3257d28bdd0f804e3135ab92e96f6"
+      "digest": "3a91320cb42686ec8122c6acc79071008d1fa76cab86bf21b06d72a15b8493c5"
     },
     {
       "id": "ship/kopman-build/b8b1c3e65514",
@@ -197,12 +215,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Content Machine:\n- Case study generator (Claude Opus Vision) — title, scope, outcome, FAQ, 3 social posts, SEO meta\n- Social scheduler with Meta Graph API (Instagram + Facebook) and Google My Business\n- Media router with presigned R2 uploads, AI caption generation (Haiku), publish flags\n\nReferral Engine:\n- Create/convert/reward flow with tiered rewards ($250/$500/$1000 by project value)\n- Auto loyalty points on referral conversion, referrer email notifications via Resend\n\nLoyalty Program:\n- Points per $100 spent, review bonuses, repeat customer bonus\n- 4-tier system (bronze/silver/gold/platinum) with tier-specific benefits\n- Points redemption ($25 off per 100 pts)\n\nMarketing Automation:\n- 3-step nurture email sequence\n- Post-completion review request sequence\n- AI win-back message generator (Haiku) for cold leads\n- 5 contact segments: repeat buyers, high-value, inactive 6m, nurture leads, gold tier\n\nInventory Management:\n- Stock items with reorder points, per-unit cost tracking\n- In/out/adjustment transactions linked to projects\n- Low-stock alerts and reorder suggestions\n\nQuotes:\n- Edit AI-generated drafts, send via email (Resend), accepted status auto-updates lead to won\n\nDB Phase 2 schema:\n- content_pieces, inventory_items, inventory_transactions, tenant_settings tables\n\nCo-Authored-By: Michael Gord <michael@gda.capital>",
       "refs": {
         "commit": "b8b1c3e655143b974e90bd3f553c020359e96b73"
       },
-      "digest": "fbd55aa0ac6a9f8cf7a454b73bcae4d64638f96fc2906334bffde18507c88d33"
+      "digest": "6ee183beabf0977937eb73c283039201c93725745b508aac619262f778d5c46c"
     },
     {
       "id": "ship/kopman-build/559714e444d1",
@@ -216,12 +234,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Build OS monorepo bootstrapped under /buildos:\n- Turborepo workspace with apps/web (Next.js 15) and packages/db + types\n- FlashyID as OIDC OAuth provider via Auth.js v5 custom provider\n  - Auto-provisions tenant from FlashyID org_id/buildos_tenant claim\n  - Upserts user record on every sign-in, stores flashy_id as subject ref\n- PostgreSQL schema via Drizzle ORM with Row-Level Security\n  - All tenant-scoped tables enforce RLS via app.current_tenant_id session var\n  - withTenant() helper sets the var per transaction\n  - Separate migrator role (BYPASSRLS) vs app role (RLS enforced)\n- tRPC v11 routers: leads, contacts, projects, ai\n  - Role-gated procedures (viewer/field/manager/admin/owner)\n  - Lead pipeline aggregation, contact loyalty points, project financials\n- AI photo-to-quote pipeline using Claude Vision (claude-opus-5)\n  - Accepts 1–10 photos, returns structured line-item quote as draft\n  - Haiku-backed caption generator for before/after media\n- Dashboard KPI page (SSR server-side caller)\n- Sidebar navigation with all 9 modules pre-wired\n- Tailwind dark theme (gray-950 ground, teal-400 accent)\n\nCo-Authored-By: Michael Gord <michael@gda.capital>",
       "refs": {
         "commit": "559714e444d188f9124b9667d421ef380230f908"
       },
-      "digest": "2f2a6a381673fc455be6298ce1f7fc8b48a271411de2e6a261d55f943a597f89"
+      "digest": "75971891c8548c4bd3eba32749a21601f8723fc76c5a8b2558ce358c68a119a5"
     },
     {
       "id": "ship/kopman-build/5471c0737264",
@@ -234,12 +252,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Two bugs diagnosed from mobile screenshots:\n1. 287 newly generated pages had drawer HTML but no mobile CSS (injection\n   script couldn't match minified CSS string) — drawer items rendered\n   inline, hamburger button was a grey square, accordion didn't work\n2. All pages had mob-drawer z-index:200 equal to mega-menu dropdown,\n   and homepage drawer was z-index:60 (below the sticky nav at z-index:50\n   was barely above it) — drawer was obscured by the sticky nav bar\n\nFix: inject full mobile CSS into all pages missing it, bump mob-drawer\nz-index to 300 site-wide, homepage drawer z-index 60→300. Add\ndisplay:block !important on .mob-group-body a to prevent cascade override.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "5471c0737264ab3d7807f677810f280c7368ef24"
       },
-      "digest": "20e7f9e97f494d263bf7729fce214ddf2463d8ddedf7b666327ca1ea90daa64f"
+      "digest": "8276882ad9d9a7a48ae62bcfa3ec63778cc3a5fa2360579db1be3b8d0072ef49"
     },
     {
       "id": "ship/kopman-build/0b4d6e30c319",
@@ -252,12 +270,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Generated programmatic SEO pages for all missing service × neighbourhood\ncombinations across Toronto, GTA, and Muskoka markets. Services covered:\nbasement renovation, bathroom renovation, custom home building, design-build,\ngeneral contracting, home addition, kitchen renovation, laneway house,\nrenovation contractor, and second storey addition across 30+ neighbourhoods\neach.\n\nSitemap updated from ~412 to 691 URLs with today's lastmod date.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "0b4d6e30c319984a8a6edb0c2956231984529f25"
       },
-      "digest": "640ace5a69e6f43c259ea3a83186f0b5c2552573dd7ad96d3fb097bc4ecdc725"
+      "digest": "e1c93ee2313b28fcdb5522f023dfcf162e4cc243d28ff34f44008f6f55f4bd6a"
     },
     {
       "id": "ship/kopman-build/e024891c1823",
@@ -270,12 +288,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Interior pages previously had no mobile navigation (nav-links hidden at <880px,\nno hamburger). Now all interior pages have:\n- Hamburger button (3-line icon, top-right in header)\n- Full-screen slide-in drawer with accordion sections for Services, Markets,\n  and Resources (tap to expand), plus direct links for About, Insights,\n  For Professionals, and Request a Consultation CTA\n- Smooth open/close animation (translateX), body scroll-lock when open\n\nHomepage drawer updated: added Insights, For Professionals, and a Resources\nsection listing all 7 strategic resource pages. Removed #process and #services\nsection anchors (replaced with global links that work across the site).\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "e024891c182336992ebb0c20eda83ce3df800aac"
       },
-      "digest": "f9314bb7d1f9b102ca7be5a693ab135ac6f622463ddaeb4e5eb4cd3779bf3c02"
+      "digest": "44ae0824c5a49b112c006d51fc3f79e8537f2bc6482c28e2503f8046f17fa4bc"
     },
     {
       "id": "ship/kopman-build/1fecc30b75aa",
@@ -288,12 +306,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Two bugs:\n1. Homepage missing .nav-drop{position:relative} — dropdowns were anchoring\n   to the header instead of their trigger, placing Markets and Resources at\n   the far right of the page.\n2. top:calc(100%+14px) created a 14px gap between trigger and dropdown;\n   moving the mouse across the gap lost hover state, making items unclickable.\n   Fixed with a .nav-drop::after pseudo-element that bridges the gap invisibly.\n\nApplied to homepage + all 411 interior pages.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "1fecc30b75aa5e53c6c74b020acf54d688a0becf"
       },
-      "digest": "5afb4766a5c3885c8ce006eef3407e0c8e2950e1fe0aa99ce4ea066419e84698"
+      "digest": "ae67ed459f89cf6af1f9eeee26b94efba2c3dde8ed31a05bef72ef6c07f7fc4e"
     },
     {
       "id": "ship/kopman-build/fa88c098a074",
@@ -306,12 +324,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "New nav structure: About | Services▾ | Markets▾ | Resources▾ | Insights | For Professionals\n- Resources dropdown (right-anchored 2-col): Tools & Data (Cost Index, Budget\n  Calculator, Permit Timeline) + Reference Guides (4 strategic guide pages)\n- For Professionals added as standalone nav link\n- Contact removed from nav links (covered by Request a Consultation CTA)\n- .nav-mega-2col-right CSS class added for right-anchored 2-col dropdowns\n- Applied to homepage + all 411 interior pages\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "fa88c098a0748b97e6c838ff26f8cdb9b74e7b0c"
       },
-      "digest": "e5926d46d84cecffaade14e4bb5e8ac5dc47996e9d5aa336d8caef904ae6d0c8"
+      "digest": "3dbbc01c4158f6138d414951d730864f55da4862b772273a53faeebd785dd2db"
     },
     {
       "id": "ship/kopman-build/b1792f17093e",
@@ -324,12 +342,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "- custom-home-building-guide: complete reference covering lot selection,\n  design-build vs architect-led process, Toronto permit requirements (8–16 wks),\n  cost breakdown by size and finish tier, Tarion warranty, neighbourhood\n  context, and timeline phases; Article + FAQPage JSON-LD\n- second-storey-addition-guide: structural candidacy assessment, pop-top vs\n  rear addition comparison table, roof removal and shoring process, permit\n  requirements (6–12 wks), cost table by scope and finish tier, living during\n  construction, ROI analysis by neighbourhood; Article + FAQPage JSON-LD\n- sitemap.xml: 8 new high-priority URL entries for all strategic resource pages\n  (renovation-cost-index, renovation-budget-calculator, toronto-permit-timeline,\n  for-professionals, toronto-renovation-guide, custom-home-building-guide,\n  laneway-house-guide, second-storey-addition-guide)\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "b1792f17093ea582b150910cff6fb32001118c1e"
       },
-      "digest": "4f8f9db8cc804bd2c8e2cadab8d5f44421beda95145f0e34d4063356fdef58f9"
+      "digest": "bff777018e478cba44eb53b9a647796ff9aea2a051e05f54017be4b6092cad77"
     },
     {
       "id": "ship/kopman-build/305e8e9c3453",
@@ -342,12 +360,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Comprehensive reference covering Toronto laneway house eligibility rules,\ndesign constraints, permit process (4–10 week timeline), cost ranges\n($250K–$550K+), rental income potential, financing options, and\n2018–2023 regulatory history. Includes FAQPage JSON-LD and internal\nlinks to Permit Timeline and Cost Index pages.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "305e8e9c34538949175543c22565a1d1804c6729"
       },
-      "digest": "23701f40d3fdca0f0ab1c27289238e42a7ccfb7acfafcbbba098f2358378e8ee"
+      "digest": "880be1f35fee84d69155533e83eba3f65535296b83546dd59b71d9106073f3cd"
     },
     {
       "id": "ship/kopman-build/7312ed043a5d",
@@ -360,12 +378,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "- for-professionals: partner program page for realtors, architects, and\n  interior designers; trust pillars, partner type cards, program checklist,\n  representative case study, and partner intake form; Service + FAQPage JSON-LD\n- toronto-renovation-guide: comprehensive homeowner guide covering planning,\n  budgeting, permit requirements, contractor selection, and project phases;\n  FAQPage JSON-LD with internal links to Cost Index and Permit Timeline\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "7312ed043a5d751908a6e595d4c2970a17011df7"
       },
-      "digest": "6ef5a0855de8e95e1970daee0e7cf558d7639b0db96a83f1d06054f1ecd17526"
+      "digest": "f7e0ed02c49a6f417416e8cee89209fd61731a9872841532cac0cf8d6969f549"
     },
     {
       "id": "ship/kopman-build/103e8ad42bcb",
@@ -378,12 +396,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "- renovation-cost-index: Q3 2026 cost data table (10 project types × 3 tiers),\n  neighbourhood variation table, YoY trend cards, methodology section, FAQs,\n  Article + FAQPage JSON-LD\n- renovation-budget-calculator: interactive JS calculator with project type grid,\n  neighbourhood multiplier, finish tier selector, proportional cost bar output,\n  WebApplication + FAQPage JSON-LD\n- toronto-permit-timeline: full permit type matrix (11 types with fees/timelines),\n  9 inspection stages, 4-district processing comparison, expedite strategies,\n  common revision request guide, 2024–2026 regulatory changes, FAQPage JSON-LD\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "103e8ad42bcb601502eb30b15eaf91df27c0b490"
       },
-      "digest": "d14052747b32b18cb073ae421fc513588c44c76c3b518340fc7f4424e3d58ee1"
+      "digest": "4a35f7bcac2e0289c6063d253b832a3e5fd6d9d8a903154348bbff9d8cd24feb"
     },
     {
       "id": "ship/kopman-build/1d1d908250fe",
@@ -396,12 +414,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Services: 2-column mega-menu (Design & Construction | Renovation Specialties)\n  — Custom Home Building, Design-Build, General Contracting, Renovation\n    Contractor, Muskoka Home Builder / Kitchen, Bathroom, Basement,\n    Home Additions, Second Storey Addition, Laneway House\n\nMarkets: 3-column mega-menu (Toronto | Greater Toronto | Muskoka)\n  — 9 Toronto neighbourhoods (Rosedale, Forest Hill, Leaside, Annex,\n    Cabbagetown, Riverdale, Beaches, Yorkville, Leslieville)\n  — 9 GTA areas (North York, Etobicoke, Scarborough, Mississauga,\n    Oakville, Richmond Hill, Markham, Vaughan, Burlington)\n  — Muskoka with branded callout panel\n\nRenamed Blog → Insights for institutional positioning\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "1d1d908250fe8f9f5c1ff0f9f64463305fa2859f"
       },
-      "digest": "1295a74624f97df2e4c52a2f5f69e01912f3a1b891440348e54814d6a8175b81"
+      "digest": "88408d53dce7139414d85a42f744a68697a785982972574888bb3c77bbc0826b"
     },
     {
       "id": "ship/kopman-build/9520261c874d",
@@ -414,12 +432,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "9520261c874d6680de274f763b6ef1e7c0e3dd6e"
       },
-      "digest": "db1789d0870fe94b54fab3ace013b4ce5d07ee16d06bd46dd941c8ed914878ab"
+      "digest": "2ebc1ad102eec3b82e0aec6cd9cd16667f493bbe4c64774e05649151f64cba78"
     },
     {
       "id": "ship/kopman-build/f5355966d2eb",
@@ -432,12 +450,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Phase 1 — 53 neighbourhood renovation hub pages (Rosedale, Forest Hill, Leaside,\nAnnex, Beaches, Cabbagetown, Riverdale, Lawrence Park, Moore Park + GTA cities\nincluding Vaughan, Burlington, Aurora, Ajax, Whitby and more)\n\nPhase 2 — 270 service × neighbourhood matrix pages covering kitchen, bathroom,\nbasement, home addition, second storey, custom home, general contractor,\ndesign-build, and laneway house across 30 top neighbourhoods\n\nPhase 3 — 47 new authoritative blog posts across 10 content clusters:\nkitchen renovation, bathroom, basement, additions, laneway houses, heritage,\npermits & process, neighbourhood guides, design & planning, custom homes\n\nPhase 4 — Regenerated sitemap.xml with 370+ URLs\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "f5355966d2ebe60221b15dce17f1c4638ea66081"
       },
-      "digest": "607e329f06ec1229a39dc01e77d223948ba1843b12b3b4073d073fdef721da77"
+      "digest": "517d7da1c0a3095b8d21b25cd41dc9ade24b775971ad5a89d9b3c11625d5accc"
     },
     {
       "id": "ship/kopman-build/f1781cab226b",
@@ -450,12 +468,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "- Added OG meta tags to 5 blog posts missing them\n- Fixed duplicate nav trigger links (changed <a> to <span> on all inner pages)\n- Added FAQPage JSON-LD schema to 18 service/location pages\n- Updated homepage nav with Services dropdown and Blog link\n- Added renovation-contractor-rosedale and renovation-contractor-forest-hill hub pages\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "f1781cab226b29a6101556c617088ea014341677"
       },
-      "digest": "af342e23012120c33e229daefa7ddcf7095b04a18f3bb1a0e0fb54197186ee28"
+      "digest": "b86017a97c2f97dfdd776e1330615b2da1d0457d4d45fc6f7aedc2554a5e50a3"
     },
     {
       "id": "ship/kopman-build/71ca552c2654",
@@ -468,11 +486,11 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "refs": {
         "commit": "71ca552c2654ad44ed681829d35bec77d95ed8ec"
       },
-      "digest": "7e76f1325502550229469fd3bd645e9a526ab9f132581b6bd42f3f55155a5f09"
+      "digest": "ed6733d3b002773a83cc48cf40601100f08e93e24b272e08b9f803bbfba45d2c"
     },
     {
       "id": "ship/kopman-build/1aaed98f7d5d",
@@ -485,12 +503,12 @@
       ],
       "asserted": "2026-08-30",
       "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
+      "visibility": "public",
       "detail": "Single-page static site with custom K monogram, Est. 1999 brand lockup,\nby-the-numbers strip, global offices grid, and recognition row. Includes\ndeploy instructions and design spec.\n\nhttps://claude.ai/code/session_01WjoNeXrqyRMhNdKjxw2ErP",
       "refs": {
         "commit": "1aaed98f7d5d4ed65dd7169baae9a64a306e82e5"
       },
-      "digest": "97a4dc2ae945ecf8f85e05c2369b3b5540bbbd52d34bdb1d9163e91fc2369729"
+      "digest": "ac8e9d177aea9231ebe8793e34a4ba95efdffef68480fbb5c2473851df72b200"
     }
   ]
 }

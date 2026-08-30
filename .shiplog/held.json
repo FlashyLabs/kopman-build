@@ -1,0 +1,4 @@
+{
+  "ddb45f0cc5febd1726a8a823bf6dd89dc74d5749": "The same commit held in buildos: it names the file that carried a live NextAuth signing secret and says the secret is in git history on two GitHub repositories. This is the second of those two. Not currently on this repository's default branch, so the hold is forward-protection rather than a fix \u2014 if that branch merges, the entry stays private. Release once the credentials are rotated.",
+  "f78aabb0fa3d0d8a67ece2d5c3240d675d6445b1": "The commit that introduced the leak. Its message says it adds .env.vercel with a pre-filled AUTH_SECRET, which names both the file and what is in it. Held for the same reason as the commit that removed it, and with the same caveat: this keeps it out of the served projection, not out of a public repository's history. Only rotation fixes that."
+}
