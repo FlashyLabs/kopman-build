@@ -6,5 +6,6 @@
   "authors": {},
   "visibility": "private",
   "branch": "claude/repo-update-EeLrY",
+  "lexicon": "imperative",
   "prBase": "https://github.com/FlashyLabs/kopman-build/pull/"
 }

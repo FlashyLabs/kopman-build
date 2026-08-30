@@ -2,13 +2,31 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-30T06:53:35.065Z",
+  "generated": "2026-08-30T13:08:50.373Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/df00f2b74a13",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T06:53:35+00:00",
+      "kind": "infra",
+      "title": "Point the workflows at the branch this repository actually defaults to",
+      "by": [
+        "person/michael"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "private",
+      "detail": "Adoption wrote `main`, and this repository has no `main` — its remote\nHEAD is a branch named after the change that created it. A workflow\nwritten for a branch that does not exist is the silent kind of broken:\nit is present, it reads correctly, and it never fires.\n\nFixed in the adopt command too, which now asks the remote for its HEAD\nwhen the local refs say nothing and neither main nor master was fetched.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01FDosmV9fXV6oZ9NXe7PZ76",
+      "refs": {
+        "commit": "df00f2b74a138cea8c64a73730a90563881b16a1"
+      },
+      "digest": "bf676bb5bda03c8acd61cedf3f418fabb9001d8bece4e02fc6f4192697f3905f"
+    },
     {
       "id": "ship/kopman-build/9cfea7998658",
       "repo": "repo/kopman-build",
       "at": "2026-08-30T05:47:01+00:00",
-      "kind": "other",
+      "kind": "feature",
       "title": "Adopt backlog/1 and shipped/1",
       "by": [
         "person/michael"
@@ -20,7 +38,7 @@
       "refs": {
         "commit": "9cfea7998658c3f7b2e16ccad5cce2a2139036df"
       },
-      "digest": "589a9e219e28ed8f8614758131ea40f768140bd4e01fab345e0cf709b7f06d83"
+      "digest": "03739217b24050e162f136dc95010093f456cbd5b5ab326f7657073eadddd108"
     },
     {
       "id": "ship/kopman-build/bcac6270c7b4",
@@ -43,7 +61,7 @@
       "id": "ship/kopman-build/e79714cedf20",
       "repo": "repo/kopman-build",
       "at": "2026-08-23T16:55:25+00:00",
-      "kind": "other",
+      "kind": "feature",
       "title": "Add pnpm lockfile and workspace config for Vercel deployment",
       "by": [
         "person/michael"
@@ -55,7 +73,7 @@
       "refs": {
         "commit": "e79714cedf20f98a9fd412b1d24ece99209d41b0"
       },
-      "digest": "a1cdecb14d0611773573273ec778df1dd1e47b24114a1f13319f66babbc7757b"
+      "digest": "14ea84e361e40bbd84830673ac25896c79af3ca2f99afc41a30d1675acfa48ad"
     },
     {
       "id": "ship/kopman-build/a3cde50fde9d",
@@ -168,7 +186,7 @@
       "id": "ship/kopman-build/5471c0737264",
       "repo": "repo/kopman-build",
       "at": "2026-07-24T13:27:34+00:00",
-      "kind": "other",
+      "kind": "fix",
       "title": "Fix mobile drawer on all 691 pages: CSS injection and z-index",
       "by": [
         "person/michael"
@@ -180,13 +198,13 @@
       "refs": {
         "commit": "5471c0737264ab3d7807f677810f280c7368ef24"
       },
-      "digest": "1c8642f64598fec1c2c5747a8afbfd286337e022bcedac61fcb2c92e600c3ff9"
+      "digest": "79b02319823afe9adf6f0e347e0218e3c4c28d617e410848c674ce84d3228a2b"
     },
     {
       "id": "ship/kopman-build/0b4d6e30c319",
       "repo": "repo/kopman-build",
       "at": "2026-07-17T13:44:33+00:00",
-      "kind": "other",
+      "kind": "feature",
       "title": "Add 279 neighbourhood × service pages and update sitemap to 691 URLs",
       "by": [
         "person/michael"
@@ -198,13 +216,13 @@
       "refs": {
         "commit": "0b4d6e30c319984a8a6edb0c2956231984529f25"
       },
-      "digest": "d8d2af8b95c0acf7c159cf31731e888e06c91c288539af0c8299c2649d2697e7"
+      "digest": "a0708f5018643aeb10e621fad968644bd532498c42581065a79a3981bad9048f"
     },
     {
       "id": "ship/kopman-build/e024891c1823",
       "repo": "repo/kopman-build",
       "at": "2026-07-17T12:59:55+00:00",
-      "kind": "other",
+      "kind": "feature",
       "title": "Add mobile nav drawer to all 411 interior pages; update homepage drawer",
       "by": [
         "person/michael"
@@ -216,13 +234,13 @@
       "refs": {
         "commit": "e024891c182336992ebb0c20eda83ce3df800aac"
       },
-      "digest": "56e7d37c0326b155f7b708956db221b7dd5115f72d046438874cf6654ac42be0"
+      "digest": "5a603d20c3de8a6e82e95936b71a595d92dab6751af2d580a1c062a67e03c01a"
     },
     {
       "id": "ship/kopman-build/1fecc30b75aa",
       "repo": "repo/kopman-build",
       "at": "2026-07-16T20:03:07+00:00",
-      "kind": "other",
+      "kind": "fix",
       "title": "Fix dropdown positioning and hover-gap click bug on all pages",
       "by": [
         "person/michael"
@@ -234,13 +252,13 @@
       "refs": {
         "commit": "1fecc30b75aa5e53c6c74b020acf54d688a0becf"
       },
-      "digest": "fdb50c548c1677db21155b24c7a814dc050d8fcdfc96a3b599005ea81517a91b"
+      "digest": "d603d8a5bb9d9ba10ff13a7d0a0c8dbd195c6f237f7866eabb0fbd9296ee836f"
     },
     {
       "id": "ship/kopman-build/fa88c098a074",
       "repo": "repo/kopman-build",
       "at": "2026-07-16T18:43:20+00:00",
-      "kind": "other",
+      "kind": "feature",
       "title": "Add Resources mega-menu and For Professionals link to nav on all 412 pages",
       "by": [
         "person/michael"
@@ -252,13 +270,13 @@
       "refs": {
         "commit": "fa88c098a0748b97e6c838ff26f8cdb9b74e7b0c"
       },
-      "digest": "58a69d4b3037836784a1df1298a0578dbfd9ab7de63c5bc0576831b1bc77f716"
+      "digest": "d63609e366acd289c0ed8fbb0b487aded9a0666913c126d446f85e7a5740e392"
     },
     {
       "id": "ship/kopman-build/b1792f17093e",
       "repo": "repo/kopman-build",
       "at": "2026-07-16T17:11:53+00:00",
-      "kind": "other",
+      "kind": "feature",
       "title": "Add Custom Home Building Guide, Second Storey Addition Guide, update sitemap",
       "by": [
         "person/michael"
@@ -270,13 +288,13 @@
       "refs": {
         "commit": "b1792f17093ea582b150910cff6fb32001118c1e"
       },
-      "digest": "efc5a8322f01f6c672d04d8d11a86aa7cd1ced81ac7ed0ba9df8354b71d337ea"
+      "digest": "3b1900c068411b46ab80e9259fe7a8a9d52ae2d2d79982acf189ad9124e8f0c1"
     },
     {
       "id": "ship/kopman-build/305e8e9c3453",
       "repo": "repo/kopman-build",
       "at": "2026-07-16T17:07:41+00:00",
-      "kind": "other",
+      "kind": "feature",
       "title": "Add Laneway House Guide",
       "by": [
         "person/michael"
@@ -288,13 +306,13 @@
       "refs": {
         "commit": "305e8e9c34538949175543c22565a1d1804c6729"
       },
-      "digest": "e175d78c0df02aa268c6fbe278a9df678b165d95a94ee29b16fe646ff2a17556"
+      "digest": "44c90a32490f1d2ed7c852ffa325df743fd64f340ee0300df063b86b22292eef"
     },
     {
       "id": "ship/kopman-build/7312ed043a5d",
       "repo": "repo/kopman-build",
       "at": "2026-07-16T17:07:28+00:00",
-      "kind": "other",
+      "kind": "feature",
       "title": "Add For Professionals referral program page and Toronto Renovation Guide",
       "by": [
         "person/michael"
@@ -306,13 +324,13 @@
       "refs": {
         "commit": "7312ed043a5d751908a6e595d4c2970a17011df7"
       },
-      "digest": "baff66c9b96c911b02bd60fd85346bfa01c5a4f2ffafa9986c801c591f277bd4"
+      "digest": "cd570665d9f528e451ba1ae946fc0a62325b8df4e7da0371c47b79b2f1565418"
     },
     {
       "id": "ship/kopman-build/103e8ad42bcb",
       "repo": "repo/kopman-build",
       "at": "2026-07-16T17:05:51+00:00",
-      "kind": "other",
+      "kind": "feature",
       "title": "Add 3 strategic resource pages: Cost Index, Budget Calculator, Permit Timeline",
       "by": [
         "person/michael"
@@ -324,13 +342,13 @@
       "refs": {
         "commit": "103e8ad42bcb601502eb30b15eaf91df27c0b490"
       },
-      "digest": "07362f3ad08dcf03350b7f487317c84fec1301df6e0681fb19aa0e6191a8779d"
+      "digest": "f9556086db631968af49782a96361acd43865a5c4f4f1d7d1d78bf81ab3b8110"
     },
     {
       "id": "ship/kopman-build/1d1d908250fe",
       "repo": "repo/kopman-build",
       "at": "2026-07-16T13:52:50+00:00",
-      "kind": "other",
+      "kind": "infra",
       "title": "Rebuild nav as institutional mega-menu across all 404 pages",
       "by": [
         "person/michael"
@@ -342,13 +360,13 @@
       "refs": {
         "commit": "1d1d908250fe8f9f5c1ff0f9f64463305fa2859f"
       },
-      "digest": "ec3d4b0cad31629e2a899083501f10e48b97e0868d89f78a7d3ac6a874b2a5de"
+      "digest": "89b80c2bb1b5f002fa6df073336216cce5f453a3e35d305bcc071222baf1c72f"
     },
     {
       "id": "ship/kopman-build/9520261c874d",
       "repo": "repo/kopman-build",
       "at": "2026-07-16T13:48:42+00:00",
-      "kind": "other",
+      "kind": "fix",
       "title": "Fix minor content updates on 7 pages from workflow second pass",
       "by": [
         "person/michael"
@@ -360,13 +378,13 @@
       "refs": {
         "commit": "9520261c874d6680de274f763b6ef1e7c0e3dd6e"
       },
-      "digest": "3e434dd7493ab735339cb024753fa2a828d0785c1615f81707e05bf85926bf44"
+      "digest": "00c6f3fb14db3771ad2e6a324af22d2fe5c5781b2ff2004ad7cdc6c239338496"
     },
     {
       "id": "ship/kopman-build/f5355966d2eb",
       "repo": "repo/kopman-build",
       "at": "2026-07-16T09:27:04+00:00",
-      "kind": "other",
+      "kind": "feature",
       "title": "Launch full SEO expansion: 370 new pages across all Toronto neighbourhoods",
       "by": [
         "person/michael"
@@ -378,7 +396,7 @@
       "refs": {
         "commit": "f5355966d2ebe60221b15dce17f1c4638ea66081"
       },
-      "digest": "330415920dc70e57600a7d784175dd0e569fc9a539390ffeb67821a39e68c114"
+      "digest": "4b79336f05bda44d5c5e366eba4f746c0ade16ef437a9bf78044f634c98cea79"
     },
     {
       "id": "ship/kopman-build/f1781cab226b",
@@ -399,27 +417,10 @@
       "digest": "a7892c0590b77e40be38f89e2cebc072291d8f6e78f8dfa5f62eebb5de7992ef"
     },
     {
-      "id": "ship/kopman-build/737589fb10fb",
-      "repo": "repo/kopman-build",
-      "at": "2026-07-14T14:25:24+00:00",
-      "kind": "other",
-      "title": "Merge branch 'claude/repo-update-EeLrY' into gh-pages",
-      "by": [
-        "person/michael"
-      ],
-      "asserted": "2026-08-30",
-      "assertedBy": "agent/kopman-build-ci",
-      "visibility": "private",
-      "refs": {
-        "commit": "737589fb10fbabdca2b5f241672485bb1c298c77"
-      },
-      "digest": "03fbf01419e186116685c5e5b1ec7bced13e985d926831c084afcb7813d168cc"
-    },
-    {
       "id": "ship/kopman-build/71ca552c2654",
       "repo": "repo/kopman-build",
       "at": "2026-05-22T17:45:38+02:00",
-      "kind": "other",
+      "kind": "feature",
       "title": "Add index.html at root for GitHub Pages",
       "by": [
         "person/michael"
@@ -430,13 +431,13 @@
       "refs": {
         "commit": "71ca552c2654ad44ed681829d35bec77d95ed8ec"
       },
-      "digest": "35143b93e1f2075775aa975f7b3521847d491698197ffb1147a4997b9fb6e9c6"
+      "digest": "7e76f1325502550229469fd3bd645e9a526ab9f132581b6bd42f3f55155a5f09"
     },
     {
       "id": "ship/kopman-build/1aaed98f7d5d",
       "repo": "repo/kopman-build",
       "at": "2026-05-22T15:13:58+00:00",
-      "kind": "other",
+      "kind": "feature",
       "title": "Add Kopman Build marketing site (v2 design handoff)",
       "by": [
         "person/michael"
@@ -448,7 +449,7 @@
       "refs": {
         "commit": "1aaed98f7d5d4ed65dd7169baae9a64a306e82e5"
       },
-      "digest": "48798f4735c867cae09b7783e24357cbeb3ef267ab0d5d73015143763009cb09"
+      "digest": "7d04216b8b41621d7f04337cf7a97886aff83c070526f4d1155c5c79af883548"
     }
   ]
 }
