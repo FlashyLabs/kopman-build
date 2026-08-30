@@ -2,8 +2,80 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-30T18:01:40.413Z",
+  "generated": "2026-08-30T19:25:31.352Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/5875278b2c74",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T19:25:18Z",
+      "kind": "fix",
+      "title": "Name a copyright holder, and stop granting what was never ours",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "Two errors from the licence sweep of 2026-08-30, found by putting the\nestate's licences in one register and comparing.\n\nA LICENCE THAT NAMED NOBODY\n\nEleven repositories carried a bare Apache-2.0 text with no copyright line\nat all. That is not a missing file — it is a file that answers the\nquestion wrongly. It reads as a grant, and no reader can tell who made it\nor whether they were entitled to. Every LICENSE now opens with the holder\nand one line saying what the repository is.\n\nAN OPEN LICENCE ON SOMEBODY ELSE'S PROPERTY\n\nkopman-build and buildos are a construction firm's marketing site and the\napplication behind that engagement. Both carried AGPL-3.0-only, which\noffers a client's own site to anyone willing to publish their changes.\nNobody decided that; it was the default that got reached for. Both are now\nall rights reserved, held by Kopman Build, with a line saying ownership is\ngoverned by the agreement between the firm and the studio rather than by\nthe file.\n\nThe same care had already been taken for marco.law an hour earlier and\nthen not taken here, which is the argument for a register rather than for\nbeing more careful next time.\n\nEight further repositories moved from an unattributed Apache-2.0 to all\nrights reserved: the org profile, the Terraform that can delete\nproduction, three brand properties and the three Life repositories.\nflashy-sdk is among them and its package.json already said UNLICENSED —\nthe LICENSE file had been contradicting its own manifest.\n\n`tools/estate-licences.mjs` in flashyos is now the one declaration, and it\nreports a checkout and a default branch separately, because conflating\nthose is the mistake this estate's tooling keeps making.\n\nKind: fix",
+      "refs": {
+        "commit": "5875278b2c74ac2d95da0f8029c11cd75840f1e4"
+      },
+      "digest": "186106e14c006f95cfb2cba6803e831dace828cc493e761efe6fc96c8a5a3d80"
+    },
+    {
+      "id": "ship/kopman-build/000baee26f89",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T18:37:56Z",
+      "kind": "feature",
+      "title": "Close the gap that let a secret reach a tracked file, and scan for the next one",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "The committed AUTH_SECRET has already been removed on this branch. What had\nnot been fixed is the reason it got in: `.gitignore` listed `*.env`, which\nmatches a file ending in `.env` and does not match `.env.vercel`. The pattern\nis now `.env.*` with an escape for `.env.example`, so the family is covered\nrather than one spelling of it.\n\nSecret scanning arrives with it — vendored byte-identical across the estate,\nscanning the working tree rather than history so it blocks the next committed\nsecret without failing forever on a historical value pending rotation.\nVerified clean against this branch before pushing, so it arrives green.\n\nThe disclosed value is still disclosed. Removal from the tree is not rotation:\nAUTH_SECRET remains in this repository's history and must be rotated, and\nanything signed with it treated as compromised.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01BEaXzktRU5ZPe3R2NY7CKD",
+      "refs": {
+        "commit": "000baee26f89a9c187ebd213ddbca01b046db68d"
+      },
+      "digest": "727ebc25dfdb2dcc0f268db77974c7fe2c0a9f3731d1635b5b047031e760c3a6"
+    },
+    {
+      "id": "ship/kopman-build/bae0f48d585f",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T18:35:03Z",
+      "kind": "feature",
+      "title": "Declare a licence: AGPL-3.0-only",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "Source with no licence file is all rights reserved by default. Nobody may\nlegally use, fork or embed it — including a future acquirer’s diligence team,\nand including anyone who reads this estate’s claim to publish an open\norganisational protocol and goes looking for the source.\n\nAGPL-3.0-only, which is what the estate applies to anything hosted: a hosted\nfork must publish its changes. The spec and the published clients stay\nApache-2.0 so that anyone may embed them, including in closed software.\n\nThe full text ships rather than only a field, because a repository that names\na licence and does not carry it makes a claim a reader cannot check.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01BEaXzktRU5ZPe3R2NY7CKD",
+      "refs": {
+        "commit": "bae0f48d585fdc6458387b61357aa1470af5f8bd"
+      },
+      "digest": "57d1725b4a6c28cd87fc9309d3efd11a3577bc4422931641b880f270b6679712"
+    },
+    {
+      "id": "ship/kopman-build/cc0d31040c46",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T18:01:40Z",
+      "kind": "other",
+      "title": "Re-emit against the rebased tree",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "Kind: chore",
+      "refs": {
+        "commit": "cc0d31040c46fcd5f45ca8463cb809438fb60655"
+      },
+      "digest": "3cbe5c807e791fd889bb42a6b13389a26945e3f6d45dd11adfa299b83e906e59"
+    },
     {
       "id": "ship/kopman-build/88d341a45662",
       "repo": "repo/kopman-build",
