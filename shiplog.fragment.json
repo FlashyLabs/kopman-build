@@ -2,8 +2,44 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-30T17:02:22.512Z",
+  "generated": "2026-08-30T17:23:13.459Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/058c528224e8",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T17:18:13+00:00",
+      "kind": "feature",
+      "title": "Adopt checkpoint/1 — a tree head over what this repository seals",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "An RFC 6962 Merkle root over the sealed claims already published here, served\nbeside them. Anyone holding the fragments can recompute it and see whether the\nrecord still describes what it said it did.\n\nThe head is deliberately unsigned. A signature over a root computed and checked\nby the same party is ceremony without a property — what makes history provably\nappend-only is a witness who is not us, and that is not built. The root catches\ndrift and after-the-fact edits, and nothing here claims more.\n\nIt is refreshed by the shiplog workflow rather than its own, so the head and\nthe log it commits to always move in one commit. A separate workflow would\nleave a window in which the published root and the published record disagree,\nand a reader hitting that window sees a forged-looking estate.\n\nKind: feature",
+      "refs": {
+        "commit": "058c528224e8a9383979df3a8a939a81bf9da73c"
+      },
+      "digest": "59bc1e15f1b65abe08838785eb4638d9135e50c31c722800ced8077787044b09"
+    },
+    {
+      "id": "ship/kopman-build/3cc11539d5d4",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T17:02:42+00:00",
+      "kind": "fix",
+      "title": "Re-vendor the emitter, and publish this log",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "The vendored copy here predated four changes: an emit that unions rather\nthan replaces, a per-entry privacy hold, a guard that stops an agent's\ncommits being filed under a person, and a filter for this format's own\nrefresh commits.\n\nA stale vendored copy does not fail. It disagrees with the source about\nwhat it was told to do — which is how a hold added this morning did\nnothing in sixteen repositories and marked the held entry public.\nestate-hygiene now compares every vendor-*.mjs byte-for-byte against the\npackage it came from, and this repository was one of nine it caught.\n\nvisibility is public. Everything derived has been private since adoption;\nthis is the decision that makes it a changelog anyone can read.\n\nKind: fix",
+      "refs": {
+        "commit": "3cc11539d5d4c6252d8787cb64a44d01dce124b3"
+      },
+      "digest": "14f78f3e148e5bfd2e030d7d17027799fb2e045c8961871eb029ba45d543c5a3"
+    },
     {
       "id": "ship/kopman-build/22c8015f1e8d",
       "repo": "repo/kopman-build",
