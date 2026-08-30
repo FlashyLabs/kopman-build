@@ -2,8 +2,44 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-30T17:23:13.459Z",
+  "generated": "2026-08-30T17:59:12.390Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/91741885a2ae",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T17:39:02+00:00",
+      "kind": "fix",
+      "title": "Fail loudly on a fragment that exists and cannot be parsed",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "The emitter treated an unparseable fragment as an absent one and built a head\nover whatever else it could read. A conflicted fragment produced a\nvalid-looking head over nothing.\n\nKind: fix",
+      "refs": {
+        "commit": "91741885a2aec791452c987376133f8b2fe17d2f"
+      },
+      "digest": "6a4978c6f87ed61f9a0d04ab81d7dcc08bc58fb326b1f3ca636721368c1233a2"
+    },
+    {
+      "id": "ship/kopman-build/3cdd9c4d1d7b",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T17:23:13+00:00",
+      "kind": "other",
+      "title": "Re-emit the log and its checkpoint after rebase",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "Kind: chore",
+      "refs": {
+        "commit": "3cdd9c4d1d7b36aebbfe2ad835f6541e5f600260"
+      },
+      "digest": "a01d858000be3e7ef47d15da45d07c30124689cb3fdc069ba36bd36c0a9ae724"
+    },
     {
       "id": "ship/kopman-build/058c528224e8",
       "repo": "repo/kopman-build",
