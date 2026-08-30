@@ -2,8 +2,26 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-30T05:47:01.445Z",
+  "generated": "2026-08-30T06:53:35.065Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/9cfea7998658",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T05:47:01+00:00",
+      "kind": "other",
+      "title": "Adopt backlog/1 and shipped/1",
+      "by": [
+        "person/michael"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "private",
+      "detail": "This repository now publishes the two tenses the estate records: what it\nintends, and what it shipped. Both are emitted by a dependency-free\nvendored script, so nothing here gains a toolchain it did not have.\n\nNothing is published by this commit. Backlog items are filed private and\nreach the served fragment only when a named human promotes one; shipped\nentries land private until someone changes one field in\n.shiplog/config.json. The served copy is the public projection and the\nemitter writes it, so a private record cannot reach a URL through a\nforgotten copy step.\n\nDerived 24 entries from this repository's own history, every seal\nrecomputed. Org org/kopman-build, served at none.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01FDosmV9fXV6oZ9NXe7PZ76",
+      "refs": {
+        "commit": "9cfea7998658c3f7b2e16ccad5cce2a2139036df"
+      },
+      "digest": "589a9e219e28ed8f8614758131ea40f768140bd4e01fab345e0cf709b7f06d83"
+    },
     {
       "id": "ship/kopman-build/bcac6270c7b4",
       "repo": "repo/kopman-build",

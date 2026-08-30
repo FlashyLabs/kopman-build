@@ -11,7 +11,7 @@ name: Backlog
 
 on:
   push:
-    branches: ['main']
+    branches: ['claude/repo-update-EeLrY']
     paths-ignore:
       - 'backlog.fragment.json'
   pull_request:

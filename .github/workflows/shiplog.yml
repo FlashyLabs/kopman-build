@@ -15,7 +15,7 @@ name: Shiplog
 
 on:
   push:
-    branches: ['main']
+    branches: ['claude/repo-update-EeLrY']
     paths-ignore:
       - 'shiplog.fragment.json'
   schedule:
