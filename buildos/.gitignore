@@ -3,6 +3,12 @@ node_modules
 .turbo
 dist
 *.env
+# `.env.vercel` did not match `*.env` — that pattern needs the name to END in
+# .env, and this one ends in .vercel. Six days and seven live credentials went
+# into the repository through that gap on 2026-08-23. `.env.*` closes it.
+.env.*
+!.env.example
+!.env.sample
 .env.local
 .env.production
 .vercel
