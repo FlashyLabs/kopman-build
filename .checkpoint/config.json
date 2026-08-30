@@ -1,0 +1,6 @@
+{
+  "origin": "repo/kopman-build",
+  "fragments": [
+    "shiplog.fragment.json"
+  ]
+}
