@@ -1,0 +1,10 @@
+{
+  "source": "repo/kopman-build",
+  "org": "org/kopman-build",
+  "assertedBy": "agent/kopman-build-ci",
+  "defaultAuthor": "person/michael",
+  "authors": {},
+  "visibility": "private",
+  "branch": "main",
+  "prBase": "https://github.com/FlashyLabs/kopman-build/pull/"
+}
