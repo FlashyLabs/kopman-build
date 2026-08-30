@@ -11,4 +11,8 @@ dist
 !.env.sample
 .env.local
 .env.production
+# `*.env` matches a file ending in .env; it does not match `.env.vercel`,
+# which is how a real AUTH_SECRET reached a tracked file. Match the family.
+.env.*
+!.env.example
 .vercel
