@@ -2,8 +2,26 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-30T17:59:12.390Z",
+  "generated": "2026-08-30T18:01:40.413Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/88d341a45662",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T17:59:12+00:00",
+      "kind": "fix",
+      "title": "Carry the current vendored emitters",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-30",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "A stale copy fails silently and in the dangerous direction: it does not know\nabout rules added since it was vendored, so it ignores them rather than\nerroring. Re-emitted and re-verified against the refreshed copies.\n\nKind: fix",
+      "refs": {
+        "commit": "88d341a45662d36242362c803f8729f332ba6a74"
+      },
+      "digest": "05308cfe609e38abf5331f3d03941df0fc9b1c760c5f866287ff0707bdcac8c9"
+    },
     {
       "id": "ship/kopman-build/91741885a2ae",
       "repo": "repo/kopman-build",
