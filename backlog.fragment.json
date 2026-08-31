@@ -2,13 +2,13 @@
   "backlog": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-31T01:02:16.654Z",
+  "generated": "2026-08-31T01:43:50.648Z",
   "items": [
     {
       "id": "backlog/kopman-build/declare-the-record-emitter",
-      "rev": 1,
+      "rev": 2,
       "kind": "task",
-      "status": "open",
+      "status": "done",
       "title": "Declare the machine that signs this repository’s record",
       "source": {
         "repo": "repo/kopman-build"
@@ -21,9 +21,9 @@
     },
     {
       "id": "backlog/kopman-build/publish-a-directory-record",
-      "rev": 1,
+      "rev": 2,
       "kind": "task",
-      "status": "open",
+      "status": "done",
       "title": "Publish a directory/1 fragment for this repository",
       "source": {
         "repo": "repo/kopman-build"
