@@ -2,8 +2,43 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-30T21:56:46.578Z",
+  "generated": "2026-08-31T01:02:27.871Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/52a1963900b4",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-31T01:01:22Z",
+      "kind": "feature",
+      "title": "File the gaps this repository can prove about itself",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-31",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "`backlog/1` was published by thirty repositories and empty in twenty-nine —\nfull distribution and nothing to distribute, which is worse than no adoption,\nbecause a format every property emits and none fills teaches every reader that\nthe format is decorative.\n\nThe temptation was to write some intentions. That would be fabrication: an\nagent inventing what an organisation intends is exactly what `promote()`\nexists to prevent, and a backlog of plausible work nobody agreed to is worse\nthan an empty one.\n\nSo these are derived, not invented. Each item is a gap the estate survey\nmeasures directly — a signature citing an identity nothing declares, a\nrepository sealing records and publishing no directory, a default branch that\nis an agent's scratch branch — and each carries the evidence that establishes\nit, because an item that says what to do without saying how anyone knows is an\ninstruction rather than a finding.\n\nFiled private. Reaching public needs a named human to promote it, which is the\nconsent rule rather than an oversight.\n\nKind: feature\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01FDosmV9fXV6oZ9NXe7PZ76",
+      "refs": {
+        "commit": "52a1963900b4ee4c9971e559d14720888e096732"
+      },
+      "digest": "8969662d7b6d53344d52b18a6befe62e04228c14406bd271c5f809bf2e9ad84c"
+    },
+    {
+      "id": "ship/kopman-build/5fcb21fe9fdb",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-30T21:56:47Z",
+      "kind": "infra",
+      "title": "shipped/1: refresh the log, and the checkpoint over it",
+      "by": [
+        "agent/unattributed"
+      ],
+      "asserted": "2026-08-31",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "refs": {
+        "commit": "5fcb21fe9fdb1bd10af665ca4b42d4bac39a75a9"
+      },
+      "digest": "c0645dc249f3ae302852b802c02b315849022008e67e62cc78505076de8f5488"
+    },
     {
       "id": "ship/kopman-build/9abc81b545bc",
       "repo": "repo/kopman-build",
