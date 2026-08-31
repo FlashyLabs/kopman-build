@@ -1,0 +1,6 @@
+{
+ "_comment": "Ids this fragment references and another repository defines. Written by the emitter, not maintained by hand: the emitter knows what it borrowed.",
+ "ids": [
+  "person/michael"
+ ]
+}

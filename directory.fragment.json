@@ -1,0 +1,53 @@
+{
+ "directory": "0.1",
+ "source": "repo/kopman-build",
+ "generated": "2026-08-31",
+ "nodes": [
+  {
+   "asserted": "2026-08-31",
+   "assertedBy": "person/michael",
+   "expires": "2027-08-31",
+   "visibility": "public",
+   "id": "agent/kopman-build-bot",
+   "kind": "Agent",
+   "name": "Backlog emitter",
+   "description": "The tool that files and promotes this repository's intentions. It emits backlog/1 and signs each one as agent/kopman-build-bot."
+  },
+  {
+   "asserted": "2026-08-31",
+   "assertedBy": "person/michael",
+   "expires": "2027-08-31",
+   "visibility": "public",
+   "id": "agent/kopman-build-ci",
+   "kind": "Agent",
+   "name": "Record emitter",
+   "description": "The tool that derives and seals this repository's record. It emits shipped/1 and signs each one as agent/kopman-build-ci."
+  }
+ ],
+ "edges": [
+  {
+   "asserted": "2026-08-31",
+   "assertedBy": "person/michael",
+   "expires": "2027-08-31",
+   "visibility": "public",
+   "type": "delegatedTo",
+   "from": "person/michael",
+   "to": "agent/kopman-build-bot",
+   "scope": [
+    "backlog/1"
+   ]
+  },
+  {
+   "asserted": "2026-08-31",
+   "assertedBy": "person/michael",
+   "expires": "2027-08-31",
+   "visibility": "public",
+   "type": "delegatedTo",
+   "from": "person/michael",
+   "to": "agent/kopman-build-ci",
+   "scope": [
+    "shipped/1"
+   ]
+  }
+ ]
+}
