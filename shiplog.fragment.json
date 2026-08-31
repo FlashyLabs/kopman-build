@@ -2,8 +2,61 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-31T01:41:01.142Z",
+  "generated": "2026-08-31T10:58:15.882Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/6b88046cc1d9",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-31T02:19:39Z",
+      "kind": "other",
+      "title": "Re-vendor the backlog emitter: it can revise an item now",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-31",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "`file` has taken `--wants` since the beginning and nothing could add them\nafterwards, so every item filed across the estate — all of them filed without\nwants — was permanently invisible to the matcher, which refuses an item that\nnames no `capabilitiesWanted`. A format whose central field is\nwrite-once-at-creation is a format whose central field is empty.\n\n`revise` changes everything about an item except its visibility. Promotion\nstays a separate verb because it is a separate decision: it refuses anything\nbut a `person/` id, and folding it in would give a revision the power to\npublish. Unmentioned fields are left alone — `close` is a revision too, and\nclearing on absence would strip every want in the repository.\n\nCopied byte-identical from flashyos rather than edited here. A stale vendored\nfile does not break; it disagrees, silently, about exactly the field somebody\nhas just added.\n\nKind: chore",
+      "refs": {
+        "commit": "6b88046cc1d9977c16205c64413c7e5add4c7ce1"
+      },
+      "digest": "7414124a5398d82f63b287b378719af831c23f6419ffcdf76fd20b25b4e41185"
+    },
+    {
+      "id": "ship/kopman-build/323962acd6b0",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-31T01:45:09Z",
+      "kind": "feature",
+      "title": "Close the backlog items this repository has since fixed",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-31",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "These were filed from measurement — a signature citing an identity nothing\ndeclared, a repository sealing a record and publishing no directory fragment\n— and the measurement no longer finds them. An open item naming work that is\nfinished is a record that is wrong about the one thing a backlog is for.\n\nSigned by the filing machine rather than by a person, and that asymmetry is\ndeliberate. Promotion publishes an organisation's intention on its behalf and\nneeds a named human; closure records that a measurement changed, makes\nnothing visible to anyone new, and the identity that made the claim is the\nhonest one to withdraw it.\n\nLeft alone, these would have decayed in about ninety days. Ninety days of a\npublished backlog naming finished work is not a reason to wait.\n\nKind: chore",
+      "refs": {
+        "commit": "323962acd6b0b82ce24cfc51bba0c4fa3023644f"
+      },
+      "digest": "01bb99d08d5b421d8b80cc1d3fba56cf84e675765105bd54d7d025390cefa44e"
+    },
+    {
+      "id": "ship/kopman-build/b80c49029f42",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-31T01:41:01Z",
+      "kind": "infra",
+      "title": "shipped/1: refresh the log, and the checkpoint over it",
+      "by": [
+        "agent/unattributed"
+      ],
+      "asserted": "2026-08-31",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "refs": {
+        "commit": "b80c49029f42ffa8d77b2a0258c3b28fd3ee364c"
+      },
+      "digest": "ddf183dacf253038ecd359c1411fe91b244a100c49386bda927f04a358da61fb"
+    },
     {
       "id": "ship/kopman-build/07de8e526b30",
       "repo": "repo/kopman-build",
