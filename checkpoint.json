@@ -1,10 +1,10 @@
 {
   "checkpoint": "1",
   "origin": "repo/kopman-build",
-  "size": 41,
-  "root": "ecf3b49d797ef200c41a367fc8bd41db74550078ebe23b64ac2e0592570e93a8",
-  "at": "2026-08-31T01:02:28.034Z",
+  "size": 43,
+  "root": "de515a2b518c33806383ca4a7f93d4d8f8bc0188200e85714fabf3994ee12e4d",
+  "at": "2026-08-31T01:41:01.310Z",
   "counts": {
-    "shipped": 41
+    "shipped": 43
   }
 }

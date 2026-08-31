@@ -2,8 +2,43 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-31T01:02:27.871Z",
+  "generated": "2026-08-31T01:41:01.142Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/07de8e526b30",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-31T01:37:49Z",
+      "kind": "feature",
+      "title": "Publish a directory/1 fragment, so this repository's signatures resolve",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-08-31",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "Every sealed entry here carries `assertedBy: agent/<slug>-ci` and every filed\nitem carries `agent/<slug>-bot`, and nothing in the estate defined either. An\n`assertedBy` naming an id nothing declares reads as provenance and carries\nnone, which is worse than leaving the field out — across the estate that was\n2,478 edges citing identities that formally did not exist.\n\nThe repositories that already had a fragment each hand-wrote one around their\nAAO charter. This repository has no charter, and neither will an outside\nadopter of `shipped/1` on their first push, so the fragment comes from\n`vendor-directory.mjs`: dependency-free, derived from the two config files\nthat already do the stamping, and validated here by the vendored checker.\n\nIt does not declare an organisation. `.shiplog/config.json` carries an `org`\nfield that adoption filled in with this repository's own slug, and in sixteen\nrepositories that names a company which does not exist. A repository is not\nthe authority for which organisation answers for it; defining one here to\nraise a provenance number would put the fiction into the published graph. The\nemitter says so on every run, and the gap is filed rather than papered over.\n\nKind: feat",
+      "refs": {
+        "commit": "07de8e526b309408337bafa8fa7da6354a7aed7b"
+      },
+      "digest": "49d066e4ad0ba34d71f68eca9d64308c6279773e38332246100e9b08f28d71f1"
+    },
+    {
+      "id": "ship/kopman-build/75377b9e1ca3",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-31T01:02:28Z",
+      "kind": "infra",
+      "title": "shipped/1: refresh the log, and the checkpoint over it",
+      "by": [
+        "agent/unattributed"
+      ],
+      "asserted": "2026-08-31",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "refs": {
+        "commit": "75377b9e1ca3c74664444b47f158327d58b5ddd3"
+      },
+      "digest": "84e85e4006ba4d3bbdb90412126b952a17e9453ed35d00b64d38a18b4af43bd0"
+    },
     {
       "id": "ship/kopman-build/52a1963900b4",
       "repo": "repo/kopman-build",
