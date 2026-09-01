@@ -1,0 +1,95 @@
+# Keeps this repository's directory/1 fragment current.
+#
+# The fragment says what this repository is the authority for — the machines it
+# runs, the human they act on behalf of, and the machine surfaces it serves.
+# All three are read from disk, so all three change without anybody editing the
+# fragment, and a fragment nobody re-emits stops being true without going red.
+#
+# Emitted on a schedule as well as on a push, for the reason the other two
+# formats are: a repository that has stopped changing should say so by standing
+# still, not by going stale.
+#
+# The commit carries [skip ci] because it is a record of what already happened.
+# Without it the estate's emitters ate 321 of one day's 594 commits and the
+# account's whole Vercel build budget with them.
+name: Directory
+
+on:
+  push:
+    # Every branch, filtered to the default one by the job's `if` below.
+    # Naming a branch here is the trap eleven repositories in this estate are
+    # already sitting in: their GitHub default is an agent branch, and the day
+    # somebody fixes it a pinned workflow stops firing — silently.
+    paths-ignore:
+      - 'shiplog.fragment.json'
+      - 'backlog.fragment.json'
+      - 'checkpoint.json'
+      - '**/*.md'
+  schedule:
+    - cron: '41 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: directory-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  emit:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'push' || github.ref_name == github.event.repository.default_branch
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Emit
+        run: node vendor-directory.mjs
+
+      # Fails at the point the mistake is made. The estate-wide merge catches
+      # contested authority and dangling references, and it runs elsewhere and
+      # cannot say which repository caused them.
+      - name: Check
+        run: node scripts/check-directory.mjs
+
+      - name: Commit if it changed
+        id: commit
+        run: |
+          if git diff --quiet; then
+            echo "no change"
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "directory"
+          git config user.email "directory@users.noreply.github.com"
+          git add -A
+          git commit -m "directory/1: refresh the fragment [skip ci]"
+          git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # Only when something actually changed. A dispatch per run rather than
+      # per change turns one daily merge into a merge per push across thirty
+      # repositories.
+      #
+      # Loud when the secret is missing, because a skipped step reports the run
+      # green and an estate that has quietly stopped fanning out looks healthy
+      # from every angle.
+      - name: Notify the estate graph
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          TOKEN: ${{ secrets.ESTATE_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::warning title=Fan-out is not configured::The fragment changed and the estate graph was not told. The daily merge will still find it, so this is a delay of up to 24 hours rather than a loss. Set ESTATE_DISPATCH_TOKEN (an org secret with contents:write on FlashyLabs/flashyos) to close it."
+            exit 0
+          fi
+          code=$(curl -sS -o /tmp/dispatch.out -w '%{http_code}' -X POST -H 'Accept: application/vnd.github+json' -H "Authorization: Bearer $TOKEN" https://api.github.com/repos/FlashyLabs/flashyos/dispatches -d '{"event_type":"estate-fragment-updated"}')
+          if [ "$code" != "204" ]; then
+            echo "::error title=Fan-out failed::flashyos returned $code to the dispatch. The daily merge is the fallback."
+            cat /tmp/dispatch.out
+            exit 1
+          fi
+          echo "::notice::Estate graph notified."
