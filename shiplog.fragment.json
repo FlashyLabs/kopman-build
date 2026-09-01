@@ -2,8 +2,62 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-08-31T10:58:15.882Z",
+  "generated": "2026-09-01T09:29:32.510Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/9b91df379f49",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-31T19:43:24Z",
+      "kind": "fix",
+      "title": "Re-vendor shiplog: the hold retracts, and bookkeeping stays filtered [vercel skip]",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-09-01",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "Two fixes in one copy, and this repository had neither.\n\nThe hold is applied at projection as well as at derivation, so it can retract\nan entry already sealed public — the case claimyour.gold found, where an entry\nquoting a bootstrap credential was served among 746 public entries. Visibility\nis inside the digest, so re-deriving to change it is the restatement\nappend-only forbids; the entry now keeps its seal and stops being handed out.\n\nAnd the bookkeeping filter tolerates the suffixes those subjects have grown.\nIt anchored on $ exactly, so adding [skip ci] to every emitted commit would\nhave started sealing each refresh as a shipped entry under agent/unattributed.\n\nHolding is not remediation. A credential that reached a public history stays\nburned until it is rotated.\n\nKind: fix",
+      "refs": {
+        "commit": "9b91df379f49e2c6c56ef6209accf2d7d7102266"
+      },
+      "digest": "091d87bf1fa7fd4d2b69c8693da6462e4037586dacecd0f071e66ffde3e3eda3"
+    },
+    {
+      "id": "ship/kopman-build/4100178e4394",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-31T19:40:23Z",
+      "kind": "fix",
+      "title": "Re-vendor shiplog: the hold can now retract an already-published entry [vercel skip]",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-09-01",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "Visibility is inside an entry's digest, so an entry sealed public stays sealed\npublic — re-deriving it to change that is the restatement append-only forbids.\nSo a hold added afterwards changed nothing here: the entry kept being handed\nout at the well-known URL.\n\nclaimyour.gold found the case. An entry explaining the removal of a bootstrap\ncredential quoted the token and the admin password verbatim, and was being\nserved among 746 public entries.\n\nThe fix applies the hold at projection as well as at derivation, so the record\nkeeps its seal and the served copy honours the hold: the entry stays in the\nfragment, digest intact, counted, and simply stops being handed out.\n\nIt existed in flashyos's own root copy and in no other repository. Twenty-eight\nvendored the version without it — including the one where the incident\nhappened. This is that copy, replaced.\n\nHolding is still not remediation. A credential that reached a public history\nstays burned until it is rotated.\n\nKind: fix",
+      "refs": {
+        "commit": "4100178e439440dd295ad88ac877c1f55a88f02f"
+      },
+      "digest": "ebbd63f056eb6c17af98f3780d15cb4693d4c769347af0e939ee59bed07c0f1d"
+    },
+    {
+      "id": "ship/kopman-build/bdd885a6827a",
+      "repo": "repo/kopman-build",
+      "at": "2026-08-31T16:43:15Z",
+      "kind": "fix",
+      "title": "An emitted record must not spend a deploy [vercel skip]",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-09-01",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "The emitters commit a refreshed fragment on every push, and each of those is a\ndeployment. On 2026-08-31 the estate landed 594 commits on default branches and\n321 of them — 54% — were emitters refreshing their own output. Vercel's build\nrate limit is 100 a day across the account, so the record-keeping machinery was\nconsuming the whole estate's deploy budget three times over and starving the\npushes people actually made.\n\nIt was invisible everywhere. Each property sat a few revisions behind, gda.group\nhad stopped on 30 August, nothing was red. The one place it was written down was\na commit status on a dependabot PR nobody had opened: \"Deployment rate limited —\nretry in 24 hours.\"\n\n[skip ci] is the marker Vercel and GitHub Actions both honour. The fragment\nstill reaches the domain on the next deploy a real push triggers, which is the\nright cadence for a record of something that already happened.\n\nThis commit carries [vercel skip] rather than [skip ci] so CI still validates\nit without spending one of the deploys it exists to save.\n\nKind: fix",
+      "refs": {
+        "commit": "bdd885a6827ae2a6e920a3877037f736beb5cb9f"
+      },
+      "digest": "4d7b1bf046a00568d49c254a58d95662b1142aed72eb105592730fc03d8c1280"
+    },
     {
       "id": "ship/kopman-build/6b88046cc1d9",
       "repo": "repo/kopman-build",
