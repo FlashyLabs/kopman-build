@@ -2,8 +2,26 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-09-07T09:29:20.035Z",
+  "generated": "2026-09-07T16:11:35.373Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/469a6405339f",
+      "repo": "repo/kopman-build",
+      "at": "2026-09-07T16:11:20Z",
+      "kind": "feature",
+      "title": "Merge claude/ceo-estate-dashboard-gmtgl8",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-09-07",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01BjzD1kWqueq1ArT1m4mZsy",
+      "refs": {
+        "commit": "469a6405339ff073f672d7da8256286e0fd038a0"
+      },
+      "digest": "41a91aefc23e2309ab404d82cbc0d94d707e2bf8b53b54de49d2018c531b5c7c"
+    },
     {
       "id": "ship/kopman-build/daee026cb054",
       "repo": "repo/kopman-build",
