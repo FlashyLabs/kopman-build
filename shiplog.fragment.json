@@ -2,8 +2,26 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-09-08T08:56:08.961Z",
+  "generated": "2026-09-08T14:01:27.781Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/6d192d31f813",
+      "repo": "repo/kopman-build",
+      "at": "2026-09-08T14:00:17Z",
+      "kind": "feature",
+      "title": "Merge the declared default into main, so the default can be flipped",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-09-08",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "This repository's GitHub default is an agent's scratch branch. That is a\nlie to every human and every tool that reads it, and `default-branch.mjs`\nin flashy-infra runs daily to fix exactly this — but it refuses to switch\nwhen the trunk is missing commits from the current default, because\nflipping there leaves real work with nothing pointing at it.\n\nThat refusal was firing here. `main` was ahead in one direction and\nbehind in the other, so the nightly job could not act and the setting\nstayed wrong.\n\nMerging rather than resetting: a merge keeps every commit on both sides\nand keeps anybody's checkout of the default branch valid. Nothing is\ndiscarded and nothing is rewritten.\n\n`main` is now a strict superset of the declared default, so the flip is\nsafe. Changing the setting itself is a repository permission and only\nthe owner can do it.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01BjzD1kWqueq1ArT1m4mZsy",
+      "refs": {
+        "commit": "6d192d31f81341352235abe79acc7f74b3cf1d16"
+      },
+      "digest": "26aea7f5d982c569118a3938f05f328dd8d77e72de5dfaddc09d608617ad1590"
+    },
     {
       "id": "ship/kopman-build/469a6405339f",
       "repo": "repo/kopman-build",
