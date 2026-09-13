@@ -2,8 +2,27 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-09-12T08:42:00.831Z",
+  "generated": "2026-09-13T09:37:23.270Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/9424f6d5663b",
+      "repo": "repo/kopman-build",
+      "at": "2026-09-12T11:17:20-04:00",
+      "kind": "feature",
+      "title": "Merge pull request #2 from FlashyLabs/claude/code-estate-audit-wfm6ha",
+      "by": [
+        "person/michael"
+      ],
+      "asserted": "2026-09-13",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "Re-vendor check-directory.mjs from canon",
+      "refs": {
+        "commit": "9424f6d5663b2ebf0757642767e82fdcd8f13a44",
+        "pr": "https://github.com/FlashyLabs/kopman-build/pull/2"
+      },
+      "digest": "9749ce065cccbd5fbd28547fd5c13320bf6944f949a5f6829beddfb821d51c25"
+    },
     {
       "id": "ship/kopman-build/6d192d31f813",
       "repo": "repo/kopman-build",
