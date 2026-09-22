@@ -58,17 +58,42 @@ jobs:
       - name: Commit if it changed
         id: commit
         run: |
-          if git diff --quiet; then
-            echo "no change"
-            echo "pushed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
+          # The branch is read per run. A literal here is the trap eleven
+          # repositories in this estate sit in: their default is an agent
+          # branch, and a retry resetting to a hardcoded main would push one
+          # branch's content over another's.
+          BRANCH="${{ github.event.repository.default_branch }}"
           git config user.name "directory"
           git config user.email "directory@users.noreply.github.com"
-          git add -A
-          git commit -m "directory/1: refresh the fragment [skip ci]"
-          git push
-          echo "pushed=true" >> "$GITHUB_OUTPUT"
+          # Five attempts, re-emitting each time. A scheduled job racing a
+          # human push loses, and losing silently means the fragment stops
+          # advancing while every run still reports a reason.
+          #
+          # shiplog's template learned this from eighteen repositories that
+          # had each added it by hand. This one never did, so fourteen
+          # repositories vendored a bare push — nothing compared the three
+          # templates until 2026-09-22, because the test that checks them
+          # carried a hardcoded list of two.
+          for attempt in 1 2 3 4 5; do
+            if git diff --quiet; then
+              echo "no change"
+              echo "pushed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            git add -A
+            git commit -m "directory/1: refresh the fragment [skip ci]"
+            if git push; then
+              echo "pushed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt) — $BRANCH moved; re-emitting on the new tip"
+            git fetch origin "$BRANCH"
+            git checkout -B "$BRANCH" "origin/$BRANCH"
+            node vendor-directory.mjs
+            node scripts/check-directory.mjs
+          done
+          echo "$BRANCH outran five attempts; the next run will refresh this"
+          exit 1
 
       # Only when something actually changed. A dispatch per run rather than
       # per change turns one daily merge into a merge per push across thirty
