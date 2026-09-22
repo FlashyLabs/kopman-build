@@ -69,11 +69,14 @@ jobs:
           # human push loses, and losing silently means the fragment stops
           # advancing while every run still reports a reason.
           #
-          # shiplog's template learned this from eighteen repositories that
-          # had each added it by hand. This one never did, so fourteen
-          # repositories vendored a bare push — nothing compared the three
-          # templates until 2026-09-22, because the test that checks them
-          # carried a hardcoded list of two.
+          # shiplog's template learned this from repositories that had each
+          # added it by hand. This one never did, and every copy vendored from
+          # it carried the bare push — nothing compared the three templates,
+          # because the test that reads them carried a hardcoded list of two.
+          # No count here on purpose: a number in a vendored comment is wrong
+          # in every copy at once the day the estate changes. The account, with
+          # its figures and the dates they were taken, is
+          # docs/record/fan-out-and-retries.md in flashyos.
           for attempt in 1 2 3 4 5; do
             if git diff --quiet; then
               echo "no change"
