@@ -1,0 +1,94 @@
+{
+  "x-generated": "estate-charter/1; 2026-09-29; every role is one standing job, and five roles are five agents",
+  "aao": "0.1",
+  "name": "Kopman Build",
+  "slug": "kopman-build",
+  "description": "Kopman Build — client work carried on the FlashyOS mesh — delivered to a specification, reviewed before delivery, and never open-licensed. AAO expands to Agentic Autonomous Organization.",
+  "accountableTo": "michael@gda.capital",
+  "escalation": "delivery",
+  "repositories": [
+    {
+      "name": "kopman-build",
+      "url": "github.com/FlashyLabs/kopman-build",
+      "default": true,
+      "holds": [
+        "client-work"
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "name": "delivery",
+      "family": "operations",
+      "purpose": "Owns delivery to the client and answers to the accountable human for what was promised. Client work is never open-licensed; the grant is not ours to make.",
+      "measure": "Milestones delivered on date, as a share of those planned",
+      "capabilities": [
+        "plan-delivery",
+        "deliver-work"
+      ],
+      "humanApprovalAtOrAbove": "HIGH",
+      "x-capability": [
+        "content-exchange"
+      ],
+      "worksIn": [
+        "kopman-build"
+      ]
+    },
+    {
+      "name": "engineering",
+      "family": "engineering",
+      "purpose": "Builds the client work to the agreed specification and keeps it tested.",
+      "measure": "Changes carrying a test, as a share of merges",
+      "capabilities": [
+        "merge-changes",
+        "build-feature"
+      ],
+      "humanApprovalAtOrAbove": "MEDIUM",
+      "worksIn": [
+        "kopman-build"
+      ]
+    },
+    {
+      "name": "review",
+      "family": "governance",
+      "purpose": "Reviews a change before it is delivered, because a defect delivered to a client is dearer than one caught in review.",
+      "measure": "Deliveries carrying a review, as a share of deliveries",
+      "capabilities": [
+        "review-changes",
+        "approve-merge"
+      ],
+      "humanApprovalAtOrAbove": "HIGH",
+      "worksIn": [
+        "kopman-build"
+      ]
+    },
+    {
+      "name": "release",
+      "family": "operations",
+      "purpose": "Ships to the client environment. A production change waits for a named human at the critical floor.",
+      "measure": "Deploys verified in the client environment, as a share of deploys",
+      "capabilities": [
+        "deploy-release",
+        "verify-delivery"
+      ],
+      "humanApprovalAtOrAbove": "CRITICAL",
+      "worksIn": [
+        "kopman-build"
+      ]
+    },
+    {
+      "name": "account",
+      "family": "support",
+      "purpose": "The client’s point of contact — briefs the work and reports status on the agreed cadence.",
+      "measure": "Status reports sent on cadence, as a share of those due",
+      "capabilities": [
+        "brief-client",
+        "report-status"
+      ],
+      "humanApprovalAtOrAbove": "LOW",
+      "worksIn": [
+        "kopman-build"
+      ]
+    }
+  ]
+}
