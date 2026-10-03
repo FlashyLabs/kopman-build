@@ -1,12 +1,12 @@
 {
  "directory": "0.1",
  "source": "repo/kopman-build",
- "generated": "2026-10-02",
+ "generated": "2026-10-03",
  "nodes": [
   {
-   "asserted": "2026-10-02",
+   "asserted": "2026-10-03",
    "assertedBy": "person/michael",
-   "expires": "2027-10-02",
+   "expires": "2027-10-03",
    "visibility": "public",
    "id": "agent/kopman-build-bot",
    "kind": "Agent",
@@ -14,9 +14,9 @@
    "description": "The tool that files and promotes this repository's intentions. It emits backlog/1 and signs each one as agent/kopman-build-bot."
   },
   {
-   "asserted": "2026-10-02",
+   "asserted": "2026-10-03",
    "assertedBy": "person/michael",
-   "expires": "2027-10-02",
+   "expires": "2027-10-03",
    "visibility": "public",
    "id": "agent/kopman-build-ci",
    "kind": "Agent",
@@ -26,9 +26,9 @@
  ],
  "edges": [
   {
-   "asserted": "2026-10-02",
+   "asserted": "2026-10-03",
    "assertedBy": "person/michael",
-   "expires": "2027-10-02",
+   "expires": "2027-10-03",
    "visibility": "public",
    "type": "delegatedTo",
    "from": "person/michael",
@@ -38,9 +38,9 @@
    ]
   },
   {
-   "asserted": "2026-10-02",
+   "asserted": "2026-10-03",
    "assertedBy": "person/michael",
-   "expires": "2027-10-02",
+   "expires": "2027-10-03",
    "visibility": "public",
    "type": "delegatedTo",
    "from": "person/michael",
