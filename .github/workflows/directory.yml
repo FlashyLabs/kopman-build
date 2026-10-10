@@ -56,27 +56,35 @@ jobs:
         run: node scripts/check-directory.mjs
 
       - name: Commit if it changed
-        id: commit
+        # Gated off pull_request: that checkout is a detached merge ref and the
+        # push can only be rejected there. On a push, three emitters run on the
+        # same commit and each pushes; only the first wins unless the losers
+        # regenerate on the new tip and try again — the estate's canonical step,
+        # copied from flashy-labs. Measured here 2026-10-10: exactly one of the
+        # three emitter runs went green per push and the other two failed at
+        # this step.
+        if: github.event_name != 'pull_request'
         run: |
-          if git diff --quiet; then
-            echo "no change"
-            echo "pushed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
+          BRANCH="${{ github.event.repository.default_branch }}"
           git config user.name "directory"
           git config user.email "directory@users.noreply.github.com"
-          git add -A
-          git commit -m "directory/1: refresh the fragment [skip ci]"
-          git push
-          echo "pushed=true" >> "$GITHUB_OUTPUT"
-
-      # Only when something actually changed. A dispatch per run rather than
-      # per change turns one daily merge into a merge per push across thirty
-      # repositories.
-      #
-      # Loud when the secret is missing, because a skipped step reports the run
-      # green and an estate that has quietly stopped fanning out looks healthy
-      # from every angle.
+          for attempt in 1 2 3 4 5; do
+            if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
+              echo "no change"
+              exit 0
+            fi
+            git add -A
+            git commit -m "directory/1: refresh the fragment [skip ci]"
+            if git push; then
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt) — $BRANCH moved; regenerating on the new tip"
+            git fetch origin "$BRANCH"
+            git checkout -B "$BRANCH" "origin/$BRANCH"
+            node vendor-directory.mjs
+          done
+          echo "$BRANCH outran five attempts; the next push's run will refresh this"
+          exit 1
       - name: Notify the estate graph
         if: steps.commit.outputs.pushed == 'true'
         env:
