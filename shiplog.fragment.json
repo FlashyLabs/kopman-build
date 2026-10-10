@@ -2,8 +2,26 @@
   "shipped": "1",
   "source": "repo/kopman-build",
   "org": "org/kopman-build",
-  "generated": "2026-10-09T11:24:09.576Z",
+  "generated": "2026-10-10T04:46:27.871Z",
   "entries": [
+    {
+      "id": "ship/kopman-build/c0021f6668e5",
+      "repo": "repo/kopman-build",
+      "at": "2026-09-29T01:36:26Z",
+      "kind": "other",
+      "title": "mesh: AAO charter (five roles = five agents), directory fragment, MESH note",
+      "by": [
+        "agent/claude"
+      ],
+      "asserted": "2026-10-10",
+      "assertedBy": "agent/kopman-build-ci",
+      "visibility": "public",
+      "detail": "A valid aao/0.1 charter with exactly five standing roles, so this repository\nprovisions as a FlashyOS organisation with five agents. Validated against the\nvendored AAO checker (0 issues). directory.fragment.json is its directory/1\nnode; MESH.md documents the roles and the command that provisions a live org.\n\nCo-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01KD3oquCLVnqZxYegHuZM6D",
+      "refs": {
+        "commit": "c0021f6668e57a5e7411bc63f2b6ff3833a1c676"
+      },
+      "digest": "46957a0996b96f74e60fae3e8926b6bbecc0b2a9514c3a26134b51e2ce6498be"
+    },
     {
       "id": "ship/kopman-build/9424f6d5663b",
       "repo": "repo/kopman-build",
